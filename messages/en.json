@@ -1,0 +1,40 @@
+{
+  "nav": {
+    "home": "home",
+    "posts": "posts",
+    "about": "about"
+  },
+  "home": {
+    "greeting": "👋 Hello",
+    "tagline": "I write about things I learn, build, and think about while developing.",
+    "recentPosts": "Recent Posts",
+    "viewAll": "View all →",
+    "noPosts": "No posts yet. Add a markdown file to",
+    "noPostsEnd": "folder."
+  },
+  "posts": {
+    "title": "Posts",
+    "count": "{count} posts",
+    "noPost": "No posts yet."
+  },
+  "post": {
+    "backToList": "← Back to list",
+    "translateButton": "Translate to Korean",
+    "translating": "Translating...",
+    "translateError": "Translation failed. Please try again.",
+    "originalContent": "Show original",
+    "translatedBadge": "Auto-translated"
+  },
+  "about": {
+    "title": "About",
+    "intro": "Hello. This is a space for recording development notes.",
+    "blogTitle": "This Blog",
+    "blogItems": [
+      "Organizes things learned while developing.",
+      "Records the process of what's being built.",
+      "Writes easily in Markdown."
+    ],
+    "stackTitle": "Tech Stack"
+  },
+  "footer": "backtodev"
+}

@@ -1,0 +1,40 @@
+{
+  "nav": {
+    "home": "홈",
+    "posts": "글",
+    "about": "소개"
+  },
+  "home": {
+    "greeting": "👋 안녕하세요",
+    "tagline": "개발하면서 배운 것들, 만든 것들, 생각한 것들을 기록합니다.",
+    "recentPosts": "최근 글",
+    "viewAll": "모두 보기 →",
+    "noPosts": "아직 작성된 글이 없습니다.",
+    "noPostsEnd": "폴더에 마크다운 파일을 추가해보세요."
+  },
+  "posts": {
+    "title": "글 목록",
+    "count": "총 {count}개의 글",
+    "noPost": "아직 작성된 글이 없습니다."
+  },
+  "post": {
+    "backToList": "← 목록으로",
+    "translateButton": "한국어로 번역",
+    "translating": "번역 중...",
+    "translateError": "번역에 실패했습니다. 다시 시도해 주세요.",
+    "originalContent": "원문 보기",
+    "translatedBadge": "자동 번역됨"
+  },
+  "about": {
+    "title": "소개",
+    "intro": "안녕하세요. 이 사이트는 개발 기록을 위한 공간입니다.",
+    "blogTitle": "이 블로그는",
+    "blogItems": [
+      "개발하면서 배운 것들을 정리합니다.",
+      "만들고 있는 것들의 과정을 기록합니다.",
+      "마크다운으로 쉽게 글을 씁니다."
+    ],
+    "stackTitle": "기술 스택"
+  },
+  "footer": "backtodev"
+}
