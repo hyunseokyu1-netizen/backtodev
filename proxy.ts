@@ -8,21 +8,22 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // /admin 경로 보호
+  // 인증 API는 항상 허용 (로그인/로그아웃)
+  if (pathname.startsWith("/api/admin/auth")) return NextResponse.next();
+
+  // /admin 페이지 보호
   if (pathname.startsWith("/admin")) {
-    if (pathname.startsWith("/admin/login")) return NextResponse.next();
-    if (pathname.startsWith("/api/admin/auth")) return NextResponse.next();
+    if (pathname === "/admin/login") return NextResponse.next();
 
     const token = request.cookies.get("admin_token")?.value;
     const valid = token ? await verifyToken(token) : false;
-
     if (!valid) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
     return NextResponse.next();
   }
 
-  // /api/admin 경로 보호
+  // /api/admin 보호
   if (pathname.startsWith("/api/admin")) {
     const token = request.cookies.get("admin_token")?.value;
     const valid = token ? await verifyToken(token) : false;
