@@ -9,7 +9,8 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getAllPosts().flatMap((p) => [
+  const posts = await getAllPosts();
+  return posts.flatMap((p) => [
     { locale: "en", slug: p.slug },
     { locale: "ko", slug: p.slug },
   ]);
@@ -17,7 +18,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} | backtodev`,
@@ -39,7 +40,7 @@ function getTagStyle(tag: string) {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
   const t = await getTranslations("post");

@@ -1,11 +1,11 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
 import { SectionDots } from "@/components/DecorativeBlobs";
 
-export default function PostsPage() {
-  const t = useTranslations("posts");
-  const posts = getAllPosts();
+export default async function PostsPage() {
+  const t = await getTranslations("posts");
+  const posts = await getAllPosts();
 
   return (
     <div>

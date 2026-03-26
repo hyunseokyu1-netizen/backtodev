@@ -1,8 +1,8 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { SectionDots } from "@/components/DecorativeBlobs";
 
-export default function AboutPage() {
-  const t = useTranslations("about");
+export default async function AboutPage() {
+  const t = await getTranslations("about");
   const blogItems = t.raw("blogItems") as string[];
 
   const stack = [

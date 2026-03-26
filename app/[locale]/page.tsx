@@ -1,12 +1,12 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
 import { HeroBlobs, SectionDots } from "@/components/DecorativeBlobs";
 
-export default function Home() {
-  const t = useTranslations("home");
-  const posts = getAllPosts().slice(0, 6);
+export default async function Home() {
+  const t = await getTranslations("home");
+  const posts = (await getAllPosts()).slice(0, 6);
 
   return (
     <div>
