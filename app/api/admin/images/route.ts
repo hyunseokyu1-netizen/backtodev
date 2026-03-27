@@ -36,5 +36,6 @@ export async function POST(request: NextRequest) {
   const sha = await getFileSha(githubPath);
   await putFileBinary(githubPath, base64, `image: ${filename} 추가`, sha ?? undefined);
 
-  return NextResponse.json({ url: `/images/${filename}` });
+  const rawUrl = `https://raw.githubusercontent.com/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/main/public/images/${filename}`;
+  return NextResponse.json({ url: rawUrl });
 }
