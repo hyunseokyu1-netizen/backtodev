@@ -1,16 +1,18 @@
 {
   "nav": {
-    "home": "home",
-    "posts": "posts",
-    "about": "about"
+    "home": "Home",
+    "posts": "Posts",
+    "about": "About"
   },
   "home": {
-    "greeting": "👋 Hello",
-    "tagline": "I write about things I learn, build, and think about while developing.",
-    "recentPosts": "Recent Posts",
-    "viewAll": "View all →",
-    "noPosts": "No posts yet. Add a markdown file to",
-    "noPostsEnd": "folder."
+    "heroLine1": "A 40-something PM",
+    "heroLine2": "returns to code.",
+    "tagline": "A development journey with AI. From product manager back to developer — documenting failures and learnings in Markdown.",
+    "readPosts": "Read Posts",
+    "aboutMe": "About Me",
+    "latestNotes": "Latest Notes",
+    "viewAll": "View all",
+    "noPost": "No posts yet."
   },
   "posts": {
     "title": "Posts",
@@ -19,22 +21,22 @@
   },
   "post": {
     "backToList": "← Back to list",
+    "minRead": "min read",
+    "read": "Read",
     "translateButton": "Translate to Korean",
     "translating": "Translating...",
     "translateError": "Translation failed. Please try again.",
     "originalContent": "Show original",
-    "translatedBadge": "Auto-translated"
+    "translatedBadge": "Auto-translated",
+    "authorBio": "A 40-something PM returning to code — with AI."
   },
   "about": {
-    "title": "About",
-    "intro": "Hello. This is a space for recording development notes.",
-    "blogTitle": "This Blog",
-    "blogItems": [
-      "Organizes things learned while developing.",
-      "Records the process of what's being built.",
-      "Writes easily in Markdown."
-    ],
-    "stackTitle": "Tech Stack"
-  },
-  "footer": "backtodev"
+    "hello": "Hello, World.",
+    "tagline": "I'm a 40-something PM returning to code.",
+    "para1": "Ten years ago, I was a developer writing code every day. But as my career progressed, I naturally moved into product planning and management (PM), and before I knew it, Excel and PowerPoint had become more familiar than any code editor.",
+    "para2": "But recently, watching the rise of generative AI and coding assistants, my heart started beating again. Now that the barrier to building has never been lower — all you need is an idea — I made the decision to \"go back and build things myself.\"",
+    "whyTitle": "Why \"backtodev\"?",
+    "whyContent": "This blog is my rehabilitation center and journal. It captures development through the lens of a PM, coding alongside AI, and the honest feelings along the way.",
+    "techStack": "TECH STACK"
+  }
 }

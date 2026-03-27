@@ -1,48 +1,37 @@
 import { getTranslations } from "next-intl/server";
 import { getAllPosts } from "@/lib/posts";
-import PostCard from "@/components/PostCard";
-import { SectionDots } from "@/components/DecorativeBlobs";
+import PostsClient from "@/components/PostsClient";
 
 export default async function PostsPage() {
   const t = await getTranslations("posts");
+  const tPost = await getTranslations("post");
   const posts = await getAllPosts();
 
   return (
     <div>
       {/* Header */}
-      <div className="mb-12">
-        <SectionDots />
+      <div style={{ marginBottom: "2.5rem" }}>
         <h1
-          className="font-black mb-2"
           style={{
-            fontSize: "clamp(2rem, 5vw, 3rem)",
+            fontSize: "clamp(2rem, 5vw, 2.75rem)",
+            fontWeight: 800,
             letterSpacing: "-0.04em",
-            color: "hsl(210 10% 95%)",
+            color: "hsl(var(--foreground))",
+            marginBottom: "0.5rem",
           }}
         >
-          {t("title")}
+          All Posts
         </h1>
-        <p className="text-sm font-medium" style={{ color: "var(--text-muted)" }}>
-          {t("count", { count: posts.length })}
+        <p style={{ color: "hsl(var(--muted-foreground))", fontSize: "1rem" }}>
+          Thoughts, learnings, and snippets from the journey back to dev.
         </p>
       </div>
 
-      {/* Post grid */}
-      {posts.length === 0 ? (
-        <div
-          className="rounded-2xl p-12 text-center"
-          style={{ background: "var(--surface)", border: "1px dashed var(--border)" }}
-        >
-          <p className="text-3xl mb-3">✍️</p>
-          <p style={{ color: "var(--text-muted)" }}>{t("noPost")}</p>
-        </div>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
-      )}
+      <PostsClient
+        posts={posts}
+        minReadLabel={tPost("minRead")}
+        readLabel={tPost("read")}
+      />
     </div>
   );
 }

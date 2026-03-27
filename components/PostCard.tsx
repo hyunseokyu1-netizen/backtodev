@@ -3,112 +3,128 @@ import type { PostMeta } from "@/lib/posts";
 
 interface Props {
   post: PostMeta;
-  large?: boolean;
+  minReadLabel?: string;
+  readLabel?: string;
 }
 
-const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  default: {
-    bg: "hsl(160 40% 12%)",
-    text: "hsl(160 100% 40%)",
-    border: "hsl(160 40% 22%)",
-  },
-};
+export default function PostCard({ post, minReadLabel = "min read", readLabel = "Read →" }: Props) {
+  const tags = post.tags ?? [];
 
-function getTagStyle(tag: string) {
-  const palette = [
-    { bg: "hsl(160 40% 12%)", text: "hsl(160 100% 40%)", border: "hsl(160 40% 20%)" },
-    { bg: "hsl(225 40% 16%)", text: "hsl(225 100% 75%)", border: "hsl(225 40% 26%)" },
-    { bg: "hsl(50  40% 12%)", text: "hsl(50  100% 50%)", border: "hsl(50  40% 20%)" },
-    { bg: "hsl(333 30% 14%)", text: "hsl(333 100% 65%)", border: "hsl(333 30% 24%)" },
-  ];
-  let hash = 0;
-  for (const c of tag) hash = (hash * 31 + c.charCodeAt(0)) & 0xffffffff;
-  return palette[Math.abs(hash) % palette.length];
-}
-
-function readingTime(content?: string) {
-  if (!content) return null;
-  const words = content.trim().split(/\s+/).length;
-  const mins = Math.max(1, Math.round(words / 200));
-  return mins;
-}
-
-export default function PostCard({ post, large = false }: Props) {
-  const mins = readingTime(undefined); // content not passed at list level
+  const formattedDate = post.date
+    ? new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    : post.date;
 
   return (
-    <Link href={`/posts/${post.slug}`} className="post-card group" style={{ padding: large ? "1.75rem" : "1.25rem 1.5rem" }}>
-      {/* Tags */}
-      {post.tags && post.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {post.tags.map((tag) => {
-            const s = getTagStyle(tag);
-            return (
-              <span
-                key={tag}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  padding: "0.18em 0.65em",
-                  borderRadius: 999,
-                  fontSize: "0.72rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.03em",
-                  background: s.bg,
-                  color: s.text,
-                  border: `1px solid ${s.border}`,
-                }}
-              >
-                {tag}
-              </span>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Title */}
-      <p
-        className="font-bold leading-snug mb-2 group-hover:text-white transition-colors"
+    <Link
+      href={`/posts/${post.slug}`}
+      className="post-card group"
+      style={{
+        padding: "1.5rem 2rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "space-between",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+        textDecoration: "none",
+      }}
+    >
+      {/* Meta row */}
+      <div
+        className="flex items-center"
         style={{
-          color: "hsl(210 10% 88%)",
-          fontSize: large ? "1.25rem" : "1.05rem",
-          letterSpacing: "-0.02em",
+          gap: "1rem",
+          fontSize: "0.75rem",
+          color: "hsl(var(--muted-foreground))",
+          fontFamily: "var(--font-mono), monospace",
+          marginBottom: "1rem",
         }}
       >
-        {post.title}
-      </p>
-
-      {/* Description */}
-      {post.description && (
-        <p
-          className="text-sm line-clamp-2 mb-3"
-          style={{ color: "var(--text-muted)", lineHeight: 1.65 }}
-        >
-          {post.description}
-        </p>
-      )}
-
-      {/* Footer meta */}
-      <div className="flex items-center gap-3 mt-auto">
-        <time
-          className="text-xs font-medium"
-          style={{ color: "hsl(210 10% 45%)" }}
-        >
-          {post.date}
+        <time dateTime={post.date} className="flex items-center" style={{ gap: "0.375rem" }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          {formattedDate}
         </time>
-        <span style={{ color: "hsl(210 10% 30%)", fontSize: "0.7rem" }}>·</span>
-        <span
-          className="text-xs"
-          style={{ color: "hsl(210 10% 45%)" }}
-        >
-          {post.lang === "en" ? "EN" : "KO"}
+        <span className="flex items-center" style={{ gap: "0.375rem" }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          1 {minReadLabel}
         </span>
-        <span
-          className="ml-auto text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ color: "var(--yellow)" }}
+      </div>
+
+      {/* Title + description */}
+      <div style={{ width: "100%" }}>
+        <h3
+          className="post-card-title"
+          style={{
+            marginTop: "0.75rem",
+            fontSize: "1.25rem",
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.3,
+          }}
         >
-          읽기 →
-        </span>
+          {post.title}
+        </h3>
+
+        {post.description && (
+          <p
+            style={{
+              marginTop: "1rem",
+              fontSize: "0.875rem",
+              lineHeight: 1.65,
+              color: "hsl(var(--muted-foreground))",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical" as const,
+              overflow: "hidden",
+            }}
+          >
+            {post.description}
+          </p>
+        )}
+      </div>
+
+      {/* Tags + read indicator */}
+      <div
+        className="flex items-center w-full"
+        style={{ marginTop: "1.5rem", gap: "1rem" }}
+      >
+        <div className="flex flex-wrap" style={{ gap: "0.5rem", flex: 1 }}>
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              style={{
+                borderRadius: 999,
+                background: "hsl(var(--secondary))",
+                padding: "0.2em 0.75em",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                color: "hsl(var(--secondary-foreground))",
+              }}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="flex items-center gap-1 text-sm font-medium transition-all duration-300 opacity-0 group-hover:opacity-100"
+          style={{
+            color: "hsl(var(--primary))",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {readLabel}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
       </div>
     </Link>
   );

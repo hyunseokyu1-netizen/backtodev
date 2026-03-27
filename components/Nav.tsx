@@ -1,18 +1,24 @@
 "use client";
 
 import { usePathname, useRouter, Link } from "@/i18n/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+
+const TerminalIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="4 17 10 11 4 5"/>
+    <line x1="12" y1="19" x2="20" y2="19"/>
+  </svg>
+);
 
 export default function Nav() {
-  const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
 
   const links = [
-    { href: "/" as const, label: t("home") },
-    { href: "/posts" as const, label: t("posts") },
-    { href: "/about" as const, label: t("about") },
+    { href: "/" as const, label: "Home" },
+    { href: "/posts" as const, label: "Posts" },
+    { href: "/about" as const, label: "About" },
   ];
 
   const toggleLocale = () => {
@@ -22,64 +28,74 @@ export default function Nav() {
 
   return (
     <header
-      className="sticky top-0 z-50"
+      className="sticky top-0 z-50 w-full"
       style={{
-        background: "hsl(210 15% 6% / 0.88)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid hsl(210 10% 14%)",
+        borderBottom: "1px solid hsl(var(--border) / 0.4)",
+        background: "hsl(var(--background) / 0.8)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
       }}
     >
       <div
-        className="mx-auto flex items-center justify-between px-8 py-4"
-        style={{ maxWidth: "min(68.75rem, 100%)" }}
+        className="mx-auto flex items-center justify-between px-6"
+        style={{ maxWidth: "64rem", height: 64 }}
       >
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-black text-xl tracking-tight"
-          style={{ color: "var(--yellow)", letterSpacing: "-0.04em" }}
-        >
-          <span
+        <Link href="/" className="flex items-center gap-2 group">
+          <div
+            className="flex items-center justify-center rounded-lg transition-colors"
             style={{
-              background: "var(--yellow)",
-              color: "hsl(210 15% 6%)",
-              borderRadius: 6,
-              padding: "0px 6px",
-              fontSize: "0.85em",
-              fontWeight: 900,
+              padding: "0.375rem",
+              background: "hsl(var(--primary) / 0.1)",
+              color: "hsl(var(--primary))",
             }}
           >
-            B
+            <TerminalIcon />
+          </div>
+          <span
+            style={{
+              fontFamily: "var(--font-mono), 'Fira Code', monospace",
+              fontWeight: 700,
+              fontSize: "1.1rem",
+              letterSpacing: "-0.02em",
+              color: "hsl(var(--foreground))",
+            }}
+          >
+            backtodev
+            <span
+              style={{
+                color: "hsl(var(--primary))",
+                animation: "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
+              }}
+            >
+              _
+            </span>
           </span>
-          backtodev
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {/* Nav links */}
-          <nav className="flex items-center mr-3">
+          <nav className="flex items-center">
             {links.map(({ href, label }) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
               return (
                 <Link
                   key={href}
                   href={href}
-                  className="relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150"
-                  style={{ color: active ? "#fff" : "var(--text-muted)" }}
+                  className="relative px-3 py-2 text-sm font-medium transition-colors"
+                  style={{ color: active ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" }}
                 >
                   {label}
                   {active && (
                     <span
                       style={{
                         position: "absolute",
-                        bottom: 4,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        width: 18,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
                         height: 2,
+                        background: "hsl(var(--primary))",
                         borderRadius: 2,
-                        background: "var(--yellow)",
-                        display: "block",
                       }}
                     />
                   )}
@@ -91,12 +107,12 @@ export default function Nav() {
           {/* Language toggle */}
           <button
             onClick={toggleLocale}
-            className="text-xs font-bold px-3 py-1.5 rounded-lg transition-all duration-150"
+            className="text-xs font-bold px-3 py-1.5 rounded-lg transition-all ml-2"
             style={{
               background: "transparent",
-              border: "1.5px solid var(--yellow)",
-              color: "var(--yellow)",
-              letterSpacing: "0.05em",
+              border: "1px solid hsl(var(--border))",
+              color: "hsl(var(--muted-foreground))",
+              fontFamily: "var(--font-mono), monospace",
             }}
             title={locale === "ko" ? "Switch to English" : "한국어로 보기"}
           >
