@@ -141,28 +141,30 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
           {isEdit ? "글 수정" : "새 글 작성"}
         </span>
 
-        <div className="flex gap-1 ml-auto">
+        <div className="flex items-center gap-2 ml-auto">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+            className="hidden"
+            onChange={handleImageUpload}
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60"
+            style={{ background: "var(--surface-2)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
+            title="이미지 업로드"
+          >
+            {uploading ? "업로드 중..." : "이미지 삽입"}
+          </button>
+
+          <div style={{ width: 1, height: 16, background: "var(--border)" }} />
+
           {modeBtn("edit", "편집")}
           {modeBtn("split", "분할")}
           {modeBtn("preview", "미리보기")}
         </div>
-
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/jpeg,image/png,image/gif,image/webp"
-          className="hidden"
-          onChange={handleImageUpload}
-        />
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          disabled={uploading}
-          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60"
-          style={{ background: "var(--surface-2)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
-          title="이미지 업로드"
-        >
-          {uploading ? "업로드 중..." : "이미지 삽입"}
-        </button>
 
         {error && <p className="text-xs" style={{ color: "hsl(340 95% 60%)" }}>{error}</p>}
         {saved && <p className="text-xs" style={{ color: "var(--green)" }}>✓ 저장 완료 (배포 중...)</p>}
