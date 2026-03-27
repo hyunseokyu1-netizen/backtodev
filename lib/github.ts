@@ -12,6 +12,14 @@ export interface GitHubFile {
   sha: string;
 }
 
+export async function getFileSha(path: string): Promise<string | null> {
+  const res = await fetch(`${BASE}/${path}`, { headers: headers(), cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`GitHub GET failed: ${res.status}`);
+  const data = await res.json();
+  return data.sha ?? null;
+}
+
 export async function getFile(path: string): Promise<GitHubFile | null> {
   const res = await fetch(`${BASE}/${path}`, { headers: headers(), cache: "no-store" });
   if (res.status === 404) return null;
@@ -34,6 +42,21 @@ export async function putFile(path: string, content: string, message: string, sh
     message,
     content: Buffer.from(content, "utf-8").toString("base64"),
   };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(`${BASE}/${path}`, {
+    method: "PUT",
+    headers: headers(),
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`GitHub PUT failed: ${res.status} ${err}`);
+  }
+}
+
+export async function putFileBinary(path: string, base64Content: string, message: string, sha?: string): Promise<void> {
+  const body: Record<string, string> = { message, content: base64Content };
   if (sha) body.sha = sha;
 
   const res = await fetch(`${BASE}/${path}`, {

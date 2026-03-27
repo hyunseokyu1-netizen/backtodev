@@ -35,6 +35,8 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
   const isEdit = !!initSlug;
 
   // 자동 slug 생성 (새 글)
@@ -69,6 +71,41 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
       setError(e instanceof Error ? e.message : "저장 실패");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const insertAtCursor = (text: string) => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const next = content.slice(0, start) + text + content.slice(end);
+    setContent(next);
+    // 커서를 삽입 텍스트 뒤로 이동
+    requestAnimationFrame(() => {
+      ta.selectionStart = ta.selectionEnd = start + text.length;
+      ta.focus();
+    });
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = "";
+
+    setUploading(true);
+    setError("");
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/images", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "업로드 실패");
+      insertAtCursor(`![${file.name.replace(/\.[^.]+$/, "")}](${data.url})`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "이미지 업로드 실패");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -109,6 +146,23 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
           {modeBtn("split", "분할")}
           {modeBtn("preview", "미리보기")}
         </div>
+
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          className="hidden"
+          onChange={handleImageUpload}
+        />
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          disabled={uploading}
+          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60"
+          style={{ background: "var(--surface-2)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
+          title="이미지 업로드"
+        >
+          {uploading ? "업로드 중..." : "이미지 삽입"}
+        </button>
 
         {error && <p className="text-xs" style={{ color: "hsl(340 95% 60%)" }}>{error}</p>}
         {saved && <p className="text-xs" style={{ color: "var(--green)" }}>✓ 저장 완료 (배포 중...)</p>}
