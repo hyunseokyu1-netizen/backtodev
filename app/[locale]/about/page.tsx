@@ -24,34 +24,12 @@ export default async function AboutPage() {
             border: "1px solid hsl(var(--border))",
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              height: 260,
-              background: "linear-gradient(135deg, hsl(240 10% 8%) 0%, hsl(225 20% 12%) 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                width: 110,
-                height: 110,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, hsl(175 80% 20% / 0.4), hsl(217 91% 30% / 0.4))",
-                border: "2px solid hsl(var(--border))",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "2rem",
-                fontWeight: 700,
-                color: "hsl(var(--primary))",
-                fontFamily: "var(--font-mono), monospace",
-              }}
-            >
-              PM
-            </div>
+          <div style={{ position: "relative" }}>
+            <img
+              src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/avatar.png"
+              alt="profile"
+              style={{ width: "100%", display: "block", objectFit: "cover" }}
+            />
             <div
               style={{
                 position: "absolute",
