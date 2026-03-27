@@ -26,7 +26,7 @@ export default async function AboutPage() {
         >
           <div style={{ position: "relative" }}>
             <img
-              src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/avatar.png"
+              src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/avatar-004.png"
               alt="profile"
               style={{ width: "100%", display: "block", objectFit: "cover" }}
             />
