@@ -36,37 +36,41 @@ interface Props {
 const TRANSLATE_MAX_CHARS = 400; // MyMemory API: 500자 제한
 
 function splitIntoChunks(text: string): string[] {
-  // 먼저 단락으로 나눔
-  const paragraphs = text.split(/\n\n+/);
   const chunks: string[] = [];
+  // 줄 단위로 나누고, 400자 초과 시 강제로 잘라서 청크 구성
+  const lines = text.split("\n");
   let current = "";
 
-  for (const para of paragraphs) {
-    const candidate = current ? `${current}\n\n${para}` : para;
+  const flush = () => {
+    if (current.trim()) chunks.push(current.trim());
+    current = "";
+  };
+
+  for (const line of lines) {
+    // 한 줄 자체가 400자 초과면 강제로 분리
+    if (line.length > TRANSLATE_MAX_CHARS) {
+      if (current) flush();
+      let remaining = line;
+      while (remaining.length > TRANSLATE_MAX_CHARS) {
+        // 마지막 공백 위치에서 자르기 (단어 경계 우선)
+        let cutAt = remaining.lastIndexOf(" ", TRANSLATE_MAX_CHARS);
+        if (cutAt <= 0) cutAt = TRANSLATE_MAX_CHARS;
+        chunks.push(remaining.slice(0, cutAt).trim());
+        remaining = remaining.slice(cutAt).trim();
+      }
+      current = remaining;
+      continue;
+    }
+
+    const candidate = current ? `${current}\n${line}` : line;
     if (candidate.length <= TRANSLATE_MAX_CHARS) {
       current = candidate;
     } else {
-      if (current) chunks.push(current.trim());
-      // 단락 자체가 너무 길면 문장 단위로 분리
-      if (para.length > TRANSLATE_MAX_CHARS) {
-        const sentences = para.split(/(?<=[.!?。])\s+/);
-        let sentChunk = "";
-        for (const s of sentences) {
-          if ((sentChunk + " " + s).trim().length > TRANSLATE_MAX_CHARS && sentChunk) {
-            chunks.push(sentChunk.trim());
-            sentChunk = s;
-          } else {
-            sentChunk = sentChunk ? `${sentChunk} ${s}` : s;
-          }
-        }
-        if (sentChunk) current = sentChunk;
-        else current = "";
-      } else {
-        current = para;
-      }
+      flush();
+      current = line;
     }
   }
-  if (current) chunks.push(current.trim());
+  flush();
   return chunks.filter(Boolean);
 }
 
