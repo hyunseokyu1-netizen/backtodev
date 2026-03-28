@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useRouter, Link } from "@/i18n/navigation";
+import { usePathname as useRawPathname } from "next/navigation";
+import { useRouter, Link } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 
 const TerminalIcon = () => (
@@ -12,8 +13,10 @@ const TerminalIcon = () => (
 
 export default function Nav() {
   const locale = useLocale();
-  const pathname = usePathname();
+  const rawPathname = useRawPathname(); // /en/posts/foo 또는 /posts/foo 형태
   const router = useRouter();
+  // locale prefix를 직접 제거해서 중복 방지
+  const cleanPath = rawPathname.replace(/^\/(en|ko)(?=\/|$)/, "") || "/";
 
   const links = [
     { href: "/" as const, label: "Home" },
@@ -23,7 +26,7 @@ export default function Nav() {
 
   const toggleLocale = () => {
     const next = locale === "ko" ? "en" : "ko";
-    router.replace(pathname, { locale: next });
+    router.replace(cleanPath, { locale: next });
   };
 
   return (
@@ -77,7 +80,7 @@ export default function Nav() {
           {/* Nav links */}
           <nav className="flex items-center">
             {links.map(({ href, label }) => {
-              const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+              const active = href === "/" ? cleanPath === "/" : cleanPath.startsWith(href);
               return (
                 <Link
                   key={href}
