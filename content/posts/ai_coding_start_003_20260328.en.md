@@ -151,7 +151,7 @@ Correction: chunk separation by 400 characters, additional separation by sentenc
 
   Deploy Vercel (1-2 minutes) and try again!
 
-`` `
+```
 
-&gt; - When coding AI, I    
-<span style="color:red">feel like I'm learning from a senior developer by looking at how AI that appears in the log is recommended and how it works. </span>
+>  >When coding AI,   
+<span style="color:red"> I feel like I'm learning from a senior developer </span> by looking at how AI that appears in the log is recommended and how it works. 
