@@ -33,32 +33,56 @@ interface Props {
   onSave: (data: SavePayload) => Promise<void>;
 }
 
-async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
-  const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
+const TRANSLATE_MAX_CHARS = 400; // MyMemory API: 500자 제한
+
+function splitIntoChunks(text: string): string[] {
+  // 먼저 단락으로 나눔
   const paragraphs = text.split(/\n\n+/);
   const chunks: string[] = [];
   let current = "";
-  let wordCount = 0;
+
   for (const para of paragraphs) {
-    const words = para.split(/\s+/).length;
-    if (wordCount + words > 400 && current) {
-      chunks.push(current.trim());
-      current = para;
-      wordCount = words;
+    const candidate = current ? `${current}\n\n${para}` : para;
+    if (candidate.length <= TRANSLATE_MAX_CHARS) {
+      current = candidate;
     } else {
-      current = current ? `${current}\n\n${para}` : para;
-      wordCount += words;
+      if (current) chunks.push(current.trim());
+      // 단락 자체가 너무 길면 문장 단위로 분리
+      if (para.length > TRANSLATE_MAX_CHARS) {
+        const sentences = para.split(/(?<=[.!?。])\s+/);
+        let sentChunk = "";
+        for (const s of sentences) {
+          if ((sentChunk + " " + s).trim().length > TRANSLATE_MAX_CHARS && sentChunk) {
+            chunks.push(sentChunk.trim());
+            sentChunk = s;
+          } else {
+            sentChunk = sentChunk ? `${sentChunk} ${s}` : s;
+          }
+        }
+        if (sentChunk) current = sentChunk;
+        else current = "";
+      } else {
+        current = para;
+      }
     }
   }
   if (current) chunks.push(current.trim());
+  return chunks.filter(Boolean);
+}
+
+async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
+  const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
+  const chunks = splitIntoChunks(text);
 
   const results: string[] = [];
   for (const chunk of chunks) {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langpair}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("API error");
+    const res = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langpair}`
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (data.responseStatus !== 200) throw new Error(data.responseDetails);
+    if (data.responseStatus !== 200) throw new Error(data.responseDetails ?? "API error");
+    if (data.quotaFinished) throw new Error("일일 번역 한도 초과. 내일 다시 시도해 주세요.");
     results.push(data.responseData.translatedText);
   }
   return results.join("\n\n");
@@ -165,8 +189,8 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
       });
       // 번역 후 다른 탭으로 이동
       setActiveLang(activeLang === "ko" ? "en" : "ko");
-    } catch {
-      setTranslateError("번역 실패. 다시 시도해 주세요.");
+    } catch (e) {
+      setTranslateError(e instanceof Error ? e.message : "번역 실패. 다시 시도해 주세요.");
     } finally {
       setTranslating(false);
     }
