@@ -221,7 +221,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
       const res = await fetch("/api/admin/images", { method: "POST", body: formData });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "업로드 실패");
-      insertAtCursor(`![${file.name.replace(/\.[^.]+$/, "")}](${data.url})`);
+      insertAtCursor(`![${file.name.replace(/\.[^.]+$/, "")}](${data.url.trim().replace(/\s+/g, "")})`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "이미지 업로드 실패");
     } finally {
