@@ -24,6 +24,7 @@
     "minRead": "분 읽기",
     "read": "읽기",
     "translateButton": "한국어로 번역",
+    "writtenIn": "이 글은 영어로 작성되었습니다.",
     "translating": "번역 중...",
     "translateError": "번역에 실패했습니다. 다시 시도해 주세요.",
     "originalContent": "원문 보기",

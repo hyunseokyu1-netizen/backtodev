@@ -34,7 +34,8 @@ export default async function PostPage({ params }: Props) {
   const t = await getTranslations("post");
   const locale = await getLocale();
   const postLang = post.lang ?? "en";
-  const needsTranslation = locale === "ko" && postLang === "en";
+  const needsTranslation = (locale === "ko" && postLang === "en") || (locale === "en" && postLang === "ko");
+  const translationDirection: "en-ko" | "ko-en" = postLang === "en" ? "en-ko" : "ko-en";
   const tags = post.tags ?? [];
 
   const formattedDate = post.date
@@ -136,7 +137,9 @@ export default async function PostPage({ params }: Props) {
       <PostContent
         content={post.content}
         needsTranslation={needsTranslation}
+        translationDirection={translationDirection}
         translateLabel={t("translateButton")}
+        writtenInLabel={t("writtenIn")}
         translatingLabel={t("translating")}
         errorLabel={t("translateError")}
         originalLabel={t("originalContent")}

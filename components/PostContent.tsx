@@ -7,20 +7,23 @@ import remarkGfm from "remark-gfm";
 interface Props {
   content: string;
   needsTranslation: boolean;
+  translationDirection: "en-ko" | "ko-en";
   translateLabel: string;
+  writtenInLabel: string;
   translatingLabel: string;
   errorLabel: string;
   originalLabel: string;
   translatedBadge: string;
 }
 
-async function translateText(text: string): Promise<string> {
+async function translateText(text: string, direction: "en-ko" | "ko-en"): Promise<string> {
   // MyMemory API: 무료, API 키 불필요 (일 500단어 제한)
+  const langpair = direction === "en-ko" ? "en|ko" : "ko|en";
   const chunks = splitIntoChunks(text, 400);
   const translated: string[] = [];
 
   for (const chunk of chunks) {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=en|ko`;
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langpair}`;
     const res = await fetch(url);
     if (!res.ok) throw new Error("API error");
     const data = await res.json();
@@ -55,7 +58,9 @@ function splitIntoChunks(text: string, maxWords: number): string[] {
 export default function PostContent({
   content,
   needsTranslation,
+  translationDirection,
   translateLabel,
+  writtenInLabel,
   translatingLabel,
   errorLabel,
   originalLabel,
@@ -70,7 +75,7 @@ export default function PostContent({
     setLoading(true);
     setError(false);
     try {
-      const result = await translateText(content);
+      const result = await translateText(content, translationDirection);
       setTranslatedContent(result);
       setShowOriginal(false);
     } catch {
@@ -95,7 +100,7 @@ export default function PostContent({
           {!translatedContent ? (
             <>
               <span className="text-sm flex-1" style={{ color: "var(--text-muted)" }}>
-                이 글은 영어로 작성되었습니다.
+                {writtenInLabel}
               </span>
               <button
                 onClick={handleTranslate}
