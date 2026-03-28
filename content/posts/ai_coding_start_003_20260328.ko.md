@@ -152,7 +152,7 @@ tags:
 ```
 
 > - AI 코딩시, 로그에 뜨는 AI가 추천해주는 방법 및 일하는 방식을 보면,    
-<span style="color:red">선임 개발자에게 배우는 느낌이다. </span>
+***<span style="color:red">선임 개발자에게 배우는 느낌이다. </span>***
 
 
 
