@@ -4,34 +4,77 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import PostEditor from "../../_components/PostEditor";
 
+interface LangData {
+  title: string;
+  description: string;
+  content: string;
+  sha?: string;
+  filePath?: string;
+}
+
 export default function EditPostPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [data, setData] = useState<{ frontmatter: Record<string, unknown>; content: string; sha: string } | null>(null);
+  const [koData, setKoData] = useState<LangData | undefined>();
+  const [enData, setEnData] = useState<LangData | undefined>();
+  const [sharedDate, setSharedDate] = useState<string | undefined>();
+  const [sharedTags, setSharedTags] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/admin/posts/${slug}`)
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d);
-        setLoading(false);
-      });
+    async function load() {
+      const [koRes, enRes] = await Promise.all([
+        fetch(`/api/admin/posts/${slug}?lang=ko`),
+        fetch(`/api/admin/posts/${slug}?lang=en`),
+      ]);
+
+      let date = "";
+      let tags = "";
+
+      if (koRes.ok) {
+        const d = await koRes.json();
+        const fm = d.frontmatter ?? {};
+        setKoData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", sha: d.sha, filePath: d.filePath });
+        date = fm.date ?? "";
+        tags = Array.isArray(fm.tags) ? fm.tags.join(", ") : (fm.tags ?? "");
+      }
+
+      if (enRes.ok) {
+        const d = await enRes.json();
+        const fm = d.frontmatter ?? {};
+        // en 버전이 실제로 다른 파일인지 확인 (fallback이 아닌 경우)
+        if (d.filePath?.includes(".en.")) {
+          setEnData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", sha: d.sha, filePath: d.filePath });
+        }
+        if (!date) {
+          date = fm.date ?? "";
+          tags = Array.isArray(fm.tags) ? fm.tags.join(", ") : (fm.tags ?? "");
+        }
+      }
+
+      setSharedDate(date);
+      setSharedTags(tags);
+      setLoading(false);
+    }
+    load();
   }, [slug]);
 
-  const handleSave = async ({ frontmatter, content, sha }: {
+  const handleSave = async ({ lang, title, description, content, sha, filePath, date, tags }: {
     slug: string;
-    frontmatter: { title: string; date: string; description: string; tags: string; lang: "ko" | "en" };
+    date: string;
+    tags: string;
+    lang: "ko" | "en";
+    title: string;
+    description: string;
     content: string;
     sha?: string;
+    filePath?: string;
   }) => {
-    const tags = frontmatter.tags
-      ? frontmatter.tags.split(",").map((t) => t.trim()).filter(Boolean)
-      : [];
+    const tagsArr = tags ? tags.split(",").map((t) => t.trim()).filter(Boolean) : [];
 
     const res = await fetch(`/api/admin/posts/${slug}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...frontmatter, tags, content, sha }),
+      body: JSON.stringify({ title, date, description, tags: tagsArr, lang, content, sha, filePath }),
     });
 
     if (!res.ok) {
@@ -48,7 +91,7 @@ export default function EditPostPage() {
     );
   }
 
-  if (!data) {
+  if (!koData && !enData) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ color: "hsl(340 95% 60%)" }}>
         글을 찾을 수 없습니다.
@@ -56,20 +99,13 @@ export default function EditPostPage() {
     );
   }
 
-  const fm = data.frontmatter as { title?: string; date?: string; description?: string; tags?: string[]; lang?: string };
-
   return (
     <PostEditor
       slug={slug}
-      initialFrontmatter={{
-        title: fm.title,
-        date: fm.date,
-        description: fm.description,
-        tags: Array.isArray(fm.tags) ? fm.tags : [],
-        lang: fm.lang as "ko" | "en",
-      }}
-      initialContent={data.content}
-      sha={data.sha}
+      date={sharedDate}
+      tags={sharedTags}
+      initialKo={koData}
+      initialEn={enData}
       onSave={handleSave}
     />
   );

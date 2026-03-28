@@ -17,8 +17,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
-  const post = await getPost(slug);
+  const { slug, locale } = await params;
+  const post = await getPost(slug, locale);
   if (!post) return {};
   return {
     title: `${post.title} | backtodev`,
@@ -28,14 +28,11 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const locale = await getLocale();
+  const post = await getPost(slug, locale);
   if (!post) notFound();
 
   const t = await getTranslations("post");
-  const locale = await getLocale();
-  const postLang = post.lang ?? "en";
-  const needsTranslation = (locale === "ko" && postLang === "en") || (locale === "en" && postLang === "ko");
-  const translationDirection: "en-ko" | "ko-en" = postLang === "en" ? "en-ko" : "ko-en";
   const tags = post.tags ?? [];
 
   const formattedDate = post.date
@@ -130,21 +127,19 @@ export default async function PostPage({ params }: Props) {
             </svg>
             1 min read
           </span>
+          {post.isFallback && (
+            <span
+              className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-lg"
+              style={{ background: "hsl(45 100% 15%)", color: "hsl(45 100% 65%)" }}
+            >
+              🌐 {locale === "en" ? "Only Korean available" : "영어 버전 없음"}
+            </span>
+          )}
         </div>
       </header>
 
       {/* Content */}
-      <PostContent
-        content={post.content}
-        needsTranslation={needsTranslation}
-        translationDirection={translationDirection}
-        translateLabel={t("translateButton")}
-        writtenInLabel={t("writtenIn")}
-        translatingLabel={t("translating")}
-        errorLabel={t("translateError")}
-        originalLabel={t("originalContent")}
-        translatedBadge={t("translatedBadge")}
-      />
+      <PostContent content={post.content} />
 
       {/* Author bio */}
       <div

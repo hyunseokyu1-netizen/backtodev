@@ -4,55 +4,114 @@ import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-interface Frontmatter {
+interface LangData {
   title: string;
-  date: string;
   description: string;
+  content: string;
+  sha?: string;
+  filePath?: string;
+}
+
+interface SavePayload {
+  slug: string;
+  date: string;
   tags: string;
   lang: "ko" | "en";
+  title: string;
+  description: string;
+  content: string;
+  sha?: string;
+  filePath?: string;
 }
 
 interface Props {
   slug?: string;
-  initialFrontmatter?: Partial<Omit<Frontmatter, "tags">> & { tags?: string | string[] };
-  initialContent?: string;
-  sha?: string;
-  onSave: (data: { slug: string; frontmatter: Frontmatter; content: string; sha?: string }) => Promise<void>;
+  date?: string;
+  tags?: string;
+  initialKo?: Partial<LangData>;
+  initialEn?: Partial<LangData>;
+  onSave: (data: SavePayload) => Promise<void>;
 }
 
-export default function PostEditor({ slug: initSlug, initialFrontmatter, initialContent, sha, onSave }: Props) {
+async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
+  const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
+  const paragraphs = text.split(/\n\n+/);
+  const chunks: string[] = [];
+  let current = "";
+  let wordCount = 0;
+  for (const para of paragraphs) {
+    const words = para.split(/\s+/).length;
+    if (wordCount + words > 400 && current) {
+      chunks.push(current.trim());
+      current = para;
+      wordCount = words;
+    } else {
+      current = current ? `${current}\n\n${para}` : para;
+      wordCount += words;
+    }
+  }
+  if (current) chunks.push(current.trim());
+
+  const results: string[] = [];
+  for (const chunk of chunks) {
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langpair}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("API error");
+    const data = await res.json();
+    if (data.responseStatus !== 200) throw new Error(data.responseDetails);
+    results.push(data.responseData.translatedText);
+  }
+  return results.join("\n\n");
+}
+
+export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
   const [slug, setSlug] = useState(initSlug ?? "");
-  const [fm, setFm] = useState<Frontmatter>({
-    title: initialFrontmatter?.title ?? "",
-    date: initialFrontmatter?.date ?? new Date().toISOString().slice(0, 10),
-    description: initialFrontmatter?.description ?? "",
-    tags: Array.isArray(initialFrontmatter?.tags) ? initialFrontmatter.tags.join(", ") : (initialFrontmatter?.tags ?? ""),
-    lang: (initialFrontmatter?.lang as "ko" | "en") ?? "ko",
+  const [date, setDate] = useState(initDate ?? new Date().toISOString().slice(0, 10));
+  const [tags, setTags] = useState(initTags ?? "");
+  const [activeLang, setActiveLang] = useState<"ko" | "en">("ko");
+  const [ko, setKo] = useState<LangData>({
+    title: initialKo?.title ?? "",
+    description: initialKo?.description ?? "",
+    content: initialKo?.content ?? "",
+    sha: initialKo?.sha,
+    filePath: initialKo?.filePath,
   });
-  const [content, setContent] = useState(initialContent ?? "");
+  const [en, setEn] = useState<LangData>({
+    title: initialEn?.title ?? "",
+    description: initialEn?.description ?? "",
+    content: initialEn?.content ?? "",
+    sha: initialEn?.sha,
+    filePath: initialEn?.filePath,
+  });
+
   const [mode, setMode] = useState<"edit" | "split" | "preview">("split");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const [translating, setTranslating] = useState(false);
+  const [translateError, setTranslateError] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const isEdit = !!initSlug;
 
-  // 자동 slug 생성 (새 글)
+  const current = activeLang === "ko" ? ko : en;
+  const setCurrent = activeLang === "ko" ? setKo : setEn;
+
+  // 새 글: 제목으로 slug 자동 생성
   useEffect(() => {
-    if (!isEdit && fm.title && !slug) {
-      const generated = fm.title
+    if (!isEdit && ko.title && !slug) {
+      const generated = ko.title
         .toLowerCase()
         .replace(/[^a-z0-9가-힣\s-]/g, "")
         .replace(/\s+/g, "-")
         .slice(0, 60);
       setSlug(generated);
     }
-  }, [fm.title, isEdit, slug]);
+  }, [ko.title, isEdit, slug]);
 
   const handleSave = async () => {
-    if (!slug || !fm.title) {
+    if (!slug || !current.title) {
       setError("slug와 제목은 필수입니다.");
       return;
     }
@@ -61,9 +120,14 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
     try {
       await onSave({
         slug,
-        frontmatter: fm,
-        content,
-        sha,
+        date,
+        tags,
+        lang: activeLang,
+        title: current.title,
+        description: current.description,
+        content: current.content,
+        sha: current.sha,
+        filePath: current.filePath,
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
@@ -74,14 +138,47 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
     }
   };
 
+  const handleAutoTranslate = async () => {
+    if (!current.content) {
+      setTranslateError("번역할 내용이 없습니다.");
+      return;
+    }
+    setTranslating(true);
+    setTranslateError("");
+    try {
+      const direction = activeLang === "ko" ? "ko-en" : "en-ko";
+      const translated = await autoTranslate(current.content, direction);
+      const titleTranslated = current.title
+        ? await autoTranslate(current.title, direction)
+        : "";
+      const descTranslated = current.description
+        ? await autoTranslate(current.description, direction)
+        : "";
+
+      const other = activeLang === "ko" ? en : ko;
+      const setOther = activeLang === "ko" ? setEn : setKo;
+      setOther({
+        ...other,
+        title: other.title || titleTranslated,
+        description: other.description || descTranslated,
+        content: translated,
+      });
+      // 번역 후 다른 탭으로 이동
+      setActiveLang(activeLang === "ko" ? "en" : "ko");
+    } catch {
+      setTranslateError("번역 실패. 다시 시도해 주세요.");
+    } finally {
+      setTranslating(false);
+    }
+  };
+
   const insertAtCursor = (text: string) => {
     const ta = textareaRef.current;
     if (!ta) return;
     const start = ta.selectionStart;
     const end = ta.selectionEnd;
-    const next = content.slice(0, start) + text + content.slice(end);
-    setContent(next);
-    // 커서를 삽입 텍스트 뒤로 이동
+    const next = current.content.slice(0, start) + text + current.content.slice(end);
+    setCurrent((prev) => ({ ...prev, content: next }));
     requestAnimationFrame(() => {
       ta.selectionStart = ta.selectionEnd = start + text.length;
       ta.focus();
@@ -92,7 +189,6 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
     const file = e.target.files?.[0];
     if (!file) return;
     e.target.value = "";
-
     setUploading(true);
     setError("");
     try {
@@ -122,6 +218,9 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
     </button>
   );
 
+  const langHasContent = (lang: "ko" | "en") =>
+    (lang === "ko" ? ko : en).content.trim().length > 0;
+
   return (
     <div className="flex flex-col h-screen">
       {/* 상단 툴바 */}
@@ -129,11 +228,7 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
         className="flex items-center gap-3 px-6 py-3 border-b shrink-0"
         style={{ background: "var(--surface)", borderColor: "var(--border)" }}
       >
-        <a
-          href="/admin"
-          className="text-sm font-medium mr-2"
-          style={{ color: "var(--text-muted)" }}
-        >
+        <a href="/admin" className="text-sm font-medium mr-2" style={{ color: "var(--text-muted)" }}>
           ← 목록
         </a>
         <span style={{ color: "var(--border)" }}>|</span>
@@ -154,13 +249,10 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
             disabled={uploading}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60"
             style={{ background: "var(--surface-2)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
-            title="이미지 업로드"
           >
             {uploading ? "업로드 중..." : "이미지 삽입"}
           </button>
-
           <div style={{ width: 1, height: 16, background: "var(--border)" }} />
-
           {modeBtn("edit", "편집")}
           {modeBtn("split", "분할")}
           {modeBtn("preview", "미리보기")}
@@ -175,8 +267,54 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
           className="px-5 py-2 rounded-xl font-bold text-sm transition-all disabled:opacity-60 ml-2"
           style={{ background: "var(--yellow)", color: "hsl(210 15% 6%)" }}
         >
-          {saving ? "저장 중..." : "저장 & 배포"}
+          {saving ? "저장 중..." : `저장 & 배포 (${activeLang.toUpperCase()})`}
         </button>
+      </div>
+
+      {/* 언어 탭 */}
+      <div
+        className="flex items-center gap-3 px-6 py-3 border-b shrink-0"
+        style={{ background: "hsl(213 40% 8%)", borderColor: "var(--border)" }}
+      >
+        {(["ko", "en"] as const).map((lang) => (
+          <button
+            key={lang}
+            onClick={() => setActiveLang(lang)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+            style={{
+              background: activeLang === lang ? "var(--yellow)" : "var(--surface-2)",
+              color: activeLang === lang ? "hsl(210 15% 6%)" : "var(--text-muted)",
+              border: `1px solid ${activeLang === lang ? "var(--yellow)" : "var(--border)"}`,
+            }}
+          >
+            {lang === "ko" ? "🇰🇷 한국어" : "🇺🇸 English"}
+            {langHasContent(lang) && (
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: activeLang === lang ? "hsl(210 15% 6%)" : "var(--green)" }}
+              />
+            )}
+          </button>
+        ))}
+
+        <button
+          onClick={handleAutoTranslate}
+          disabled={translating || !current.content}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 ml-2"
+          style={{ background: "hsl(225 40% 16%)", color: "var(--blue)", border: "1px solid hsl(225 40% 24%)" }}
+        >
+          {translating ? (
+            <>
+              <Spinner />
+              번역 중...
+            </>
+          ) : (
+            `↔ ${activeLang === "ko" ? "영어로 번역 초안" : "한국어로 번역 초안"}`
+          )}
+        </button>
+        {translateError && (
+          <span className="text-xs" style={{ color: "hsl(340 95% 60%)" }}>{translateError}</span>
+        )}
       </div>
 
       {/* Frontmatter 입력 */}
@@ -186,11 +324,13 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
       >
         <div className="col-span-2 flex gap-3">
           <div className="flex-1">
-            <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>제목 *</label>
+            <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
+              제목 * <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
+            </label>
             <input
-              value={fm.title}
-              onChange={(e) => setFm({ ...fm, title: e.target.value })}
-              placeholder="글 제목"
+              value={current.title}
+              onChange={(e) => setCurrent((prev) => ({ ...prev, title: e.target.value }))}
+              placeholder={activeLang === "ko" ? "글 제목" : "Post title"}
               className="w-full px-3 py-2 rounded-lg text-sm outline-none"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
             />
@@ -212,32 +352,8 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
           <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>날짜</label>
           <input
             type="date"
-            value={fm.date}
-            onChange={(e) => setFm({ ...fm, date: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
-            style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
-          />
-        </div>
-
-        <div>
-          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>언어</label>
-          <select
-            value={fm.lang}
-            onChange={(e) => setFm({ ...fm, lang: e.target.value as "ko" | "en" })}
-            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
-            style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
-          >
-            <option value="ko">한국어 (ko)</option>
-            <option value="en">English (en)</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>설명</label>
-          <input
-            value={fm.description}
-            onChange={(e) => setFm({ ...fm, description: e.target.value })}
-            placeholder="짧은 설명"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="w-full px-3 py-2 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
           />
@@ -246,9 +362,22 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
         <div>
           <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>태그 (쉼표 구분)</label>
           <input
-            value={fm.tags}
-            onChange={(e) => setFm({ ...fm, tags: e.target.value })}
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
             placeholder="Next.js, React, 개발"
+            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
+            style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
+            설명 <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
+          </label>
+          <input
+            value={current.description}
+            onChange={(e) => setCurrent((prev) => ({ ...prev, description: e.target.value }))}
+            placeholder={activeLang === "ko" ? "짧은 설명" : "Short description"}
             className="w-full px-3 py-2 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
           />
@@ -257,7 +386,6 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
 
       {/* 에디터 / 미리보기 */}
       <div className="flex flex-1 overflow-hidden">
-        {/* 마크다운 에디터 */}
         {(mode === "edit" || mode === "split") && (
           <div
             className="flex flex-col overflow-hidden"
@@ -270,13 +398,13 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
               className="px-4 py-2 text-xs font-semibold border-b"
               style={{ color: "var(--text-muted)", borderColor: "var(--border)", background: "var(--surface)" }}
             >
-              마크다운
+              마크다운 ({activeLang === "ko" ? "한국어" : "English"})
             </div>
             <textarea
               ref={textareaRef}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="마크다운으로 글을 작성하세요..."
+              value={current.content}
+              onChange={(e) => setCurrent((prev) => ({ ...prev, content: e.target.value }))}
+              placeholder={activeLang === "ko" ? "마크다운으로 글을 작성하세요..." : "Write in Markdown..."}
               className="flex-1 w-full p-6 resize-none outline-none text-sm leading-relaxed"
               style={{
                 background: "hsl(213 40% 8%)",
@@ -288,7 +416,6 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
           </div>
         )}
 
-        {/* 미리보기 */}
         {(mode === "preview" || mode === "split") && (
           <div className="flex flex-col flex-1 overflow-hidden">
             <div
@@ -299,12 +426,22 @@ export default function PostEditor({ slug: initSlug, initialFrontmatter, initial
             </div>
             <div className="flex-1 overflow-y-auto p-8">
               <div className="prose">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{content || "_미리보기가 여기에 표시됩니다._"}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {current.content || "_미리보기가 여기에 표시됩니다._"}
+                </ReactMarkdown>
               </div>
             </div>
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
   );
 }

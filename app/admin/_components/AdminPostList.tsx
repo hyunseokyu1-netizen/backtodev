@@ -15,7 +15,7 @@ interface Post {
 export default function AdminPostList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null); // "{slug}-{lang}"
   const router = useRouter();
 
   const fetchPosts = async () => {
@@ -28,10 +28,10 @@ export default function AdminPostList() {
 
   useEffect(() => { fetchPosts(); }, []);
 
-  const handleDelete = async (slug: string, title: string) => {
-    if (!confirm(`"${title}" 글을 삭제할까요?`)) return;
-    setDeleting(slug);
-    await fetch(`/api/admin/posts/${slug}`, { method: "DELETE" });
+  const handleDelete = async (slug: string, lang: string, title: string) => {
+    if (!confirm(`"${title}" (${lang.toUpperCase()}) 글을 삭제할까요?`)) return;
+    setDeleting(`${slug}-${lang}`);
+    await fetch(`/api/admin/posts/${slug}?lang=${lang}`, { method: "DELETE" });
     await fetchPosts();
     setDeleting(null);
   };
@@ -165,12 +165,12 @@ export default function AdminPostList() {
                     수정
                   </a>
                   <button
-                    onClick={() => handleDelete(post.slug, post.title)}
-                    disabled={deleting === post.slug}
+                    onClick={() => handleDelete(post.slug, post.lang, post.title)}
+                    disabled={deleting === `${post.slug}-${post.lang}`}
                     className="text-xs px-3 py-1.5 rounded-lg transition-all disabled:opacity-50"
                     style={{ background: "hsl(340 30% 14%)", color: "hsl(340 95% 60%)", border: "1px solid hsl(340 30% 22%)" }}
                   >
-                    {deleting === post.slug ? "삭제 중..." : "삭제"}
+                    {deleting === `${post.slug}-${post.lang}` ? "삭제 중..." : "삭제"}
                   </button>
                 </div>
               </div>

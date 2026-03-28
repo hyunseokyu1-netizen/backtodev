@@ -6,19 +6,21 @@ import { useRouter } from "next/navigation";
 export default function NewPostPage() {
   const router = useRouter();
 
-  const handleSave = async ({ slug, frontmatter, content }: {
+  const handleSave = async ({ slug, date, tags, lang, title, description, content }: {
     slug: string;
-    frontmatter: { title: string; date: string; description: string; tags: string; lang: "ko" | "en" };
+    date: string;
+    tags: string;
+    lang: "ko" | "en";
+    title: string;
+    description: string;
     content: string;
   }) => {
-    const tags = frontmatter.tags
-      ? frontmatter.tags.split(",").map((t) => t.trim()).filter(Boolean)
-      : [];
+    const tagsArr = tags ? tags.split(",").map((t) => t.trim()).filter(Boolean) : [];
 
     const res = await fetch("/api/admin/posts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug, content, ...frontmatter, tags }),
+      body: JSON.stringify({ slug, date, description, tags: tagsArr, lang, title, content }),
     });
 
     if (!res.ok) {
