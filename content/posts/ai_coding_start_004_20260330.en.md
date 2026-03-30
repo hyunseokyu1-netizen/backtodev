@@ -41,7 +41,7 @@ Below the terminal are the current session markings and window numbers as shown 
 ![2026-03-30](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-03-30_______10_51_26_1774835545046.png)
 
 The picture below is from another blog. 
-Use multiple screens like this * * and `All commands can be done with the keyboard.` * *
+Use multiple screens like this and **`All commands can be done with the keyboard.` **
 
 ![2026-03-30](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-03-30_______10_55_41_1774836562855.png)
 
