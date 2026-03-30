@@ -18,7 +18,7 @@ The program that helps with that is tmux.
 
 vercel connection or github connection is lost.
 
-`` `jsx
+```jsx
 ा GitHub push is normal, but it is difficult to check the Vercel integration status directly in the terminal.
 
   To check for yourself:
