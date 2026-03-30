@@ -3,8 +3,8 @@ title: '[AI_StartDevelopment04] Maintain Session'
 date: '2026-03-30'
 description: 'If the network changes while working, the session is sometimes broken.: ('
 tags:
-  - AI개발시작
-  - 세션유지
+  - AI coding start
+  - Session
 ---
 If you use the clod code in the terminal, if you switch back and forth between networks, the session will be interrupted.
 
