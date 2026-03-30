@@ -57,10 +57,28 @@ export async function PUT(request: NextRequest, { params }: Params) {
   });
 
   try {
-    const newSha = await putFile(targetPath, fileContent, `post: ${title} 수정`, sha);
+    // SHA가 없거나 불확실한 경우 GitHub에서 최신 SHA를 직접 조회
+    let latestSha = sha;
+    if (!latestSha) {
+      const existing = await getFile(targetPath);
+      if (existing) latestSha = existing.sha;
+    }
+    const newSha = await putFile(targetPath, fileContent, `post: ${title} 수정`, latestSha);
     return NextResponse.json({ ok: true, sha: newSha, filePath: targetPath });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "저장 실패";
+    // SHA 불일치(409)인 경우 최신 SHA로 재시도
+    if (msg.includes("409")) {
+      try {
+        const existing = await getFile(targetPath);
+        if (existing) {
+          const newSha = await putFile(targetPath, fileContent, `post: ${title} 수정`, existing.sha);
+          return NextResponse.json({ ok: true, sha: newSha, filePath: targetPath });
+        }
+      } catch {
+        // 재시도도 실패
+      }
+    }
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
