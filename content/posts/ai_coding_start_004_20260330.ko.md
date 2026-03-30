@@ -49,6 +49,8 @@ tmux의 장점은 같은 세션에서 여러개 창 만들기와 상태표시줄
 
 tmux 설치법, 사용법은 아래 블로그 참고.
 
-![tmux사용법01] (https://m.blog.naver.com/PostView.naver?blogId=songsite123&logNo=223809804101&navType=by)
 
-![tmus사용법02] (https://editor752.tistory.com/67)
+[tmux 사용법 보기 01](https://m.blog.naver.com/PostView.naver?blogId=songsite123&logNo=223809804101&navType=by)
+
+
+[tmus 사용법 보기 02](https://editor752.tistory.com/67)
