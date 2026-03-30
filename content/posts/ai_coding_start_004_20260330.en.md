@@ -38,7 +38,7 @@ So I installed tmux.
 the advantage of tmux is that there are multiple windows and status bars in the same session.
 Below the terminal are the current session markings and window numbers as shown in the image below.
 
-! [2026-03-30] (https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-03-30_______10_51_26_1774835545046.png)
+![2026-03-30](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-03-30_______10_51_26_1774835545046.png)
 
 The picture below is from another blog. 
 Use multiple screens like this * * and `All commands can be done with the keyboard.` * *
