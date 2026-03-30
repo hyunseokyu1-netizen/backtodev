@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
+import { Analytics } from "@vercel/analytics/next";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import Nav from "@/components/Nav";
@@ -110,6 +111,7 @@ export default async function LocaleLayout({
             </footer>
           </div>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
