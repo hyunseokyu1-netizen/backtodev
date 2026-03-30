@@ -53,7 +53,7 @@ There are too many shortcuts, but for now, you can just press ctrl + b and use t
 refer to the blog below for instructions on how to install and use tmux.
 
 
-[See how to use tmux 01] (https://m.blog.naver.com/PostView.naver?blogId=songsite123&logNo=223809804101&navType=by)
+[how to use tmux 01] (https://m.blog.naver.com/PostView.naver?blogId=songsite123&logNo=223809804101&navType=by)
 
 
 [See how to use tmus 02] (https://editor752.tistory.com/67)
