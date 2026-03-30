@@ -123,14 +123,15 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [slugManual, setSlugManual] = useState(false);
   const isEdit = !!initSlug;
 
   const current = activeLang === "ko" ? ko : en;
   const setCurrent = activeLang === "ko" ? setKo : setEn;
 
-  // 새 글: 제목으로 slug 자동 생성
+  // 새 글: 제목으로 slug 자동 생성 (사용자가 직접 수정한 경우 제외)
   useEffect(() => {
-    if (!isEdit && ko.title && !slug) {
+    if (!isEdit && !slugManual && ko.title) {
       const generated = ko.title
         .toLowerCase()
         .replace(/[^a-z0-9가-힣\s-]/g, "")
@@ -138,7 +139,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
         .slice(0, 60);
       setSlug(generated);
     }
-  }, [ko.title, isEdit, slug]);
+  }, [ko.title, isEdit, slugManual]);
 
   const handleSave = async () => {
     if (!slug || !current.title) {
@@ -376,7 +377,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
             <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>slug *</label>
             <input
               value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+              onChange={(e) => { setSlug(e.target.value); setSlugManual(true); }}
               placeholder="url-slug"
               disabled={isEdit}
               className="w-full px-3 py-2 rounded-lg text-sm outline-none font-mono disabled:opacity-50"
