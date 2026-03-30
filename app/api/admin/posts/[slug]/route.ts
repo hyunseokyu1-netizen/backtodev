@@ -56,8 +56,13 @@ export async function PUT(request: NextRequest, { params }: Params) {
     tags,
   });
 
-  await putFile(targetPath, fileContent, `post: ${title} 수정`, sha);
-  return NextResponse.json({ ok: true });
+  try {
+    const newSha = await putFile(targetPath, fileContent, `post: ${title} 수정`, sha);
+    return NextResponse.json({ ok: true, sha: newSha, filePath: targetPath });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "저장 실패";
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
 }
 
 export async function DELETE(request: NextRequest, { params }: Params) {

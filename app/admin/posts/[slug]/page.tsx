@@ -77,9 +77,17 @@ export default function EditPostPage() {
       body: JSON.stringify({ title, date, description, tags: tagsArr, lang, content, sha, filePath }),
     });
 
+    const d = await res.json().catch(() => ({}));
     if (!res.ok) {
-      const d = await res.json();
       throw new Error(d.error ?? "저장 실패");
+    }
+
+    // 저장 성공 후 새 SHA를 state에 반영 (다음 저장에 사용)
+    if (d.sha) {
+      const updater = (prev: LangData | undefined) =>
+        prev ? { ...prev, sha: d.sha, filePath: d.filePath ?? prev.filePath } : prev;
+      if (lang === "ko") setKoData(updater);
+      else setEnData(updater);
     }
   };
 

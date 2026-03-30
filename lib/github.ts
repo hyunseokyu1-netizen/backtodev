@@ -37,7 +37,7 @@ export async function listDir(path: string): Promise<{ name: string; path: strin
   return Array.isArray(data) ? data.map((f: { name: string; path: string; sha: string }) => ({ name: f.name, path: f.path, sha: f.sha })) : [];
 }
 
-export async function putFile(path: string, content: string, message: string, sha?: string): Promise<void> {
+export async function putFile(path: string, content: string, message: string, sha?: string): Promise<string> {
   const body: Record<string, string> = {
     message,
     content: Buffer.from(content, "utf-8").toString("base64"),
@@ -53,6 +53,8 @@ export async function putFile(path: string, content: string, message: string, sh
     const err = await res.text();
     throw new Error(`GitHub PUT failed: ${res.status} ${err}`);
   }
+  const data = await res.json();
+  return data.content?.sha ?? "";
 }
 
 export async function putFileBinary(path: string, base64Content: string, message: string, sha?: string): Promise<void> {
