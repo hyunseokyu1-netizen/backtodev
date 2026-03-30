@@ -1,11 +1,13 @@
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { getAllPosts } from "@/lib/posts";
 import PostsClient from "@/components/PostsClient";
 
 export default async function PostsPage() {
   const t = await getTranslations("posts");
   const tPost = await getTranslations("post");
-  const posts = await getAllPosts();
+  const locale = await getLocale();
+  const posts = await getAllPosts(locale);
 
   return (
     <div>

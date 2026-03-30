@@ -79,8 +79,18 @@ function parseFrontmatter(slug: string, lang: string, raw: string): PostMeta {
 
 // ── Public API ───────────────────────────────────────────────────────────────
 
-export async function getAllPosts(): Promise<PostMeta[]> {
-  const slugMap = new Map<string, PostMeta>();
+export async function getAllPosts(locale = "ko"): Promise<PostMeta[]> {
+  // slug → { ko: PostMeta, en: PostMeta } 수집
+  const slugMap = new Map<string, Partial<Record<string, PostMeta>>>();
+
+  const processFile = (name: string, raw: string) => {
+    const parsed = parseFileName(name);
+    if (!parsed) return;
+    const meta = parseFrontmatter(parsed.slug, parsed.lang, raw);
+    const entry = slugMap.get(parsed.slug) ?? {};
+    entry[parsed.lang] = meta;
+    slugMap.set(parsed.slug, entry);
+  };
 
   if (IS_PROD) {
     const files = await listGitHubDir("content/posts");
@@ -89,15 +99,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
     );
     await Promise.all(
       mdFiles.map(async (f) => {
-        const parsed = parseFileName(f.name);
-        if (!parsed) return;
         const raw = await fetchFromGitHub(`content/posts/${f.name}`);
-        if (!raw) return;
-        const meta = parseFrontmatter(parsed.slug, parsed.lang, raw);
-        // 같은 slug가 여러 언어로 있으면 ko 우선, 없으면 첫 번째
-        if (!slugMap.has(parsed.slug) || parsed.lang === "ko") {
-          slugMap.set(parsed.slug, meta);
-        }
+        if (raw) processFile(f.name, raw);
       })
     );
   } else {
@@ -105,19 +108,19 @@ export async function getAllPosts(): Promise<PostMeta[]> {
     fs.readdirSync(postsDir)
       .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
       .forEach((file) => {
-        const parsed = parseFileName(file);
-        if (!parsed) return;
         const raw = fs.readFileSync(path.join(postsDir, file), "utf-8");
-        const meta = parseFrontmatter(parsed.slug, parsed.lang, raw);
-        if (!slugMap.has(parsed.slug) || parsed.lang === "ko") {
-          slugMap.set(parsed.slug, meta);
-        }
+        processFile(file, raw);
       });
   }
 
-  return Array.from(slugMap.values()).sort((a, b) =>
-    a.date < b.date ? 1 : -1
-  );
+  const fallback = locale === "ko" ? "en" : "ko";
+  const result: PostMeta[] = [];
+  for (const entry of slugMap.values()) {
+    const post = entry[locale] ?? entry[fallback];
+    if (post) result.push({ ...post, isFallback: !entry[locale] });
+  }
+
+  return result.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export async function getPost(slug: string, locale = "ko"): Promise<Post | null> {

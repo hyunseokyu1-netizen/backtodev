@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
@@ -6,7 +7,8 @@ import PostCard from "@/components/PostCard";
 export default async function Home() {
   const t = await getTranslations("home");
   const tPost = await getTranslations("post");
-  const posts = (await getAllPosts()).slice(0, 6);
+  const locale = await getLocale();
+  const posts = (await getAllPosts(locale)).slice(0, 6);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6rem", paddingBottom: "3rem" }}>
