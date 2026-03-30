@@ -3,8 +3,8 @@ title: '[AI_StartDevelopment04] Maintain Session'
 date: '2026-03-30'
 description: 'If the network changes while working, the session is sometimes broken.: ('
 tags:
-  - AI coding start
-  - maintain Session
+  - AI개발시작
+  - 세션유지
 ---
 If you use the clod code in the terminal, if you switch back and forth between networks, the session will be interrupted.
 
@@ -42,6 +42,8 @@ Below the terminal are the current session markings and window numbers as shown 
 
 The picture below is from another blog. 
 Use multiple screens like this * * and `All commands can be done with the keyboard.` * *
+
+![2026-03-30](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-03-30_______10_55_41_1774836562855.png)
 
 I feel like an old vim, but it's been so long... I think it'll be much faster once I get used to shortcuts.
 
