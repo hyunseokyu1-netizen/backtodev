@@ -8,6 +8,7 @@ interface LangData {
   title: string;
   description: string;
   content: string;
+  tags?: string;
   sha?: string;
   filePath?: string;
 }
@@ -33,9 +34,10 @@ export default function EditPostPage() {
       if (koRes.ok) {
         const d = await koRes.json();
         const fm = d.frontmatter ?? {};
-        setKoData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", sha: d.sha, filePath: d.filePath });
+        const koTags = Array.isArray(fm.tags) ? fm.tags.join(", ") : (fm.tags ?? "");
+        setKoData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", tags: koTags, sha: d.sha, filePath: d.filePath });
         date = fm.date ?? "";
-        tags = Array.isArray(fm.tags) ? fm.tags.join(", ") : (fm.tags ?? "");
+        tags = koTags;
       }
 
       if (enRes.ok) {
@@ -43,7 +45,8 @@ export default function EditPostPage() {
         const fm = d.frontmatter ?? {};
         // en 버전이 실제로 다른 파일인지 확인 (fallback이 아닌 경우)
         if (d.filePath?.includes(".en.")) {
-          setEnData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", sha: d.sha, filePath: d.filePath });
+          const enTags = Array.isArray(fm.tags) ? fm.tags.join(", ") : (fm.tags ?? "");
+          setEnData({ title: fm.title ?? "", description: fm.description ?? "", content: d.content ?? "", tags: enTags, sha: d.sha, filePath: d.filePath });
         }
         if (!date) {
           date = fm.date ?? "";

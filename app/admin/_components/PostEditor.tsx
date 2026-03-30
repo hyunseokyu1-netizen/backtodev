@@ -8,6 +8,7 @@ interface LangData {
   title: string;
   description: string;
   content: string;
+  tags?: string;
   sha?: string;
   filePath?: string;
 }
@@ -95,12 +96,12 @@ async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promis
 export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
   const [slug, setSlug] = useState(initSlug ?? "");
   const [date, setDate] = useState(initDate ?? new Date().toISOString().slice(0, 10));
-  const [tags, setTags] = useState(initTags ?? "");
   const [activeLang, setActiveLang] = useState<"ko" | "en">("ko");
   const [ko, setKo] = useState<LangData>({
     title: initialKo?.title ?? "",
     description: initialKo?.description ?? "",
     content: initialKo?.content ?? "",
+    tags: initialKo?.tags ?? initTags ?? "",
     sha: initialKo?.sha,
     filePath: initialKo?.filePath,
   });
@@ -108,6 +109,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
     title: initialEn?.title ?? "",
     description: initialEn?.description ?? "",
     content: initialEn?.content ?? "",
+    tags: initialEn?.tags ?? "",
     sha: initialEn?.sha,
     filePath: initialEn?.filePath,
   });
@@ -149,7 +151,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
       await onSave({
         slug,
         date,
-        tags,
+        tags: current.tags ?? "",
         lang: activeLang,
         title: current.title,
         description: current.description,
@@ -182,6 +184,12 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
       const descTranslated = current.description
         ? await autoTranslate(current.description, direction)
         : "";
+      // 태그 각각 번역
+      const currentTagList = (current.tags ?? "").split(",").map((t) => t.trim()).filter(Boolean);
+      const translatedTagList = await Promise.all(
+        currentTagList.map((tag) => autoTranslate(tag, direction))
+      );
+      const tagsTranslated = translatedTagList.join(", ");
 
       const other = activeLang === "ko" ? en : ko;
       const setOther = activeLang === "ko" ? setEn : setKo;
@@ -190,6 +198,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
         title: other.title || titleTranslated,
         description: other.description || descTranslated,
         content: translated,
+        tags: other.tags || tagsTranslated,
       });
       // 번역 후 다른 탭으로 이동
       setActiveLang(activeLang === "ko" ? "en" : "ko");
@@ -390,8 +399,8 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
         <div>
           <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>태그 (쉼표 구분)</label>
           <input
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
+            value={current.tags ?? ""}
+            onChange={(e) => setCurrent((prev) => ({ ...prev, tags: e.target.value }))}
             placeholder="Next.js, React, 개발"
             className="w-full px-3 py-2 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
