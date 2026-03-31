@@ -84,16 +84,6 @@ export default async function Home() {
               maxWidth: "36rem",
             }}
           >
-            {t("tagline")}
-          </p>
-          <p
-            style={{
-              fontSize: "0.95rem",
-              color: "hsl(var(--muted-foreground) / 0.7)",
-              lineHeight: 1.7,
-              maxWidth: "36rem",
-            }}
-          >
             {t("description")}
           </p>
 
