@@ -86,6 +86,16 @@ export default async function Home() {
           >
             {t("tagline")}
           </p>
+          <p
+            style={{
+              fontSize: "0.95rem",
+              color: "hsl(var(--muted-foreground) / 0.7)",
+              lineHeight: 1.7,
+              maxWidth: "36rem",
+            }}
+          >
+            {t("description")}
+          </p>
 
           {/* CTAs */}
           <div className="flex items-center" style={{ gap: "1rem", marginTop: "1rem" }}>
