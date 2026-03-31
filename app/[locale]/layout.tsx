@@ -60,7 +60,7 @@ export default async function LocaleLayout({
             <main
               className="flex-1 relative"
               style={{
-                maxWidth: "64rem",
+                maxWidth: "72rem",
                 width: "100%",
                 margin: "0 auto",
                 padding: "2rem 1.5rem 3rem",
@@ -81,7 +81,7 @@ export default async function LocaleLayout({
             >
               <div
                 style={{
-                  maxWidth: "64rem",
+                  maxWidth: "72rem",
                   margin: "0 auto",
                   display: "flex",
                   flexDirection: "column",

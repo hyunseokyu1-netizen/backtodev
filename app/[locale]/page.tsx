@@ -65,10 +65,7 @@ export default async function Home() {
             <br />
             <span
               style={{
-                background: "linear-gradient(to right, hsl(var(--primary)), #3b82f6)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                color: "hsl(var(--primary))",
               }}
             >
               {t("heroLine2")}
@@ -96,11 +93,10 @@ export default async function Home() {
                 height: 48,
                 padding: "0 2rem",
                 borderRadius: 12,
-                background: "hsl(var(--primary))",
-                color: "hsl(var(--primary-foreground))",
+                background: "#00FFC6",
+                color: "#000",
                 fontSize: "0.875rem",
-                fontWeight: 600,
-                boxShadow: "0 8px 24px hsl(var(--primary) / 0.25)",
+                fontWeight: 700,
                 textDecoration: "none",
               }}
             >
@@ -117,7 +113,7 @@ export default async function Home() {
                 color: "hsl(var(--foreground))",
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                border: "2px solid hsl(var(--border))",
+                border: "1px solid rgba(255,255,255,0.1)",
                 textDecoration: "none",
               }}
             >

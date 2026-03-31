@@ -32,41 +32,41 @@
 }
 
 :root {
-  --background: 240 10% 4%;
-  --foreground: 0 0% 98%;
+  --background: 213 35% 6%;       /* #0A0F14 */
+  --foreground: 220 13% 91%;      /* #E5E7EB */
 
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 222 39% 11%;            /* #111827 */
+  --card-foreground: 220 13% 91%;
 
-  --primary: 175 80% 50%;
-  --primary-foreground: 240 10% 4%;
+  --primary: 167 100% 50%;        /* #00FFC6 */
+  --primary-foreground: 222 39% 6%;
 
-  --secondary: 240 10% 12%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 222 25% 16%;
+  --secondary-foreground: 220 13% 91%;
 
-  --muted: 240 10% 12%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 222 25% 16%;
+  --muted-foreground: 220 9% 65%; /* #9CA3AF */
 
-  --accent: 175 80% 50%;
-  --accent-foreground: 240 10% 4%;
+  --accent: 167 100% 50%;
+  --accent-foreground: 222 39% 6%;
 
-  --border: 240 10% 15%;
-  --ring: 175 80% 50%;
+  --border: 220 15% 18%;
+  --ring: 167 100% 50%;
 
   /* Legacy aliases for admin pages */
-  --bg: hsl(240 10% 4%);
-  --surface: hsl(240 10% 6%);
-  --surface-2: hsl(240 10% 12%);
-  --text: hsl(0 0% 98%);
-  --text-muted: hsl(240 5% 65%);
-  --yellow: hsl(175 80% 50%);
-  --yellow-dim: hsl(175 80% 10% / 0.3);
+  --bg: hsl(213 35% 6%);
+  --surface: hsl(222 39% 11%);
+  --surface-2: hsl(222 25% 16%);
+  --text: hsl(220 13% 91%);
+  --text-muted: hsl(220 9% 65%);
+  --yellow: hsl(167 100% 50%);
+  --yellow-dim: hsl(167 100% 50% / 0.15);
   --blue: hsl(217 91% 60%);
   --magenta: hsl(333 100% 55%);
-  --green: hsl(175 80% 50%);
-  --green-dim: hsl(175 80% 10% / 0.2);
-  --cyan: hsl(175 80% 50%);
-  --cyan-dim: hsl(175 80% 50% / 0.1);
+  --green: hsl(167 100% 50%);
+  --green-dim: hsl(167 100% 50% / 0.12);
+  --cyan: hsl(167 100% 50%);
+  --cyan-dim: hsl(167 100% 50% / 0.1);
 }
 
 /* ── Reset & Base ── */
@@ -97,15 +97,16 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Post card ── */
 .post-card {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border) / 0.5);
-  border-radius: 16px;
-  transition: border-color 300ms ease, box-shadow 300ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
   text-decoration: none;
   display: block;
 }
 .post-card:hover {
-  border-color: hsl(var(--primary) / 0.6);
-  box-shadow: 0 4px 32px hsl(var(--primary) / 0.08);
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.1);
+  transform: translateY(-4px);
 }
 
 .post-card-title {

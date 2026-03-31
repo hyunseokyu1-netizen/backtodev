@@ -5,7 +5,7 @@ export function HeroBlobs() {
       className="pointer-events-none absolute inset-0 overflow-hidden"
       style={{ zIndex: 0 }}
     >
-      {/* Yellow glow — top right */}
+      {/* Teal glow — top right */}
       <div
         style={{
           position: "absolute",
@@ -15,11 +15,11 @@ export function HeroBlobs() {
           height: "420px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, hsl(50 100% 50% / 0.13) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,255,198,0.08) 0%, transparent 70%)",
           filter: "blur(1px)",
         }}
       />
-      {/* Blue glow — bottom left */}
+      {/* Teal glow — bottom left */}
       <div
         style={{
           position: "absolute",
@@ -29,21 +29,8 @@ export function HeroBlobs() {
           height: "360px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, hsl(225 100% 75% / 0.1) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,255,198,0.05) 0%, transparent 70%)",
           filter: "blur(1px)",
-        }}
-      />
-      {/* Magenta glow — center right */}
-      <div
-        style={{
-          position: "absolute",
-          top: "40%",
-          right: "10%",
-          width: "240px",
-          height: "240px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, hsl(333 100% 55% / 0.08) 0%, transparent 70%)",
         }}
       />
     </div>
@@ -81,9 +68,9 @@ export function SectionDots() {
       aria-hidden
       className="flex gap-1.5 mb-3"
     >
-      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--yellow)", display: "block" }} />
-      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--blue)", display: "block" }} />
-      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--magenta)", display: "block" }} />
+      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cyan)", display: "block" }} />
+      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cyan)", opacity: 0.5, display: "block" }} />
+      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cyan)", opacity: 0.25, display: "block" }} />
     </div>
   );
 }
