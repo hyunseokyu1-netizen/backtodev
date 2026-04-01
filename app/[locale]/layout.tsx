@@ -98,7 +98,7 @@ export default async function LocaleLayout({
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
                   </svg>
-                  <span>© {new Date().getFullYear()} backtodev. Made with AI assistance.</span>
+                  <span>© {new Date().getFullYear()} backtodev.</span>
                 </div>
                 <div className="flex items-center gap-4" style={{ color: "hsl(var(--muted-foreground))" }}>
                   <a href="/privacy" className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
