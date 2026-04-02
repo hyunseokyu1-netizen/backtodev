@@ -357,66 +357,66 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
 
       {/* Frontmatter 입력 */}
       <div
-        className="grid grid-cols-2 gap-3 px-6 py-4 border-b shrink-0"
+        className="grid grid-cols-2 gap-2 px-6 py-2 border-b shrink-0"
         style={{ background: "hsl(213 40% 9%)", borderColor: "var(--border)" }}
       >
-        <div className="col-span-2 flex gap-3">
+        <div className="col-span-2 flex gap-2">
           <div className="flex-1">
-            <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
+            <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>
               제목 * <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
             </label>
             <input
               value={current.title}
               onChange={(e) => setCurrent((prev) => ({ ...prev, title: e.target.value }))}
               placeholder={activeLang === "ko" ? "글 제목" : "Post title"}
-              className="w-full px-3 py-2 rounded-lg text-sm outline-none"
+              className="w-full px-3 py-1.5 rounded-lg text-sm outline-none"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
             />
           </div>
           <div style={{ width: 180 }}>
-            <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>slug *</label>
+            <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>slug *</label>
             <input
               value={slug}
               onChange={(e) => { setSlug(e.target.value); setSlugManual(true); }}
               placeholder="url-slug"
               disabled={isEdit}
-              className="w-full px-3 py-2 rounded-lg text-sm outline-none font-mono disabled:opacity-50"
+              className="w-full px-3 py-1.5 rounded-lg text-sm outline-none font-mono disabled:opacity-50"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>날짜</label>
+          <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>날짜</label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
+            className="w-full px-3 py-1.5 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>태그 (쉼표 구분)</label>
+          <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>태그 (쉼표 구분)</label>
           <input
             value={current.tags ?? ""}
             onChange={(e) => setCurrent((prev) => ({ ...prev, tags: e.target.value }))}
             placeholder="Next.js, React, 개발"
-            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
+            className="w-full px-3 py-1.5 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
           />
         </div>
 
         <div className="col-span-2">
-          <label className="block text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
+          <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>
             설명 <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
           </label>
           <input
             value={current.description}
             onChange={(e) => setCurrent((prev) => ({ ...prev, description: e.target.value }))}
             placeholder={activeLang === "ko" ? "짧은 설명" : "Short description"}
-            className="w-full px-3 py-2 rounded-lg text-sm outline-none"
+            className="w-full px-3 py-1.5 rounded-lg text-sm outline-none"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
           />
         </div>
@@ -443,12 +443,13 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
               value={current.content}
               onChange={(e) => setCurrent((prev) => ({ ...prev, content: e.target.value }))}
               placeholder={activeLang === "ko" ? "마크다운으로 글을 작성하세요..." : "Write in Markdown..."}
-              className="flex-1 w-full p-6 resize-none outline-none text-sm leading-relaxed"
+              className="flex-1 w-full resize-none outline-none text-sm leading-relaxed"
               style={{
                 background: "hsl(213 40% 8%)",
                 color: "hsl(210 10% 82%)",
                 fontFamily: "var(--font-mono), 'Fira Code', monospace",
                 fontSize: "0.875rem",
+                padding: "1.5rem 1.5rem 6rem",
               }}
             />
           </div>
