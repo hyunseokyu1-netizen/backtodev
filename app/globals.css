@@ -172,7 +172,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid hsl(var(--border));
   border-radius: 5px;
   padding: 0.15em 0.45em;
-  font-size: 0.87em;
+  font-size: 0.95em;
   color: hsl(var(--primary));
   font-family: var(--font-mono), "Fira Code", monospace;
 }
