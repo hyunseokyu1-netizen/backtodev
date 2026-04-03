@@ -85,28 +85,14 @@ function escapeMarkdownHeadings(text: string): { escaped: string; map: [string, 
   return { escaped, map };
 }
 
-function restoreMarkdownHeadings(text: string, map: [string, string][]): string {
-  let result = text;
-  for (const [placeholder, hashes] of map) {
-    result = result.replace(new RegExp(placeholder.replace(/_/g, "\\_"), "g"), hashes);
-    // API가 _ 를 변환하는 경우도 대비
-    const variants = [
-      placeholder,
-      placeholder.replace(/__/g, "_ _"),
-      placeholder.replace(/__/g, " __ "),
-    ];
-    for (const v of variants) {
-      result = result.split(v).join(hashes);
-    }
-  }
-  // 혹시 남은 `# #` 패턴도 정리
-  result = result.replace(/^(#)([ ]+#)+/gm, (match) => match.replace(/[ ]+/g, ""));
-  return result;
+function restoreMarkdownHeadings(text: string): string {
+  // API가 __H2__ 를 __ H2 __ 등으로 변형하는 모든 경우 처리
+  return text.replace(/__\s*H(\d)\s*__/g, (_, n) => "#".repeat(parseInt(n)));
 }
 
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
   const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
-  const { escaped, map } = escapeMarkdownHeadings(text);
+  const { escaped } = escapeMarkdownHeadings(text);
   const chunks = splitIntoChunks(escaped);
 
   const results: string[] = [];
@@ -120,7 +106,7 @@ async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promis
     if (data.quotaFinished) throw new Error("일일 번역 한도 초과. 내일 다시 시도해 주세요.");
     results.push(data.responseData.translatedText);
   }
-  return restoreMarkdownHeadings(results.join("\n\n"), map);
+  return restoreMarkdownHeadings(results.join("\n\n"));
 }
 
 export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
