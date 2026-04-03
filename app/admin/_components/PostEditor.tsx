@@ -75,9 +75,39 @@ function splitIntoChunks(text: string): string[] {
   return chunks.filter(Boolean);
 }
 
+function escapeMarkdownHeadings(text: string): { escaped: string; map: [string, string][] } {
+  const map: [string, string][] = [];
+  const escaped = text.replace(/^(#{1,6}) /gm, (_, hashes) => {
+    const placeholder = `__H${hashes.length}__`;
+    if (!map.find(([k]) => k === placeholder)) map.push([placeholder, hashes]);
+    return `${placeholder} `;
+  });
+  return { escaped, map };
+}
+
+function restoreMarkdownHeadings(text: string, map: [string, string][]): string {
+  let result = text;
+  for (const [placeholder, hashes] of map) {
+    result = result.replace(new RegExp(placeholder.replace(/_/g, "\\_"), "g"), hashes);
+    // API가 _ 를 변환하는 경우도 대비
+    const variants = [
+      placeholder,
+      placeholder.replace(/__/g, "_ _"),
+      placeholder.replace(/__/g, " __ "),
+    ];
+    for (const v of variants) {
+      result = result.split(v).join(hashes);
+    }
+  }
+  // 혹시 남은 `# #` 패턴도 정리
+  result = result.replace(/^(#)([ ]+#)+/gm, (match) => match.replace(/[ ]+/g, ""));
+  return result;
+}
+
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
   const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
-  const chunks = splitIntoChunks(text);
+  const { escaped, map } = escapeMarkdownHeadings(text);
+  const chunks = splitIntoChunks(escaped);
 
   const results: string[] = [];
   for (const chunk of chunks) {
@@ -90,7 +120,7 @@ async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promis
     if (data.quotaFinished) throw new Error("일일 번역 한도 초과. 내일 다시 시도해 주세요.");
     results.push(data.responseData.translatedText);
   }
-  return results.join("\n\n");
+  return restoreMarkdownHeadings(results.join("\n\n"), map);
 }
 
 export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
