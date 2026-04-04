@@ -140,10 +140,24 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [slugManual, setSlugManual] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const isEdit = !!initSlug;
 
   const current = activeLang === "ko" ? ko : en;
   const setCurrent = activeLang === "ko" ? setKo : setEn;
+
+  // 모바일 감지
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // 모바일에서 split 모드 자동 해제
+  useEffect(() => {
+    if (isMobile && mode === "split") setMode("edit");
+  }, [isMobile, mode]);
 
   // 새 글: 제목으로 slug 자동 생성 (사용자가 직접 수정한 경우 제외)
   useEffect(() => {
@@ -308,7 +322,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
           </button>
           <div style={{ width: 1, height: 16, background: "var(--border)" }} />
           {modeBtn("edit", "편집")}
-          {modeBtn("split", "분할")}
+          {!isMobile && modeBtn("split", "분할")}
           {modeBtn("preview", "미리보기")}
         </div>
 
@@ -373,10 +387,10 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
 
       {/* Frontmatter 입력 */}
       <div
-        className="grid grid-cols-2 gap-2 px-6 py-2 border-b shrink-0"
+        className="grid grid-cols-1 md:grid-cols-2 gap-2 px-4 md:px-6 py-2 border-b shrink-0"
         style={{ background: "hsl(213 40% 9%)", borderColor: "var(--border)" }}
       >
-        <div className="col-span-2 flex gap-2">
+        <div className="col-span-full flex flex-col md:flex-row gap-2">
           <div className="flex-1">
             <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>
               제목 * <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
@@ -389,7 +403,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
             />
           </div>
-          <div style={{ width: 180 }}>
+          <div className="w-full md:w-[180px]">
             <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>slug *</label>
             <input
               value={slug}
@@ -424,7 +438,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
           />
         </div>
 
-        <div className="col-span-2">
+        <div className="col-span-full">
           <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>
             설명 <span className="font-normal opacity-60">({activeLang === "ko" ? "한국어" : "English"})</span>
           </label>
@@ -439,7 +453,36 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
       </div>
 
       {/* 에디터 / 미리보기 */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col flex-1 overflow-hidden">
+        {/* 모바일 전용 탭 바 */}
+        {isMobile && (
+          <div
+            className="flex shrink-0 border-b"
+            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+          >
+            <button
+              onClick={() => setMode("edit")}
+              className="flex-1 py-2 text-xs font-semibold transition-all"
+              style={{
+                color: mode === "edit" ? "var(--yellow)" : "var(--text-muted)",
+                borderBottom: mode === "edit" ? "2px solid var(--yellow)" : "2px solid transparent",
+              }}
+            >
+              마크다운 ({activeLang === "ko" ? "한국어" : "English"})
+            </button>
+            <button
+              onClick={() => setMode("preview")}
+              className="flex-1 py-2 text-xs font-semibold transition-all"
+              style={{
+                color: mode === "preview" ? "var(--yellow)" : "var(--text-muted)",
+                borderBottom: mode === "preview" ? "2px solid var(--yellow)" : "2px solid transparent",
+              }}
+            >
+              미리보기
+            </button>
+          </div>
+        )}
+        <div className="flex flex-1 overflow-hidden">
         {(mode === "edit" || mode === "split") && (
           <div
             className="flex flex-col overflow-hidden"
@@ -448,12 +491,14 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
               borderRight: mode === "split" ? `1px solid var(--border)` : "none",
             }}
           >
-            <div
-              className="px-4 py-2 text-xs font-semibold border-b"
-              style={{ color: "var(--text-muted)", borderColor: "var(--border)", background: "var(--surface)" }}
-            >
-              마크다운 ({activeLang === "ko" ? "한국어" : "English"})
-            </div>
+            {!isMobile && (
+              <div
+                className="px-4 py-2 text-xs font-semibold border-b"
+                style={{ color: "var(--text-muted)", borderColor: "var(--border)", background: "var(--surface)" }}
+              >
+                마크다운 ({activeLang === "ko" ? "한국어" : "English"})
+              </div>
+            )}
             <textarea
               ref={textareaRef}
               value={current.content}
@@ -473,12 +518,14 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
 
         {(mode === "preview" || mode === "split") && (
           <div className="flex flex-col flex-1 overflow-hidden">
-            <div
-              className="px-4 py-2 text-xs font-semibold border-b"
-              style={{ color: "var(--text-muted)", borderColor: "var(--border)", background: "var(--surface)" }}
-            >
-              미리보기
-            </div>
+            {!isMobile && (
+              <div
+                className="px-4 py-2 text-xs font-semibold border-b"
+                style={{ color: "var(--text-muted)", borderColor: "var(--border)", background: "var(--surface)" }}
+              >
+                미리보기
+              </div>
+            )}
             <div className="flex-1 overflow-y-auto p-8">
               <div className="prose">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -488,6 +535,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
