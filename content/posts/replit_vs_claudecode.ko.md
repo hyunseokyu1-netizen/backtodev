@@ -59,6 +59,8 @@ Replit은 Preview탭에서 바로바로 확인할 수 있어서 오히려 초보
 
 |Replit|ClaudeCode|
 | :---:   |:---:   | 
+| <img src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-07_______10_41_19_1775526840658.png" alt="Replit 화면" width="200" /> | <img src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/KakaoTalk_Photo_2026-04-07-10-40-01_002_1775526632969.jpg" alt="ClaudeCode 화면" width="200" /> |
+
 |![스크린샷 2026-04-07 오전 10.41.19](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-07_______10_41_19_1775526840658.png)|![KakaoTalk_Photo_2026-04-07-10-40-01 002](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/KakaoTalk_Photo_2026-04-07-10-40-01_002_1775526632969.jpg)|
 
 
