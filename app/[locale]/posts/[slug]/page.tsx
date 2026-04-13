@@ -3,6 +3,9 @@ import { getAllPosts, getPost } from "@/lib/posts";
 import { Link } from "@/i18n/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import PostContent from "@/components/PostContent";
+import type { Metadata } from "next";
+
+const BASE_URL = "https://backtodev.com";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -16,13 +19,42 @@ export async function generateStaticParams() {
   ]);
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
   const post = await getPost(slug, locale);
   if (!post) return {};
+
+  const otherLocale = locale === "ko" ? "en" : "ko";
+  const otherPost = await getPost(slug, otherLocale);
+  const canonicalUrl = `${BASE_URL}/${locale}/posts/${slug}`;
+
   return {
-    title: `${post.title} | backtodev`,
+    title: post.title,
     description: post.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        [locale]: canonicalUrl,
+        ...(otherPost && !otherPost.isFallback
+          ? { [otherLocale]: `${BASE_URL}/${otherLocale}/posts/${slug}` }
+          : {}),
+      },
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: canonicalUrl,
+      siteName: "backtodev",
+      locale: locale === "ko" ? "ko_KR" : "en_US",
+      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
   };
 }
 
@@ -39,8 +71,33 @@ export default async function PostPage({ params }: Props) {
     ? new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
     : post.date;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date ? new Date(post.date).toISOString() : undefined,
+    url: `${BASE_URL}/${locale}/posts/${slug}`,
+    author: {
+      "@type": "Person",
+      name: "backtodev",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "backtodev",
+      url: BASE_URL,
+    },
+    keywords: post.tags?.join(", "),
+    inLanguage: locale === "ko" ? "ko-KR" : "en-US",
+  };
+
   return (
     <article style={{ maxWidth: "48rem", margin: "0 auto", width: "100%" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* Back link — terminal style */}
       <Link
