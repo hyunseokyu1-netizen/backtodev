@@ -7,10 +7,50 @@ import { routing } from "@/i18n/routing";
 import Nav from "@/components/Nav";
 import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "backtodev",
-  description: "개발 기록과 포트폴리오",
-};
+const BASE_URL = "https://backtodev.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isKo = locale === "ko";
+
+  const title = "backtodev";
+  const description = isKo
+    ? "개발을 다시 시작한 개발자의 기록. AI 코딩, 툴, 새로운 기술을 직접 써보며 공유합니다."
+    : "A developer returning to code. Sharing hands-on experiences with AI coding, tools, and new tech.";
+
+  return {
+    title: {
+      default: title,
+      template: `%s | backtodev`,
+    },
+    description,
+    metadataBase: new URL(BASE_URL),
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+      languages: {
+        "ko": `${BASE_URL}/ko`,
+        "en": `${BASE_URL}/en`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "backtodev",
+      title,
+      description,
+      url: `${BASE_URL}/${locale}`,
+      locale: isKo ? "ko_KR" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
