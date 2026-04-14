@@ -34,90 +34,20 @@ interface Props {
   onSave: (data: SavePayload) => Promise<void>;
 }
 
-const TRANSLATE_MAX_CHARS = 400; // MyMemory API: 500자 제한
-
-function splitIntoChunks(text: string): string[] {
-  const chunks: string[] = [];
-  // 줄 단위로 나누고, 400자 초과 시 강제로 잘라서 청크 구성
-  const lines = text.split("\n");
-  let current = "";
-
-  const flush = () => {
-    if (current.trim()) chunks.push(current.trim());
-    current = "";
-  };
-
-  for (const line of lines) {
-    // 한 줄 자체가 400자 초과면 강제로 분리
-    if (line.length > TRANSLATE_MAX_CHARS) {
-      if (current) flush();
-      let remaining = line;
-      while (remaining.length > TRANSLATE_MAX_CHARS) {
-        // 마지막 공백 위치에서 자르기 (단어 경계 우선)
-        let cutAt = remaining.lastIndexOf(" ", TRANSLATE_MAX_CHARS);
-        if (cutAt <= 0) cutAt = TRANSLATE_MAX_CHARS;
-        chunks.push(remaining.slice(0, cutAt).trim());
-        remaining = remaining.slice(cutAt).trim();
-      }
-      current = remaining;
-      continue;
-    }
-
-    const candidate = current ? `${current}\n${line}` : line;
-    if (candidate.length <= TRANSLATE_MAX_CHARS) {
-      current = candidate;
-    } else {
-      flush();
-      current = line;
-    }
-  }
-  flush();
-  return chunks.filter(Boolean);
-}
-
-function escapeMarkdownHeadings(text: string): { escaped: string; map: [string, string][] } {
-  const map: [string, string][] = [];
-  const escaped = text.replace(/^(#{1,6}) /gm, (_, hashes) => {
-    const placeholder = `__H${hashes.length}__`;
-    if (!map.find(([k]) => k === placeholder)) map.push([placeholder, hashes]);
-    return `${placeholder} `;
-  });
-  return { escaped, map };
-}
-
-function restoreMarkdownHeadings(text: string): string {
-  // API가 __H2__ 를 __ H2 __ 등으로 변형하는 모든 경우 처리
-  return text.replace(/__\s*H(\d)\s*__/g, (_, n) => "#".repeat(parseInt(n)));
-}
-
-// 전각 별표(＊＊, U+FF0A) 사용 — 번역 API가 단어로 인식하지 않으므로 절대 변형되지 않음
-const BOLD_PLACEHOLDER = "\uFF0A\uFF0A";
-
-function escapeMarkdownBold(text: string): string {
-  return text.replace(/\*\*/g, BOLD_PLACEHOLDER);
-}
-
-function restoreMarkdownBold(text: string): string {
-  return text.replace(/\uFF0A\uFF0A/g, "**");
-}
-
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
-  const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
-  const { escaped } = escapeMarkdownHeadings(escapeMarkdownBold(text));
-  const chunks = splitIntoChunks(escaped);
+  const res = await fetch("/api/admin/translate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, direction }),
+  });
 
-  const results: string[] = [];
-  for (const chunk of chunks) {
-    const res = await fetch(
-      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langpair}`
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (data.responseStatus !== 200) throw new Error(data.responseDetails ?? "API error");
-    if (data.quotaFinished) throw new Error("일일 번역 한도 초과. 내일 다시 시도해 주세요.");
-    results.push(data.responseData.translatedText);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "번역 실패" }));
+    throw new Error(err.error ?? "번역 실패. 다시 시도해 주세요.");
   }
-  return restoreMarkdownBold(restoreMarkdownHeadings(results.join("\n\n")));
+
+  const data = await res.json();
+  return data.translated;
 }
 
 export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
