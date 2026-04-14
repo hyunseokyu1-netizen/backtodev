@@ -90,9 +90,18 @@ function restoreMarkdownHeadings(text: string): string {
   return text.replace(/__\s*H(\d)\s*__/g, (_, n) => "#".repeat(parseInt(n)));
 }
 
+function escapeMarkdownBold(text: string): string {
+  return text.replace(/\*\*/g, "__BOLD__");
+}
+
+function restoreMarkdownBold(text: string): string {
+  // API가 __BOLD__ 를 __ BOLD __ 등으로 변형하는 모든 경우 처리
+  return text.replace(/__\s*BOLD\s*__/g, "**");
+}
+
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
   const langpair = direction === "ko-en" ? "ko|en" : "en|ko";
-  const { escaped } = escapeMarkdownHeadings(text);
+  const { escaped } = escapeMarkdownHeadings(escapeMarkdownBold(text));
   const chunks = splitIntoChunks(escaped);
 
   const results: string[] = [];
@@ -106,7 +115,7 @@ async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promis
     if (data.quotaFinished) throw new Error("일일 번역 한도 초과. 내일 다시 시도해 주세요.");
     results.push(data.responseData.translatedText);
   }
-  return restoreMarkdownHeadings(results.join("\n\n"));
+  return restoreMarkdownBold(restoreMarkdownHeadings(results.join("\n\n")));
 }
 
 export default function PostEditor({ slug: initSlug, date: initDate, tags: initTags, initialKo, initialEn, onSave }: Props) {
