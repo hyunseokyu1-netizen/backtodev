@@ -1,10 +1,16 @@
 ---
-title: "React SPA에서 페이지별 title과 meta 태그 바꾸기 — react-helmet-async"
-date: 2026-04-14
-tags: [React, SEO, react-helmet-async, SPA]
+title: React SPA에서 페이지별 title과 meta 태그 바꾸기 — react-helmet-async
+date: '2026-04-14'
+description: SEO작업 중 react-helmet에 대한 설명
+tags:
+  - React
+  - SEO
+  - react-helmet-async
+  - SPA
 ---
 
-# React SPA에서 페이지별 title과 meta 태그 바꾸기 — react-helmet-async
+# React SPA에서 페이지별 title과 meta 태그 바꾸기 
+## react-helmet-async
 
 React로 만든 사이트를 배포하고 나서 이런 경험 한 번쯤 있지 않나요?
 
