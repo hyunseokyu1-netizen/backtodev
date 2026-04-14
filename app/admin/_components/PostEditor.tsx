@@ -90,17 +90,15 @@ function restoreMarkdownHeadings(text: string): string {
   return text.replace(/__\s*H(\d)\s*__/g, (_, n) => "#".repeat(parseInt(n)));
 }
 
+// 전각 별표(＊＊, U+FF0A) 사용 — 번역 API가 단어로 인식하지 않으므로 절대 변형되지 않음
+const BOLD_PLACEHOLDER = "\uFF0A\uFF0A";
+
 function escapeMarkdownBold(text: string): string {
-  // 언더스코어 없는 placeholder 사용 (__ 가 마크다운 볼드로 해석되는 문제 방지)
-  return text.replace(/\*\*/g, "XBOLDX");
+  return text.replace(/\*\*/g, BOLD_PLACEHOLDER);
 }
 
 function restoreMarkdownBold(text: string): string {
-  // 1단계: 쌍 매칭 — API가 줄넘김이나 공백을 추가해도 처리 ([\s\S]*? 로 멀티라인 대응)
-  let result = text.replace(/X\s*BOLD\s*X\s*([\s\S]*?)\s*X\s*BOLD\s*X/g, "**$1**");
-  // 2단계: 쌍 매칭 후 남은 단독 토큰 처리
-  result = result.replace(/X\s*BOLD\s*X/g, "**");
-  return result;
+  return text.replace(/\uFF0A\uFF0A/g, "**");
 }
 
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
