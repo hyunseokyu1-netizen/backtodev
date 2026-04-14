@@ -91,12 +91,13 @@ function restoreMarkdownHeadings(text: string): string {
 }
 
 function escapeMarkdownBold(text: string): string {
-  return text.replace(/\*\*/g, "__BOLD__");
+  // 언더스코어 없는 placeholder 사용 (__ 가 마크다운 볼드로 해석되는 문제 방지)
+  return text.replace(/\*\*/g, "XBOLDX");
 }
 
 function restoreMarkdownBold(text: string): string {
-  // API가 __BOLD__ 를 __ BOLD __ 등으로 변형하는 모든 경우 처리
-  return text.replace(/__\s*BOLD\s*__/g, "**");
+  // API가 XBOLDX 를 X BOLD X 등으로 변형하는 모든 경우 처리
+  return text.replace(/X\s*BOLD\s*X/g, "**");
 }
 
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
