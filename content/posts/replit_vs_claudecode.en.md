@@ -58,7 +58,7 @@ For example
 images created with
 
 |Replit|ClaudeCode|
-| :---: |:---: |:---: |
+| :---:   |:---:   | 
 | <img src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-07_______10_41_19_1775526840658.png" alt="Replit screen" width="200" /> | <img src="https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/KakaoTalk_Photo_2026-04-07-10-40-01_002_1775526632969.jpg" alt="ClaudeCode screen" width="200" /> |
 
 
