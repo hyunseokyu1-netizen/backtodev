@@ -96,8 +96,9 @@ function escapeMarkdownBold(text: string): string {
 }
 
 function restoreMarkdownBold(text: string): string {
-  // API가 XBOLDX 를 X BOLD X 등으로 변형하는 모든 경우 처리
-  return text.replace(/X\s*BOLD\s*X/g, "**");
+  // API가 "XBOLDX text XBOLDX" 처럼 앞뒤 공백을 추가하는 경우까지 처리
+  // 여는 placeholder ~ 닫는 placeholder 를 쌍으로 매칭해서 공백 제거
+  return text.replace(/X\s*BOLD\s*X\s*(.*?)\s*X\s*BOLD\s*X/g, "**$1**");
 }
 
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
