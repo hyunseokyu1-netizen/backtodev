@@ -96,9 +96,11 @@ function escapeMarkdownBold(text: string): string {
 }
 
 function restoreMarkdownBold(text: string): string {
-  // API가 "XBOLDX text XBOLDX" 처럼 앞뒤 공백을 추가하는 경우까지 처리
-  // 여는 placeholder ~ 닫는 placeholder 를 쌍으로 매칭해서 공백 제거
-  return text.replace(/X\s*BOLD\s*X\s*(.*?)\s*X\s*BOLD\s*X/g, "**$1**");
+  // 1단계: 쌍 매칭 — API가 줄넘김이나 공백을 추가해도 처리 ([\s\S]*? 로 멀티라인 대응)
+  let result = text.replace(/X\s*BOLD\s*X\s*([\s\S]*?)\s*X\s*BOLD\s*X/g, "**$1**");
+  // 2단계: 쌍 매칭 후 남은 단독 토큰 처리
+  result = result.replace(/X\s*BOLD\s*X/g, "**");
+  return result;
 }
 
 async function autoTranslate(text: string, direction: "ko-en" | "en-ko"): Promise<string> {
