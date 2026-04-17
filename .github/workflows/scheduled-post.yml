@@ -1,0 +1,56 @@
+name: Publish Scheduled Posts
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # 매일 00:00 KST (= UTC 15:00)
+  workflow_dispatch:        # 수동 실행 가능
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish scheduled posts
+        run: |
+          TODAY=$(date -u '+%Y-%m-%d')
+          echo "오늘 날짜: $TODAY"
+
+          PUBLISHED=0
+
+          for file in content/scheduled/*.md content/scheduled/*.mdx; do
+            [ -f "$file" ] || continue
+
+            # frontmatter에서 date 추출
+            POST_DATE=$(grep -m1 '^date:' "$file" | sed "s/date: *['\"]//;s/['\"].*//;s/ *//")
+
+            if [ -z "$POST_DATE" ]; then
+              echo "날짜 없음, 건너뜀: $file"
+              continue
+            fi
+
+            echo "확인: $file (date: $POST_DATE)"
+
+            # POST_DATE <= TODAY 이면 발행
+            if [[ "$POST_DATE" <= "$TODAY" ]]; then
+              FILENAME=$(basename "$file")
+              mv "$file" "content/posts/$FILENAME"
+              echo "발행: $FILENAME"
+              PUBLISHED=$((PUBLISHED + 1))
+            fi
+          done
+
+          if [ "$PUBLISHED" -gt 0 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add content/posts/ content/scheduled/
+            git commit -m "post: 예약 포스트 $PUBLISHED 개 발행 ($TODAY)"
+            git push
+            echo "✅ $PUBLISHED 개 포스트 발행 완료"
+          else
+            echo "오늘 발행할 예약 포스트 없음"
+          fi
