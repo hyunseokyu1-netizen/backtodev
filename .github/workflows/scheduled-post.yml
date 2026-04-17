@@ -36,7 +36,7 @@ jobs:
             echo "확인: $file (date: $POST_DATE)"
 
             # POST_DATE <= TODAY 이면 발행
-            if [[ "$POST_DATE" <= "$TODAY" ]]; then
+            if [[ "$POST_DATE" < "$TODAY" || "$POST_DATE" == "$TODAY" ]]; then
               FILENAME=$(basename "$file")
               mv "$file" "content/posts/$FILENAME"
               echo "발행: $FILENAME"
