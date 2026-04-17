@@ -18,7 +18,7 @@ jobs:
       - name: Publish scheduled posts
         shell: bash
         run: |
-          TODAY=$(date -u '+%Y-%m-%d')
+          TODAY=$(TZ='Asia/Seoul' date '+%Y-%m-%d')
           echo "오늘 날짜: $TODAY"
 
           PUBLISHED=0
