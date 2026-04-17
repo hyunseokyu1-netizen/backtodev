@@ -36,8 +36,10 @@ jobs:
 
             echo "확인: $file (date: $POST_DATE)"
 
-            # POST_DATE <= TODAY 이면 발행
-            if [[ "$POST_DATE" < "$TODAY" || "$POST_DATE" == "$TODAY" ]]; then
+            # POST_DATE <= TODAY 이면 발행 (YYYYMMDD 숫자로 변환 후 비교)
+            POST_NUM=$(echo "$POST_DATE" | tr -d '-')
+            TODAY_NUM=$(echo "$TODAY" | tr -d '-')
+            if [ "$POST_NUM" -le "$TODAY_NUM" ]; then
               FILENAME=$(basename "$file")
               mv "$file" "content/posts/$FILENAME"
               echo "발행: $FILENAME"
