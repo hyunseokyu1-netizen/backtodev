@@ -120,7 +120,11 @@ export async function getAllPosts(locale = "ko"): Promise<PostMeta[]> {
     if (post) result.push({ ...post, isFallback: !entry[locale] });
   }
 
-  return result.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return result.sort((a, b) => {
+    if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+    // 같은 날짜: slug 오름차순 (알파벳 앞 순서가 최상단)
+    return a.slug < b.slug ? -1 : 1;
+  });
 }
 
 export async function getPost(slug: string, locale = "ko"): Promise<Post | null> {
