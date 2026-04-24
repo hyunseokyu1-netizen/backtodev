@@ -1,8 +1,9 @@
 ---
-title: '내 취업을 위해 AI 툴을 직접 만들었다 — JobRadar 1편: 프로젝트 세팅'
+title: '[JobRadar 1편] 프로젝트 세팅 — 내 취업을 위해 AI 툴을 직접 만들었다'
 date: '2026-04-20'
-publish_date: '2026-04-25'
-description: 채용공고 자동 수집부터 AI 매칭까지 — JobRadar 사이드 프로젝트 1편. Next.js + Supabase + Vercel 초기 세팅을 단계별로 정리했다.
+description: >-
+  채용공고 자동 수집부터 AI 매칭까지 — JobRadar 사이드 프로젝트 1편. Next.js + Supabase + Vercel 초기
+  세팅을 단계별로 정리했다.
 tags:
   - JobRadar
   - NextJS
