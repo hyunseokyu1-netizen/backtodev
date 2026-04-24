@@ -1,8 +1,9 @@
 ---
-title: 'JobRadar 2편: Supabase 설계 + Playwright 스크래퍼 — 삽질 기록'
+title: '[JobRadar 2편] Supabase 설계 + Playwright 스크래퍼 — 삽질 기록'
 date: '2026-04-21'
-publish_date: '2026-04-25'
-description: JobRadar 2편. Supabase 멀티유저 스키마 설계부터 Indeed · Seek Playwright 스크래퍼 구현까지. Glassdoor 차단, ETXTBSY, 모듈 누락까지 삽질 과정 전부 정리.
+description: >-
+  JobRadar 2편. Supabase 멀티유저 스키마 설계부터 Indeed · Seek Playwright 스크래퍼 구현까지.
+  Glassdoor 차단, ETXTBSY, 모듈 누락까지 삽질 과정 전부 정리.
 tags:
   - JobRadar
   - Playwright
