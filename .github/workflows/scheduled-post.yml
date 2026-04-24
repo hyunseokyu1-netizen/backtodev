@@ -26,13 +26,18 @@ jobs:
           for file in content/scheduled/*.md content/scheduled/*.mdx; do
             [ -f "$file" ] || continue
 
-            # frontmatter에서 date 추출
-            POST_DATE=$(grep -m1 '^date:' "$file" | sed "s/date: *['\"]//;s/['\"].*//;s/ *//")
+            # frontmatter에서 publish_date 우선 추출, 없으면 date 사용
+            PUBLISH_DATE=$(grep -m1 '^publish_date:' "$file" | sed "s/publish_date: *['\"]//;s/['\"].*//;s/ *//")
+            if [ -z "$PUBLISH_DATE" ]; then
+              PUBLISH_DATE=$(grep -m1 '^date:' "$file" | sed "s/date: *['\"]//;s/['\"].*//;s/ *//")
+            fi
 
-            if [ -z "$POST_DATE" ]; then
+            if [ -z "$PUBLISH_DATE" ]; then
               echo "날짜 없음, 건너뜀: $file"
               continue
             fi
+
+            POST_DATE="$PUBLISH_DATE"
 
             echo "확인: $file (date: $POST_DATE)"
 
