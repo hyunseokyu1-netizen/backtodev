@@ -53,8 +53,8 @@ jobs:
           done
 
           if [ "$PUBLISHED" -gt 0 ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git config user.name "hs"
+            git config user.email "hyunseok.yu1@gmail.com"
             git add content/posts/ content/scheduled/
             git commit -m "post: 예약 포스트 $PUBLISHED 개 발행 ($TODAY)"
             git pull --rebase origin main
