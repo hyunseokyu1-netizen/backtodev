@@ -144,6 +144,9 @@ export default async function LocaleLayout({
                   <span>© {new Date().getFullYear()} backtodev.</span>
                 </div>
                 <div className="flex items-center gap-4" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  <a href="/contact" className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
+                    Contact
+                  </a>
                   <a href="/privacy" className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
                     Privacy Policy
                   </a>
