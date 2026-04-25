@@ -2,7 +2,7 @@ name: Publish Scheduled Posts
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # 매일 00:00 KST (= UTC 15:00)
+    - cron: '5 15 * * *'  # 매일 00:05 KST (= UTC 15:05)
   workflow_dispatch:        # 수동 실행 가능
 
 jobs:
@@ -53,6 +53,7 @@ jobs:
           done
 
           if [ "$PUBLISHED" -gt 0 ]; then
+            export TZ='Asia/Seoul'
             git config user.name "hs"
             git config user.email "hyunseok.yu1@gmail.com"
             git add content/posts/ content/scheduled/
