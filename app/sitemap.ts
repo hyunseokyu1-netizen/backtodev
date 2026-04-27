@@ -46,8 +46,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/en`,        lastModified: new Date(), changeFrequency: "daily",   priority: 1.0 },
     { url: `${BASE_URL}/ko/posts`,  lastModified: new Date(), changeFrequency: "daily",   priority: 0.9 },
     { url: `${BASE_URL}/en/posts`,  lastModified: new Date(), changeFrequency: "daily",   priority: 0.9 },
-    { url: `${BASE_URL}/ko/about`,  lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/en/about`,  lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/ko/about`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/en/about`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/ko/contact`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.4 },
+    { url: `${BASE_URL}/en/contact`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.4 },
+    { url: `${BASE_URL}/ko/privacy`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${BASE_URL}/en/privacy`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
   ];
 
   return [...staticEntries, ...postEntries];
