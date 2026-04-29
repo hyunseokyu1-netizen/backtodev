@@ -206,10 +206,17 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0 8px 8px 0;
 }
 
-.prose ul, .prose ol {
+.prose ul {
   margin: 1rem 0 1.35rem 0;
   padding-left: 1.6rem;
   color: hsl(var(--muted-foreground));
+  list-style-type: disc;
+}
+.prose ol {
+  margin: 1rem 0 1.35rem 0;
+  padding-left: 1.6rem;
+  color: hsl(var(--muted-foreground));
+  list-style-type: decimal;
 }
 .prose li { margin-bottom: 0.45rem; }
 
