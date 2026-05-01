@@ -1,10 +1,26 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with backtodev.",
-};
+const BASE_URL = "https://backtodev.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Contact",
+    description: "Get in touch with backtodev.",
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/contact`,
+      languages: {
+        ko: `${BASE_URL}/ko/contact`,
+        en: `${BASE_URL}/en/contact`,
+      },
+    },
+  };
+}
 
 export default async function ContactPage() {
   const locale = await getLocale();

@@ -144,10 +144,10 @@ export default async function LocaleLayout({
                   <span>© {new Date().getFullYear()} backtodev.</span>
                 </div>
                 <div className="flex items-center gap-4" style={{ color: "hsl(var(--muted-foreground))" }}>
-                  <a href="/contact" className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
+                  <a href={`/${locale}/contact`} className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
                     Contact
                   </a>
-                  <a href="/privacy" className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
+                  <a href={`/${locale}/privacy`} className="text-xs transition-colors hover:text-white" style={{ fontFamily: "var(--font-mono), monospace" }}>
                     Privacy Policy
                   </a>
                   <a href="https://github.com/hyunseokyu1-netizen" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">

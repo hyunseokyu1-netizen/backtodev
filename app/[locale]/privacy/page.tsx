@@ -1,4 +1,26 @@
 import { getLocale } from "next-intl/server";
+import type { Metadata } from "next";
+
+const BASE_URL = "https://backtodev.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Privacy Policy",
+    description: "Privacy policy for backtodev.",
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/privacy`,
+      languages: {
+        ko: `${BASE_URL}/ko/privacy`,
+        en: `${BASE_URL}/en/privacy`,
+      },
+    },
+  };
+}
 
 export default async function PrivacyPage() {
   const locale = await getLocale();

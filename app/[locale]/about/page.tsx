@@ -1,4 +1,24 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+const BASE_URL = "https://backtodev.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/about`,
+      languages: {
+        ko: `${BASE_URL}/ko/about`,
+        en: `${BASE_URL}/en/about`,
+      },
+    },
+  };
+}
 
 export default async function AboutPage() {
   const t = await getTranslations("about");
