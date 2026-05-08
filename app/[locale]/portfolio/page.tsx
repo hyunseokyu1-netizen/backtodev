@@ -256,7 +256,7 @@ export default async function PortfolioPage() {
                   borderRadius: 10,
                   overflow: "hidden",
                   border: "1px solid hsl(var(--border))",
-                  height: "180px",
+                  height: "300px",
                 }}
               >
                 <Image
