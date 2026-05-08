@@ -16,7 +16,20 @@ export default function AdminPostList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null); // "{slug}-{lang}"
+  const [query, setQuery] = useState("");
+  const [searchContent, setSearchContent] = useState(false);
   const router = useRouter();
+
+  const filteredPosts = posts.filter((post) => {
+    if (!query.trim()) return true;
+    const q = query.toLowerCase();
+    if (post.title.toLowerCase().includes(q)) return true;
+    if (searchContent) {
+      if (post.description?.toLowerCase().includes(q)) return true;
+      if (post.tags?.some((t) => t.toLowerCase().includes(q))) return true;
+    }
+    return false;
+  });
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -76,13 +89,13 @@ export default function AdminPostList() {
       </div>
 
       <div className="max-w-4xl mx-auto px-8 py-10">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-black text-2xl" style={{ color: "hsl(210 10% 95%)", letterSpacing: "-0.03em" }}>
               글 관리
             </h1>
             <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-              총 {posts.length}개의 글
+              {query ? `${filteredPosts.length} / ${posts.length}개` : `총 ${posts.length}개의 글`}
             </p>
           </div>
           <a
@@ -92,6 +105,60 @@ export default function AdminPostList() {
           >
             + 새 글 작성
           </a>
+        </div>
+
+        {/* 검색 */}
+        <div className="mb-6 flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
+              style={{ color: "var(--text-muted)" }}
+              fill="none" stroke="currentColor" strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="제목으로 검색..."
+              className="w-full pl-9 pr-9 py-2.5 rounded-xl text-sm outline-none transition-all"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                color: "hsl(210 10% 90%)",
+              }}
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"
+                style={{ color: "var(--text-muted)" }}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+          <label
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm cursor-pointer select-none shrink-0"
+            style={{
+              background: searchContent ? "hsl(225 40% 16%)" : "var(--surface)",
+              border: `1px solid ${searchContent ? "var(--blue)" : "var(--border)"}`,
+              color: searchContent ? "var(--blue)" : "var(--text-muted)",
+              transition: "all 0.15s",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={searchContent}
+              onChange={(e) => setSearchContent(e.target.checked)}
+              className="hidden"
+            />
+            <span style={{ fontSize: "0.7rem" }}>{searchContent ? "✓" : "○"}</span>
+            내용 검색 포함
+          </label>
         </div>
 
         {loading ? (
@@ -106,9 +173,19 @@ export default function AdminPostList() {
             <p className="text-3xl mb-3">✍️</p>
             <p style={{ color: "var(--text-muted)" }}>아직 작성된 글이 없습니다.</p>
           </div>
+        ) : filteredPosts.length === 0 ? (
+          <div
+            className="rounded-2xl p-12 text-center"
+            style={{ background: "var(--surface)", border: "1px dashed var(--border)" }}
+          >
+            <p className="text-3xl mb-3">🔍</p>
+            <p style={{ color: "var(--text-muted)" }}>
+              &ldquo;{query}&rdquo; 검색 결과가 없습니다.
+            </p>
+          </div>
         ) : (
           <div className="space-y-3">
-            {posts.map((post) => (
+            {filteredPosts.map((post) => (
               <div
                 key={post.slug}
                 className="flex items-center gap-4 p-4 rounded-2xl"
