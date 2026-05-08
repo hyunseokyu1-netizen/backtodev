@@ -115,31 +115,6 @@ export default async function PortfolioPage() {
               position: "relative",
             }}
           >
-            {/* Preview image */}
-            {project.image && (
-              <a
-                href={project.links.find((l) => l.primary)?.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "block",
-                  marginBottom: "1.5rem",
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  border: "1px solid hsl(var(--border))",
-                }}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={1280}
-                  height={800}
-                  style={{ width: "100%", height: "auto", display: "block" }}
-                  priority
-                />
-              </a>
-            )}
-
             {/* Top row: name + status */}
             <div
               className="flex items-start justify-between"
@@ -268,6 +243,38 @@ export default async function PortfolioPage() {
                 </a>
               ))}
             </div>
+
+            {/* Preview image */}
+            {project.image && (
+              <a
+                href={project.links.find((l) => l.primary)?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  marginTop: "1.25rem",
+                  borderRadius: 10,
+                  overflow: "hidden",
+                  border: "1px solid hsl(var(--border))",
+                  height: "180px",
+                }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={1280}
+                  height={800}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    objectFit: "cover",
+                    objectPosition: "top",
+                  }}
+                  priority
+                />
+              </a>
+            )}
           </article>
         ))}
       </div>
