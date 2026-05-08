@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 const BASE_URL = "https://backtodev.com";
 
@@ -35,6 +36,7 @@ interface Project {
   status: "live" | "wip";
   statusLabel: string;
   period: string;
+  image?: string;
 }
 
 export default async function PortfolioPage() {
@@ -56,6 +58,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.05",
+          image: "/portfolio/wifi-qr-preview.png",
         },
       ]
     : [
@@ -72,6 +75,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "May 2026",
+          image: "/portfolio/wifi-qr-preview.png",
         },
       ];
 
@@ -111,6 +115,31 @@ export default async function PortfolioPage() {
               position: "relative",
             }}
           >
+            {/* Preview image */}
+            {project.image && (
+              <a
+                href={project.links.find((l) => l.primary)?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  marginBottom: "1.5rem",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  border: "1px solid hsl(var(--border))",
+                }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={1280}
+                  height={800}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  priority
+                />
+              </a>
+            )}
+
             {/* Top row: name + status */}
             <div
               className="flex items-start justify-between"
