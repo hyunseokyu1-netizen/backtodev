@@ -187,7 +187,7 @@ export default function AdminPostList() {
           <div className="space-y-3">
             {filteredPosts.map((post) => (
               <div
-                key={post.slug}
+                key={`${post.slug}-${post.lang}`}
                 className="flex items-center gap-4 p-4 rounded-2xl"
                 style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
               >
