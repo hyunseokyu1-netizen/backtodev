@@ -1,7 +1,6 @@
 ---
-title: 'WiFi QR 코드 생성기를 만들었다 — AI로 처음 완성한 사이드 프로젝트'
+title: WiFi QR 코드 생성기를 만들었다 — AI로 처음 완성한 사이드 프로젝트
 date: '2026-05-05'
-publish_date: '2026-05-05'
 description: 손님에게 WiFi 비밀번호 알려주기가 불편해서 만든 QR 코드 생성기 — React + i18n + 인쇄까지
 tags:
   - React
@@ -235,4 +234,4 @@ Vercel 배포 → wi-fi-qr.xyz
 
 *WiFi QR 코드 생성기 개발기*
 - **1편: 사이트 소개 — AI와 함께 만든 WiFi QR 생성기 (현재)**
-- [2편: 구글 애드센스 거절당했다 — 콘텐츠 없는 도구 사이트의 현실](/posts/wifi_qr_adsense_20260429)
+- [2편: 구글 애드센스 거절당했다 — 콘텐츠 없는 도구 사이트의 현실](/posts/wifi_qr_adsense_20260506)
