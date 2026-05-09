@@ -1,5 +1,5 @@
 ---
-title: 'Why GitHub Actions Commits Don't Show on Your Contribution Graph — Fix with KST Timezone'
+title: "Why GitHub Actions Commits Don't Show on Your Contribution Graph — Fix with KST Timezone"
 date: '2026-05-04'
 publish_date: '2026-05-10'
 description: The timezone issue where GitHub Actions auto-commits don't appear on the contribution graph. One line — TZ=Asia/Seoul — fixes it.
