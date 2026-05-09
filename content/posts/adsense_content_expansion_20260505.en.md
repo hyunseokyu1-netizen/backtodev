@@ -1,70 +1,69 @@
 ---
-title: Created a WiFi QR code generator - my first completed side project with AI
+title: 'I Built a WiFi QR Code Generator — My First Completed Side Project with AI'
 date: '2026-05-05'
-description: >-
-  A QR code generator created because I didn't want to give my guests my WiFi
-  password - React + i18n + Print
+publish_date: '2026-05-10'
+description: A WiFi QR code generator I made because sharing passwords to guests was annoying — React + i18n + print support
 tags:
   - React
   - TypeScript
   - i18n
-  - Sideprojects
+  - SideProject
   - qrcode
 ---
 
-When guests come over, the same situation always repeats itself.
+The same thing happens every time guests come over.
 
-1. ask "What's the WiFi password?"
-2. check the sticker on the back of the router
-3. dictate a complicated password
-4. typo → retry
+1. "What's the WiFi password?" they ask
+2. Check the sticker on the back of the router
+3. Dictate the complicated password character by character
+4. Typo → try again
 
-What if there was a way to automatically connect with a QR code? I looked for a standard format and found libraries like `qrcode.react`. I decided to create one myself.
+What if they could just scan a QR code and connect automatically? I looked into it and found there's a standard format for this, plus libraries like `qrcode.react`. So I decided to build it myself.
 
-This is the first side project I completed with AI. The site address is [wi-fi-qr.xyz](https://wi-fi-qr.xyz).
-
----
-
-## What I made at a glance
-
-| Features | Content |
-|------|------|
-| WiFi QR code generation | Enter SSID, password, encryption method → instantly generate QR
-| Print function | Print as QR code + network name card format
-| History | List of previously created QR codes (local storage) |
-| Multi-language support | Korean / English / Chinese / German
-| Hidden SSID | Supports hidden networks as well
+This is the first side project I've actually finished with AI. The site is at [wi-fi-qr.xyz](https://wi-fi-qr.xyz).
 
 ---
 
-## Technology Stack
+## What It Does at a Glance
 
-| Uncategorized | Libraries
-|------|-----------|
-| Frameworks | React + Vite + TypeScript |
+| Feature | Description |
+|---------|-------------|
+| WiFi QR code generation | Enter SSID, password, encryption type → instant QR |
+| Print support | Print QR code + network name as a card |
+| History | List of previously generated QR codes (localStorage) |
+| Multilingual | Korean / English / Chinese / German |
+| Hidden SSID | Supports hidden networks too |
+
+---
+
+## Tech Stack
+
+| Category | Library |
+|----------|---------|
+| Framework | React + Vite + TypeScript |
 | Routing | wouter |
-| Form Management | react-hook-form + zod
-| QR Generation | qrcode.react |
-| SEO | react-helmet-async
+| Form | react-hook-form + zod |
+| QR generation | qrcode.react |
+| SEO | react-helmet-async |
 | Icons | lucide-react |
 | Analytics | @vercel/analytics |
 
 ---
 
-## Step 1 - Understand the QR Code format
+## Step 1 — Understanding the WiFi QR Format
 
-WiFi QR Codes follow a specific string format.
+WiFi QR codes follow a specific string format.
 
 ```
 WIFI:T:WPA;S:NetworkName;P:Password;H:false;;
 ```
 
-- T`: Encryption method (`WPA`, `WEP`, `nopass`)
-- S`: SSID (network name)
-- P`: Password
-- H`: Hidden SSID or not
+- `T`: Encryption type (`WPA`, `WEP`, `nopass`)
+- `S`: SSID (network name)
+- `P`: Password
+- `H`: Whether SSID is hidden
 
-On iOS 11+, Android 10+ devices, scan with the camera app and the connection screen will pop up immediately. Pass this string to `qrcode.react` and it will render a QR code.
+On iOS 11+ and Android 10+, scanning with the camera app brings up a connection prompt directly. Pass this string to `qrcode.react` and it renders the QR code.
 
 ```typescript
 import QRCode from "qrcode.react";
@@ -78,11 +77,11 @@ function buildWifiString(config: WifiConfig): string {
 <QRCode value={buildWifiString(config)} size={200} />
 ```
 
----]
+---
 
-## Step 2 - Configure the form: react-hook-form + zod
+## Step 2 — Form Setup: react-hook-form + zod
 
-The input form is managed with `react-hook-form` and `zod`. The encryption method is `nopass`, which hides the password field itself.
+The form is managed with `react-hook-form` and `zod`. When encryption is set to `nopass`, the password field is hidden entirely.
 
 ```typescript
 // shared/schema.ts
@@ -94,24 +93,24 @@ export const insertWifiConfigSchema = z.object({
 });
 ```
 
-Whenever the form changes, the QR code is updated in real time by sending the current value to the parent.
+Every form change lifts the current values to the parent so the QR code updates in real time.
 
 ```typescript
 // WifiForm.tsx
 const handleChange = (data: Partial<InsertWifiConfig>) => {
   const newConfig = { ...form.getValues(), ...data };
-  onUpdate(newConfig); // update QR immediately by raising to parent
+  onUpdate(newConfig); // lift to parent for immediate QR refresh
 };
 
 <form onChange={() => handleChange(form.getValues())}>
 ```
 
-The password field has a show/hide toggle. WiFi passwords are often long and complex, so we need to confirm the input.
+The password field has a show/hide toggle — WiFi passwords are often long and complex, so being able to verify the input matters.
 
 ```typescript
 const [showPassword, setShowPassword] = useState(false);
 
-<Input type={showPassword ? "text" : "password"} />.
+<Input type={showPassword ? "text" : "password"} />
 <button onClick={() => setShowPassword(!showPassword)}>
   {showPassword ? <EyeOff /> : <Eye />}
 </button>
@@ -119,9 +118,9 @@ const [showPassword, setShowPassword] = useState(false);
 
 ---
 
-## Step 3 - Multilingual support (i18n)
+## Step 3 — Multilingual Support (i18n)
 
-We implemented this directly without any libraries. We manage translation key-value objects per language in `i18n.ts` and share them globally with Context.
+I implemented this without a library. `i18n.ts` holds key-value translation objects per language, shared across the app via Context.
 
 ```typescript
 // lib/i18n.ts
@@ -129,13 +128,13 @@ type Language = "en" | "ko" | "zh" | "de";
 
 const translations: Record<Language, Record<string, string>> = {
   en: { "form.ssid": "Network Name (SSID)", ... },
-  en: { "form.ssid": "Network Name (SSID)", ... },
+  ko: { "form.ssid": "네트워크 이름 (SSID)", ... },
   zh: { "form.ssid": "网络名称 (SSID)", ... },
   de: { "form.ssid": "Netzwerkname (SSID)", ... },
 };
 ```
 
-Language detection checks the browser settings first and falls back to English if not present. The selected language is saved in `localStorage` and is preserved for the next visit.
+Language detection checks the browser settings first and falls back to English if nothing matches. The selected language is saved in `localStorage` so it persists across visits.
 
 ```typescript
 // App.tsx
@@ -144,7 +143,7 @@ function detectLanguage(): Language {
   if (valid.includes(saved as Language)) return saved as Language;
 
   const browserLang = navigator.language.toLowerCase();
-  if (browserLang.startsWith("en")) return "en";
+  if (browserLang.startsWith("ko")) return "ko";
   if (browserLang.startsWith("zh")) return "zh";
   if (browserLang.startsWith("de")) return "de";
   return "en";
@@ -153,9 +152,9 @@ function detectLanguage(): Language {
 
 ---
 
-## Step 4 - Print Function
+## Step 4 — Print Feature
 
-We created a separate printable card component (`PrintableCard`) and called `window.print()`. We used CSS `@media print` to hide the UI elements and make sure only the card is printed.
+I created a separate `PrintableCard` component for printing and call `window.print()`. CSS `@media print` hides all UI elements so only the card prints.
 
 ```typescript
 // WifiForm.tsx
@@ -169,13 +168,13 @@ const handlePrint = () => {
 </Button>
 ```
 
-The card comes with a QR code and the name of the network. You can print it out and post it in your cafe or office so customers can scan it to connect.
+The card shows the QR code alongside the network name. Print it out and stick it somewhere — guests can scan and connect themselves.
 
 ---
 
-## Step 5 - Routing and SEO
+## Step 5 — Routing and SEO
 
-We've routed to wouter. There are 4 pages in total.
+I used wouter for routing. There are four pages in total.
 
 ```typescript
 // App.tsx
@@ -185,7 +184,7 @@ We've routed to wouter. There are 4 pages in total.
 <Route path="/privacy" component={Privacy} />
 ```
 
-Each page has a title, description, and canonical URL using `react-helmet-async`.
+Each page gets a title, description, and canonical URL via `react-helmet-async`.
 
 ```typescript
 <Helmet>
@@ -197,43 +196,43 @@ Each page has a title, description, and canonical URL using `react-helmet-async`
 
 ---
 
-## Initial site structure
+## Initial Site Structure
 
-At the time of deployment, the home page looked like this
+The home page layout at launch looked like this:
 
 ```
 Home (/)
-  ├── Header + language selector
-  WiFi QR form (left) + QR preview (right)
+  ├── Header + Language selector
+  ├── WiFi QR form (left) + QR preview (right)
   ├── How-to section (4 steps)
-  ├── FAQ (5 steps)
+  ├── FAQ (5 items)
   └── Footer → Privacy link
 ```
 
-As a tool, it was good enough. The form was easy to fill out, QR, printable, and available in four languages, so I decided to add Google AdSense.
+As a tool it worked well. Fill in the form, get a QR, print it, use it in four languages. So I decided to try adding Google AdSense.
 
 ---
 
-## Organization - Key flows at a glance
+## Summary — The Core Flow
 
 ```
-WiFi password sharing is inconvenient
+Annoying WiFi password sharing
   ↓
-Create a QR with the format WIFI:T:WPA;S:...;P:...;;
+Generate QR with WIFI:T:WPA;S:...;P:...;; format
   ↓
-react-hook-form + zod-form → Real-time QR update
+react-hook-form + zod → real-time QR updates
   ↓
 window.print() print card
   ↓
-4 languages i18n (browser auto detection)
-  ↓ Vercel
-Vercel Deployment → wi-fi-qr.xyz
+4-language i18n (browser auto-detect)
+  ↓
+Vercel deploy → wi-fi-qr.xyz
 ```
 
-The site was working fine. However, after applying for AdSense, I received a rejection email, which I will write about in the next installment.
+The site worked great. Then the AdSense rejection email arrived. I'll cover that story in the next post.
 
 ---
 
-*WiFi QR code generator developer*.
-- **Part 1: Site Introduction - WiFi QR Generator with AI (Current)
-- [Part 2: Google AdSense Rejected - The Reality of a Contentless Tools Site](/posts/wifi_qr_adsense_20260506)
+*WiFi QR Code Generator series*
+- **Part 1: Site Overview — WiFi QR Generator Built with AI (current)**
+- [Part 2: Google AdSense Rejected Me — The Reality of a Tool-Only Site](/posts/wifi_qr_adsense_20260429)
