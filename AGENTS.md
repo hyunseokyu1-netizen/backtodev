@@ -36,4 +36,18 @@ blog_doc_temp/완료/     ← 원본 초안에 ff_ 접두사 붙여 보관
 
 - `date`: 작성일 (YYYY-MM-DD)
 - `publish_date`: 배포 예정일. scheduled 폴더에서 이 날짜 기준으로 posts로 이동됨
+
+## Frontmatter 작성 규칙 (YAML 파싱 오류 방지)
+
+**⚠️ title/description에 apostrophe(')가 포함된 경우 반드시 큰따옴표 사용**
+
+```yaml
+# 틀림 — 작은따옴표 안에 '가 있으면 YAML 파싱 오류 → Vercel 빌드 실패
+title: 'Why GitHub Actions Commits Don't Show'
+
+# 맞음 — 큰따옴표로 감싸기
+title: "Why GitHub Actions Commits Don't Show"
+```
+
+`it's`, `don't`, `I've`, `you're`, `won't` 등 영어 축약어가 title에 있으면 무조건 `"..."` 사용.
 <!-- END:nextjs-agent-rules -->
