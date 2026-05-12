@@ -33,7 +33,7 @@ const ghHeaders = {
 async function fetchFromGitHub(filePath: string): Promise<string | null> {
   const res = await fetch(`${GH_BASE}/${filePath}`, {
     headers: ghHeaders,
-    cache: "no-store",
+    next: { revalidate: 300 }, // 5분 캐시
   });
   if (!res.ok) return null;
   const data = await res.json();
@@ -43,7 +43,7 @@ async function fetchFromGitHub(filePath: string): Promise<string | null> {
 async function listGitHubDir(dirPath: string): Promise<{ name: string }[]> {
   const res = await fetch(`${GH_BASE}/${dirPath}`, {
     headers: ghHeaders,
-    cache: "no-store",
+    next: { revalidate: 300 }, // 5분 캐시
   });
   if (!res.ok) return [];
   return res.json();
