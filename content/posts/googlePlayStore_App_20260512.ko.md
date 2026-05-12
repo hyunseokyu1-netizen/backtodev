@@ -184,13 +184,28 @@ tags: []
 ![스크린샷 2026-05-12 오후 12.43.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_43_23_1778557438801.png)
 > `저장`버튼 누르기. 자동으로 다음 버튼이 활성화 되지 않아서, 저장을 눌러야 됨. `다음` 버튼이 활성화 됨.
 
+![스크린샷 2026-05-12 오후 12.45.41](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_45_41_1778564914759.png)
 
 
 - 요약
+![스크린샷 2026-05-12 오후 2.49.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_49_03_1778565011095.png)
 
 
 16. 타겟층  
+![스크린샷 2026-05-12 오후 2.50.27](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_50_27_1778565070916.png)
+![스크린샷 2026-05-12 오후 2.50.44](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_50_44_1778565092284.png)
+![스크린샷 2026-05-12 오후 2.51.46](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_51_46_1778565172139.png)
+![스크린샷 2026-05-12 오후 2.51.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_51_56_1778565239015.png)
+![스크린샷 2026-05-12 오후 2.52.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_52_09_1778565258642.png)
+![스크린샷 2026-05-12 오후 2.52.16](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_52_16_1778565274931.png)
+
+
 17. 데이터 보안  
+![스크린샷 2026-05-12 14.59.33](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_33_1778565615802.png)
+![스크린샷 2026-05-12 14.59.48](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_48_1778565629331.png)
+![스크린샷 2026-05-12 15.00.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_00_47_1778565697123.png)
+![스크린샷 2026-05-12 15.01.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_01_12_1778565715512.png)
+
 18. 정부 앱  
 19. 금융 기능  
 20. 건강    
