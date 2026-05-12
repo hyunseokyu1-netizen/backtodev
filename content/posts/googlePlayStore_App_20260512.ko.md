@@ -204,12 +204,26 @@ tags: []
 ![스크린샷 2026-05-12 14.59.33](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_33_1778565615802.png)
 ![스크린샷 2026-05-12 14.59.48](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_48_1778565629331.png)
 ![스크린샷 2026-05-12 15.00.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_00_47_1778565697123.png)
+![스크린샷 2026-05-12 15.22.05](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_22_05_1778566948272.png)
+- 앱 대상 연령대에 다동이 포함된다고 표시했기 때문에 Google Play 가족 정책을 춘수해야 스토어 등록정보의 데이터 보안 섹션에서 사용자에계 이러한 약속에 대해 안내하시겠어요? -> 예 로 꼭 표시해야지 넘어감.
+![스크린샷 2026-05-12 15.23.57](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_23_57_1778567066107.png)
 ![스크린샷 2026-05-12 15.01.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_01_12_1778565715512.png)
 
 18. 정부 앱  
+![스크린샷 2026-05-12 15.26.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_26_29_1778567208159.png)
+
 19. 금융 기능  
+![스크린샷 2026-05-12 15.27.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_27_12_1778567259406.png)
+![스크린샷 2026-05-12 15.27.27](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_27_27_1778567268841.png)
+- 앱에서 금융 기능을 제공하지 않음 선택해야지 넘어감.
+
 20. 건강    
+![스크린샷 2026-05-12 15.29.10](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_10_1778567388656.png)
+![스크린샷 2026-05-12 15.29.34](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_34_1778567402939.png)
     
 21. 앱 카테고리 선택 및 연락처 세부정보 제공  
+![스크린샷 2026-05-12 15.30.32](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_30_32_1778567447349.png)
+
+
 22. 스토어 등록정보 설정  
 
