@@ -150,3 +150,51 @@ tags: []
 - 이 목록을 다 해야한다. 
 
 
+12.  개인정보처리방침
+![스크린샷 2026-05-12 오전 11.02.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_02_56_1778556377545.png)
+
+- 개인정보처리방침이 꼭 필요하므로 사이트를 만들던지 ,아니면 github를 이용해서 웹에서 볼수있게 만들어야 한다.
+![스크린샷 2026-05-12 오전 11.01.21](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_01_21_1778556450713.png)
+
+- 작업 끝날때마다 개요로 이동 버튼 누르면, 계속 대시보드에서 다시 열어줘야하는 불편함이 있으므로, '나중에'버튼을 눌러서 뒤로가기 버튼을 활용한다. 
+![스크린샷 2026-05-12 오전 11.03.05](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_03_05_1778556542324.png)
+
+13. 앱 엑세스 권한
+![스크린샷 2026-05-12 오후 12.30.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_30_12_1778556687129.png)
+   
+14. 광고  
+![스크린샷 2026-05-12 오후 12.32.48](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_32_48_1778556787949.png)
+
+15. 콘텐츠 등급  
+![스크린샷 2026-05-12 오후 12.33.43](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_33_43_1778556836906.png)
+- 설문지 시작 
+- 카테고리 (여기 또 이메일 주소 작성있음)
+![스크린샷 2026-05-12 오후 12.34.50](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_34_50_1778556911063.png)
+- 설문지 여기서 '예'의 대답들은 추가 질문이 엄청 나옴.
+![스크린샷 2026-05-12 오후 12.36.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_36_12_1778556999923.png)
+- 아래처럼 폭력성 있다고 표시하면 추가 질문이 엄청 많음
+![스크린샷 2026-05-12 오후 12.39.16](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_16_1778557232488.png)
+![스크린샷 2026-05-12 오후 12.39.28](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_28_1778557248811.png)
+![스크린샷 2026-05-12 오후 12.39.39](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_39_1778557261422.png)
+![스크린샷 2026-05-12 오후 12.39.49](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_49_1778557273775.png)
+
+- 아니요 만 했을 경우 목록
+![스크린샷 2026-05-12 오후 12.41.38](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_41_38_1778557343685.png)
+![스크린샷 2026-05-12 오후 12.42.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_42_09_1778557356630.png)
+![스크린샷 2026-05-12 오후 12.43.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_43_23_1778557438801.png)
+> `저장`버튼 누르기. 자동으로 다음 버튼이 활성화 되지 않아서, 저장을 눌러야 됨. `다음` 버튼이 활성화 됨.
+
+
+
+- 요약
+
+
+16. 타겟층  
+17. 데이터 보안  
+18. 정부 앱  
+19. 금융 기능  
+20. 건강    
+    
+21. 앱 카테고리 선택 및 연락처 세부정보 제공  
+22. 스토어 등록정보 설정  
+
