@@ -250,10 +250,18 @@ tags: []
 23. 검토 전송
 - 위에 작업이 다 끝났을때, 상태바가 보이고, 검토중으로 표시됨.
 ![스크린샷 2026-05-12 15.36.58](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_36_58_1778567894474.png)
-
+![스크린샷 2026-05-13 11.52.55](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_52_55_1778640841863.png)
+![스크린샷 2026-05-13 11.53.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_53_09_1778640870670.png)
 
 24. 예외 (문제 발견)
 ![스크린샷 2026-05-13 11.46.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_03_1778640429631.png)
 ![스크린샷 2026-05-13 11.46.13](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_13_1778640456014.png)
 - 이런식으로 내가 놓힌 부분을 설명해주고 고치라고 해줌.
 
+25. 전송 완료 후 
+- 변경사항 검토중으로 바뀜.
+![스크린샷 2026-05-13 11.55.53](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_55_53_1778641001907.png)
+- 비공개테스트에서도 검토중으로 되어 있음.
+![스크린샷 2026-05-13 11.54.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_54_56_1778641050306.png)
+- 아래처럼 아이콘이 초록색 체크 표시로 바뀌면 이제 테스터에게 링크 공유나 설치가 가능해짐.
+![스크린샷 2026-05-13 12.00.31](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_12_00_31_1778641319462.png)
