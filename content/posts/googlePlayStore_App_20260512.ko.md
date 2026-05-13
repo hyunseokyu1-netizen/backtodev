@@ -251,3 +251,9 @@ tags: []
 - 위에 작업이 다 끝났을때, 상태바가 보이고, 검토중으로 표시됨.
 ![스크린샷 2026-05-12 15.36.58](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_36_58_1778567894474.png)
 
+
+24. 예외 (문제 발견)
+![스크린샷 2026-05-13 11.46.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_03_1778640429631.png)
+![스크린샷 2026-05-13 11.46.13](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_13_1778640456014.png)
+- 이런식으로 내가 놓힌 부분을 설명해주고 고치라고 해줌.
+
