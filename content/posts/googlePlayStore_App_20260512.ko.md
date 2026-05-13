@@ -95,169 +95,118 @@ App Bundle(`.aab`) 파일을 업로드한다.
 
 ![출시 확인](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-11______12_00_04_1778553865311.png)
 
-**초록색 체크 표시**가 핵심이다. '검토 중'으로 보이면 구글 승인을 기다려야 한다. 승인이 완료돼야 테스터 초대 링크가 활성화된다.
+12.  개인정보처리방침
+![스크린샷 2026-05-12 오전 11.02.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_02_56_1778556377545.png)
 
-![링크 활성화](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_47_24_1778554088406.png)
+- 개인정보처리방침이 꼭 필요하므로 사이트를 만들던지 ,아니면 github를 이용해서 웹에서 볼수있게 만들어야 한다.
+![스크린샷 2026-05-12 오전 11.01.21](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_01_21_1778556450713.png)
 
-> 비공개 테스트 승인에 시간이 걸리기 때문에, 내부 테스트 링크를 먼저 생성해서 설치 확인을 해두는 것을 추천한다.
+- 작업 끝날때마다 개요로 이동 버튼 누르면, 계속 대시보드에서 다시 열어줘야하는 불편함이 있으므로, '나중에'버튼을 눌러서 뒤로가기 버튼을 활용한다. 
+![스크린샷 2026-05-12 오전 11.03.05](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_03_05_1778556542324.png)
 
----
+13. 앱 엑세스 권한
+![스크린샷 2026-05-12 오후 12.30.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_30_12_1778556687129.png)
+   
+14. 광고  
+![스크린샷 2026-05-12 오후 12.32.48](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_32_48_1778556787949.png)
 
-## Step 3 — 비공개 테스트 (필수)
+15. 콘텐츠 등급  
+![스크린샷 2026-05-12 오후 12.33.43](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_33_43_1778556836906.png)
+- 설문지 시작 
+- 카테고리 (여기 또 이메일 주소 작성있음)
+![스크린샷 2026-05-12 오후 12.34.50](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_34_50_1778556911063.png)
+- 설문지 여기서 '예'의 대답들은 추가 질문이 엄청 나옴.
+![스크린샷 2026-05-12 오후 12.36.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_36_12_1778556999923.png)
+- 아래처럼 폭력성 있다고 표시하면 추가 질문이 엄청 많음
+![스크린샷 2026-05-12 오후 12.39.16](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_16_1778557232488.png)
+![스크린샷 2026-05-12 오후 12.39.28](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_28_1778557248811.png)
+![스크린샷 2026-05-12 오후 12.39.39](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_39_1778557261422.png)
+![스크린샷 2026-05-12 오후 12.39.49](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_49_1778557273775.png)
 
-정식 출시를 위한 필수 단계다. **12명의 테스터가 14일 이상 참여**해야 한다.
+- 아니요 만 했을 경우 목록
+![스크린샷 2026-05-12 오후 12.41.38](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_41_38_1778557343685.png)
+![스크린샷 2026-05-12 오후 12.42.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_42_09_1778557356630.png)
+![스크린샷 2026-05-12 오후 12.43.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_43_23_1778557438801.png)
+> `저장`버튼 누르기. 자동으로 다음 버튼이 활성화 되지 않아서, 저장을 눌러야 됨. `다음` 버튼이 활성화 됨.
 
-### 트랙 만들기
+![스크린샷 2026-05-12 오후 12.45.41](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_45_41_1778564914759.png)
 
-![비공개 테스트](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_46_28_1778554207528.png)
 
-구글 플레이 콘솔에서는 버전 단위를 '트랙'이라고 부른다. 알파/베타로 관리해도 되고, 헷갈리면 트랙1, 트랙2로 관리해도 무방하다.
+- 요약
+![스크린샷 2026-05-12 오후 2.49.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_49_03_1778565011095.png)
 
-> 비공개 테스트 중에도 주기적으로 트랙을 업데이트해야 한다. 업데이트가 없으면 리젝될 수 있다.
 
-**진행 순서:**
+16. 타겟층  
+![스크린샷 2026-05-12 오후 2.50.27](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_50_27_1778565070916.png)
+![스크린샷 2026-05-12 오후 2.50.44](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_50_44_1778565092284.png)
+![스크린샷 2026-05-12 오후 2.51.46](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_51_46_1778565172139.png)
+![스크린샷 2026-05-12 오후 2.51.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_51_56_1778565239015.png)
+![스크린샷 2026-05-12 오후 2.52.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_52_09_1778565258642.png)
+![스크린샷 2026-05-12 오후 2.52.16](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______2_52_16_1778565274931.png)
 
-비공개 테스트 트랙 생성 → 국가 선택 → 테스터 선택 → 새 버전 만들기 → 버전 미리보기 → Google에 버전 전송
 
-![비공개 테스트 순서](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_46_41_1778554730753.png)
+17. 데이터 보안  
+![스크린샷 2026-05-12 14.59.33](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_33_1778565615802.png)
+![스크린샷 2026-05-12 14.59.48](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_14_59_48_1778565629331.png)
+![스크린샷 2026-05-12 15.00.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_00_47_1778565697123.png)
+![스크린샷 2026-05-12 15.22.05](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_22_05_1778566948272.png)
+- 앱 대상 연령대에 다동이 포함된다고 표시했기 때문에 Google Play 가족 정책을 춘수해야 스토어 등록정보의 데이터 보안 섹션에서 사용자에계 이러한 약속에 대해 안내하시겠어요? -> 예 로 꼭 표시해야지 넘어감.
+![스크린샷 2026-05-12 15.23.57](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_23_57_1778567066107.png)
+![스크린샷 2026-05-12 15.01.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_01_12_1778565715512.png)
 
-### 국가 선택
+18. 정부 앱  
+![스크린샷 2026-05-12 15.26.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_26_29_1778567208159.png)
 
-![국가 선택](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_46_53_1778554859534.png)
-![국가 선택 2](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_07_1778554879268.png)
+19. 금융 기능  
+![스크린샷 2026-05-12 15.27.12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_27_12_1778567259406.png)
+![스크린샷 2026-05-12 15.27.27](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_27_27_1778567268841.png)
+- 앱에서 금융 기능을 제공하지 않음 선택해야지 넘어감.
 
-특별히 제한할 이유가 없으면 전체 선택하면 된다.
+20. 건강    
+![스크린샷 2026-05-12 15.29.10](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_10_1778567388656.png)
+![스크린샷 2026-05-12 15.29.34](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_34_1778567402939.png)
+    
+21. 앱 카테고리 선택 및 연락처 세부정보 제공  
+![스크린샷 2026-05-12 15.30.32](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_30_32_1778567447349.png)
+![스크린샷 2026-05-12 15.31.11](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_31_11_1778567618242.png)
+![스크린샷 2026-05-12 15.32.10](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_32_10_1778567637309.png)
+![스크린샷 2026-05-12 15.32.20](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_32_20_1778567652196.png)
+![스크린샷 2026-05-12 15.34.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_34_29_1778567755539.png)
+![스크린샷 2026-05-12 15.35.26](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_35_26_1778567798505.png)
 
-![국가 전체 선택](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_17_1778554905020.png)
 
-> 각 페이지 완료 후 '게시 개요로 이동하시겠어요?' 팝업이 뜨는데, '개요로 이동'을 누르면 대시보드로 이동해서 작업 흐름이 끊긴다. **'나중에' 버튼을 누르고 뒤로 가기**로 이어서 작업하는 게 편하다.
+22. 스토어 등록정보 설정  
+- 여기에서 스토어에 보이는 설명, 이미지을 각 언어에 맞게 등록하면 된다.
+![스크린샷 2026-05-13 10.21.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_21_47_1778635429482.png)
+![스크린샷 2026-05-13 10.22.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_23_1778635440147.png)
+![스크린샷 2026-05-13 10.22.41](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_41_1778635454873.png)
+![스크린샷 2026-05-13 10.22.49](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_49_1778635468031.png)
+![스크린샷 2026-05-13 10.22.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_56_1778635478168.png)
+![스크린샷 2026-05-13 10.23.06](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_23_06_1778635487330.png)
 
-### 테스터 설정 — Google Groups 활용 추천
+- 이미지 등록시, 에셋으로 추가 해서 이미지를 관리해야한다. 아래 사진처럼 업로드 하고, 파일 보내기, 추가 버튼을 눌러서 등록해야함.
+![스크린샷 2026-05-13 10.35.11](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_35_11_1778638764027.png)
+![스크린샷 2026-05-13 10.35.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_35_29_1778638804657.png)
 
-![테스터 선택](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_26_1778555110625.png)
+- 각 섹션에 맞는 이미지 사이즈만 등록할 수 있게 표시되고, 사이즈 안맞는 이미지는 저렇게 안됨 표시로 보임. 그래서 각 에셋에 맞게 버튼을 누르고 추가해야 함.
+![스크린샷 2026-05-13 11.22.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_22_03_1778639032518.png)
 
-이메일로 테스터를 일일이 추가하면, 내가 직접 추가해줘야 하고 사용자도 승인될 때까지 기다려야 한다. 테스터를 외부에서 모집할 계획이라면 **Google Groups를 사용하는 것이 훨씬 편하다.** 사용자가 그룹에 직접 가입해서 바로 테스트에 참여할 수 있다.
 
-![테스터 이메일 방식](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_37_1778555142663.png)
+23. 검토 전송
+- 위에 작업이 다 끝났을때, 상태바가 보이고, 검토중으로 표시됨.
+![스크린샷 2026-05-12 15.36.58](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_36_58_1778567894474.png)
+![스크린샷 2026-05-13 11.52.55](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_52_55_1778640841863.png)
+![스크린샷 2026-05-13 11.53.09](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_53_09_1778640870670.png)
 
----
+24. 예외 (문제 발견)
+![스크린샷 2026-05-13 11.46.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_03_1778640429631.png)
+![스크린샷 2026-05-13 11.46.13](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_46_13_1778640456014.png)
+- 이런식으로 내가 놓힌 부분을 설명해주고 고치라고 해줌.
 
-## Step 4 — Google Groups 만들기
-
-![Google Groups](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_48_13_1778555372662.png)
-
-Google Groups에서 새 그룹을 생성한다. **개인정보 설정이 중요하다.** 설정이 너무 제한적이면 사람들이 가입 자체를 포기한다.
-
-![Google Groups 설정](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_49_20_1778555416592.png)
-
-**권장 설정:**
-
-| 항목 | 설정값 |
-|------|--------|
-| 그룹을 검색할 수 있는 사용자 | 웹의 모든 사용자에게 공개 |
-| 그룹에 가입할 수 있는 사용자 | 누구나 가입할 수 있음 |
-| 대화를 볼 수 있는 사용자 | 웹의 모든 사용자에게 공개 |
-| 게시물을 올릴 수 있는 사용자 | 그룹 멤버 |
-| 회원을 볼 수 있는 사용자 | 그룹 관리자 |
-
-'회원을 볼 수 있는 사용자'를 그룹 관리자로 제한하면 가입자 수가 외부에 노출되지 않는다.
-
-![그룹 만들기 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_49_42_1778555636467.png)
-
-그룹 생성 완료:
-
-![그룹 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_50_31_1778555679096.png)
-![그룹 주소 복사](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_50_56_1778555700028.png)
-
-그룹 정보에서 **그룹 주소 이메일(`이름@googlegroups.com`)을 복사**해 둔다. 다음 단계에서 사용한다.
-
----
-
-## Step 5 — 테스터에 Google Groups 연결
-
-![Google Groups 연결](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_51_19_1778555775154.png)
-
-테스터 설정에서 Google Groups를 선택하고 복사해둔 그룹 이메일을 추가한다.
-
----
-
-## Step 6 — 의견 URL / 이메일 등록
-
-![의견 이메일](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_51_38_1778555814447.png)
-
-테스터 피드백을 받을 이메일 주소를 입력한다. 앱 관련 이메일이 생각보다 많이 오기 때문에 **스토어 전용 이메일 계정을 별도로 만들어서 관리하는 것을 추천한다.**
-
----
-
-## Step 7 — 앱 설정 완료: 할 일 목록 처리
-
-버전을 전송하고 나면 대시보드에서 '할 일 보기'를 펼쳐야 한다.
-
-![추가 정보 오류](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_52_11_1778555897806.png)
-![추가 정보 오류 2](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_52_20_1778555924530.png)
-![앱 설정 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_52_39_1778556008313.png)
-![할 일 목록](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_52_53_1778556103595.png)
-
-처리해야 할 항목들:
-
-- 개인정보처리방침 설정
-- 앱 액세스 권한
-- 광고 여부
-- 콘텐츠 등급
-- 타겟층
-- 데이터 보안
-- 앱 카테고리 선택 및 연락처 세부정보
-- 스토어 등록정보 설정
-
-항목이 많아 보이지만, 대부분은 라디오 버튼 선택이나 간단한 입력으로 끝난다. 하나씩 체크하면서 완료하면 된다.
-
----
-
-## Step 8 — 검토 제출
-
-![검토 제출](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_01_21_1778556450713.png)
-![검토 제출 2](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_02_56_1778556377545.png)
-![검토 제출 3](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_03_05_1778556542324.png)
-
-모든 항목 완료 후 'Google에 버전 전송'을 누르면 검토가 시작된다.
-
-![최종 확인](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_30_12_1778556687129.png)
-![최종 확인 2](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_32_48_1778556787949.png)
-![최종 확인 3](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_33_43_1778556836906.png)
-![최종 확인 4](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_34_50_1778556911063.png)
-![최종 확인 5](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_36_12_1778556999923.png)
-![최종 확인 6](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_16_1778557232488.png)
-![최종 확인 7](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_28_1778557248811.png)
-![최종 확인 8](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_39_1778557261422.png)
-![최종 확인 9](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_39_49_1778557273775.png)
-![최종 확인 10](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_41_38_1778557343685.png)
-![최종 확인 11](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_42_09_1778557356630.png)
-![최종 확인 12](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12______12_43_23_1778557438801.png)
-
----
-
-## 전체 흐름 정리
-
-```
-1. 구글 플레이 콘솔 가입 ($25)
-        ↓
-2. 앱 만들기 (패키지명, 언어, 유무료 설정)
-        ↓
-3. 내부 테스트 [선택] (빠른 설치 링크 확보)
-        ↓
-4. 비공개 테스트 [필수]
-   - Google Groups로 테스터 모집
-   - 12명 × 14일 충족
-        ↓
-5. 할 일 목록 전부 완료
-        ↓
-6. Google에 버전 전송 → 검토 → 승인
-        ↓
-7. 정식 출시
-```
-
-**핵심 팁 3가지:**
-
-1. **내부 테스트를 먼저** — 비공개 테스트 승인 기다리는 동안 내부 테스트로 앱을 직접 검증
-2. **Google Groups 사용** — 이메일 수동 추가 대신 그룹 링크 하나로 테스터 모집
-3. **'나중에' 버튼 애용** — 각 페이지에서 '개요로 이동' 대신 '나중에'를 눌러야 작업 흐름이 끊기지 않음
+25. 전송 완료 후 
+- 변경사항 검토중으로 바뀜.
+![스크린샷 2026-05-13 11.55.53](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_55_53_1778641001907.png)
+- 비공개테스트에서도 검토중으로 되어 있음.
+![스크린샷 2026-05-13 11.54.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_54_56_1778641050306.png)
+- 아래처럼 아이콘이 초록색 체크 표시로 바뀌면 이제 테스터에게 링크 공유나 설치가 가능해짐.
+![스크린샷 2026-05-13 12.00.31](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_12_00_31_1778641319462.png)
