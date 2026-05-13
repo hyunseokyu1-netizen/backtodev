@@ -226,17 +226,16 @@ tags: []
 ![스크린샷 2026-05-12 15.31.11](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_31_11_1778567618242.png)
 ![스크린샷 2026-05-12 15.32.10](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_32_10_1778567637309.png)
 ![스크린샷 2026-05-12 15.32.20](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_32_20_1778567652196.png)
-
+![스크린샷 2026-05-12 15.34.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_34_29_1778567755539.png)
+![스크린샷 2026-05-12 15.35.26](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_35_26_1778567798505.png)
 
 
 22. 스토어 등록정보 설정  
-![스크린샷 2026-05-12 15.34.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_34_29_1778567755539.png)
-![스크린샷 2026-05-12 15.35.26](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_35_26_1778567798505.png)
+
 
 
 
 23. 검토 전송
 - 위에 작업이 다 끝났을때, 상태바가 보이고, 검토중으로 표시됨.
-
 ![스크린샷 2026-05-12 15.36.58](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_36_58_1778567894474.png)
 
