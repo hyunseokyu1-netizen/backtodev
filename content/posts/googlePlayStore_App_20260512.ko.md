@@ -231,6 +231,7 @@ tags: []
 
 
 22. 스토어 등록정보 설정  
+- 여기에서 스토어에 보이는 설명, 이미지을 각 언어에 맞게 등록하면 된다.
 ![스크린샷 2026-05-13 10.21.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_21_47_1778635429482.png)
 ![스크린샷 2026-05-13 10.22.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_23_1778635440147.png)
 ![스크린샷 2026-05-13 10.22.41](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_41_1778635454873.png)
@@ -238,6 +239,12 @@ tags: []
 ![스크린샷 2026-05-13 10.22.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_56_1778635478168.png)
 ![스크린샷 2026-05-13 10.23.06](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_23_06_1778635487330.png)
 
+- 이미지 등록시, 에셋으로 추가 해서 이미지를 관리해야한다. 아래 사진처럼 업로드 하고, 파일 보내기, 추가 버튼을 눌러서 등록해야함.
+![스크린샷 2026-05-13 10.35.11](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_35_11_1778638764027.png)
+![스크린샷 2026-05-13 10.35.29](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_35_29_1778638804657.png)
+
+- 각 섹션에 맞는 이미지 사이즈만 등록할 수 있게 표시되고, 사이즈 안맞는 이미지는 저렇게 안됨 표시로 보임. 그래서 각 에셋에 맞게 버튼을 누르고 추가해야 함.
+![스크린샷 2026-05-13 11.22.03](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_22_03_1778639032518.png)
 
 
 23. 검토 전송
