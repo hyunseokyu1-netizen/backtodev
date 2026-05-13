@@ -231,7 +231,12 @@ tags: []
 
 
 22. 스토어 등록정보 설정  
-
+![스크린샷 2026-05-13 10.21.47](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_21_47_1778635429482.png)
+![스크린샷 2026-05-13 10.22.23](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_23_1778635440147.png)
+![스크린샷 2026-05-13 10.22.41](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_41_1778635454873.png)
+![스크린샷 2026-05-13 10.22.49](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_49_1778635468031.png)
+![스크린샷 2026-05-13 10.22.56](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_22_56_1778635478168.png)
+![스크린샷 2026-05-13 10.23.06](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_10_23_06_1778635487330.png)
 
 
 
