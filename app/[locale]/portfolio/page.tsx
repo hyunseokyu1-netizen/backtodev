@@ -46,19 +46,78 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
-          name: "WiFi QR 코드 생성기",
-          tagline: "손님한테 비밀번호 받아 적는 거 이제 그만",
+          name: "TILT — The Maze Puzzle",
+          tagline: "기울여서 탈출, 시각장애인도 음성만으로 완전히 플레이 가능",
           description:
-            "카페, 식당, 소상공인 공간에서 손님이 WiFi 비밀번호를 직접 받아 적는 불편함을 없애기 위해 만들었습니다. SSID와 비밀번호를 입력하면 즉시 QR 코드가 생성되고, 카드 형태로 인쇄해 벽에 붙여두면 손님이 카메라로 스캔해 바로 연결할 수 있습니다. 한국어·영어·중국어·독일어 4개 언어를 지원합니다.",
-          tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
+            "가속도계로 스마트폰을 기울여 3×3 그리드에서 마커를 목표 칸으로 이동시키는 반응 속도 퍼즐 게임입니다. 라운드마다 타이머가 짧아져 긴장감이 높아집니다. 시각장애인을 포함한 모든 사용자가 동등하게 플레이할 수 있도록 설계했습니다. TTS 음성 안내, 남은 시간에 따라 60–180 BPM으로 변하는 메트로놈, 햅틱 피드백으로 화면 없이도 플레이 가능합니다. Supabase 실시간 글로벌 리더보드와 3단계 인터랙티브 온보딩 튜토리얼을 포함합니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo",
+            "Supabase",
+            "expo-sensors",
+            "expo-speech",
+            "expo-audio",
+            "expo-haptics",
+          ],
           links: [
-            { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
-            { label: "개발 이야기", href: "/ko/posts/adsense_content_expansion_20260505" },
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
           ],
           status: "live",
-          statusLabel: "운영 중",
+          statusLabel: "출시 완료",
           period: "2026.05",
-          image: "/portfolio/wifi-qr-preview.png",
+          image: "/portfolio/tilt-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/tilt-screen-menu.png",
+              alt: "TILT 메인 메뉴 화면",
+              caption: "메인 메뉴",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameplay.png",
+              alt: "TILT 게임플레이 화면",
+              caption: "게임플레이",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameover.png",
+              alt: "TILT 게임오버 / 리더보드 화면",
+              caption: "게임오버 / 리더보드",
+            },
+          ],
+        },
+        {
+          name: "ChainPlay",
+          tagline: "알고리즘이 아닌, 내가 만든 순서대로 자동 재생",
+          description:
+            "원하는 유튜브 영상만 골라 내 순서대로 이어 보기 위해 만든 안드로이드 앱입니다. youtube.com/watch, youtu.be, Shorts, embed URL을 붙여넣으면 플레이리스트에 추가되고, 한 영상이 끝나면 다음 영상으로 자동 이동합니다. 별도 로그인 없이 YouTube 공식 플레이어를 사용하며, 이전/다음 이동, ▲▼ 순서 변경, 개별 삭제, 로컬 저장을 지원합니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "react-native-youtube-iframe",
+            "AsyncStorage",
+            "Intl API",
+          ],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
+          ],
+          status: "wip",
+          statusLabel: "출시 준비 중",
+          period: "2026.04 ~ 2026.05",
+          image: "/portfolio/chainplay-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/chainplay-screen-ko-main.png",
+              alt: "ChainPlay 메인 화면 한국어",
+              caption: "메인 화면",
+            },
+            {
+              src: "/portfolio/chainplay-screen-ko-add.png",
+              alt: "ChainPlay URL 추가 화면 한국어",
+              caption: "URL 추가",
+            },
+          ],
         },
         {
           name: "Cassette Music Player",
@@ -109,44 +168,27 @@ export default async function PortfolioPage() {
           ],
         },
         {
-          name: "ChainPlay",
-          tagline: "알고리즘이 아닌, 내가 만든 순서대로 자동 재생",
+          name: "WiFi QR 코드 생성기",
+          tagline: "손님한테 비밀번호 받아 적는 거 이제 그만",
           description:
-            "원하는 유튜브 영상만 골라 내 순서대로 이어 보기 위해 만든 안드로이드 앱입니다. youtube.com/watch, youtu.be, Shorts, embed URL을 붙여넣으면 플레이리스트에 추가되고, 한 영상이 끝나면 다음 영상으로 자동 이동합니다. 별도 로그인 없이 YouTube 공식 플레이어를 사용하며, 이전/다음 이동, ▲▼ 순서 변경, 개별 삭제, 로컬 저장을 지원합니다.",
-          tech: [
-            "React Native",
-            "TypeScript",
-            "Expo SDK 54",
-            "react-native-youtube-iframe",
-            "AsyncStorage",
-            "Intl API",
-          ],
+            "카페, 식당, 소상공인 공간에서 손님이 WiFi 비밀번호를 직접 받아 적는 불편함을 없애기 위해 만들었습니다. SSID와 비밀번호를 입력하면 즉시 QR 코드가 생성되고, 카드 형태로 인쇄해 벽에 붙여두면 손님이 카메라로 스캔해 바로 연결할 수 있습니다. 한국어·영어·중국어·독일어 4개 언어를 지원합니다.",
+          tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
-            { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
+            { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
+            { label: "개발 이야기", href: "/ko/posts/adsense_content_expansion_20260505" },
           ],
-          status: "wip",
-          statusLabel: "출시 준비 중",
-          period: "2026.04 ~ 2026.05",
-          image: "/portfolio/chainplay-feature.png",
-          screenshots: [
-            {
-              src: "/portfolio/chainplay-screen-ko-main.png",
-              alt: "ChainPlay 메인 화면 한국어",
-              caption: "메인 화면",
-            },
-            {
-              src: "/portfolio/chainplay-screen-ko-add.png",
-              alt: "ChainPlay URL 추가 화면 한국어",
-              caption: "URL 추가",
-            },
-          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2026.05",
+          image: "/portfolio/wifi-qr-preview.png",
         },
+      ]
+    : [
         {
           name: "TILT — The Maze Puzzle",
-          tagline: "기울여서 탈출, 시각장애인도 음성만으로 완전히 플레이 가능",
+          tagline: "Tilt to escape — fully playable by blind users via voice alone",
           description:
-            "가속도계로 스마트폰을 기울여 3×3 그리드에서 마커를 목표 칸으로 이동시키는 반응 속도 퍼즐 게임입니다. 라운드마다 타이머가 짧아져 긴장감이 높아집니다. 시각장애인을 포함한 모든 사용자가 동등하게 플레이할 수 있도록 설계했습니다. TTS 음성 안내, 남은 시간에 따라 60–180 BPM으로 변하는 메트로놈, 햅틱 피드백으로 화면 없이도 플레이 가능합니다. Supabase 실시간 글로벌 리더보드와 3단계 인터랙티브 온보딩 튜토리얼을 포함합니다.",
+            "A reaction-speed puzzle game where you tilt your phone to move a marker across a 3×3 grid to the target cell. The timer shortens each round, keeping pressure constant. Designed from the ground up for equal access: TTS announces your position and target each round, a metronome shifts from 60 to 180 BPM as time runs out, and haptic feedback marks every move and collision — so the game is fully playable without looking at the screen. Includes a real-time Supabase global leaderboard and a 3-step interactive onboarding tutorial.",
           tech: [
             "React Native",
             "TypeScript",
@@ -161,43 +203,60 @@ export default async function PortfolioPage() {
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
           ],
           status: "live",
-          statusLabel: "출시 완료",
-          period: "2026.05",
+          statusLabel: "Released",
+          period: "May 2026",
           image: "/portfolio/tilt-feature.png",
           screenshots: [
             {
               src: "/portfolio/tilt-screen-menu.png",
-              alt: "TILT 메인 메뉴 화면",
-              caption: "메인 메뉴",
+              alt: "TILT main menu screen",
+              caption: "Main menu",
             },
             {
               src: "/portfolio/tilt-screen-gameplay.png",
-              alt: "TILT 게임플레이 화면",
-              caption: "게임플레이",
+              alt: "TILT gameplay screen",
+              caption: "Gameplay",
             },
             {
               src: "/portfolio/tilt-screen-gameover.png",
-              alt: "TILT 게임오버 / 리더보드 화면",
-              caption: "게임오버 / 리더보드",
+              alt: "TILT game over and leaderboard screen",
+              caption: "Game Over / Leaderboard",
             },
           ],
         },
-      ]
-    : [
         {
-          name: "WiFi QR Code Generator",
-          tagline: "No more reading out WiFi passwords to guests",
+          name: "ChainPlay",
+          tagline: "Autoplay YouTube videos in the order you choose",
           description:
-            "Built to eliminate the awkward WiFi password exchange at cafés, restaurants, and small businesses. Enter your SSID and password, get a QR code instantly. Print it as a card, stick it on the wall — guests scan with their camera and connect. Supports Korean, English, Chinese, and German.",
-          tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
-          links: [
-            { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
-            { label: "Dev story", href: "/en/posts/adsense_content_expansion_20260505" },
+            "An Android app for watching only the YouTube videos you picked, in your own sequence. Paste youtube.com/watch, youtu.be, Shorts, or embed URLs to add videos to a local playlist, then ChainPlay automatically moves to the next item when one ends. It uses the official YouTube player without login and supports previous/next controls, ▲▼ reordering, deleting videos, local persistence, and Korean/English auto-detection.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "react-native-youtube-iframe",
+            "AsyncStorage",
+            "Intl API",
           ],
-          status: "live",
-          statusLabel: "Live",
-          period: "May 2026",
-          image: "/portfolio/wifi-qr-preview.png",
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
+          ],
+          status: "wip",
+          statusLabel: "Coming to Play Store",
+          period: "Apr ~ May 2026",
+          image: "/portfolio/chainplay-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/chainplay-screen-en-main.png",
+              alt: "ChainPlay main screen in English",
+              caption: "Main screen",
+            },
+            {
+              src: "/portfolio/chainplay-screen-en-add.png",
+              alt: "ChainPlay add URL screen in English",
+              caption: "Add URL",
+            },
+          ],
         },
         {
           name: "Cassette Music Player",
@@ -248,78 +307,19 @@ export default async function PortfolioPage() {
           ],
         },
         {
-          name: "ChainPlay",
-          tagline: "Autoplay YouTube videos in the order you choose",
+          name: "WiFi QR Code Generator",
+          tagline: "No more reading out WiFi passwords to guests",
           description:
-            "An Android app for watching only the YouTube videos you picked, in your own sequence. Paste youtube.com/watch, youtu.be, Shorts, or embed URLs to add videos to a local playlist, then ChainPlay automatically moves to the next item when one ends. It uses the official YouTube player without login and supports previous/next controls, ▲▼ reordering, deleting videos, local persistence, and Korean/English auto-detection.",
-          tech: [
-            "React Native",
-            "TypeScript",
-            "Expo SDK 54",
-            "react-native-youtube-iframe",
-            "AsyncStorage",
-            "Intl API",
-          ],
+            "Built to eliminate the awkward WiFi password exchange at cafés, restaurants, and small businesses. Enter your SSID and password, get a QR code instantly. Print it as a card, stick it on the wall — guests scan with their camera and connect. Supports Korean, English, Chinese, and German.",
+          tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
-            { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
-          ],
-          status: "wip",
-          statusLabel: "Coming to Play Store",
-          period: "Apr ~ May 2026",
-          image: "/portfolio/chainplay-feature.png",
-          screenshots: [
-            {
-              src: "/portfolio/chainplay-screen-en-main.png",
-              alt: "ChainPlay main screen in English",
-              caption: "Main screen",
-            },
-            {
-              src: "/portfolio/chainplay-screen-en-add.png",
-              alt: "ChainPlay add URL screen in English",
-              caption: "Add URL",
-            },
-          ],
-        },
-        {
-          name: "TILT — The Maze Puzzle",
-          tagline: "Tilt to escape — fully playable by blind users via voice alone",
-          description:
-            "A reaction-speed puzzle game where you tilt your phone to move a marker across a 3×3 grid to the target cell. The timer shortens each round, keeping pressure constant. Designed from the ground up for equal access: TTS announces your position and target each round, a metronome shifts from 60 to 180 BPM as time runs out, and haptic feedback marks every move and collision — so the game is fully playable without looking at the screen. Includes a real-time Supabase global leaderboard and a 3-step interactive onboarding tutorial.",
-          tech: [
-            "React Native",
-            "TypeScript",
-            "Expo",
-            "Supabase",
-            "expo-sensors",
-            "expo-speech",
-            "expo-audio",
-            "expo-haptics",
-          ],
-          links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
+            { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
+            { label: "Dev story", href: "/en/posts/adsense_content_expansion_20260505" },
           ],
           status: "live",
-          statusLabel: "Released",
+          statusLabel: "Live",
           period: "May 2026",
-          image: "/portfolio/tilt-feature.png",
-          screenshots: [
-            {
-              src: "/portfolio/tilt-screen-menu.png",
-              alt: "TILT main menu screen",
-              caption: "Main menu",
-            },
-            {
-              src: "/portfolio/tilt-screen-gameplay.png",
-              alt: "TILT gameplay screen",
-              caption: "Gameplay",
-            },
-            {
-              src: "/portfolio/tilt-screen-gameover.png",
-              alt: "TILT game over and leaderboard screen",
-              caption: "Game Over / Leaderboard",
-            },
-          ],
+          image: "/portfolio/wifi-qr-preview.png",
         },
       ];
 
