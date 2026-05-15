@@ -36,6 +36,7 @@ interface Project {
   statusLabel: string;
   period: string;
   image?: string;
+  screenshots?: { src: string; alt: string; caption: string }[];
 }
 
 export default async function PortfolioPage() {
@@ -80,6 +81,18 @@ export default async function PortfolioPage() {
           statusLabel: "출시 준비 중",
           period: "2026.04 ~ 2026.05",
           image: "/portfolio/chainplay-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/chainplay-screen-ko-main.png",
+              alt: "ChainPlay 메인 화면 한국어",
+              caption: "메인 화면",
+            },
+            {
+              src: "/portfolio/chainplay-screen-ko-add.png",
+              alt: "ChainPlay URL 추가 화면 한국어",
+              caption: "URL 추가",
+            },
+          ],
         },
       ]
     : [
@@ -119,6 +132,18 @@ export default async function PortfolioPage() {
           statusLabel: "Coming to Play Store",
           period: "Apr ~ May 2026",
           image: "/portfolio/chainplay-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/chainplay-screen-en-main.png",
+              alt: "ChainPlay main screen in English",
+              caption: "Main screen",
+            },
+            {
+              src: "/portfolio/chainplay-screen-en-add.png",
+              alt: "ChainPlay add URL screen in English",
+              caption: "Add URL",
+            },
+          ],
         },
       ];
 
@@ -299,7 +324,6 @@ export default async function PortfolioPage() {
                   borderRadius: 10,
                   overflow: "hidden",
                   border: "1px solid hsl(var(--border))",
-                  height: "500px",
                 }}
               >
                 <Image
@@ -311,12 +335,59 @@ export default async function PortfolioPage() {
                     width: "100%",
                     height: "auto",
                     display: "block",
-                    objectFit: "cover",
-                    objectPosition: "top",
                   }}
                   priority
                 />
               </a>
+            )}
+
+            {/* Screenshots */}
+            {project.screenshots && (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+                  gap: "0.9rem",
+                  marginTop: "1rem",
+                }}
+              >
+                {project.screenshots.map((screenshot) => (
+                  <figure
+                    key={screenshot.src}
+                    style={{
+                      margin: 0,
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      border: "1px solid hsl(var(--border))",
+                      background: "hsl(var(--background))",
+                    }}
+                  >
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      width={1080}
+                      height={2340}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        display: "block",
+                      }}
+                    />
+                    <figcaption
+                      style={{
+                        padding: "0.55rem 0.7rem",
+                        fontSize: "0.72rem",
+                        color: "hsl(var(--muted-foreground))",
+                        fontFamily: "var(--font-mono), monospace",
+                        textAlign: "center",
+                        borderTop: "1px solid hsl(var(--border))",
+                      }}
+                    >
+                      {screenshot.caption}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             )}
           </article>
         ))}
