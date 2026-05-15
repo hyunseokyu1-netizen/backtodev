@@ -169,17 +169,15 @@ export default async function PortfolioPage() {
         },
         {
           name: "back to dev",
-          tagline: "Markdown 기반 콘텐츠 파이프라인을 갖춘 개발 블로그",
+          tagline: "40대 PM이 다시 개발자로 돌아오는 기록",
           description:
-            "콘텐츠 작성, 예약 발행, 다국어 라우팅, SEO 메타데이터까지 직접 설계한 개인 개발 블로그입니다. 포스트는 GitHub 저장소의 Markdown 파일을 단일 소스로 관리하고, scheduled/posts 디렉터리와 GitHub Actions 워크플로우로 발행 일정을 자동화했습니다. Next.js App Router 기반으로 한국어·영어 페이지를 분리하고 canonical/alternate metadata, sitemap, robots를 구성했습니다. 관리자 화면에서는 포스트 목록 조회, 검색, 편집, 이미지 업로드, 번역 보조 워크플로우를 처리합니다.",
+            "개발을 다시 시작하면서 배운 것들을 글로 남기는 개인 개발 블로그입니다. Markdown 파일을 GitHub에 올리면 GitHub Actions가 날짜에 맞춰 자동 발행하는 워크플로우를 직접 설계했습니다. Next.js App Router로 한국어·영어를 분리 운영하고, SEO 메타데이터·sitemap·robots까지 구성했습니다. 지금 이 포트폴리오 페이지도 이 블로그 안에 있습니다.",
           tech: [
             "Next.js",
             "TypeScript",
             "Vercel",
             "GitHub API",
             "GitHub Actions",
-            "Markdown",
-            "gray-matter",
             "next-intl",
             "Tailwind CSS",
           ],
@@ -190,6 +188,10 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.04 ~",
+          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev 블로그 홈 화면" },
+          screenshots: [
+            { src: "/portfolio/backtodev-screen-posts.png", alt: "포스트 목록 화면", caption: "Posts" },
+          ],
         },
         {
           name: "WiFi QR 코드 생성기",
@@ -334,17 +336,15 @@ export default async function PortfolioPage() {
         },
         {
           name: "back to dev",
-          tagline: "A Markdown-based publishing pipeline for a developer blog",
+          tagline: "A developer blog — a 40-something PM returning to code",
           description:
-            "A personal developer blog with a custom content workflow covering writing, scheduled publishing, localized routing, and SEO metadata. Markdown files in the GitHub repository act as the source of truth, while scheduled/posts directories and GitHub Actions automate the publishing lifecycle. Built with the Next.js App Router, it serves Korean and English routes with canonical/alternate metadata, sitemap, and robots support. The admin surface handles post browsing, search, editing, image uploads, and assisted translation workflows.",
+            "A personal developer blog documenting the journey back into development. The publishing workflow is fully automated: push a Markdown file to GitHub, and GitHub Actions publishes it on the scheduled date. Built with Next.js App Router to serve Korean and English routes separately, with SEO metadata, sitemap, and robots configured. This portfolio page is part of the same blog.",
           tech: [
             "Next.js",
             "TypeScript",
             "Vercel",
             "GitHub API",
             "GitHub Actions",
-            "Markdown",
-            "gray-matter",
             "next-intl",
             "Tailwind CSS",
           ],
@@ -355,6 +355,10 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "Apr 2026 ~",
+          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev blog home" },
+          screenshots: [
+            { src: "/portfolio/backtodev-screen-posts.png", alt: "Posts list page", caption: "Posts" },
+          ],
         },
         {
           name: "WiFi QR Code Generator",
