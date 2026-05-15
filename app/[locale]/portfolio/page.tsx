@@ -168,6 +168,20 @@ export default async function PortfolioPage() {
           ],
         },
         {
+          name: "back to dev",
+          tagline: "DB 없이 GitHub만으로 운영하는 개발 블로그",
+          description:
+            "개발을 다시 시작하면서 직접 만든 개발 블로그입니다. Next.js + Vercel 기반이며, 포스트는 GitHub 저장소의 마크다운 파일로 저장됩니다. 별도 DB 없이 GitHub API로 파일을 읽어오고, GitHub Actions로 예약 발행을 자동화했습니다. 한국어·영어 다국어를 지원하며, 관리자 페이지에서 포스트 조회와 검색이 가능합니다.",
+          tech: ["Next.js", "TypeScript", "Vercel", "GitHub API", "GitHub Actions", "next-intl", "Tailwind CSS"],
+          links: [
+            { label: "→ backtodev.com", href: "https://backtodev.com", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
+          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2026.04 ~",
+        },
+        {
           name: "WiFi QR 코드 생성기",
           tagline: "손님한테 비밀번호 받아 적는 거 이제 그만",
           description:
@@ -307,6 +321,20 @@ export default async function PortfolioPage() {
               caption: "Player Side B",
             },
           ],
+        },
+        {
+          name: "back to dev",
+          tagline: "A dev blog running on GitHub alone — no database",
+          description:
+            "A development blog built from scratch while getting back into coding. Built on Next.js + Vercel, with posts stored as markdown files in a GitHub repository. No separate database — posts are fetched via the GitHub API at build time, and scheduled publishing is automated with GitHub Actions. Supports Korean and English, with an admin page for browsing and searching posts.",
+          tech: ["Next.js", "TypeScript", "Vercel", "GitHub API", "GitHub Actions", "next-intl", "Tailwind CSS"],
+          links: [
+            { label: "→ backtodev.com", href: "https://backtodev.com", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
+          ],
+          status: "live",
+          statusLabel: "Live",
+          period: "Apr 2026 ~",
         },
         {
           name: "WiFi QR Code Generator",
