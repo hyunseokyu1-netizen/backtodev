@@ -60,6 +60,20 @@ export default async function PortfolioPage() {
           period: "2026.05",
           image: "/portfolio/wifi-qr-preview.png",
         },
+        {
+          name: "ChainPlay",
+          tagline: "내 순서대로 유튜브 자동 재생",
+          description:
+            "유튜브의 불편한 플레이리스트 기능을 개선한 안드로이드 앱입니다. URL만 붙여넣으면 내 순서대로 영상이 추가되고, 한 영상이 끝나면 자동으로 다음 영상으로 넘어갑니다. 별도 로그인 없이 유튜브 공식 플레이어를 사용하며, ▲▼ 버튼으로 순서를 자유롭게 조정할 수 있습니다. 시스템 언어에 따라 한국어·영어가 자동 전환됩니다.",
+          tech: ["React Native", "TypeScript", "Expo", "YouTube IFrame API", "AsyncStorage"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
+          ],
+          status: "wip",
+          statusLabel: "출시 준비 중",
+          period: "2026.04 ~ 2026.05",
+        },
       ]
     : [
         {
@@ -76,6 +90,20 @@ export default async function PortfolioPage() {
           statusLabel: "Live",
           period: "May 2026",
           image: "/portfolio/wifi-qr-preview.png",
+        },
+        {
+          name: "ChainPlay",
+          tagline: "Autoplay YouTube videos in your own order",
+          description:
+            "An Android app that fixes YouTube's awkward playlist experience. Paste video URLs to add them in your custom order, and they'll play automatically one after another. No login required — uses the official YouTube player. Rearrange videos with ▲▼ buttons, delete any video, and everything saves locally. Auto-detects system language for Korean or English UI.",
+          tech: ["React Native", "TypeScript", "Expo", "YouTube IFrame API", "AsyncStorage"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
+          ],
+          status: "wip",
+          statusLabel: "Coming to Play Store",
+          period: "Apr ~ May 2026",
         },
       ];
 
