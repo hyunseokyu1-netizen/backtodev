@@ -169,10 +169,20 @@ export default async function PortfolioPage() {
         },
         {
           name: "back to dev",
-          tagline: "DB 없이 GitHub만으로 운영하는 개발 블로그",
+          tagline: "Markdown 기반 콘텐츠 파이프라인을 갖춘 개발 블로그",
           description:
-            "개발을 다시 시작하면서 직접 만든 개발 블로그입니다. Next.js + Vercel 기반이며, 포스트는 GitHub 저장소의 마크다운 파일로 저장됩니다. 별도 DB 없이 GitHub API로 파일을 읽어오고, GitHub Actions로 예약 발행을 자동화했습니다. 한국어·영어 다국어를 지원하며, 관리자 페이지에서 포스트 조회와 검색이 가능합니다.",
-          tech: ["Next.js", "TypeScript", "Vercel", "GitHub API", "GitHub Actions", "next-intl", "Tailwind CSS"],
+            "콘텐츠 작성, 예약 발행, 다국어 라우팅, SEO 메타데이터까지 직접 설계한 개인 개발 블로그입니다. 포스트는 GitHub 저장소의 Markdown 파일을 단일 소스로 관리하고, scheduled/posts 디렉터리와 GitHub Actions 워크플로우로 발행 일정을 자동화했습니다. Next.js App Router 기반으로 한국어·영어 페이지를 분리하고 canonical/alternate metadata, sitemap, robots를 구성했습니다. 관리자 화면에서는 포스트 목록 조회, 검색, 편집, 이미지 업로드, 번역 보조 워크플로우를 처리합니다.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Vercel",
+            "GitHub API",
+            "GitHub Actions",
+            "Markdown",
+            "gray-matter",
+            "next-intl",
+            "Tailwind CSS",
+          ],
           links: [
             { label: "→ backtodev.com", href: "https://backtodev.com", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
@@ -324,10 +334,20 @@ export default async function PortfolioPage() {
         },
         {
           name: "back to dev",
-          tagline: "A dev blog running on GitHub alone — no database",
+          tagline: "A Markdown-based publishing pipeline for a developer blog",
           description:
-            "A development blog built from scratch while getting back into coding. Built on Next.js + Vercel, with posts stored as markdown files in a GitHub repository. No separate database — posts are fetched via the GitHub API at build time, and scheduled publishing is automated with GitHub Actions. Supports Korean and English, with an admin page for browsing and searching posts.",
-          tech: ["Next.js", "TypeScript", "Vercel", "GitHub API", "GitHub Actions", "next-intl", "Tailwind CSS"],
+            "A personal developer blog with a custom content workflow covering writing, scheduled publishing, localized routing, and SEO metadata. Markdown files in the GitHub repository act as the source of truth, while scheduled/posts directories and GitHub Actions automate the publishing lifecycle. Built with the Next.js App Router, it serves Korean and English routes with canonical/alternate metadata, sitemap, and robots support. The admin surface handles post browsing, search, editing, image uploads, and assisted translation workflows.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Vercel",
+            "GitHub API",
+            "GitHub Actions",
+            "Markdown",
+            "gray-matter",
+            "next-intl",
+            "Tailwind CSS",
+          ],
           links: [
             { label: "→ backtodev.com", href: "https://backtodev.com", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
