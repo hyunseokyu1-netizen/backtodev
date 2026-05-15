@@ -1,6 +1,5 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 
 const BASE_URL = "https://backtodev.com";
@@ -62,10 +61,17 @@ export default async function PortfolioPage() {
         },
         {
           name: "ChainPlay",
-          tagline: "내 순서대로 유튜브 자동 재생",
+          tagline: "알고리즘이 아닌, 내가 만든 순서대로 자동 재생",
           description:
-            "유튜브의 불편한 플레이리스트 기능을 개선한 안드로이드 앱입니다. URL만 붙여넣으면 내 순서대로 영상이 추가되고, 한 영상이 끝나면 자동으로 다음 영상으로 넘어갑니다. 별도 로그인 없이 유튜브 공식 플레이어를 사용하며, ▲▼ 버튼으로 순서를 자유롭게 조정할 수 있습니다. 시스템 언어에 따라 한국어·영어가 자동 전환됩니다.",
-          tech: ["React Native", "TypeScript", "Expo", "YouTube IFrame API", "AsyncStorage"],
+            "원하는 유튜브 영상만 골라 내 순서대로 이어 보기 위해 만든 안드로이드 앱입니다. youtube.com/watch, youtu.be, Shorts, embed URL을 붙여넣으면 플레이리스트에 추가되고, 한 영상이 끝나면 다음 영상으로 자동 이동합니다. 별도 로그인 없이 YouTube 공식 플레이어를 사용하며, 이전/다음 이동, ▲▼ 순서 변경, 개별 삭제, 로컬 저장을 지원합니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "react-native-youtube-iframe",
+            "AsyncStorage",
+            "Intl API",
+          ],
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
             { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
@@ -73,6 +79,7 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "출시 준비 중",
           period: "2026.04 ~ 2026.05",
+          image: "/portfolio/chainplay-feature.png",
         },
       ]
     : [
@@ -93,10 +100,17 @@ export default async function PortfolioPage() {
         },
         {
           name: "ChainPlay",
-          tagline: "Autoplay YouTube videos in your own order",
+          tagline: "Autoplay YouTube videos in the order you choose",
           description:
-            "An Android app that fixes YouTube's awkward playlist experience. Paste video URLs to add them in your custom order, and they'll play automatically one after another. No login required — uses the official YouTube player. Rearrange videos with ▲▼ buttons, delete any video, and everything saves locally. Auto-detects system language for Korean or English UI.",
-          tech: ["React Native", "TypeScript", "Expo", "YouTube IFrame API", "AsyncStorage"],
+            "An Android app for watching only the YouTube videos you picked, in your own sequence. Paste youtube.com/watch, youtu.be, Shorts, or embed URLs to add videos to a local playlist, then ChainPlay automatically moves to the next item when one ends. It uses the official YouTube player without login and supports previous/next controls, ▲▼ reordering, deleting videos, local persistence, and Korean/English auto-detection.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "react-native-youtube-iframe",
+            "AsyncStorage",
+            "Intl API",
+          ],
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
             { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
@@ -104,6 +118,7 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "Coming to Play Store",
           period: "Apr ~ May 2026",
+          image: "/portfolio/chainplay-feature.png",
         },
       ];
 
