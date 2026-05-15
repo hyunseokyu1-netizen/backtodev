@@ -35,7 +35,7 @@ interface Project {
   status: "live" | "wip";
   statusLabel: string;
   period: string;
-  image?: string;
+  image?: { src: string; alt: string };
   screenshots?: { src: string; alt: string; caption: string }[];
 }
 
@@ -66,7 +66,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "출시 완료",
           period: "2026.05",
-          image: "/portfolio/tilt-feature.png",
+          image: { src: "/portfolio/tilt-feature.png", alt: "TILT 메이즈 퍼즐 게임 화면" },
           screenshots: [
             {
               src: "/portfolio/tilt-screen-menu.png",
@@ -105,7 +105,7 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "출시 준비 중",
           period: "2026.04 ~ 2026.05",
-          image: "/portfolio/chainplay-feature.png",
+          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
             {
               src: "/portfolio/chainplay-screen-ko-main.png",
@@ -148,7 +148,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2025.05",
-          image: "/portfolio/cassette-feature.png",
+          image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-player-a.png",
@@ -208,7 +208,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.05",
-          image: "/portfolio/wifi-qr-preview.png",
+          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
         },
       ]
     : [
@@ -233,7 +233,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Released",
           period: "May 2026",
-          image: "/portfolio/tilt-feature.png",
+          image: { src: "/portfolio/tilt-feature.png", alt: "TILT maze puzzle game screen" },
           screenshots: [
             {
               src: "/portfolio/tilt-screen-menu.png",
@@ -272,7 +272,7 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "Coming to Play Store",
           period: "Apr ~ May 2026",
-          image: "/portfolio/chainplay-feature.png",
+          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
             {
               src: "/portfolio/chainplay-screen-en-main.png",
@@ -315,7 +315,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "May 2025",
-          image: "/portfolio/cassette-feature.png",
+          image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-player-a.png",
@@ -375,7 +375,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "May 2026",
-          image: "/portfolio/wifi-qr-preview.png",
+          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
         },
       ];
 
@@ -559,8 +559,8 @@ export default async function PortfolioPage() {
                 }}
               >
                 <Image
-                  src={project.image}
-                  alt={project.name}
+                  src={project.image.src}
+                  alt={project.image.alt}
                   width={1280}
                   height={800}
                   style={{
