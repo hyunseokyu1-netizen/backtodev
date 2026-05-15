@@ -72,7 +72,7 @@
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   background: hsl(var(--background));
