@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getAllPosts, getPost } from "@/lib/posts";
-import { Link } from "@/i18n/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import PostContent from "@/components/PostContent";
+import BackButton from "@/components/BackButton";
 import type { Metadata } from "next";
 
 const BASE_URL = "https://backtodev.com";
@@ -99,19 +99,8 @@ export default async function PostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Back link — terminal style */}
-      <Link
-        href="/posts"
-        className="inline-flex items-center gap-2 text-sm transition-colors"
-        style={{
-          color: "hsl(var(--muted-foreground))",
-          fontFamily: "var(--font-mono), monospace",
-          marginBottom: "2.5rem",
-          textDecoration: "none",
-        }}
-      >
-        ← cd ..
-      </Link>
+      {/* Back button — uses browser history to avoid scroll jump */}
+      <BackButton />
 
       {/* Post header */}
       <header style={{ marginBottom: "2.5rem" }}>
