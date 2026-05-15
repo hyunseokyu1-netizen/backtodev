@@ -142,6 +142,46 @@ export default async function PortfolioPage() {
             },
           ],
         },
+        {
+          name: "TILT — The Maze Puzzle",
+          tagline: "기울여서 탈출, 시각장애인도 음성만으로 완전히 플레이 가능",
+          description:
+            "가속도계로 스마트폰을 기울여 3×3 그리드에서 마커를 목표 칸으로 이동시키는 반응 속도 퍼즐 게임입니다. 라운드마다 타이머가 짧아져 긴장감이 높아집니다. 시각장애인을 포함한 모든 사용자가 동등하게 플레이할 수 있도록 설계했습니다. TTS 음성 안내, 남은 시간에 따라 60–180 BPM으로 변하는 메트로놈, 햅틱 피드백으로 화면 없이도 플레이 가능합니다. Supabase 실시간 글로벌 리더보드와 3단계 인터랙티브 온보딩 튜토리얼을 포함합니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo",
+            "Supabase",
+            "expo-sensors",
+            "expo-speech",
+            "expo-audio",
+            "expo-haptics",
+          ],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
+          ],
+          status: "live",
+          statusLabel: "출시 완료",
+          period: "2026.05",
+          image: "/portfolio/tilt-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/tilt-screen-menu.png",
+              alt: "TILT 메인 메뉴 화면",
+              caption: "메인 메뉴",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameplay.png",
+              alt: "TILT 게임플레이 화면",
+              caption: "게임플레이",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameover.png",
+              alt: "TILT 게임오버 / 리더보드 화면",
+              caption: "게임오버 / 리더보드",
+            },
+          ],
+        },
       ]
     : [
         {
@@ -238,6 +278,46 @@ export default async function PortfolioPage() {
               src: "/portfolio/chainplay-screen-en-add.png",
               alt: "ChainPlay add URL screen in English",
               caption: "Add URL",
+            },
+          ],
+        },
+        {
+          name: "TILT — The Maze Puzzle",
+          tagline: "Tilt to escape — fully playable by blind users via voice alone",
+          description:
+            "A reaction-speed puzzle game where you tilt your phone to move a marker across a 3×3 grid to the target cell. The timer shortens each round, keeping pressure constant. Designed from the ground up for equal access: TTS announces your position and target each round, a metronome shifts from 60 to 180 BPM as time runs out, and haptic feedback marks every move and collision — so the game is fully playable without looking at the screen. Includes a real-time Supabase global leaderboard and a 3-step interactive onboarding tutorial.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo",
+            "Supabase",
+            "expo-sensors",
+            "expo-speech",
+            "expo-audio",
+            "expo-haptics",
+          ],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
+          ],
+          status: "live",
+          statusLabel: "Released",
+          period: "May 2026",
+          image: "/portfolio/tilt-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/tilt-screen-menu.png",
+              alt: "TILT main menu screen",
+              caption: "Main menu",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameplay.png",
+              alt: "TILT gameplay screen",
+              caption: "Gameplay",
+            },
+            {
+              src: "/portfolio/tilt-screen-gameover.png",
+              alt: "TILT game over and leaderboard screen",
+              caption: "Game Over / Leaderboard",
             },
           ],
         },
