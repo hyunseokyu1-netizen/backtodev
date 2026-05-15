@@ -137,7 +137,7 @@ export default async function PortfolioPage() {
           links: [
             {
               label: "→ Play Store",
-              href: "https://play.google.com/store/apps/details?id=com.hyunseokyu.cassetteplayer",
+              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
               primary: true,
             },
             {
@@ -304,7 +304,7 @@ export default async function PortfolioPage() {
           links: [
             {
               label: "→ Play Store",
-              href: "https://play.google.com/store/apps/details?id=com.hyunseokyu.cassetteplayer",
+              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
               primary: true,
             },
             {
