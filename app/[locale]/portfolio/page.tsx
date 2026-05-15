@@ -61,6 +61,54 @@ export default async function PortfolioPage() {
           image: "/portfolio/wifi-qr-preview.png",
         },
         {
+          name: "Cassette Music Player",
+          tagline: "스킵 버튼 없는 레트로 카세트 뮤직 플레이어",
+          description:
+            "1980년대 카세트 테이프 경험을 안드로이드 폰에 옮긴 음악 플레이어입니다. 요즘 스트리밍 앱처럼 바로 스킵하지 못하고, FF 버튼을 꾹 눌러야 다음 곡으로 넘어갑니다. Side A/B에 각각 30분씩만 담을 수 있고, 트랙 사이에는 테이프 노이즈가 재생됩니다. 로컬 음악 파일만 사용하므로 인터넷과 알고리즘 없이 내가 고른 곡을 끝까지 듣는 경험에 집중했습니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "expo-router",
+            "expo-av",
+            "react-native-reanimated",
+            "react-native-svg",
+            "AsyncStorage",
+          ],
+          links: [
+            {
+              label: "→ Play Store",
+              href: "https://play.google.com/store/apps/details?id=com.hyunseokyu.cassetteplayer",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
+            },
+          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2025.05",
+          image: "/portfolio/cassette-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/cassette-screen-player-a.png",
+              alt: "Cassette Music Player Side A 플레이어 화면",
+              caption: "Player Side A",
+            },
+            {
+              src: "/portfolio/cassette-screen-library.png",
+              alt: "Cassette Music Player 트랙 관리 화면",
+              caption: "Library",
+            },
+            {
+              src: "/portfolio/cassette-screen-player-b.png",
+              alt: "Cassette Music Player Side B 재생 화면",
+              caption: "Player Side B",
+            },
+          ],
+        },
+        {
           name: "ChainPlay",
           tagline: "알고리즘이 아닌, 내가 만든 순서대로 자동 재생",
           description:
@@ -110,6 +158,54 @@ export default async function PortfolioPage() {
           statusLabel: "Live",
           period: "May 2026",
           image: "/portfolio/wifi-qr-preview.png",
+        },
+        {
+          name: "Cassette Music Player",
+          tagline: "A retro cassette music player with no skip button",
+          description:
+            "An Android music player that brings the 1980s cassette tape experience to a modern phone. Instead of instant skipping, you have to press and hold FF to move to the next track. Each cassette has Side A and Side B with a 30-minute limit per side, and tape noise plays between tracks. It uses local music files only, with no internet and no algorithm, so the experience stays focused on the songs you chose.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "expo-router",
+            "expo-av",
+            "react-native-reanimated",
+            "react-native-svg",
+            "AsyncStorage",
+          ],
+          links: [
+            {
+              label: "→ Play Store",
+              href: "https://play.google.com/store/apps/details?id=com.hyunseokyu.cassetteplayer",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
+            },
+          ],
+          status: "live",
+          statusLabel: "Live",
+          period: "May 2025",
+          image: "/portfolio/cassette-feature.png",
+          screenshots: [
+            {
+              src: "/portfolio/cassette-screen-player-a.png",
+              alt: "Cassette Music Player Side A player screen",
+              caption: "Player Side A",
+            },
+            {
+              src: "/portfolio/cassette-screen-library.png",
+              alt: "Cassette Music Player library screen",
+              caption: "Library",
+            },
+            {
+              src: "/portfolio/cassette-screen-player-b.png",
+              alt: "Cassette Music Player Side B playing screen",
+              caption: "Player Side B",
+            },
+          ],
         },
         {
           name: "ChainPlay",
