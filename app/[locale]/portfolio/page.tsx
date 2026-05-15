@@ -175,7 +175,7 @@ export default async function PortfolioPage() {
           tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
           links: [
             { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
-            { label: "Vercel", href: "https://vercel.com/hyunseokyu1-netizens-projects/wifi-qr-print/G3AZi6ogiDdXKGycryouUXVcAMV4" },
+            { label: "Vercel", href: "https://wifi-qr-print-etkz434gl-hyunseokyu1-netizens-projects.vercel.app/" },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/wifi-qr-print" },
             { label: "개발 이야기", href: "/ko/posts/adsense_content_expansion_20260505" },
           ],
@@ -316,7 +316,7 @@ export default async function PortfolioPage() {
           tech: ["React", "TypeScript", "Vite", "qrcode.react", "Zod", "i18n"],
           links: [
             { label: "→ wi-fi-qr.xyz", href: "https://wi-fi-qr.xyz", primary: true },
-            { label: "Vercel", href: "https://vercel.com/hyunseokyu1-netizens-projects/wifi-qr-print/G3AZi6ogiDdXKGycryouUXVcAMV4" },
+            { label: "Vercel", href: "https://wifi-qr-print-etkz434gl-hyunseokyu1-netizens-projects.vercel.app/" },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/wifi-qr-print" },
             { label: "Dev story", href: "/en/posts/adsense_content_expansion_20260505" },
           ],
