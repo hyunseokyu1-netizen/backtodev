@@ -104,7 +104,7 @@ export default async function PortfolioPage() {
           ],
           status: "wip",
           statusLabel: "출시 준비 중",
-          period: "2026.04 ~ 2026.05",
+          period: "2026.05",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
             {
