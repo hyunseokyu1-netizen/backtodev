@@ -207,7 +207,7 @@ export default async function PortfolioPage() {
           ],
           status: "live",
           statusLabel: "운영 중",
-          period: "2026.05",
+          period: "2026.04",
           image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
         },
       ]
