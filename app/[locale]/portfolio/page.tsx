@@ -147,7 +147,7 @@ export default async function PortfolioPage() {
             },
           ],
           status: "live",
-          statusLabel: "운영 중",
+          statusLabel: "출시 완료",
           period: "2025.05",
           image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
           screenshots: [
@@ -315,7 +315,7 @@ export default async function PortfolioPage() {
             },
           ],
           status: "live",
-          statusLabel: "Live",
+          statusLabel: "Released",
           period: "May 2025",
           image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
           screenshots: [
