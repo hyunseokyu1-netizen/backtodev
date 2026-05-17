@@ -9,9 +9,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const isKo = locale === "ko";
   return {
-    title: "Contact",
-    description: "Get in touch with backtodev.",
+    title: isKo ? "연락하기 | backtodev" : "Contact | backtodev",
+    description: isKo ? "backtodev에 연락하기" : "Get in touch with backtodev",
     alternates: {
       canonical: `${BASE_URL}/${locale}/contact`,
       languages: {
