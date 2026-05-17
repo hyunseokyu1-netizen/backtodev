@@ -26,7 +26,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const otherLocale = locale === "ko" ? "en" : "ko";
   const otherPost = await getPost(slug, otherLocale);
-  const canonicalUrl = `${BASE_URL}/${locale}/posts/${slug}`;
+  // isFallback: 영어 번역 없이 한국어 내용을 /en/ 에서 보여주는 경우
+  // 두 URL이 같은 내용 → canonical을 ko 버전으로 통일해 중복 페이지 오류 방지
+  const canonicalUrl = post.isFallback
+    ? `${BASE_URL}/ko/posts/${slug}`
+    : `${BASE_URL}/${locale}/posts/${slug}`;
 
   return {
     title: post.title,
