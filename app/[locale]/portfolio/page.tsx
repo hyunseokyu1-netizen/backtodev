@@ -61,7 +61,8 @@ export default async function PortfolioPage() {
             "expo-haptics",
           ],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
+            { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.tilt", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt" },
           ],
           status: "wip",
           statusLabel: "출시 준비 중",
@@ -229,7 +230,8 @@ export default async function PortfolioPage() {
             "expo-haptics",
           ],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
+            { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.tilt", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt" },
           ],
           status: "wip",
           statusLabel: "Coming Soon",
