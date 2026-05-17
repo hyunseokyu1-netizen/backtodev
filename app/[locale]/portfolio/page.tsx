@@ -63,8 +63,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
           ],
-          status: "live",
-          statusLabel: "출시 완료",
+          status: "wip",
+          statusLabel: "출시 준비 중",
           period: "2026.05",
           image: { src: "/portfolio/tilt-feature.png", alt: "TILT 메이즈 퍼즐 게임 화면" },
           screenshots: [
@@ -103,8 +103,8 @@ export default async function PortfolioPage() {
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "live",
-          statusLabel: "출시 완료",
+          status: "wip",
+          statusLabel: "출시 준비 중",
           period: "2026.05",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
@@ -231,8 +231,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt", primary: true },
           ],
-          status: "live",
-          statusLabel: "Released",
+          status: "wip",
+          statusLabel: "Coming Soon",
           period: "May 2026",
           image: { src: "/portfolio/tilt-feature.png", alt: "TILT maze puzzle game screen" },
           screenshots: [
@@ -271,8 +271,8 @@ export default async function PortfolioPage() {
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "live",
-          statusLabel: "Released",
+          status: "wip",
+          statusLabel: "Coming Soon",
           period: "May 2026",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
