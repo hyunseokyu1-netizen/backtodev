@@ -99,11 +99,12 @@ export default async function PortfolioPage() {
             "Intl API",
           ],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.chainplay", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "wip",
-          statusLabel: "출시 준비 중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.05",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
@@ -266,12 +267,13 @@ export default async function PortfolioPage() {
             "Intl API",
           ],
           links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player", primary: true },
+            { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.chainplay", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "wip",
-          statusLabel: "Coming to Play Store",
-          period: "Apr ~ May 2026",
+          status: "live",
+          statusLabel: "Released",
+          period: "May 2026",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
             {
