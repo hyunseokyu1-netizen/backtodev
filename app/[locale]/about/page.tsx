@@ -133,7 +133,7 @@ export default async function AboutPage() {
       {/* ── Left column ── */}
       <div className="flex flex-col" style={{ gap: "1rem", width: "100%", maxWidth: 280, flexShrink: 0 }}>
 
-        {/* Profile card */}
+        {/* Profile card — 임시 비활성화, 나중에 주석 해제로 복원 가능
         <div
           style={{
             borderRadius: 20,
@@ -172,6 +172,7 @@ export default async function AboutPage() {
             </div>
           </div>
         </div>
+        */}
 
         {/* Tech stack card */}
         <div
