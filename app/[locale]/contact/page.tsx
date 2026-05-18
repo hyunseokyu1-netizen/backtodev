@@ -56,10 +56,10 @@ export default async function ContactPage() {
               : "Feel free to reach out directly via email."}
           </p>
           <a
-            href="mailto:hyunseok.yu1@gmail.com"
+            href="mailto:backdev.tip@gmail.com"
             style={linkStyle}
           >
-            hyunseok.yu1@gmail.com
+            backdev.tip@gmail.com
           </a>
         </section>
 
