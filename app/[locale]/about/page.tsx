@@ -25,11 +25,18 @@ export default async function AboutPage() {
   const locale = await getLocale();
   const isKo = locale === "ko";
 
-  const stack = [
-    { icon: ">_", label: "TypeScript / Node.js", color: "hsl(var(--primary))" },
-    { icon: "</>", label: "React / Next.js", color: "hsl(var(--primary))" },
-    { icon: "⊕", label: "AI Agents / LLMs", color: "hsl(var(--primary))" },
-    { icon: "☕", label: "Lots of Caffeine", color: "hsl(var(--primary))" },
+  const stackNow = [
+    { icon: ">_", label: "TypeScript / Node.js" },
+    { icon: "</>", label: "React / Next.js" },
+    { icon: "◎",  label: "React Native / Expo" },
+    { icon: "⊗",  label: "Supabase / Vercel" },
+    { icon: "⊕",  label: "AI Agents / LLMs" },
+  ];
+
+  const stackPast = [
+    { icon: "☕", label: "Java / PHP" },
+    { icon: "∢",  label: "Angular" },
+    { icon: "⬡",  label: isKo ? "아키텍처 설계" : "System Architecture" },
   ];
 
   const sections = isKo ? [
@@ -188,21 +195,33 @@ export default async function AboutPage() {
           >
             {t("techStack")}
           </p>
-          <ul style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {stack.map(({ icon, label, color }) => (
+
+          {/* 현재 주력 */}
+          <p style={{ fontSize: "0.7rem", fontFamily: "var(--font-mono), monospace", color: "hsl(var(--primary))", letterSpacing: "0.08em", marginBottom: "0.6rem" }}>
+            {isKo ? "# 현재" : "# now"}
+          </p>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "1.25rem" }}>
+            {stackNow.map(({ icon, label }) => (
               <li key={label} className="flex items-center" style={{ gap: "0.75rem", fontSize: "0.875rem" }}>
-                <span
-                  style={{
-                    color,
-                    fontFamily: "var(--font-mono), monospace",
-                    fontSize: "0.8rem",
-                    width: 24,
-                    flexShrink: 0,
-                  }}
-                >
+                <span style={{ color: "hsl(var(--primary))", fontFamily: "var(--font-mono), monospace", fontSize: "0.8rem", width: 24, flexShrink: 0 }}>
                   {icon}
                 </span>
                 <span style={{ color: "hsl(var(--foreground) / 0.85)" }}>{label}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* 이전 경험 */}
+          <p style={{ fontSize: "0.7rem", fontFamily: "var(--font-mono), monospace", color: "hsl(var(--muted-foreground))", letterSpacing: "0.08em", marginBottom: "0.6rem" }}>
+            {isKo ? "# 이전 경험" : "# before"}
+          </p>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+            {stackPast.map(({ icon, label }) => (
+              <li key={label} className="flex items-center" style={{ gap: "0.75rem", fontSize: "0.875rem" }}>
+                <span style={{ color: "hsl(var(--muted-foreground))", fontFamily: "var(--font-mono), monospace", fontSize: "0.8rem", width: 24, flexShrink: 0 }}>
+                  {icon}
+                </span>
+                <span style={{ color: "hsl(var(--muted-foreground))" }}>{label}</span>
               </li>
             ))}
           </ul>
