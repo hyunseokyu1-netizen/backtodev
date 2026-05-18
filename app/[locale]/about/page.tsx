@@ -34,9 +34,10 @@ export default async function AboutPage() {
   ];
 
   const stackPast = [
-    { icon: "☕", label: "Java / PHP" },
+    { icon: "☕", label: "Java / Oracle" },
     { icon: "∢",  label: "Angular" },
     { icon: "⬡",  label: isKo ? "아키텍처 설계" : "System Architecture" },
+    { icon: "◈",  label: isKo ? "전략 / 기획" : "Strategy / Planning" },
   ];
 
   const sections = isKo ? [
