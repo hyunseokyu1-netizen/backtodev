@@ -6,11 +6,10 @@ import type { PostMeta } from "@/lib/posts";
 
 interface Props {
   posts: PostMeta[];
-  minReadLabel: string;
   readLabel: string;
 }
 
-export default function PostsClient({ posts, minReadLabel, readLabel }: Props) {
+export default function PostsClient({ posts, readLabel }: Props) {
   const [search, setSearch] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -118,12 +117,6 @@ export default function PostsClient({ posts, minReadLabel, readLabel }: Props) {
                       </svg>
                       {formattedDate(post.date)}
                     </time>
-                    <span className="flex items-center" style={{ gap: "0.375rem" }}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                      </svg>
-                      1 {minReadLabel}
-                    </span>
                   </div>
 
                   {/* Title */}

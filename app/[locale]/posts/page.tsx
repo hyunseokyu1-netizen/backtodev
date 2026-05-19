@@ -51,7 +51,6 @@ export default async function PostsPage() {
 
       <PostsClient
         posts={posts}
-        minReadLabel={tPost("minRead")}
         readLabel={tPost("read")}
       />
     </div>

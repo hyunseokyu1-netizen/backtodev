@@ -198,7 +198,7 @@ export default async function Home() {
               const isLastSingle = pair.length === 1;
               return isLastSingle ? (
                 <div key={pair[0].slug} style={{ marginTop: i > 0 ? "1.5rem" : 0 }}>
-                  <PostCard post={pair[0]} minReadLabel={tPost("minRead")} readLabel={tPost("read")} />
+                  <PostCard post={pair[0]} readLabel={tPost("read")} />
                 </div>
               ) : (
                 <div
@@ -207,7 +207,7 @@ export default async function Home() {
                   style={{ gap: "1.5rem", marginTop: i > 0 ? "1.5rem" : 0 }}
                 >
                   {pair.map((post) => (
-                    <PostCard key={post.slug} post={post} minReadLabel={tPost("minRead")} readLabel={tPost("read")} />
+                    <PostCard key={post.slug} post={post} readLabel={tPost("read")} />
                   ))}
                 </div>
               );
