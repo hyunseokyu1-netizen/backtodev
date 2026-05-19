@@ -1,7 +1,6 @@
 ---
 title: 'Obsidian Git 모바일 설정 — 안드로이드에서 GitHub 동기화하기'
 date: '2026-05-01'
-publish_date: '2026-05-25'
 description: 안드로이드에서 Obsidian Git 플러그인으로 GitHub 레포를 클론하고 자동 동기화까지 설정하는 방법
 tags:
   - Obsidian
