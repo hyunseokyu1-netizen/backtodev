@@ -35,13 +35,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
+    ...(post.isFallback && { robots: { index: false, follow: false } }),
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        [locale]: canonicalUrl,
+        ko: `${BASE_URL}/ko/posts/${slug}`,
         ...(otherPost && !otherPost.isFallback
-          ? { [otherLocale]: `${BASE_URL}/${otherLocale}/posts/${slug}` }
-          : {}),
+          ? { en: `${BASE_URL}/en/posts/${slug}`, "x-default": `${BASE_URL}/ko/posts/${slug}` }
+          : { "x-default": `${BASE_URL}/ko/posts/${slug}` }),
       },
     },
     openGraph: {
