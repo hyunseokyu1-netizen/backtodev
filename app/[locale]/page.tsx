@@ -209,19 +209,19 @@ export default async function Home() {
                 <div style={{ paddingLeft: "1rem" }}>
                   <div>
                     <span style={{ color: "hsl(var(--muted-foreground) / 0.55)", marginRight: 8 }}>a3f2b1c</span>
-                    <span style={{ color: "hsl(var(--muted-foreground))" }}>PM → Dev 전환 결정</span>
+                    <span style={{ color: "hsl(var(--muted-foreground))" }}>{t("terminalLog1")}</span>
                   </div>
                   <div>
                     <span style={{ color: "hsl(var(--muted-foreground) / 0.55)", marginRight: 8 }}>8d4e9f2</span>
-                    <span style={{ color: "hsl(var(--muted-foreground))" }}>React 다시 공부 시작</span>
+                    <span style={{ color: "hsl(var(--muted-foreground))" }}>{t("terminalLog2")}</span>
                   </div>
                   <div>
                     <span style={{ color: "hsl(var(--muted-foreground) / 0.55)", marginRight: 8 }}>c7b3a1e</span>
-                    <span style={{ color: "hsl(var(--muted-foreground))" }}>블로그 개설</span>
+                    <span style={{ color: "hsl(var(--muted-foreground))" }}>{t("terminalLog3")}</span>
                   </div>
                   <div>
                     <span style={{ color: "hsl(var(--muted-foreground) / 0.55)", marginRight: 8 }}>f1e2d3a</span>
-                    <span style={{ color: "hsl(var(--muted-foreground))" }}>첫 사이드 프로젝트</span>
+                    <span style={{ color: "hsl(var(--muted-foreground))" }}>{t("terminalLog4")}</span>
                   </div>
                 </div>
                 <div style={{ marginTop: "0.5rem" }}>

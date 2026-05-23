@@ -12,7 +12,11 @@
     "aboutMe": "소개",
     "latestNotes": "최근 글",
     "viewAll": "전체 보기",
-    "noPost": "아직 작성된 글이 없습니다."
+    "noPost": "아직 작성된 글이 없습니다.",
+    "terminalLog1": "PM → Dev 전환 결정",
+    "terminalLog2": "React 다시 공부 시작",
+    "terminalLog3": "블로그 개설",
+    "terminalLog4": "첫 사이드 프로젝트"
   },
   "posts": {
     "title": "글 목록",

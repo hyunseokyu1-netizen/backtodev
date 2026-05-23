@@ -12,7 +12,11 @@
     "aboutMe": "About Me",
     "latestNotes": "Latest Notes",
     "viewAll": "View all",
-    "noPost": "No posts yet."
+    "noPost": "No posts yet.",
+    "terminalLog1": "Decided to return to dev",
+    "terminalLog2": "Started learning React again",
+    "terminalLog3": "Launched the blog",
+    "terminalLog4": "First side project"
   },
   "posts": {
     "title": "Posts",
