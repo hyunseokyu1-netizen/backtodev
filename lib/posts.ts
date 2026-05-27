@@ -68,11 +68,11 @@ async function listGitHubDirWithContent(
   }
   const json = await res.json();
   if (json.errors) {
-    console.error("[posts] GraphQL errors:", JSON.stringify(json.errors));
+    console.error("GQL_ERR:" + json.errors[0]?.message);
   }
   const entries: { name: string; object: { text?: string } }[] =
     json?.data?.repository?.object?.entries ?? [];
-  console.log("[posts] fetched entries:", entries.length);
+  console.log("GQL_OK entries=" + entries.length);
   return entries
     .filter((e) => e.object?.text !== undefined && e.object.text !== null)
     .map((e) => ({ name: e.name, text: e.object.text as string }));
