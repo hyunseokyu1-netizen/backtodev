@@ -69,6 +69,7 @@ async function listGitHubDirWithContent(
   const json = await res.json();
   if (json.errors) {
     console.error("GQL_ERR:" + json.errors[0]?.message);
+    console.error("ENV:" + process.env.GITHUB_OWNER + "/" + process.env.GITHUB_REPO);
   }
   const entries: { name: string; object: { text?: string } }[] =
     json?.data?.repository?.object?.entries ?? [];
