@@ -23,30 +23,81 @@ export interface Post extends PostMeta {
 
 // ── GitHub API (프로덕션) ────────────────────────────────────────────────────
 
-const GH_BASE = `https://api.github.com/repos/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/contents`;
+const GH_GRAPHQL = "https://api.github.com/graphql";
 const ghHeaders = {
   Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
+  "Content-Type": "application/json",
 };
 
-async function fetchFromGitHub(filePath: string): Promise<string | null> {
-  const res = await fetch(`${GH_BASE}/${filePath}`, {
+// GraphQL로 한 번에 디렉토리 내 모든 파일 이름+내용을 가져옴 (REST 대비 N+1 호출 → 1번)
+async function listGitHubDirWithContent(
+  dirPath: string
+): Promise<{ name: string; text: string }[]> {
+  const query = `
+    query($owner: String!, $repo: String!, $expr: String!) {
+      repository(owner: $owner, name: $repo) {
+        object(expression: $expr) {
+          ... on Tree {
+            entries {
+              name
+              object {
+                ... on Blob { text }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const res = await fetch(GH_GRAPHQL, {
+    method: "POST",
     headers: ghHeaders,
-    next: { revalidate: 300 }, // 5분 캐시
-  });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return Buffer.from(data.content, "base64").toString("utf-8");
-}
-
-async function listGitHubDir(dirPath: string): Promise<{ name: string }[]> {
-  const res = await fetch(`${GH_BASE}/${dirPath}`, {
-    headers: ghHeaders,
-    next: { revalidate: 300 }, // 5분 캐시
+    body: JSON.stringify({
+      query,
+      variables: {
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+        expr: `HEAD:${dirPath}`,
+      },
+    }),
+    next: { revalidate: 3600 }, // 1시간 캐시
   });
   if (!res.ok) return [];
-  return res.json();
+  const json = await res.json();
+  const entries: { name: string; object: { text?: string } }[] =
+    json?.data?.repository?.object?.entries ?? [];
+  return entries
+    .filter((e) => e.object?.text !== undefined && e.object.text !== null)
+    .map((e) => ({ name: e.name, text: e.object.text as string }));
+}
+
+// 단일 파일 조회 (getPost용) — GraphQL로 1번 호출
+async function fetchFromGitHub(filePath: string): Promise<string | null> {
+  const query = `
+    query($owner: String!, $repo: String!, $expr: String!) {
+      repository(owner: $owner, name: $repo) {
+        object(expression: $expr) {
+          ... on Blob { text }
+        }
+      }
+    }
+  `;
+  const res = await fetch(GH_GRAPHQL, {
+    method: "POST",
+    headers: ghHeaders,
+    body: JSON.stringify({
+      query,
+      variables: {
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+        expr: `HEAD:${filePath}`,
+      },
+    }),
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) return null;
+  const json = await res.json();
+  return json?.data?.repository?.object?.text ?? null;
 }
 
 // ── 파일명 파싱 ──────────────────────────────────────────────────────────────
@@ -93,16 +144,10 @@ export async function getAllPosts(locale = "ko"): Promise<PostMeta[]> {
   };
 
   if (IS_PROD) {
-    const files = await listGitHubDir("content/posts");
-    const mdFiles = files.filter(
-      (f) => f.name.endsWith(".md") || f.name.endsWith(".mdx")
-    );
-    await Promise.all(
-      mdFiles.map(async (f) => {
-        const raw = await fetchFromGitHub(`content/posts/${f.name}`);
-        if (raw) processFile(f.name, raw);
-      })
-    );
+    const files = await listGitHubDirWithContent("content/posts");
+    files
+      .filter((f) => f.name.endsWith(".md") || f.name.endsWith(".mdx"))
+      .forEach((f) => processFile(f.name, f.text));
   } else {
     if (!fs.existsSync(postsDir)) return [];
     fs.readdirSync(postsDir)
