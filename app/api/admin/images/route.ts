@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { putFileBinary, getFileSha } from "@/lib/github";
+import { putFilesBatch } from "@/lib/github";
 
 const ALLOWED_TYPES: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -10,34 +10,57 @@ const ALLOWED_TYPES: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
-  const file = formData.get("file");
+  const rawFiles = formData.getAll("file");
 
-  if (!(file instanceof File)) {
+  if (!rawFiles.length) {
     return NextResponse.json({ error: "파일이 없습니다." }, { status: 400 });
   }
 
-  const ext = ALLOWED_TYPES[file.type];
-  if (!ext) {
+  const now = Date.now();
+  const valid: { file: File; filename: string; githubPath: string }[] = [];
+
+  for (let i = 0; i < rawFiles.length; i++) {
+    const f = rawFiles[i];
+    if (!(f instanceof File)) continue;
+    const ext = ALLOWED_TYPES[f.type];
+    if (!ext) continue;
+
+    const safeName = f.name
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^a-zA-Z0-9가-힣_-]/g, "_")
+      .slice(0, 40);
+    const filename = `${safeName}_${now + i}.${ext}`;
+    valid.push({ file: f, filename, githubPath: `public/images/${filename}` });
+  }
+
+  if (!valid.length) {
     return NextResponse.json({ error: "jpg, png, gif, webp만 업로드 가능합니다." }, { status: 400 });
   }
 
-  const timestamp = Date.now();
-  const safeName = file.name
-    .replace(/\.[^.]+$/, "")
-    .replace(/[^a-zA-Z0-9가-힣_-]/g, "_")
-    .slice(0, 40);
-  const filename = `${safeName}_${timestamp}.${ext}`;
-  const githubPath = `public/images/${filename}`;
+  const fileData = await Promise.all(
+    valid.map(async (v) => {
+      const base64 = Buffer.from(await v.file.arrayBuffer()).toString("base64");
+      return { path: v.githubPath, base64, filename: v.filename, originalName: v.file.name };
+    })
+  );
 
-  const arrayBuffer = await file.arrayBuffer();
-  const base64 = Buffer.from(arrayBuffer).toString("base64");
+  const commitMessage =
+    fileData.length === 1
+      ? `image: ${fileData[0].filename} 추가`
+      : `image: 이미지 ${fileData.length}개 추가`;
 
-  // 혹시 같은 파일명 존재하면 sha 가져와서 덮어쓰기
-  const sha = await getFileSha(githubPath);
-  await putFileBinary(githubPath, base64, `image: ${filename} 추가`, sha ?? undefined);
+  await putFilesBatch(
+    fileData.map((f) => ({ path: f.path, base64: f.base64 })),
+    commitMessage
+  );
 
   const owner = process.env.GITHUB_OWNER ?? "hyunseokyu1-netizen";
   const repo = process.env.GITHUB_REPO ?? "backtodev";
-  const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/public/images/${filename}`;
-  return NextResponse.json({ url: rawUrl });
+
+  const urls = fileData.map((f) => ({
+    url: `https://raw.githubusercontent.com/${owner}/${repo}/main/${f.path}`,
+    name: f.originalName.replace(/\.[^.]+$/, ""),
+  }));
+
+  return NextResponse.json({ urls });
 }

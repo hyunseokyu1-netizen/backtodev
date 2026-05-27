@@ -1,4 +1,5 @@
 const BASE = `https://api.github.com/repos/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/contents`;
+const GIT_BASE = `https://api.github.com/repos/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/git`;
 
 const headers = () => ({
   Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -79,4 +80,76 @@ export async function deleteFile(path: string, sha: string, message: string): Pr
     body: JSON.stringify({ message, sha }),
   });
   if (!res.ok) throw new Error(`GitHub DELETE failed: ${res.status}`);
+}
+
+// ── Tree API (배치 커밋) ───────────────────────────────────────────────────────
+
+async function getHeadRef(): Promise<{ commitSha: string; treeSha: string }> {
+  const refRes = await fetch(`${GIT_BASE}/refs/heads/main`, { headers: headers(), cache: "no-store" });
+  if (!refRes.ok) throw new Error(`getRef failed: ${refRes.status}`);
+  const { object } = await refRes.json();
+  const commitSha: string = object.sha;
+
+  const commitRes = await fetch(`${GIT_BASE}/commits/${commitSha}`, { headers: headers(), cache: "no-store" });
+  if (!commitRes.ok) throw new Error(`getCommit failed: ${commitRes.status}`);
+  const { tree } = await commitRes.json();
+  return { commitSha, treeSha: tree.sha };
+}
+
+async function createBlob(base64Content: string): Promise<string> {
+  const res = await fetch(`${GIT_BASE}/blobs`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ content: base64Content, encoding: "base64" }),
+  });
+  if (!res.ok) throw new Error(`createBlob failed: ${res.status}`);
+  const data = await res.json();
+  return data.sha as string;
+}
+
+async function createTree(baseTreeSha: string, items: { path: string; sha: string }[]): Promise<string> {
+  const res = await fetch(`${GIT_BASE}/trees`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({
+      base_tree: baseTreeSha,
+      tree: items.map((item) => ({ path: item.path, mode: "100644", type: "blob", sha: item.sha })),
+    }),
+  });
+  if (!res.ok) throw new Error(`createTree failed: ${res.status}`);
+  const data = await res.json();
+  return data.sha as string;
+}
+
+async function createCommit(message: string, treeSha: string, parentSha: string): Promise<string> {
+  const res = await fetch(`${GIT_BASE}/commits`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ message, tree: treeSha, parents: [parentSha] }),
+  });
+  if (!res.ok) throw new Error(`createCommit failed: ${res.status}`);
+  const data = await res.json();
+  return data.sha as string;
+}
+
+async function updateRef(commitSha: string): Promise<void> {
+  const res = await fetch(`${GIT_BASE}/refs/heads/main`, {
+    method: "PATCH",
+    headers: headers(),
+    body: JSON.stringify({ sha: commitSha }),
+  });
+  if (!res.ok) throw new Error(`updateRef failed: ${res.status}`);
+}
+
+/** 여러 파일을 커밋 1개로 묶어 업로드 */
+export async function putFilesBatch(
+  files: { path: string; base64: string }[],
+  message: string
+): Promise<void> {
+  const { commitSha, treeSha } = await getHeadRef();
+  const blobShas = await Promise.all(files.map((f) => createBlob(f.base64)));
+  const items = files.map((f, i) => ({ path: f.path, sha: blobShas[i] }));
+  const newTreeSha = await createTree(treeSha, items);
+  const newCommitSha = await createCommit(message, newTreeSha, commitSha);
+  await updateRef(newCommitSha);
 }

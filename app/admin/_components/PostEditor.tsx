@@ -79,7 +79,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   const [translateError, setTranslateError] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<string | null>(null);
   const [slugManual, setSlugManual] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const isEdit = !!initSlug;
@@ -195,22 +195,25 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
     e.target.value = "";
-    setUploading(true);
+    setUploading(files.length === 1 ? "업로드 중..." : `${files.length}개 업로드 중...`);
     setError("");
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      files.forEach((f) => formData.append("file", f));
       const res = await fetch("/api/admin/images", { method: "POST", body: formData });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "업로드 실패");
-      insertAtCursor(`![${file.name.replace(/\.[^.]+$/, "")}](${data.url.trim().replace(/\s+/g, "")})`);
+      const markdown = (data.urls as { url: string; name: string }[])
+        .map((item) => `![${item.name}](${item.url.trim()})`)
+        .join("\n");
+      insertAtCursor(markdown);
     } catch (e) {
       setError(e instanceof Error ? e.message : "이미지 업로드 실패");
     } finally {
-      setUploading(false);
+      setUploading(null);
     }
   };
 
@@ -250,16 +253,17 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
             ref={fileInputRef}
             type="file"
             accept="image/jpeg,image/png,image/gif,image/webp"
+            multiple
             className="hidden"
             onChange={handleImageUpload}
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            disabled={uploading}
+            disabled={!!uploading}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60"
             style={{ background: "var(--surface-2)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
           >
-            {uploading ? "업로드 중..." : "이미지 삽입"}
+            {uploading ?? "이미지 삽입"}
           </button>
           <div style={{ width: 1, height: 16, background: "var(--border)" }} />
           {modeBtn("edit", "편집")}
