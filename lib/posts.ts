@@ -60,7 +60,7 @@ async function listGitHubDirWithContent(
         expr: `HEAD:${dirPath}`,
       },
     }),
-    next: { revalidate: 3600 }, // 1시간 캐시
+    cache: "no-store",
   });
   if (!res.ok) {
     console.error("[posts] listGitHubDirWithContent HTTP error:", res.status, await res.text());
