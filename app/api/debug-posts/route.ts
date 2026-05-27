@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAllPosts } from "@/lib/posts";
 
 export async function GET() {
   const owner = process.env.GITHUB_OWNER;
@@ -29,15 +30,17 @@ export async function GET() {
   const json = await res.json();
   const entries = json?.data?.repository?.object?.entries ?? [];
 
+  const posts = await getAllPosts("ko");
+
   return NextResponse.json({
     owner,
     repo,
     tokenPrefix: token.slice(0, 8),
     isVercel: !!process.env.VERCEL,
-    vercelVal: process.env.VERCEL,
     httpStatus: res.status,
     gqlErrors: json.errors ?? null,
-    entryCount: entries.length,
-    firstThree: entries.slice(0, 3).map((e: { name: string }) => e.name),
+    gqlEntryCount: entries.length,
+    getAllPostsCount: posts.length,
+    firstPost: posts[0] ?? null,
   });
 }
