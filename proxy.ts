@@ -11,9 +11,6 @@ export async function proxy(request: NextRequest) {
   // 인증 API는 항상 허용 (로그인/로그아웃)
   if (pathname.startsWith("/api/admin/auth")) return NextResponse.next();
 
-  // 디버그 API (임시)
-  if (pathname.startsWith("/api/debug-posts")) return NextResponse.next();
-
   // /admin 페이지 보호
   if (pathname.startsWith("/admin")) {
     if (pathname === "/admin/login") return NextResponse.next();

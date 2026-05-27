@@ -62,18 +62,10 @@ async function listGitHubDirWithContent(
     }),
     cache: "no-store",
   });
-  if (!res.ok) {
-    console.error("[posts] listGitHubDirWithContent HTTP error:", res.status, await res.text());
-    return [];
-  }
+  if (!res.ok) return [];
   const json = await res.json();
-  if (json.errors) {
-    console.error("GQL_ERR:" + json.errors[0]?.message);
-    console.error("ENV:" + process.env.GITHUB_OWNER + "/" + process.env.GITHUB_REPO);
-  }
   const entries: { name: string; object: { text?: string } }[] =
     json?.data?.repository?.object?.entries ?? [];
-  console.log("GQL_OK entries=" + entries.length);
   return entries
     .filter((e) => e.object?.text !== undefined && e.object.text !== null)
     .map((e) => ({ name: e.name, text: e.object.text as string }));
