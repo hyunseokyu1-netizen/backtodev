@@ -62,10 +62,17 @@ async function listGitHubDirWithContent(
     }),
     next: { revalidate: 3600 }, // 1시간 캐시
   });
-  if (!res.ok) return [];
+  if (!res.ok) {
+    console.error("[posts] listGitHubDirWithContent HTTP error:", res.status, await res.text());
+    return [];
+  }
   const json = await res.json();
+  if (json.errors) {
+    console.error("[posts] GraphQL errors:", JSON.stringify(json.errors));
+  }
   const entries: { name: string; object: { text?: string } }[] =
     json?.data?.repository?.object?.entries ?? [];
+  console.log("[posts] fetched entries:", entries.length);
   return entries
     .filter((e) => e.object?.text !== undefined && e.object.text !== null)
     .map((e) => ({ name: e.name, text: e.object.text as string }));
