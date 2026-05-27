@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { getLocale } from "next-intl/server";
 import { getAllPosts } from "@/lib/posts";
 import PostsClient from "@/components/PostsClient";
 import type { Metadata } from "next";
@@ -24,10 +23,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostsPage() {
+export default async function PostsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations("posts");
   const tPost = await getTranslations("post");
-  const locale = await getLocale();
   const posts = await getAllPosts(locale);
 
   return (

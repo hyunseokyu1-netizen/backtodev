@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
@@ -30,10 +29,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations("home");
   const tPost = await getTranslations("post");
-  const locale = await getLocale();
   const posts = (await getAllPosts(locale)).slice(0, 6);
 
   return (
