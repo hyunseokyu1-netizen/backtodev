@@ -33,6 +33,8 @@ export async function GET() {
     owner,
     repo,
     tokenPrefix: token.slice(0, 8),
+    isVercel: !!process.env.VERCEL,
+    vercelVal: process.env.VERCEL,
     httpStatus: res.status,
     gqlErrors: json.errors ?? null,
     entryCount: entries.length,
