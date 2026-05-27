@@ -28,6 +28,7 @@ export default async function PostsPage({ params }: { params: Promise<{ locale: 
   const t = await getTranslations("posts");
   const tPost = await getTranslations("post");
   const posts = await getAllPosts(locale);
+  console.log("PAGE_DEBUG locale=" + locale + " posts=" + posts.length);
 
   return (
     <div>
