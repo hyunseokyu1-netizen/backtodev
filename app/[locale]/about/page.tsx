@@ -27,11 +27,11 @@ export default async function AboutPage() {
   const isKo = locale === "ko";
 
   const stackNow = [
-    { icon: ">_",  label: "TypeScript / Node.js" },
-    { icon: "</>", label: "React / Next.js", color: "#ef4444" },
-    { icon: "◎",   label: "React Native / Expo" },
-    { icon: "⊗",   label: "Supabase / Vercel" },
-    { icon: "⊕",   label: "AI Agents / LLMs" },
+    { icon: ">_", label: "TypeScript / Node.js" },
+    { icon: "</>", label: "React / Next.js" },
+    { icon: "◎",  label: "React Native / Expo" },
+    { icon: "⊗",  label: "Supabase / Vercel" },
+    { icon: "⊕",  label: "AI Agents / LLMs" },
   ];
 
   const stackPast = [
@@ -204,9 +204,9 @@ export default async function AboutPage() {
             {isKo ? "# 현재" : "# now"}
           </p>
           <ul style={{ display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "1.25rem" }}>
-            {stackNow.map(({ icon, label, color }) => (
+            {stackNow.map(({ icon, label }) => (
               <li key={label} className="flex items-center" style={{ gap: "0.75rem", fontSize: "0.875rem" }}>
-                <span style={{ color: color ?? "hsl(var(--primary))", fontFamily: "var(--font-mono), monospace", fontSize: "0.8rem", width: 24, flexShrink: 0 }}>
+                <span style={{ color: "hsl(var(--primary))", fontFamily: "var(--font-mono), monospace", fontSize: "0.8rem", width: 24, flexShrink: 0 }}>
                   {icon}
                 </span>
                 <span style={{ color: "hsl(var(--foreground) / 0.85)" }}>{label}</span>
