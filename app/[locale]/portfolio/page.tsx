@@ -46,6 +46,34 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "JobRadar",
+          tagline: "채용공고 URL 붙여넣기 → AI 매칭 → 커버레터 자동 생성",
+          description:
+            "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Supabase",
+            "Vercel",
+            "Cheerio",
+            "Claude API",
+          ],
+          links: [
+            { label: "→ 사이트 바로가기", href: "https://jobradar-virid.vercel.app/", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/jobradar" },
+            { label: "개발 이야기", href: "/ko/posts/jobradar_01_setup_20260420" },
+          ],
+          status: "wip",
+          statusLabel: "개발 중",
+          period: "2026.04 ~",
+          image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar 채용공고 목록 화면" },
+          screenshots: [
+            { src: "/portfolio/jobradar-screen-status.png", alt: "JobRadar 지원 상태 관리", caption: "지원 상태 관리" },
+            { src: "/portfolio/jobradar-screen-coverletter-gen.png", alt: "JobRadar AI 커버레터 생성", caption: "AI 커버레터 생성" },
+            { src: "/portfolio/jobradar-screen-coverletter.png", alt: "JobRadar 커버레터 결과", caption: "커버레터 (영문/한국어)" },
+          ],
+        },
+        {
           name: "TILT — The Maze Puzzle",
           tagline: "기울여서 탈출, 시각장애인도 음성만으로 완전히 플레이 가능",
           description:
@@ -214,6 +242,34 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "JobRadar",
+          tagline: "Paste a job URL → AI matching → auto-generated cover letter",
+          description:
+            "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — JobRadar scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Supabase",
+            "Vercel",
+            "Cheerio",
+            "Claude API",
+          ],
+          links: [
+            { label: "→ Live site", href: "https://jobradar-virid.vercel.app/", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/jobradar" },
+            { label: "Dev story", href: "/en/posts/jobradar_01_setup_20260420" },
+          ],
+          status: "wip",
+          statusLabel: "In Progress",
+          period: "Apr 2026 ~",
+          image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar job list screen" },
+          screenshots: [
+            { src: "/portfolio/jobradar-screen-status.png", alt: "JobRadar application status management", caption: "Status management" },
+            { src: "/portfolio/jobradar-screen-coverletter-gen.png", alt: "JobRadar AI cover letter generation", caption: "AI cover letter" },
+            { src: "/portfolio/jobradar-screen-coverletter.png", alt: "JobRadar cover letter result", caption: "Cover letter (EN/KO)" },
+          ],
+        },
         {
           name: "TILT — The Maze Puzzle",
           tagline: "Tilt to escape — fully playable by blind users via voice alone",
