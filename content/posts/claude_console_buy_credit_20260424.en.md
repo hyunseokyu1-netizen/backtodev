@@ -33,7 +33,7 @@ After filling in all the fields, the button is still not activated.
 
 ![여전히 비활성화된 버튼](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-24_______12_36_29_1776992519033.png)
 
----]
+---
 
 ## Find the cause
 
@@ -41,23 +41,23 @@ I unchecked the `Shipping address and billing address are the same` checkbox to 
 
 ![체크박스 해제 후 배송 주소 확인](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-24_______12_36_42_1776992546908.png)
 
-It was clearly checked and set to the same as the billing address, but the **City select box was blank.
+It was clearly checked and set to the same as the billing address, but the **City select box was blank.**
 
 ![도시 선택값이 비어 있는 상태](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-24_______12_36_53_1776992622408.png)
 
 When the language of the checkout page switches from English to another language, the values entered in the select boxes don't seem to be picked up.
 
----]
+---
 
 ## Resolved
 
-1. Uncheck the box "Shipping address and billing address are the same
-2. manually select the **City** field for the shipping address
-3. the Buy button is activated
+1. Uncheck the box "Shipping address and billing address are the same"
+2. Manually select the **City** field for the shipping address
+3. The Buy button is activated
 
 ![버튼 활성화 확인](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-04-24_______12_37_06_1776992714184.png)
 
----]
+---
 
 ## Cleanup
 

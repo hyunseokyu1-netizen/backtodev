@@ -1,63 +1,62 @@
 ---
 title: '[Claude Code] How to Create and Use Skills - Your Own Slash Commands'
 date: '2026-04-13'
-description: >-
-  Learn how to create and use Skills to automate repetitive tasks in Claude Code
-  with hands-on exercises.
+description: Learn how to create and use Skills to automate repetitive tasks in Claude Code with hands-on examples.
 tags:
   - Claude Code
   - Skill
   - Automation
   - Slash commands
 ---
-## If you're rewriting the same prompt every time, you can use the
 
-This is what happens when you write Claude Code.
+## If you're rewriting the same prompt every time
 
-> "Write a blog post. Oh, by the way, you should always write it in this style... Do I need to explain it again?"
+When you use Claude Code, this kind of situation comes up quickly:
 
-It's annoying to have to type a long context like "write in Korean, in developer tone, with this structure" every time. And if you make a mistake, you end up with a completely different style.
+> "Write a blog post. Oh, but always use this style... do I have to explain it again?"
 
-This is where **Skill** comes in.
+Typing a long context every time, like "write in Korean, use a developer tone, and follow this structure," is tedious. If you make one mistake, the output can come back in a completely different style.
 
-Skills are Claude Code's custom slash commands. You can save your favorite prompt patterns in a file, so you can recall them with a single short command like `/blog-write`. After creating and using it, I found myself thinking, "I wish I'd known about this a long time ago."
+This is exactly where **Skills** help.
+
+Skills are Claude Code's **custom slash commands**. If you save a prompt pattern in a file, you can bring it back with a short command like `/blog-write`. After using it myself, I kept thinking, "I wish I had known this sooner."
 
 ---
 
-## Describe the skill in one line
+## Skill in one line
 
-> skill = markdown file with prompt template + slash command registration
+> Skill = a Markdown file that contains a prompt template + slash command registration
 
-No complicated setup, just create a file and it becomes a slash command.
+No complicated setup. Create one file and it becomes a slash command.
 
 ---
 
 ## Preparation
 
-First, let's understand where skill files are stored.
+First, let's look at where skill files are stored.
 
-```
+```text
 ~/.claude/skills/
 └── skillname/
-    └── skill.md ← This one file is the entirety of the skill.
+    └── skill.md ← This one file is the entire skill.
 ```
 
-- ~/.claude/skills/` is the global skills directory. It can be used in any project.
-- The skills folder name becomes the slash command name.
+- `~/.claude/skills/` is the global skills directory. It can be used in any project.
+- The skill folder name becomes the slash command name.
   - `~/.claude/skills/blog-write/` → `/blog-write`
   - `~/.claude/skills/gitpush/` → `/gitpush`
 
 ---
 
-## Step 1. Create the skill.md file
+## Step 1. Create `skill.md`
 
-Let's create our own skill folder and files. For example, we'll create a simple commit message generator.
+Let's create a skill folder and file. As an example, we'll make a simple commit message generator.
 
 ```bash
 mkdir -p ~/.claude/skills/commit-msg
 ```
 
-And create a file called `~/.claude/skills/commit-msg/skill.md`.
+Then create `~/.claude/skills/commit-msg/skill.md`.
 
 ```markdown
 ---
@@ -69,53 +68,53 @@ user-invocable: true
 Analyze the current changes and write a conventional commit message in Korean.
 
 ## Rules
-- Start with one of the following: `feat:`, `fix:`, `refactor:`, `docs:`, `style:`, or `chore:`.
-- Title must be 50 characters or less
-- If there are multiple files that have changed, summarize the key changes
-- Keep the English technical terms, but explain in Korean
+- Start with one of the following: `feat:`, `fix:`, `refactor:`, `docs:`, `style:`, or `chore:`
+- Keep the title within 50 characters
+- If multiple files changed, summarize the key changes
+- Keep English technical terms, but explain in Korean
 
 ## Output format
-Output only the commit message. No comments.
+Output only the commit message. No extra explanation.
 ```
 
-The file structure is divided into two main parts.
+The file structure has two main parts.
 
-| Delimiters | Content |
-|------|------|
-| **Frontmatter** (between `---`) | Skill meta information. Setting `name`, `description`, `user-invocable` |
-| **Body** | The actual prompt. What will be delivered to Claude |
+| Section | Content |
+|---|---|
+| **Frontmatter** (between `---`) | Skill metadata: `name`, `description`, `user-invocable` |
+| **Body** | The actual prompt that gets sent to Claude |
 
-### Frontmatter field descriptions
+### Frontmatter fields
 
 ```yaml
 ---
 name: commit-msg # Slash command name (/commit-msg)
-description: one line description # description as seen in the list with /.
-user-invocable: true # register to be able to write with the slash command
+description: one-line description # Description shown in the `/` list
+user-invocable: true # Register it so it can be used as a slash command
 ---
 ```
 
-If `user-invocable: true` is not present, it will not appear in the slash list. You must include it.
+If `user-invocable: true` is missing, it won't appear in the slash command list. You must include it.
 
 ---
 
 ## Step 2. Use the skill
 
-At the Claude Code prompt, type `/` to see a list of registered skills.
+At the Claude Code prompt, type `/` to see the list of registered skills.
 
-```
+```text
 /commit-msg
 ```
 
-After hitting enter, the body prompt of skill.md is automatically forwarded to Claude. It will analyze the current git diff and create a commit message right away.
+After you press Enter, the body prompt in `skill.md` is automatically passed to Claude. It will analyze the current `git diff` and generate a commit message right away.
 
 ---
 
-## Step 3. Get arguments with $ARGUMENTS
+## Step 3. Pass arguments with `$ARGUMENTS`
 
-If you want to take additional input into your skill, you can use the `$ARGUMENTS` variable.
+If you want to pass extra input into a skill, use the `$ARGUMENTS` variable.
 
-For example, if your blog post writing skill takes a topic as an argument:
+For example, if your blog-writing skill takes a topic as an argument:
 
 ```markdown
 ---
@@ -124,130 +123,126 @@ description: Write a developer blog post in Markdown.
 user-invocable: true
 ---
 
-Write a blog post on the following topics
+Write a blog post on the following topic.
 
 ## Style
-- Korean, friendly and practical tone
+- Korean, friendly, and practical tone
 - Include code examples
-- Audience: First-time developers
+- Audience: developers seeing this for the first time
 
-## Topics
+## Topic
 $ARGUMENTS
 ```
 
-when used, type it like this
+When using it, type:
 
-```
+```text
 /blog-write How to create and use skills in Claude Code
 ```
 
-"How to Create and Use Skills in Claude Code" is substituted for `$ARGUMENTS`.
+The text "How to create and use skills in Claude Code" is substituted into `$ARGUMENTS`.
 
 ---
 
-## Step 4. Make skill-creator a skill (easier way)
+## Step 4. Use `skill-creator` to make skills
 
-Claude Code has a built-in skill called `skill-creator`. This skill creates skills.
+Claude Code has a built-in skill called `skill-creator`. It creates skills for you.
 
+```text
+/skill-creator blog-write: Create a skill for writing developer blog posts
 ```
-/skill-creator blog-write: Create a skill to write developer blog posts
-```
 
-Claude will listen to your skill description and automatically create the skill.md file for you. This is fast when you're not sure how to structure your prompts.
+Claude will read your skill description and automatically create the `skill.md` file. This is faster when you're not sure how to structure the prompt.
 
 ---
 
-## Summarize common patterns
+## Common patterns
 
-### 1. Basic Skill Structure
+### 1. Basic skill structure
 
 ```markdown
----''
-name: Skill name
-description: One-line description
+---
+name: skill-name
+description: one-line description
 user-invocable: true
 ---
 
 Write the prompt here.
 ```
 
-### 2. Skills that take arguments
+### 2. Skill with arguments
 
 ```markdown
----''
-name: Skill name
-description: Description (takes $ARGUMENTS arguments)
+---
+name: skill-name
+description: description ($ARGUMENTS supported)
 user-invocable: true
 ---
 
 topic: $ARGUMENTS
 
-Please write ... with the above topic.
+Please write ... based on the topic above.
 ```
 
 ### 3. File path structure
 
-```
+```text
 ~/.claude/skills/
 ├── blog-write/
-│ └── skill.md
+│   └── skill.md
 ├── commit-msg/
-│ └── skill.md
+│   └── skill.md
 └── gitpush/
     └── skill.md
 ```
 
-### Skill vs. repetitive prompts
+### Skill vs. repeated prompt
 
-| | Type directly each time | Skill |
-|---|---|---|---|
-| Volume of input | Full long prompt | Single line of `/skillname` |
-| Consistency | Can vary every time | Always the same prompt
-| Arguments support | None | Can be done with `$ARGUMENTS` |
-| Sharing | Difficult | Can be shared as a file
+| | Type it manually every time | Skill |
+|---|---|---|
+| Input size | Full long prompt | Single `/skillname` line |
+| Consistency | Can vary each time | Always the same prompt |
+| Arguments | Not available | Available via `$ARGUMENTS` |
+| Sharing | Difficult | Easy to share as a file |
 
 ---
 
 ## Troubleshooting
 
-### Entering `/skillname` doesn't show up in the list
+### `/skillname` doesn't show up in the list
 
-- Make sure `user-invocable: true` is in frontmatter
-- Make sure the file path is `~/.claude/skills/skillname/skill.md` (case sensitive)
+- Make sure `user-invocable: true` is in the frontmatter
+- Make sure the file path is `~/.claude/skills/skillname/skill.md` (case-sensitive)
 - Try restarting Claude Code
 
-### Prompt not working as intended
+### The prompt doesn't work as expected
 
-- Unnecessary comments around `$ARGUMENTS` can confuse Claude
-- The more specific you are about the output format, the more stable the results will be
-- "Print ~" is more consistent than "Do ~ for me"
+- Extra text around `$ARGUMENTS` can confuse Claude
+- The more clearly you specify the output format, the more stable the result will be
+- "Output ~" is more consistent than "Do ~ for me"
 
-### skill.md doesn't reflect after modification
+### Changes to `skill.md` aren't reflected
 
-- After saving the file, it should be reflected when you start a new conversation in Claude Code.
+- After saving the file, start a new conversation in Claude Code and it will be reflected
 - It may not be reflected immediately in an existing conversation
 
 ---
 
-## Summary - Key flow at a glance
+## Summary - core flow at a glance
 
-```
-1. create a folder
-   ~/.claude/skills/skillname/
+```text
+1. Create a folder
+   ~/.claude/skills/skill-name/
 
-2. create skill.md
-   ---.
-   name: Skill name
-   description: Description
+2. Write skill.md
+   ---
+   name: skill-name
+   description: description
    user-invocable: true
-   ---]
-   [prompt content]
-   [use $ARGUMENTS if necessary].
+   ---
 
-3. invoked with a slash in Claude Code
-   /skillname [optional arguments].
+3. Use it
+   /skill-name
 ```
 
-If you have a repetitive task, it makes sense to turn it into a skill. It takes 5 minutes to create the first file, and after that it's just a single line of `/skillname`.
-
-I wrote this blog post with the `/blog-write` skill. I just put in a topic and the structure and style are consistent. Once you get the hang of it, it gets easier and easier.
+If you use Skills well, repetitive prompt work drops dramatically and your prompt quality becomes much more consistent. For anything you repeat often, Skills are worth setting up once.

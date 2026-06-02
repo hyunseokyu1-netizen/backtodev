@@ -10,13 +10,13 @@ tags:
 
 ## Finally, 14 days have passed
 
-After 14 days in private testing, you'll see a Apply to Production button in the Play Console.
+After 14 days in private testing, you'll see an Apply to Production button in the Play Console.
 
 ![프로덕션 신청 버튼](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-27_10_41_05_1779860095792.png)
 
 When you click it, you'll be asked to answer a few questions. Here's a breakdown of what you'll be asked and how I answered each question.
 
----]
+---
 
 ## Step 1. Enter your private test information
 

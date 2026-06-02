@@ -9,7 +9,7 @@ tags:
   - PostgreSQL
   - PostgREST
   - Multiuser
----]
+---
 
 ## "Data that should be visible only to me is visible to others"
 
@@ -39,7 +39,7 @@ With RLS, you can enforce policies like `auth.uid() = user_id` at the DB level, 
 
 When you write a server action in Next.js App Router, you naturally use a service role client, and there are more mistakes than you think when you omit the `user_id` filter or apply it incorrectly.
 
----]
+---
 
 ## Pitfall 1: Missing the user_id filter in the cover_letters table
 
@@ -92,7 +92,7 @@ await supabaseAdmin
   )
 ```
 
----]
+---
 
 ## Pitfall 2: I had to move a shared column (jobs.memo) to a per-user table
 
@@ -128,7 +128,7 @@ To summarize in terms of data design principles
 | Match scores, application status, notes | `matches` (per user) |
 | Cover letter content | `cover_letters` (per user) |
 
----]
+---
 
 ## Pitfall 3: PostgREST INNER JOIN filter is ignored by service role
 
@@ -195,7 +195,7 @@ const jobList = (jobs ?? []).map((j: any) => {
 
 Yes, it's one more query, but it's much better than mixing up the data.
 
----]
+---
 
 ## Pitfall 4: Missing MATCHES auto-registration when adding new postings
 
@@ -203,7 +203,7 @@ Yes, it's one more query, but it's much better than mixing up the data.
 
 If the `addJobByUrl` function, which adds a job by URL, only upserts to the `jobs` table and does not register with `matches`, then the job will be completely invisible in the aforementioned two-step query.
 
-### Solution.
+### Solution
 
 We added code to register against `matches` immediately after the `jobs` upsert.
 
@@ -226,7 +226,7 @@ await supabaseAdmin
 
 Specifying `onConflict: 'user_id,job_id'` ensures that adding the same job again doesn't overwrite any existing application status or notes.
 
----]
+---
 
 ## Pitfall 5: Hardcoding emails into server actions
 
@@ -277,28 +277,28 @@ await supabaseAdmin
   .eq('id', profile.id) // change to email → id
 ```
 
----]
+---
 
 ## Summary: Checklist for isolating data in service role apps
 
 If you are creating a multi-user app with a service role without using RLS, you must check the following items.
 
-**DB design phase**.
+**DB design phase**
 - [ ] Store per-user data in a table with a `user_id` column (or a per-user association table)
 - [ ] Never put user-specific data (`memo`, `status`, etc.) in a shared table (like `jobs`)
 - [ ] Add a `UNIQUE(user_id, other_key)` constraint to the per-user table to make upsert safe
 
-**Steps for writing queries
+**Steps for writing queries**
 - [ ] Check `.eq('user_id', profile.id)` filter on all get/modify queries
-- [ ] PostgREST relationship filter ( `.eq('relationship table.user_id', ...)` does not work for service role → replace with 2-step query
-- [ ] also register with association tables (`matches`, etc.) when creating new data
+- [ ] PostgREST relationship filter (`.eq('relationship table.user_id', ...)`) does not work for service role → replace with a 2-step query
+- [ ] Also register with association tables (`matches`, etc.) when creating new data
 
-**Code steps**.
-- [ ] never hardcode email-username
-- [ ] Always identify user by UUID `id` of session
-- [ ] Handle `/login` redirect when not logged in
+**Code steps**
+- [ ] Never hardcode email or username
+- [ ] Always identify the user by the session UUID `id`
+- [ ] Handle `/login` redirects when the user is not logged in
 
----]
+---
 
 In fact, it's a good idea to use RLS from the start. However, when you focus on server actions, it's easy to make mistakes like this because you're comfortable with service roles. I'm glad that I'm catching them one by one now.
 

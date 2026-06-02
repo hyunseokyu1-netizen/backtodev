@@ -9,7 +9,7 @@ tags:
   - React Native
   - Expo
   - ASO
----]
+---
 
 ## We've created our app. Now we need to publish it
 
@@ -71,7 +71,7 @@ chmod +x tools/build-store.sh
 
 You can create a similar one for your APK (`./gradlew assembleRelease`).
 
----]
+---
 
 ## Troubleshooting: versionCode 1 is already used
 
@@ -102,7 +102,7 @@ It's more manageable to match the `app.json` as well.
 
 After making the changes, run `./gradlew bundleRelease` again and you're done. This time it took 1 minute and 12 seconds because of the cache.
 
----]
+---
 
 ## Store intro - no one reads feature lists
 
@@ -112,7 +112,7 @@ The first introduction you write:
 
 I don't feel anything after reading it. A list of features doesn't touch the reader's heart.
 
-**Three things are important in an introduction:** 1.
+**Three things are important in an introduction:**
 1. empathize with "why do I need this app?"
 2. present limitations as features, not drawbacks
 3. a closing sentence with a hook
@@ -185,7 +185,7 @@ It'll stay with you longer than you think.
 
 ## Thinking about app name
 
-Former name: **Cassette Tape Player: Retro** Former name: **Cassette Tape Player: Retro**
+Former name: **Cassette Tape Player: Retro**
 
 The problem is that retro is a word that's used by every retro app, so it's not very distinctive. The real USP of this app is "unskippable", so the name needs to stand out.
 
@@ -197,7 +197,7 @@ The problem is that retro is a word that's used by every retro app, so it's not 
 
 The combination `Cassette - No Skip` / `Cassette - No Skip` is the most impactful. The name alone has the power to make you click "What does this mean?".
 
----]
+---
 
 ## Release Notes - Make your first release a philosophy
 
@@ -227,7 +227,7 @@ Listen slowly, all the way through.
 
 The release notes are for existing users, but new users often read them on the app page during the initial launch. It's more important to make them want to give it a try than to explain features.
 
----]
+---
 
 ## 2 Play Console recommended actions - can I ignore them?
 
@@ -249,7 +249,7 @@ com.facebook.react.modules.statusbar.StatusBarModule ← React Native internal
 com.google.android.material.bottomsheet.* ← Material library
 ```
 
-**This is not my own code** These are APIs used by the Expo/React Native framework, so I can't touch them. This will be fixed automatically when the Expo SDK is upgraded. No need to fix it now.
+**This is not my own code.** These are APIs used by the Expo/React Native framework, so I can't touch them. This will be fixed automatically when the Expo SDK is upgraded. No need to fix it now.
 
 ### Warning 2: screenOrientation orientation restriction
 
@@ -260,7 +260,7 @@ com.google.android.material.bottomsheet.* ← Material library
 
 This is a warning that as of Android 16, orientation pinning is ignored on foldables/tablets, but the cassette player UI is naturally portrait oriented. Foldables/tablets are not the primary target of this app, so leave it alone.
 
-**Both warnings do not affect the review.** **Both warnings do not affect the review.
+**Both warnings do not affect the review.**
 
 ---
 

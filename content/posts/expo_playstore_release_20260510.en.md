@@ -9,7 +9,7 @@ tags:
   - Android
   - GooglePlayStore
   - Supabase
----]
+---
 
 ## Time to finally get your app out into the world
 
@@ -74,7 +74,7 @@ if (isLoadingRankings) {
 
 It's a simple but easy pattern to miss. Judging asynchronous state by the presence or absence of data always leads to this trap. It's better to explicitly manage "loading" as a separate flag.
 
----]
+---
 
 ## Ranking system fix: tiebreaker handling
 
@@ -87,7 +87,7 @@ We were originally using PostgreSQL's `DENSE_RANK()`. This is how tied players s
 We decided on three levels of ranking criteria
 
 | Prioritization | Criteria | Direction |
-|---|---|---|---|
+|---|---|---|
 | 1 | Score | Higher the better (DESC) |
 | 2 | Total Play Time | Shorter is better (ASC) |
 | 3 | Registration time | First to register has an advantage (ASC) |
@@ -98,7 +98,7 @@ To record the play time, we need to have a column in the DB. Note that it "does 
 
 ```sql
 ALTER TABLE rankings ADD COLUMN total_play_time INTEGER DEFAULT 0;
-```sql
+```
 
 Send it along with the score when the client posts it.
 
@@ -131,12 +131,12 @@ export function applyRank<T>(
 If the results are already sorted in the DB, the client just needs to number them in the same order. The key is to get the ORDER BY right in SQL.
 
 ```sql
-SELECT * * from
+SELECT *
 FROM rankings
 ORDER BY score DESC, total_play_time ASC, created_at ASC;
 ```
 
----]
+---
 
 ## Create a Play Store asset
 
@@ -145,8 +145,8 @@ This is a bit more involved than I expected. Here's a list of the files you'll n
 | Asset | Size | Format |
 |---|---|---|---|
 | App icon | 512×512 | PNG (32bit) |
-| Feature Graphics | 1024 × 500 | PNG or JPG
-| Screenshots | 2 minimum, 8 maximum | PNG or JPG
+| Feature Graphics | 1024 × 500 | PNG or JPG |
+| Screenshots | 2 minimum, 8 maximum | PNG or JPG |
 | Privacy Policy | - | URL (external link) |
 
 ### Create as SVG first, then convert to PNG
@@ -194,7 +194,7 @@ docs/
 
 Set up the `docs/` folder as a GitHub Pages source, and you'll be able to access it right away.
 
----]
+---
 
 ## Build Android AAB
 
@@ -204,7 +204,7 @@ This is the step to transition from an Expo managed workflow to a bare workflow.
 
 ```bash
 expo prebuild --platform android
-```bash expo prebuild --platform android
+```
 
 This command creates the `android/` folder. From this point on, it will be a native Android project.
 
@@ -325,7 +325,7 @@ keytool -list -v -keystore tilt-release.keystore
   --headless --screenshot=output.png --window-size=WIDTH,HEIGHT input.html
 ```
 
----]
+---
 
 ## Troubleshooting
 
@@ -360,7 +360,7 @@ If the keystore is different from an app already on the Play Store, the upload w
 
 The `expo prebuild` will overwrite the `android/` folder. If you've modified the native code by hand, you'll need to reapply it each time. It is recommended to automate repeated modifications with the Expo config plugin.
 
----]
+---
 
 ## Wrapping up: the path to launch
 

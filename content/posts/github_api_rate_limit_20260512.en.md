@@ -20,7 +20,7 @@ The build log only said this
 Error: Command "npm run build" exited with 1
 ```
 
----]
+---
 
 ## Structure of this blog
 
@@ -65,7 +65,7 @@ This was repeated 50 times.
 
 The moment the limit is exceeded, all API calls return `403 rate limit exceeded`. The `listGitHubDir` is structured to return an empty array on failure, so it looked like there were just 0 posts, no error.
 
----]
+---
 
 ## Process to determine the cause
 
@@ -94,7 +94,7 @@ API rate limit exceeded for user ID 264085388.
 
 Cause determined.
 
----]
+---
 
 ## Workaround - Add cache
 
@@ -116,7 +116,7 @@ const res = await fetch(url, {
 
 This way, even if the same file is requested multiple times within 5 minutes, the API will only be called once. With typical blog traffic, this is well within the limit of 1,200 requests per hour.
 
----]
+---
 
 ## Fundamental problem - the more images you stack, the worse it gets
 
@@ -131,21 +131,21 @@ If you plan to write image-heavy posts, you should consider connecting to extern
 
 ### Options to consider
 
-**Cloudinary
+**Cloudinary**
 - 25 GB storage on the free plan
-- Returns CDN URL when you upload an image → Insert just the URL in markdown
-- Auto-resize, WebP conversion support
-- Most popular choice for blog images
+- Returns a CDN URL when you upload an image, so you can paste just the URL into markdown
+- Auto-resize and WebP conversion support
+- The most popular choice for blog images
 
-**Supabase Storage
-- 1 GB free, no additional setup required if you're already using Supabase
+**Supabase Storage**
+- 1 GB free, and no additional setup required if you're already using Supabase
 - S3-compatible API
 
-**Vercel Blob
-- The Vercel service is the simplest to set up
-- Free plan 500 MB
+**Vercel Blob**
+- The simplest Vercel service to set up
+- 500 MB on the free plan
 
-Either way, the process is the same Upload the image to storage and paste the returned URL into your markdown.
+Either way, the process is the same: upload the image to storage and paste the returned URL into your markdown.
 
 ```markdown
 <!-- Before change: save directly to repo -->
@@ -174,7 +174,7 @@ experimental: {
 
 Vercel automatically redeploys every time GitHub Actions pushes a new post, so all files are included in the bundle at deployment time.
 
----]
+---
 
 ## Cleanup
 

@@ -8,7 +8,7 @@ tags:
   - macOS
   - GitHub
   - xcode
----]
+---
 
 When I started my LLM wiki, I decided to use Obsidian. It's markdown-based, developer-friendly, and the structure of linking notes together works well with wikis.
 
@@ -20,7 +20,7 @@ But I was worried about saving it locally. What if my Mac blows up? So I connect
 
 Obsidian is based on Markdown, so its files are all text. This is a perfect structure for version control with Git. And if you're using it on multiple devices, you can use GitHub as an intermediate repository to synchronize without Obsidian Sync (which is paid).
 
----]
+---
 
 ## Preparation
 
@@ -43,7 +43,7 @@ git commit -m "Initial vault commit"
 git push -u origin main
 ```
 
----]
+---
 
 ## Step 2 - Install the Obsidian Git plugin
 
@@ -54,14 +54,14 @@ Install it from inside your Obsidian app.
 
 After installation, a folder called `.obsidian/plugins/obsidian-git/` will be created and settings will be saved in `data.json`.
 
----]
+---
 
 ## Step 3 - Set up automatic synchronization
 
 In the default installation, automatic commits/pushes/pulls are all turned off. You can turn them on as shown below.
 
-| Item | Recommended value | Description
-|---|---|---|---|
+| Item | Recommended value | Description |
+|---|---|---|
 | Auto save interval | 10 minutes | Auto commit + push every 10 minutes |
 | Auto pull interval | 10 minutes | Pull remotely every 10 minutes |
 | Pull on startup | On | Up to date on app startup |
@@ -73,7 +73,7 @@ You can change these in the Obsidian settings UI, or you can modify the `data.js
 "autoSaveInterval": 10,
 "autoPushInterval": 10,
 "autoPullInterval": 10,
-"autoPullOnBoot": True,
+"autoPullOnBoot": true,
 "disablePopupsForNoChanges": true
 ```
 
@@ -83,11 +83,12 @@ You can change these in the Obsidian settings UI, or you can modify the `data.js
 
 If you connected over HTTPS, you'll need a GitHub Personal Access Token (PAT).
 
-**To get a token:** 1.
+**To get a token:**
+
 1. GitHub → `Settings` → `Developer settings` → `Personal access tokens` → `Tokens (classic)`
 2. `Generate new token` → `repo` Check permissions → Generate
 
-Save to macOS Keychain (Terminal):** **Save to macOS Keychain (Terminal):** **Save to macOS Keychain (Terminal)
+Save to macOS Keychain (Terminal):
 
 ```bash
 git config --global credential.helper osxkeychain
@@ -97,13 +98,13 @@ After that, when you enter your GitHub account and token on your first push/pull
 
 > **Note:** Never post your token in chat, code, or public repositories. If they are compromised, they should be immediately destroyed and reissued.
 
----]
+---
 
 ## Troubleshooting - xcrun error
 
 After finishing the setup, I turned on Obsidian and got this popup.
 
-```
+```text
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools),
 missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 ```
@@ -124,21 +125,21 @@ sudo xcode-select --reset
 
 The installation will take a few minutes. Restart Obsidian after it finishes and the error should disappear.
 
----]
+---
 
 ## Organization - the whole flow at a glance
 
-```
+```text
 Create a GitHub repo
     ↓
 Connect git init + remote on vault folder
     ↓
 Install + activate the Git plugin from Obsidian
-    ↓ Set up the
+    ↓
 Set an auto-commit/pull interval (10 minutes recommended)
     ↓
 Issue GitHub PAT + save keychain
-    ↓Run
+    ↓
 xcode-select --install + --reset (in case of error)
     ↓
 Restart Obsidian → auto-sync complete

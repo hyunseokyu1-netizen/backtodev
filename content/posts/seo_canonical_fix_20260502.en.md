@@ -9,7 +9,7 @@ tags:
   - canonical
   - i18n
   - Google Search Console
----]
+---
 
 After creating my blog, I opened up Google Search Console, which I had forgotten about for a while, and was pretty upset. I realized that the pages I had worked so hard to create were either not indexed at all, or were categorized as "duplicate pages".
 
@@ -23,7 +23,7 @@ When the same content is accessible from multiple URLs, the canonical tag tells 
 
 > The concept of canonical and how to configure it in the next-intl environment is covered in more depth in a [follow-up post](../nextjs_canonical_seo_20260517).
 
----]
+---
 
 ## Bug 1: footer links were giving 404s
 
@@ -55,7 +55,7 @@ The layout component was already taking `locale`, so we just needed to dynamical
 
 It's a simple fix, but without it, a Google bot might think, "Wow, I hit the Contact link and got a 404. Doesn't that mean you don't manage this site?"
 
----]
+---
 
 ## Bug 2: canonical in layout was making all pages the "homepage"
 
@@ -116,12 +116,12 @@ The `languages` field is the `hreflang` setting that tells Google the multilingu
 
 I applied the same pattern to the `posts`, `contact`, and `privacy` pages.
 
----]
+---
 
 ## Summary of modification results
 
-| Separated | Before Fix | After Fix
-|---|---|---|---|
+| Separated | Before Fix | After Fix |
+|---|---|---|
 | footer Contact link | `/contact` (404) | `/${locale}/contact` |
 | footer Privacy link | `/privacy` (404) | `/${locale}/privacy` |
 | about page canonical | inherit homepage URL | `/en/about` or `/en/about` |
@@ -129,13 +129,13 @@ I applied the same pattern to the `posts`, `contact`, and `privacy` pages.
 | contact page canonical | inherits homepage URL | `/en/contact` or `/en/contact` |
 | privacy page canonical | inherits homepage URL | `/en/privacy` or `/en/privacy` |
 
----]
+---
 
 ## Troubleshooting - `export const metadata` vs `generateMetadata`
 
 The `export const metadata` is a static object, so you cannot use dynamic values like `locale`. If the URL contains a locale, you must use the `generateMetadata` function. Note that you need to `await` for the locale in `params`. For more information, see [follow-up post](../nextjs_canonical_seo_20260517).
 
----]
+---
 
 ## Cleanup
 
@@ -143,6 +143,6 @@ The key to this fix was twofold
 
 1. hardcoded paths are dangerous on multilingual sites - even if a single `/contact` is throwing 404s, it's not easy to spot during development. You should always use locale-aware paths.
 
-2. metadata from the layout is inherited by child pages.** If each page doesn't specify its own canonical, it will inherit the canonical from the layout. For proper multilingual SEO in Next.js, it's safer to specify your own canonical with `generateMetadata` for each page.
+2. metadata from the layout is inherited by child pages. If each page doesn't specify its own canonical, it will inherit the canonical from the layout. For proper multilingual SEO in Next.js, it's safer to specify your own canonical with `generateMetadata` for each page.
 
 Google Search Console is much more useful than you might think for finding these SEO issues. If you haven't already done so, I recommend connecting it as soon as you publish your blog.

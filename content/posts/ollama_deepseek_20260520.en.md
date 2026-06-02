@@ -9,11 +9,11 @@ tags:
   - DeepSeek
   - EXAONE
   - Qwen
----]
+---
 
 Install Ollama and record your impressions of each model.
 
----]
+---
 
 ## 1. DeepSeek 1.5B
 
@@ -22,7 +22,7 @@ Install Ollama and record your impressions of each model.
 
 It's 1.5B, so I can't understand Korean at all, and it doesn't recognize Korean at all.
 
----]
+---
 
 ## 2. exaone 3.5
 
@@ -30,7 +30,7 @@ It's 1.5B, so I can't understand Korean at all, and it doesn't recognize Korean 
 
 The dialog is natural.
 
----]
+---
 
 ## 3. qwen2.5-coder:7b
 
@@ -38,6 +38,6 @@ The dialog is natural.
 
 If I tell it something like uploading a file, it tells me how to solve it with code. I feel like a T in the MBTI of an engineering student.
 
----]
+---
 
 > In conclusion, I feel like a friend who can just talk about things like internet information and personal information (private shares), but QWEN feels like a friend who knows more about coding.
