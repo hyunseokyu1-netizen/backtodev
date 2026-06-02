@@ -4,6 +4,15 @@ import { routing } from "./i18n/routing";
 import { verifyToken } from "./lib/auth";
 
 const intlMiddleware = createIntlMiddleware(routing);
+const LOCALE_COOKIE = "NEXT_LOCALE";
+
+function detectLocale(request: NextRequest): "en" | "ko" {
+  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (cookie === "en" || cookie === "ko") return cookie;
+  // ko 또는 ko-KR이면 한국어, 그 외 모든 언어는 영어
+  const acceptLang = request.headers.get("accept-language") ?? "";
+  return /\bko\b/.test(acceptLang) ? "ko" : "en";
+}
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -33,7 +42,18 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 나머지는 next-intl 처리
+  // locale 접두사가 없는 경로에서 브라우저 언어(또는 쿠키) 기반으로 자동 리디렉션
+  const hasLocalePrefix = /^\/(en|ko)(\/|$)/.test(pathname);
+  if (!hasLocalePrefix) {
+    const locale = detectLocale(request);
+    if (locale === "en") {
+      const target = new URL(request.url);
+      target.pathname = `/en${pathname}`;
+      return NextResponse.redirect(target);
+    }
+    // ko: intlMiddleware가 /ko/로 리디렉션 처리
+  }
+
   return intlMiddleware(request);
 }
 
