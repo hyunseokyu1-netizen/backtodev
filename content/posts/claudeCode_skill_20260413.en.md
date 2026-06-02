@@ -166,7 +166,7 @@ Claude will listen to your skill description and automatically create the skill.
 name: Skill name
 description: One-line description
 user-invocable: true
----.
+---
 
 Write the prompt here.
 ```
@@ -178,7 +178,7 @@ Write the prompt here.
 name: Skill name
 description: Description (takes $ARGUMENTS arguments)
 user-invocable: true
----.
+---
 
 topic: $ARGUMENTS
 

@@ -109,7 +109,7 @@ return data.translations[0].text;
 
 **Verdict:** I'm happy with both the translation quality and the markdown handling. The free limit is sufficient. Card registration is the only barrier.
 
----.
+---
 
 ## Claude API - does better than translation
 

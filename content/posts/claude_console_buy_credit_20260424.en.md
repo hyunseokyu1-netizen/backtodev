@@ -17,7 +17,7 @@ I signed up for the console to try out the Claude API and tried to top up my cre
 
 I spent a couple of days trying different things, and the bottom line is - it's a bug that resets the City selection when the language is switched on the checkout page.
 
----.
+---
 
 ## Symptoms
 
