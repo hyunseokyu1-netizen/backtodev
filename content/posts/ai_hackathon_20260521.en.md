@@ -1,12 +1,12 @@
 ---
 title: '[INFO] Blockchain & AI Hackathon utilizing mobile IDs'
 date: '2026-05-21'
-description: 'Do you support blockchain & AI hackathon using mobile IDs?
+description: 'Applying for a blockchain & AI hackathon that uses mobile digital IDs'
 tags:
   - Hackathon
   - AI
   - BlockChain
----]
+---
 
 ![Hackathon Overview](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/overview_1_1_1779348720864.png)
 

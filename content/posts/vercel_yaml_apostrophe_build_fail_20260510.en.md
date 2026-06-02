@@ -1,5 +1,5 @@
 ---
-title: "Don't one broke my Vercel build - the YAML frontmatter trap"
+title: "One apostrophe broke my Vercel build — the YAML frontmatter trap"
 date: '2026-05-10'
 publish_date: '2026-06-01'
 description: When local builds were fine but only Vercel failed, the culprit was a single line of YAML title with English abbreviations.
@@ -9,7 +9,7 @@ tags:
   - NextJS
   - Debugging
   - GitHubActions
----]
+---
 
 Deployment is suddenly not working. It was working fine until yesterday.
 
@@ -21,7 +21,7 @@ Error: Command "npm run build" exited with 1
 
 You ran `npm run build` locally. It succeeds. What's different?
 
----]
+---
 
 ## Why local but not Vercel?
 
@@ -50,7 +50,7 @@ VERCEL=1 npm run build
 
 I ran this and immediately got an error.
 
----]
+---
 
 ## Full error message
 
@@ -110,7 +110,7 @@ git push origin main
 VERCEL=1 npm run build
 ```
 
----]
+---
 
 ## Common cases
 
@@ -126,7 +126,7 @@ Common expressions with apostrophes in English post titles:
 
 If any of these are in the title, use **unconditional double quotes**.
 
----]
+---
 
 ## Cleanup
 
@@ -150,6 +150,6 @@ Build failed ❌
 
 **Modification rule: if an English title has an apostrophe, use `"..."` double quotes
 
----]
+---
 
 *One single-letter quotation mark can stop the entire build pipeline. YAML is stricter than you think.

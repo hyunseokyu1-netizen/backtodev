@@ -7,9 +7,9 @@ tags:
   - Android
   - adb
   - React Native
-  - 开发会议
+  - development environment
   - app development
----Β
+---
 
 You've probably built an app and thought, "How do I get this on my phone?".
 
@@ -17,7 +17,7 @@ You put it on Google Play, but it takes a while to get approved for a developer 
 
 In this article, I'll show you step-by-step how to install Android apps without the Play Store. I'll even show you how to install it directly from the terminal with USB debugging with a single line of `adb install`.
 
----]
+---
 
 ## Method 1: Direct APK file transfer and installation
 
@@ -70,7 +70,7 @@ Settings → Security → Unknown sources → Allow
 
 Once set up, you can tap the APK file to install it.
 
----]
+---
 
 ## Method 2: EAS Build (Expo Application Services)
 
@@ -178,7 +178,7 @@ Success
 
 When `Success` appears, you can see it right away in your phone's app list.
 
----]
+---
 
 ## A collection of frequently used ADB commands
 
@@ -216,7 +216,7 @@ adb shell am force-stop com.example.myapp
 adb shell monkey -p com.example.myapp 1
 ```
 
----]
+---
 
 ## Troubleshooting
 
@@ -252,7 +252,7 @@ The release APK needs to be signed. Occurs when built with `assembleRelease` and
 
 If you build with the Expo prebuild default settings, it is automatically signed with the debug key. This is fine for testing purposes.
 
----]
+---
 
 ## Summary: Contextual recommendations
 

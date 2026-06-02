@@ -2,14 +2,14 @@
 title: 'Your own playlist app without YouTube Premium - Build it yourself with React Native (Expo)'
 date: '2026-05-05'
 publish_date: '2026-05-30'
-description: Shoveling and solving a YouTube playlist app from scratch with Expo SDK 54 + TypeScript.
+description: Building a YouTube playlist app from scratch with Expo SDK 54 + TypeScript — what broke and how I fixed it
 tags:
   - React Native
   - Expo
   - expo
   - YouTube
   - Android
----Β
+---
 
 ## Why I made it myself
 
@@ -17,7 +17,7 @@ I like to watch YouTube music videos or lectures back-to-back, but without YouTu
 
 So I just made this. A simple app that automatically fetches the title and thumbnail when you paste the YouTube URL, and automatically plays the next video when it's finished. I also wanted to try React Native.
 
----]
+---
 
 ## Choose a technology
 
@@ -31,7 +31,7 @@ So I just made this. A simple app that automatically fetches the title and thumb
 
 At first, I tried to embed YouTube directly with a custom WebView, but YouTube checks User-Agent in the Android WebView and prevents playback. The `react-native-youtube-iframe` bypasses this issue and works fine.
 
----]
+---
 
 ## App structure
 
@@ -59,7 +59,7 @@ interface PlaylistItem {
 }
 ```
 
----]
+---
 
 ## Step 1 - Parsing the YouTube URL + getting video information
 
@@ -96,7 +96,7 @@ export async function fetchVideoInfo(url: string) {
 }
 ```
 
----]
+---
 
 ## Step 2 - Configure the Player
 
@@ -125,7 +125,7 @@ useEffect(() => {
 
 When the video ends (`'ended'`) with `onChangeState`, the autoplay is completed by flipping to the next song.
 
----]
+---
 
 ## Step 3 - Isolate the SafeAreaProvider structure
 
@@ -149,7 +149,7 @@ export default function App() {
 
 This pattern pushes the `bottomInset` down to the `AddUrlModal` and the buttons so that they are not obscured by the home indicator.
 
----]
+---
 
 ## Troubleshooting
 
@@ -173,7 +173,7 @@ import App from './App';
 
 If `@expo/metro-runtime` is not the first line, the development server will throw an error about `window.location`.
 
----]
+---
 
 ## Build APK + Deploy directly to GitHub Releases
 
@@ -200,7 +200,7 @@ gh release create v1.0.0 app-release.apk \
 
 This will allow you to download and install the APK directly from the GitHub Releases page.
 
----]
+---
 
 ## Cleanup
 

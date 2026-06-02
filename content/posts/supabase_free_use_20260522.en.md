@@ -1,10 +1,10 @@
 ---
 title: 'Supabase Free Usage Restrictions'
 date: '2026-05-22'
-description: 'Supabase Free usage restrictions'
+description: Found out the hard way that Supabase free plan only allows 2 active projects
 tags:
   - Supabase
----]
+---
 
 I'm using Supabase, and a notification popped up.
 

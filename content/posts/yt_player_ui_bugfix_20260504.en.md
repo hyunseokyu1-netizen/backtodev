@@ -1,5 +1,5 @@
 ---
-title: 'Shovelware we shoveled while building a React Native YouTube app - from Android WebView playback bugs to keyboard issues'
+title: 'React Native YouTube App — Android WebView Playback, Custom Button, and Keyboard Bugs'
 date: '2026-05-04'
 publish_date: '2026-05-29'
 description: From Android WebView security policies, KeyboardAvoidingView pitfalls, and autoplay timing bugs - here are the issues and solutions we encountered while improving the YT Player app.
@@ -10,13 +10,13 @@ tags:
   - WebView
   - Bugfixes
   - YouTube
----Bugfixes
+---
 
 I've been working on a YouTube playlist app as a personal project. I started with the idea of playing videos in order without YouTube Premium, but I've run into a lot of unexpected issues on Android.
 
 This post summarizes the things I spent all day yesterday dealing with - autoplay bugs, why custom play buttons don't work, and why KeyboardAvoidingView didn't work. I hope it's helpful to those of you who are shoveling similar ground.
 
----]
+---
 
 ## Introduction to the Stack
 
@@ -79,7 +79,7 @@ if (state === 'ended') {
 
 The `hasNext` is calculated as `currentIndex < playlist.length - 1`. This way, `useEffect` does a clean `setPlaying(true)` because the middle songs don't touch the `playing` state.
 
----]
+---
 
 ## Bug 2 - Custom play buttons don't work on Android
 
@@ -128,7 +128,7 @@ const handleNext = () => {
 
 At first, I really wanted to include the custom button, but I decided it was better to remove it cleanly than to force something that doesn't work.
 
----]
+---
 
 ## Bug 3 - KeyboardAvoidingView is useless on Android
 
@@ -191,7 +191,7 @@ When the keyboard is raised, → `keyboardHeight` is updated, → the bottom pad
 
 The reason we put `visible` in the dependency array is to clean up the listeners when the modal closes and re-register them when it reopens.
 
----]
+---
 
 ## UI improvements
 
@@ -313,7 +313,7 @@ We moved the "+ Add URL" button from the header to a floating button at the bott
 </TouchableOpacity>
 ```
 
----]
+---
 
 ## Cleanup
 

@@ -5,8 +5,9 @@ description: Google Play production approved
 tags:
   - googleplay
   - app registration
---- --- Approved
-Once approved, you will receive an email like this.
+---
+
+Once approved, you will receive an email like the one below.
 
 ![스크린샷 2026-05-28 11.30.39](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_11_30_39_1779935559909.png)
 
