@@ -27,7 +27,7 @@ Sign up for Google Play Console ($25)
   → Submit review → Approve → Launch
 ```
 
-**Key condition**: Current Google policy requires **12 people in private testing for at least 14 days (2 weeks) before a public release is possible.
+**Key condition**: Current Google policy requires **12 people in private testing for at least 14 days (2 weeks) before a public release is possible.**
 
 ---
 
@@ -45,7 +45,7 @@ Inputs: app name, package name, default language, and a choice of paid or free
 
 Package name format: `com.companyname.appname`
 
----]
+---
 
 ## Step 2 - Internal Testing (optional)
 
@@ -81,7 +81,7 @@ Upload the App Bundle (`.aab`) file.
 
 For multilingual support, specify the language tag
 - English: `<en-US>`
-- Korean: `<en-US>`
+- Korean: `<ko-KR>`
 
 You can ignore the warning message.
 
@@ -95,13 +95,13 @@ Save and launch:
 
 ![출시 확인](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-11______12_00_04_1778553865311.png)
 
-**The green checkmark is key. If it looks like "Under Review", you need to wait for Google approval. Once approved, the link to invite testers will be active.
+**The green checkmark is key. If it looks like "Under Review", you need to wait for Google approval. Once approved, the link to invite testers will be active.**
 
 ![링크 활성화](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______11_47_24_1778554088406.png)
 
 > Since private test approval takes time, we recommend that you create an internal test link first to verify your installation.
 
----]
+---
 
 ## Step 3 - Private test (required)
 
@@ -128,23 +128,23 @@ If there's no reason to limit it, you can select all.
 
 ![국가 전체 선택](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_17_1778554905020.png)
 
-> After completing each page, I get a popup asking "Would you like to go to the publishing overview?", but clicking "Go to overview" takes me to the dashboard and breaks my workflow. **It's easier to hit the "Later" button and go back and continue working.
+> After completing each page, I get a popup asking "Would you like to go to the publishing overview?", but clicking "Go to overview" takes me to the dashboard and breaks my workflow. **It's easier to hit the "Later" button and go back and continue working.**
 
 ### Setting up testers - recommend utilizing Google Groups
 
 ![테스터 선택](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_26_1778555110625.png)
 
-If I manually add people by email, I have to approve them and they have to wait. **With Google Groups, users can join the group directly and join right away.
+If I manually add people by email, I have to approve them and they have to wait. **With Google Groups, users can join the group directly and join right away.**
 
 ![테스터 이메일 방식](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_47_37_1778555142663.png)
 
----]
+---
 
 ## Step 4 - Create Google Groups
 
 ![Google Groups](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_48_13_1778555372662.png)
 
-**Privacy settings are important - if they're too restrictive, people will give up on joining.
+**Privacy settings are important - if they're too restrictive, people will give up on joining.**
 
 ![Google Groups 설정](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_49_20_1778555416592.png)
 
@@ -165,7 +165,7 @@ If I manually add people by email, I have to approve them and they have to wait.
 
 Copy the group address email (`이름@googlegroups.com`) from the group information.
 
----]
+---
 
 ## Step 5 - Connect Google Groups to the tester
 
@@ -173,7 +173,7 @@ Copy the group address email (`이름@googlegroups.com`) from the group informat
 
 In the tester settings, select Google Groups and add the group email you copied.
 
----]
+---
 
 ## Step 6 - Register your comment URL/email
 
@@ -181,7 +181,7 @@ In the tester settings, select Google Groups and add the group email you copied.
 
 We recommend that you create and manage a separate email account for your store, as you will receive more emails about your app than you think.
 
----]
+---
 
 ## Step 7 - Process your to-do list
 
@@ -270,7 +270,7 @@ You'll need to select "App does not offer financial features" to move on.
 ![건강](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_10_1778567388656.png)
 ![건강 2](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_29_34_1778567402939.png)
 
----]
+---
 
 ## Step 8 - App category and contact details
 
@@ -281,7 +281,7 @@ You'll need to select "App does not offer financial features" to move on.
 ![앱 카테고리 5](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_34_29_1778567755539.png)
 ![앱 카테고리 6](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_15_35_26_1778567798505.png)
 
----]
+---
 
 ## Step 9 - Set up your store properties
 
@@ -303,7 +303,7 @@ Each section allows different image sizes. It is recommended that you check the 
 
 ![이미지 사이즈 오류](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_11_22_03_1778639032518.png)
 
----]
+---
 
 ## Step 10 - Submit for review and wait for approval
 
@@ -331,7 +331,7 @@ After sending, you'll see "Changes are being reviewed".
 
 ![승인 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-13_12_00_31_1778641319462.png)
 
----]
+---
 
 ## Clean up the overall flow
 
@@ -357,7 +357,7 @@ After sending, you'll see "Changes are being reviewed".
 8. check the green checkmark → share the tester link
 ```
 
-**3 key tips:** 1.
+**3 key tips:**
 
 1. test internally first - install and validate yourself while waiting for private test approval
 2. use Google Groups - recruit testers with a single group link instead of manually adding emails

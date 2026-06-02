@@ -30,7 +30,7 @@ Throw a topic to Claude Code
 
 This article explains the entire workflow from scratch.
 
----]
+---
 
 ## Preparation
 
@@ -56,7 +56,7 @@ Skill file location:
 This skill automatically drafts posts. Created in `~/.claude/skills/blog-write/SKILL.md`.
 
 ```markdown
----''
+---
 name: blog-write
 description: "Write a developer blog post with the given topic and save it to the specified path."
 user-invocable: true
@@ -92,18 +92,18 @@ How to call:
 
 Claude receives a topic, writes a blog-formatted markdown file, and saves it.
 
----]
+---
 
 ## Step 2 - Create the post-register skill
 
 This is the skill that registers the created file to the blog and distributes it. `~/.claude/skills/post-register/SKILL.md`:
 
 ```markdown
----]
+---
 name: post-register
 description: "Registers and deploys the specified file in the blog posts folder. After completion, prefix the original file with ff_."
 user-invocable: true
----]
+---
 
 Register the posts in the following order
 
@@ -116,7 +116,7 @@ Register the posts in the following order
 3. Rename the original file: Add ff_ prefix to original files after push.
 ```
 
-How to invoke:
+How to call:
 
 ```
 /post-register /Users/hy/Documents/workspace/claude_code/blog_doc_temp/deepl_api_20260418.en.md
@@ -124,7 +124,7 @@ How to invoke:
 
 The `ff_` prefix stands for "filed/finished" and is used to distinguish files that have already been registered in the blog_doc_temp folder.
 
----]
+---
 
 ## Step 3 - Set up scheduled publishing (GitHub Actions)
 
@@ -194,16 +194,16 @@ jobs:
 You can leave the `date` (post date) of the file as it is, but specify the publish date separately:
 
 ```yaml
----''
+---
 title: '...'
 date: '2026-04-20' ← the date that will appear in the post
 publish_date: '2026-04-25' ← the date it will actually be published
----]
+---
 ```
 
 If there is no `publish_date`, it will behave as before, based on `date`.
 
----]
+---
 
 ## Actual operational flow
 
@@ -229,7 +229,7 @@ git add → git push
     → Deploy automatically at midnight on April 28th
 ```
 
----]
+---
 
 ## Summary of frequently used patterns
 
@@ -241,27 +241,27 @@ git add → git push
 | Delimit post-register files | `ff_` prefix (post-register skill automatically appends) |
 | English post registration | Call `/post-register` the same way |
 
----]
+---
 
 ## Troubleshooting
 
-**Skill is not being called
+**Skill is not being called**
 
 Verify that the path `~/.claude/skills/skillname/SKILL.md` is correct. The file must be named `SKILL.md`.
 
-GitHub Actions push failed** **GitHub Actions push failed
+**GitHub Actions push failed**
 
 Make sure your Actions workflow has `permissions: contents: write`, otherwise it will fail because you don't have permission to push.
 
-**Scheduled post is not published
+**Scheduled post is not published**
 
 Make sure that the `publish_date` format is YYYY-MM-DD with quotes, like `'2026-04-25'`. If the format is different, the date comparison will not work properly.
 
-**Not reflected on the turf
+**Not reflected on the turf**
 
 Ensure that `git config user.email` in the Actions workflow matches your GitHub account email. If you set it to `github-actions[bot]` email, it will not be reflected in your account's grass.
 
----]
+---
 
 ## Organize - core flow at a glance
 

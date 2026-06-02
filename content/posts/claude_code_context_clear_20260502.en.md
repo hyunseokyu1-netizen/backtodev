@@ -25,7 +25,7 @@ Context Usage
 
 The number looks fine at 8%, but as the session gets longer, it goes up to 50% and 70%. This is because the **context window** is filling up.
 
----]
+---
 
 ## What's the context piling up?
 
@@ -46,7 +46,7 @@ I look at all of this and answer: the size of this chunk is the **token usage**.
 
 200k tokens may seem like a lot, but if you're reading a lot of files or modifying a lot of code, you'll fill up quickly.
 
----]
+---
 
 ## What does /clear do?
 
@@ -64,17 +64,17 @@ As soon as you type it, the token counter returns to its initial state. Claude i
 - You can't say "look at that code again"
 - but **the file is still there**. Code changes don't disappear
 
----]
+---
 
 ## When to use /clear
 
 ### When to use
 
-**The best time to use it is when your work is about to change completely.
+**The best time to use it is when your work is about to change completely.**
 
-```
+```text
 [Previous task] Fixed a bug in the login feature → Done
-[next task] Start working on a completely different UI component
+[Next task] Start working on a completely different UI component
 → /clear at this point
 ```
 
@@ -96,7 +96,7 @@ You shouldn't clear when there is continuity in your work. For example:
 
 In these situations, it's better to let **autocompact** do the work instead of clear.
 
----]
+---
 
 ## Get context with /context
 
@@ -131,7 +131,7 @@ Estimated usage by category
 
 When `Messages` starts to take up 30-40% of the total, consider `/clear`.
 
----]
+---
 
 ## Example flow in action
 
@@ -139,7 +139,7 @@ When `Messages` starts to take up 30-40% of the total, consider `/clear`.
 
 ```bash
 /context
-```bash /context
+```
 
 If you have a lot of tokens piled up, clear them first.
 
@@ -167,7 +167,7 @@ If there's any important context that Claude needs to know before `/clear`, let'
 
 We can quickly restore context by asking Claude to read this file in the next session.
 
----]
+---
 
 ## autocompact is something like
 
@@ -176,9 +176,9 @@ Claude Code will **automatically compress old content** when the context gets cl
 Pros: it's more or less automatically managed without my having to think about it
 Cons: detailed context can be lost during compression, and compression itself consumes tokens
 
-In other words, relying on autocompact alone is not a complete solution. **Better to do a clean initialization with `/clear` when the unit of work is clearly done.
+In other words, relying on autocompact alone is not a complete solution. **Better to do a clean initialization with `/clear` when the unit of work is clearly done.**
 
----]
+---
 
 ## Key takeaways
 
