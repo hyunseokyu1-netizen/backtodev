@@ -132,8 +132,8 @@ export default async function PortfolioPage() {
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "개인정보처리방침", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "wip",
-          statusLabel: "출시 준비 중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.05",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
@@ -329,8 +329,8 @@ export default async function PortfolioPage() {
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/yt-player" },
             { label: "Privacy Policy", href: "https://hyunseokyu1-netizen.github.io/chain-play-privacy/" },
           ],
-          status: "wip",
-          statusLabel: "Coming Soon",
+          status: "live",
+          statusLabel: "Released",
           period: "May 2026",
           image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
           screenshots: [
