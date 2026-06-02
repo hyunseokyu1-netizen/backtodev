@@ -43,6 +43,7 @@ export default function Nav() {
 
   const toggleLocale = () => {
     const next = locale === "ko" ? "en" : "ko";
+    document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000; SameSite=Lax`;
     router.replace(cleanPath, { locale: next });
   };
 
