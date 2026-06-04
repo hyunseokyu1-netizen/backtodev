@@ -14,7 +14,7 @@ tags:
 
 I've been working on a YouTube playlist app as a personal project. I started with the idea of playing videos in order without YouTube Premium, but I've run into a lot of unexpected issues on Android.
 
-This post summarizes the things I spent all day yesterday dealing with - autoplay bugs, why custom play buttons don't work, and why KeyboardAvoidingView didn't work. I hope it's helpful to those of you who are shoveling similar ground.
+This post summarizes the things I spent all day wrestling with — autoplay bugs, why custom play buttons don't work, and why KeyboardAvoidingView let me down. Hopefully it saves someone else the same headache.
 
 ---
 
@@ -22,7 +22,7 @@ This post summarizes the things I spent all day yesterday dealing with - autopla
 
 - **React Native + Expo SDK 54** (TypeScript)
 - **react-native-youtube-iframe** - YouTube player wrapping library
-- For **Android devices
+- **Android** physical device
 
 ---
 

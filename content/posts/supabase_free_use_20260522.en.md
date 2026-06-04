@@ -16,6 +16,6 @@ Last time, I created a new project because the project test DB became complicate
 
 Free users can only have 2 projects.
 
-ㅎㅎ Ah... I guess I'll have to use a different account for the production version.
+Ha... I guess I'll have to use a different account for the production version.
 
 I'll switch to Pro later when my usage increases.

@@ -30,7 +30,7 @@ This blog uses the GitHub API to read posts in production builds. While local de
 ```typescript
 const IS_PROD = !!process.env.VERCEL;
 
-// In production (Vercel), use the GitHub API to retrieve the ```typescript''
+// In production (Vercel), read posts via GitHub API
 if (IS_PROD) {
   const files = await listGitHubDir("content/posts");
   // ...
@@ -40,7 +40,7 @@ if (IS_PROD) {
 }
 ```
 
-So **local `npm run build** succeeds because it reads the file directly, while **Vercel goes through the GitHub API, which can lead to different results**.
+So **local `npm run build`** succeeds because it reads files directly, while **Vercel reads through the GitHub API** — which can produce different results.
 
 There are ways to recreate the Vercel environment locally:
 
@@ -67,7 +67,7 @@ Following the stack trace, we see the contents of the offending file:
 title: "Why GitHub Actions Commits Don't Show on Your Contribution Graph"
 ```
 
-right here. **That's another single quote inside a string enclosed in single quotes (`'`).** **That's another single quote inside a string enclosed in single quotes.
+Right here — **a single quote inside a single-quoted string (`'`).**
 
 The `'` in `Don't` is interpreted by the YAML parser as the end of the string, and the `t Show...` after it is an unknown string. Parsing failure.
 
@@ -146,10 +146,10 @@ Failed to collect page data for /[locale]/posts/[slug]
 Build failed ❌
 ```
 
-**Representation command**: `VERCEL=1 npm run build`
+**To reproduce**: `VERCEL=1 npm run build`
 
-**Modification rule: if an English title has an apostrophe, use `"..."` double quotes
+**Fix rule**: if an English title has an apostrophe, use `"..."` double quotes
 
 ---
 
-*One single-letter quotation mark can stop the entire build pipeline. YAML is stricter than you think.
+*One apostrophe can bring down the entire build pipeline. YAML is stricter than you'd expect.*

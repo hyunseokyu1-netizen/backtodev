@@ -19,15 +19,15 @@ So I just made this. A simple app that automatically fetches the title and thumb
 
 ---
 
-## Choose a technology
+## Tech stack
 
-| Item | Choose | Reason |
-|---|------|---|
-| Frameworks | Expo SDK 54 | Minimize native settings, quick start |
-| Language | TypeScript | Type Stability
-| Players | react-native-youtube-iframe | YouTube IFrame API official wrapper |
-| Video info | YouTube oEmbed API | No API key required
-| Storage | AsyncStorage | Simple Local Persistence
+| Item | Choice | Reason |
+|---|---|---|
+| Framework | Expo SDK 54 | Minimal native config, fast start |
+| Language | TypeScript | Type safety |
+| Player | react-native-youtube-iframe | Official YouTube IFrame API wrapper |
+| Video info | YouTube oEmbed API | No API key needed |
+| Storage | AsyncStorage | Simple local persistence |
 
 At first, I tried to embed YouTube directly with a custom WebView, but YouTube checks User-Agent in the Android WebView and prevents playback. The `react-native-youtube-iframe` bypasses this issue and works fine.
 
