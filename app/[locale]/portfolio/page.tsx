@@ -64,7 +64,7 @@ export default async function PortfolioPage() {
             { label: "개발 이야기", href: "/ko/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "개발 중",
+          statusLabel: "테스트 중",
           period: "2026.04 ~",
           image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar 채용공고 목록 화면" },
           screenshots: [
@@ -92,8 +92,8 @@ export default async function PortfolioPage() {
             { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.tilt", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt" },
           ],
-          status: "wip",
-          statusLabel: "출시 준비 중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.05",
           image: { src: "/portfolio/tilt-feature.png", alt: "TILT 메이즈 퍼즐 게임 화면" },
           screenshots: [
@@ -261,7 +261,7 @@ export default async function PortfolioPage() {
             { label: "Dev story", href: "/en/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "In Progress",
+          statusLabel: "Testing",
           period: "Apr 2026 ~",
           image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar job list screen" },
           screenshots: [
@@ -289,8 +289,8 @@ export default async function PortfolioPage() {
             { label: "→ Google Play", href: "https://play.google.com/store/apps/details?id=com.backdev.tilt", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/Tilt" },
           ],
-          status: "wip",
-          statusLabel: "Coming Soon",
+          status: "live",
+          statusLabel: "Released",
           period: "May 2026",
           image: { src: "/portfolio/tilt-feature.png", alt: "TILT maze puzzle game screen" },
           screenshots: [
