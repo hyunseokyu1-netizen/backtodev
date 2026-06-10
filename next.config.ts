@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   async redirects() {
     return [
+      // trailing slash → 슬래시 없는 버전으로 정규화 (middleware 루프 방지)
+      { source: "/ko/", destination: "/ko", permanent: true },
+      { source: "/en/", destination: "/en", permanent: true },
       // 구 한국어 슬러그 → 현재 슬러그
       {
         source: "/:locale(ko|en)/posts/ai-%EA%B0%9C%EB%B0%9C%EC%8B%9C%EC%9E%91001-%ED%81%B4%EB%A1%9C%EB%93%9C-%EC%BD%94%EB%93%9C-%EC%8B%9C%EC%9E%91",
@@ -25,12 +28,12 @@ const nextConfig: NextConfig = {
       {
         source: "/:locale(ko|en)/posts/hello-world",
         destination: "/:locale/posts",
-        permanent: false,
+        permanent: true,
       },
       {
         source: "/posts/hello-world",
         destination: "/ko/posts",
-        permanent: false,
+        permanent: true,
       },
     ];
   },
