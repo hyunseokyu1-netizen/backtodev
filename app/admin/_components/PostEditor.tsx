@@ -81,6 +81,9 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState<string | null>(null);
   const [slugManual, setSlugManual] = useState(false);
+  const [slugGenerating, setSlugGenerating] = useState(false);
+  const slugBaseRef = useRef("");
+  const dateRef = useRef(date);
   const [isMobile, setIsMobile] = useState(false);
   const isEdit = !!initSlug;
 
@@ -100,17 +103,47 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
     if (isMobile && mode === "split") setMode("edit");
   }, [isMobile, mode]);
 
-  // 새 글: 제목으로 slug 자동 생성 (사용자가 직접 수정한 경우 제외)
+  // dateRef를 최신 date 값과 동기화
+  useEffect(() => { dateRef.current = date; }, [date]);
+
+  // 새 글: 제목으로 slug 자동 생성 — 800ms 디바운스 후 DeepL 번역 → 날짜 suffix 추가
   useEffect(() => {
     if (!isEdit && !slugManual && ko.title) {
-      const generated = ko.title
-        .toLowerCase()
-        .replace(/[^a-z0-9가-힣\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .slice(0, 60);
-      setSlug(generated);
+      const timer = setTimeout(async () => {
+        setSlugGenerating(true);
+        try {
+          const englishTitle = await autoTranslate(ko.title, "ko-en");
+          const base = englishTitle
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-")
+            .replace(/^-|-$/g, "")
+            .slice(0, 50);
+          slugBaseRef.current = base;
+          setSlug(`${base}-${dateRef.current.replace(/-/g, "")}`);
+        } catch {
+          const base = ko.title
+            .toLowerCase()
+            .replace(/[^a-z0-9가-힣\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .slice(0, 50);
+          slugBaseRef.current = base;
+          setSlug(`${base}-${dateRef.current.replace(/-/g, "")}`);
+        } finally {
+          setSlugGenerating(false);
+        }
+      }, 800);
+      return () => clearTimeout(timer);
     }
   }, [ko.title, isEdit, slugManual]);
+
+  // 날짜 변경 시 slug의 날짜 suffix 업데이트
+  useEffect(() => {
+    if (!isEdit && !slugManual && slugBaseRef.current) {
+      setSlug(`${slugBaseRef.current}-${date.replace(/-/g, "")}`);
+    }
+  }, [date, isEdit, slugManual]);
 
   const handleSave = async () => {
     if (!slug || !current.title) {
@@ -348,12 +381,15 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
             />
           </div>
-          <div className="w-full md:w-[180px]">
-            <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>slug *</label>
+          <div className="w-full md:w-[280px]">
+            <label className="block text-xs font-semibold mb-0.5" style={{ color: "var(--text-muted)" }}>
+              slug *
+              {slugGenerating && <span className="ml-1 font-normal opacity-60">번역 중...</span>}
+            </label>
             <input
               value={slug}
               onChange={(e) => { setSlug(e.target.value); setSlugManual(true); }}
-              placeholder="url-slug"
+              placeholder="url-slug-20260617"
               disabled={isEdit}
               className="w-full px-3 py-1.5 rounded-lg text-sm outline-none font-mono disabled:opacity-50"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
