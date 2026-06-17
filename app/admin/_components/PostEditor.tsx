@@ -113,23 +113,27 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
         setSlugGenerating(true);
         try {
           const englishTitle = await autoTranslate(ko.title, "ko-en");
-          const base = englishTitle
+          const words = englishTitle
             .toLowerCase()
-            .replace(/[^a-z0-9\s-]/g, "")
-            .replace(/\s+/g, "-")
-            .replace(/-+/g, "-")
-            .replace(/^-|-$/g, "")
+            .replace(/[^a-z0-9\s]/g, "")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+          const base = words
+            .map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1))
+            .join("")
             .slice(0, 50);
           slugBaseRef.current = base;
-          setSlug(`${base}-${dateRef.current.replace(/-/g, "")}`);
+          setSlug(`${base}_${dateRef.current.replace(/-/g, "")}`);
         } catch {
           const base = ko.title
             .toLowerCase()
-            .replace(/[^a-z0-9가-힣\s-]/g, "")
+            .replace(/[^a-z0-9가-힣\s]/g, "")
             .replace(/\s+/g, "-")
+            .replace(/^-|-$/g, "")
             .slice(0, 50);
           slugBaseRef.current = base;
-          setSlug(`${base}-${dateRef.current.replace(/-/g, "")}`);
+          setSlug(`${base}_${dateRef.current.replace(/-/g, "")}`);
         } finally {
           setSlugGenerating(false);
         }
@@ -141,7 +145,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
   // 날짜 변경 시 slug의 날짜 suffix 업데이트
   useEffect(() => {
     if (!isEdit && !slugManual && slugBaseRef.current) {
-      setSlug(`${slugBaseRef.current}-${date.replace(/-/g, "")}`);
+      setSlug(`${slugBaseRef.current}_${date.replace(/-/g, "")}`);
     }
   }, [date, isEdit, slugManual]);
 
@@ -389,7 +393,7 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
             <input
               value={slug}
               onChange={(e) => { setSlug(e.target.value); setSlugManual(true); }}
-              placeholder="url-slug-20260617"
+              placeholder="youAndMe_20260617"
               disabled={isEdit}
               className="w-full px-3 py-1.5 rounded-lg text-sm outline-none font-mono disabled:opacity-50"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
