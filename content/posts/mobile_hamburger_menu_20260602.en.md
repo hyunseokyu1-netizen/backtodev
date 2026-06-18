@@ -1,9 +1,8 @@
 ---
 title: The Menu Is Cut Off on Mobile — Fix It with a Hamburger Menu
 date: '2026-06-02'
-description: >-
-  How I Fixed the Scrolling Issue in the Next.js Blog Navigation on Mobile Using
-  a Hamburger Menu
+publish_date: '2026-06-18'
+description: How I fixed the scrolling issue in the Next.js blog navigation on mobile using a hamburger menu
 tags:
   - Next.js
   - React
@@ -120,37 +119,37 @@ Render the dropdown conditionally just below the header.
   <div
     className="md:hidden"
     style={{
- borderTop: "1px solid hsl(var(--border) / 0.4)",
- background: "hsl(var(--background) / 0.95)",
+      borderTop: "1px solid hsl(var(--border) / 0.4)",
+      background: "hsl(var(--background) / 0.95)",
       backdropFilter: "blur(20px)",
     }}
   >
     <nav className="flex flex-col px-6 py-4" style={{ gap: "0.25rem" }}>
       {links.map(({ href, label }) => {
- const active = href === "/" ? cleanPath === "/" : cleanPath.startsWith(href);
+        const active = href === "/" ? cleanPath === "/" : cleanPath.startsWith(href);
         return (
- <Link
- key={href}
- href={href}
- onClick={() => setMenuOpen(false)} // Close the menu when the link is clicked
- className="flex items-center py-3 text-base font-medium transition-colors"
+          <Link
+            key={href}
+            href={href}
+            onClick={() => setMenuOpen(false)} // Close the menu when the link is clicked
+            className="flex items-center py-3 text-base font-medium transition-colors"
             style={{
- color: active ? "hsl(var(--primary))" : "hsl(var(--foreground))",
- borderBottom: "1px solid hsl(var(--border) / 0.3)",
+              color: active ? "hsl(var(--primary))" : "hsl(var(--foreground))",
+              borderBottom: "1px solid hsl(var(--border) / 0.3)",
               gap: "0.75rem",
- }}
- >
- <span style={{
- fontFamily: "var(--font-mono), monospace",
- fontSize: "0.8rem",
+            }}
+          >
+            <span style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "0.8rem",
               color: active ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
- }}>
- {active ? "▶" : "○"}
+            }}>
+              {active ? "▶" : "○"}
             </span>
- {label}
- </Link>
- );
- })}
+            {label}
+          </Link>
+        );
+      })}
     </nav>
   </div>
 )}
