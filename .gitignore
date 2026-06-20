@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local claude config
 .claude/
+
+# direnv (per-folder Claude account)
+.envrc
+.direnv/
