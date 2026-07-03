@@ -46,10 +46,10 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
-          name: "JobRadar",
+          name: "매치다",
           tagline: "채용공고 URL 붙여넣기 → AI 매칭 → 커버레터 자동 생성",
           description:
-            "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다.",
+            "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다. 처음엔 'JobRadar'라는 이름으로 시작했지만, 브랜딩 작업을 거치며 '세상의 모든 직업을 매칭해준다'는 뜻의 매치다(match + da)로 이름을 바꿨습니다.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -59,7 +59,7 @@ export default async function PortfolioPage() {
             "Claude API",
           ],
           links: [
-            { label: "→ 사이트 바로가기", href: "https://jobradar-virid.vercel.app/", primary: true },
+            { label: "→ 사이트 바로가기", href: "https://matchda.com/", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/jobradar" },
             { label: "개발 이야기", href: "/ko/posts/jobradar_01_setup_20260420" },
           ],
@@ -243,10 +243,10 @@ export default async function PortfolioPage() {
       ]
     : [
         {
-          name: "JobRadar",
+          name: "Matchda",
           tagline: "Paste a job URL → AI matching → auto-generated cover letter",
           description:
-            "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — JobRadar scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF.",
+            "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — Matchda scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF. It originally launched as \"JobRadar,\" but was rebranded through a branding process to Matchda (match + da) — capturing the idea of matching every job in the world.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -256,7 +256,7 @@ export default async function PortfolioPage() {
             "Claude API",
           ],
           links: [
-            { label: "→ Live site", href: "https://jobradar-virid.vercel.app/", primary: true },
+            { label: "→ Live site", href: "https://matchda.com/", primary: true },
             { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/jobradar" },
             { label: "Dev story", href: "/en/posts/jobradar_01_setup_20260420" },
           ],
