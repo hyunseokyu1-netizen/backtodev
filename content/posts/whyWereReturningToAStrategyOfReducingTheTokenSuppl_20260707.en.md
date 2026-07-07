@@ -3,8 +3,9 @@ title: Why We're Returning to a Strategy of Reducing the Number of Tokens
 date: '2026-07-07'
 description: AI ultimately moves at the pace of humans.
 tags:
-  - We need to reduce the number of tokens.
-  - The Pace of Human Development and the Pace of AI Development
+  - tokens
+  - Human
+  - AI
 ---
 # Why We’re Returning to a Token-Saving Approach
 
