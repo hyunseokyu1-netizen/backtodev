@@ -66,11 +66,11 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "테스트 중",
           period: "2026.04 ~",
-          image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar 채용공고 목록 화면" },
+          image: { src: "/portfolio/matchda-feature.png", alt: "매치다 글로벌 커리어 플랫폼 홈 화면" },
           screenshots: [
-            { src: "/portfolio/jobradar-screen-status.png", alt: "JobRadar 지원 상태 관리", caption: "지원 상태 관리" },
-            { src: "/portfolio/jobradar-screen-coverletter-gen.png", alt: "JobRadar AI 커버레터 생성", caption: "AI 커버레터 생성" },
-            { src: "/portfolio/jobradar-screen-coverletter.png", alt: "JobRadar 커버레터 결과", caption: "커버레터 (영문/한국어)" },
+            { src: "/portfolio/matchda-screen-matching.png", alt: "매치다 AI 공고 매칭 화면", caption: "AI 공고 매칭" },
+            { src: "/portfolio/matchda-screen-translate.png", alt: "매치다 이력서 영문 번역 화면", caption: "이력서 영문 번역" },
+            { src: "/portfolio/matchda-screen-tracking.png", alt: "매치다 지원 현황 추적 화면", caption: "지원 현황 추적" },
           ],
         },
         {
@@ -263,11 +263,11 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "Testing",
           period: "Apr 2026 ~",
-          image: { src: "/portfolio/jobradar-feature.png", alt: "JobRadar job list screen" },
+          image: { src: "/portfolio/matchda-feature.png", alt: "Matchda global career platform home" },
           screenshots: [
-            { src: "/portfolio/jobradar-screen-status.png", alt: "JobRadar application status management", caption: "Status management" },
-            { src: "/portfolio/jobradar-screen-coverletter-gen.png", alt: "JobRadar AI cover letter generation", caption: "AI cover letter" },
-            { src: "/portfolio/jobradar-screen-coverletter.png", alt: "JobRadar cover letter result", caption: "Cover letter (EN/KO)" },
+            { src: "/portfolio/matchda-screen-matching.png", alt: "Matchda AI job matching", caption: "AI job matching" },
+            { src: "/portfolio/matchda-screen-translate.png", alt: "Matchda resume translation", caption: "Resume translation" },
+            { src: "/portfolio/matchda-screen-tracking.png", alt: "Matchda application tracking", caption: "Application tracking" },
           ],
         },
         {
