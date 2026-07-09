@@ -42,6 +42,9 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // 그 외 API 라우트는 locale 처리 없이 통과 (예: /api/guestbook)
+  if (pathname.startsWith("/api")) return NextResponse.next();
+
   // locale 접두사가 없는 경로에서 브라우저 언어(또는 쿠키) 기반으로 자동 리디렉션
   const hasLocalePrefix = /^\/(en|ko)(\/|$)/.test(pathname);
   if (!hasLocalePrefix) {

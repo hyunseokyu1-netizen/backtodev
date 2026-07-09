@@ -37,6 +37,7 @@ export default function Nav() {
   const links = [
     { href: "/" as const, label: "Home" },
     { href: "/posts" as const, label: "Posts" },
+    { href: "/village" as const, label: "Village" },
     { href: "/portfolio" as const, label: "Portfolio" },
     { href: "/about" as const, label: "About" },
   ];

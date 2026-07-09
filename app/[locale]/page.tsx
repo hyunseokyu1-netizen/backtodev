@@ -1,7 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
+import { readGuestbook } from "@/lib/guestbook";
 import PostCard from "@/components/PostCard";
+import VillageIntroOverlay from "@/components/VillageIntroOverlay";
+import type { VillagePost } from "@/app/[locale]/village/VillageGame";
 import type { Metadata } from "next";
 
 const BASE_URL = "https://backtodev.com";
@@ -33,10 +36,22 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const t = await getTranslations("home");
   const tPost = await getTranslations("post");
-  const posts = (await getAllPosts(locale)).slice(0, 6);
+  const allPosts = await getAllPosts(locale);
+  const posts = allPosts.slice(0, 6);
+
+  // 첫 진입 픽셀 마을 오버레이용 데이터
+  const villagePosts: VillagePost[] = allPosts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    date: p.date,
+    tags: p.tags ?? [],
+  }));
+  const { entries: guestbook } = await readGuestbook();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6rem", paddingBottom: "3rem" }}>
+
+      <VillageIntroOverlay locale={locale} posts={villagePosts} guestbook={guestbook} />
 
       {/* ── Hero ── */}
       <section className="relative" style={{ paddingTop: "3rem" }}>

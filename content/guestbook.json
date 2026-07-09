@@ -1,0 +1,24 @@
+[
+  {
+    "id": "gb_1783638714515_2db2u8",
+    "name": "tyson",
+    "message": "I'm first comment",
+    "date": "2026-07-10",
+    "x": 7.9,
+    "y": -9.8,
+    "eyeL": ">",
+    "eyeR": "<",
+    "mouth": "⏜"
+  },
+  {
+    "id": "gb_1783639113422_i4gsqe",
+    "name": "Haon",
+    "message": "PAPA, I LOVE YOU",
+    "date": "2026-07-10",
+    "x": 4.2,
+    "y": -10.2,
+    "eyeL": "^",
+    "eyeR": "^",
+    "mouth": "⏝"
+  }
+]
