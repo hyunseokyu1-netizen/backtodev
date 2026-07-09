@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import VillageGame, { type VillagePost } from "@/app/[locale]/village/VillageGame";
 import type { GuestbookEntry } from "@/app/[locale]/village/world";
 
@@ -44,7 +45,9 @@ export default function VillageIntroOverlay({
     setOpen(false);
   };
 
-  return (
+  // <main>의 스태킹 컨텍스트(z-10)에 갇히면 Nav(z-50)가 위에 그려지므로
+  // body에 portal로 렌더링해 화면 전체(Nav 포함)를 덮는다
+  return createPortal(
     <div
       style={{
         position: "fixed",
@@ -80,6 +83,7 @@ export default function VillageIntroOverlay({
       </button>
 
       <VillageGame locale={locale} posts={posts} guestbook={guestbook} />
-    </div>
+    </div>,
+    document.body
   );
 }
