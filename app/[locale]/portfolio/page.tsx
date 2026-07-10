@@ -46,6 +46,25 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "문서 위변조 검증 블록체인",
+          tagline: "처방전 파일의 해시만 온체인에 기록해 위변조를 검증하는 스마트 계약",
+          description:
+            "병원이 발급한 처방전 같은 민감 문서의 위변조를 막기 위해 만든 스마트 계약입니다. 개인정보보호법 때문에 문서 원본을 블록체인에 올릴 수 없어서, SHA-256 해시값만 온체인에 기록하고 원본은 오프체인에 남겨두는 구조로 설계했습니다. 병원(발행)과 약국(검증·사용 처리) 권한을 역할 기반으로 분리하고, 발행 후 7일이 지나면 자동으로 만료되는 로직을 넣었습니다. Hardhat으로 테스트 케이스 29개를 작성해 위조 파일 적발, 재사용 차단, 권한 없는 계정의 접근 차단을 검증했고, Sepolia 테스트넷에 실제 배포까지 마쳤습니다. 브라우저에서 Web Crypto API로 파일 해시를 계산해 원본이 서버로 전송되지 않는 웹 UI도 함께 만들었습니다.",
+          tech: ["Solidity", "Hardhat", "OpenZeppelin", "Ethereum", "Ethers.js", "Express"],
+          links: [
+            {
+              label: "→ Etherscan에서 확인",
+              href: "https://sepolia.etherscan.io/address/0xF4d634D1E21c5682EB95727922077f9C048cc801",
+              primary: true,
+            },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/document-verification-blockchain" },
+            { label: "개발 이야기", href: "/ko/posts/blockchain_prescription_verification_20260710" },
+          ],
+          status: "live",
+          statusLabel: "Sepolia 테스트넷 배포",
+          period: "2026.07",
+        },
+        {
           name: "매치다",
           tagline: "채용공고 URL 붙여넣기 → AI 매칭 → 커버레터 자동 생성",
           description:
@@ -242,6 +261,25 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "Document Verification Blockchain",
+          tagline: "Smart contract that verifies documents by matching file hashes on-chain",
+          description:
+            "A smart contract built to prevent tampering with sensitive documents like hospital-issued prescriptions. Privacy law prevents storing the actual document on a public blockchain, so the design only records a SHA-256 hash on-chain while the original file stays off-chain. Hospital (issuer) and pharmacy (verifier) permissions are separated by role, and prescriptions automatically expire 7 days after issuance. I wrote 29 Hardhat test cases covering forged-file detection, reuse prevention, and unauthorized access, then deployed it to the Sepolia testnet. I also built a web UI that computes the file hash in the browser via the Web Crypto API, so the original file never touches the server.",
+          tech: ["Solidity", "Hardhat", "OpenZeppelin", "Ethereum", "Ethers.js", "Express"],
+          links: [
+            {
+              label: "→ View on Etherscan",
+              href: "https://sepolia.etherscan.io/address/0xF4d634D1E21c5682EB95727922077f9C048cc801",
+              primary: true,
+            },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/document-verification-blockchain" },
+            { label: "Dev story", href: "/en/posts/blockchain_prescription_verification_20260710" },
+          ],
+          status: "live",
+          statusLabel: "Deployed to Sepolia testnet",
+          period: "Jul 2026",
+        },
         {
           name: "Matchda",
           tagline: "Paste a job URL → AI matching → auto-generated cover letter",
