@@ -260,6 +260,12 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/village-screen-overview.png", alt: "픽셀 마을 전체 지도 화면", caption: "마을 전경 — 집·도서관·작업실", width: 1974, height: 1416 },
+            { src: "/portfolio/village-screen-square.png", alt: "픽셀 마을 광장 화면", caption: "마을 광장", width: 1964, height: 1162 },
+            { src: "/portfolio/village-screen-library.png", alt: "픽셀 마을 도서관 내부 화면", caption: "도서관 — 포스트 서가", width: 1966, height: 1164 },
+            { src: "/portfolio/village-screen-posts.png", alt: "픽셀 마을 도서관 최신 포스트 목록 모달", caption: "최신 포스트 목록", width: 1986, height: 1174 },
+          ],
         },
         {
           name: "WiFi QR 코드 생성기",
@@ -495,6 +501,12 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/village-screen-overview.png", alt: "Pixel village overview map", caption: "Village overview — home, library, workshop", width: 1974, height: 1416 },
+            { src: "/portfolio/village-screen-square.png", alt: "Pixel village square screen", caption: "Village square", width: 1964, height: 1162 },
+            { src: "/portfolio/village-screen-library.png", alt: "Pixel village library interior", caption: "Library — post shelves", width: 1966, height: 1164 },
+            { src: "/portfolio/village-screen-posts.png", alt: "Pixel village library recent posts modal", caption: "Recent posts list", width: 1986, height: 1174 },
+          ],
         },
         {
           name: "WiFi QR Code Generator",
