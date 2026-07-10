@@ -1,7 +1,9 @@
 ---
-title: 'AI 코딩 어시스턴트로 처방전 위변조 검증 블록체인 만들어보기 (스마트 계약부터 웹 UI까지)'
+title: AI 코딩 어시스턴트로 처방전 위변조 검증 블록체인 만들어보기 (스마트 계약부터 웹 UI까지)
 date: '2026-07-10'
-description: Solidity 스마트 계약으로 처방전 해시를 온체인에 기록하고, 로컬 데모부터 Sepolia 테스트넷 배포, 웹 UI까지 하루 만에 붙여본 기록
+description: >-
+  Solidity 스마트 계약으로 처방전 해시를 온체인에 기록하고, 로컬 데모부터 Sepolia 테스트넷 배포, 웹 UI까지 하루 만에 붙여본
+  기록
 tags:
   - Blockchain
   - Solidity
@@ -217,6 +219,11 @@ async function sha256OfFile(file) {
 ```bash
 npm run web   # http://localhost:3900 접속
 ```
+![스크린샷 2026-07-10 07.41.54](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_41_54_1783655766861.png)
+![스크린샷 2026-07-10 07.42.00](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_42_00_1783655766862.png)
+![스크린샷 2026-07-10 07.42.06](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_42_06_1783655766863.png)
+
+
 
 ## 자주 쓰는 명령어 정리
 
