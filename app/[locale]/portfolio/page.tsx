@@ -248,6 +248,20 @@ export default async function PortfolioPage() {
           ],
         },
         {
+          name: "Village — 픽셀 마을 방명록",
+          tagline: "이스터에그를 찾아야 나무를 심고, 댓글도 남길 수 있는 방명록",
+          description:
+            "이 블로그는 DB 없이 GitHub만으로 유지하고 싶었는데, 그래도 댓글 기능은 갖고 싶어서 만든 기능입니다. 90년대 RPG 스타일 픽셀 마을을 캐릭터로 돌아다니다가 숨겨진 돌바위(이스터에그)를 찾아야만 방명록 나무를 심을 수 있고, 댓글을 읽으려면 마을 어딘가에 심어진 나무를 찾아가야 합니다. 방명록 데이터는 별도 DB 없이 GitHub 저장소의 JSON 파일에 직접 커밋되는 방식으로 저장됩니다. 방문자가 직접 댓글을 수정·삭제할 수는 없고, 고치고 싶으면 GitHub PR을 보내야 하며 제가 검토해서 반영합니다. 봇 방지를 위해 허니팟 필드와 IP 기반 스로틀(1분에 나무 1그루)도 넣었습니다.",
+          tech: ["Next.js", "TypeScript", "React", "GitHub REST API"],
+          links: [
+            { label: "→ 마을 구경하기", href: "/ko/village", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
+          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2026.07",
+        },
+        {
           name: "WiFi QR 코드 생성기",
           tagline: "손님한테 비밀번호 받아 적는 거 이제 그만",
           description:
@@ -467,6 +481,20 @@ export default async function PortfolioPage() {
           screenshots: [
             { src: "/portfolio/backtodev-screen-posts.png", alt: "Posts list page", caption: "Posts" },
           ],
+        },
+        {
+          name: "Village — Pixel Village Guestbook",
+          tagline: "Find the easter egg to plant a tree, and leave a comment",
+          description:
+            "I wanted to keep this blog running on GitHub alone, with no database — but I still wanted a comment feature. So I built a 90s-style RPG pixel village you walk around as a character. You can only plant a guestbook tree by finding a hidden easter egg (a stone), and to read a comment, you have to track down a tree planted somewhere in the village. Guestbook entries are stored with no database at all — they're committed directly as a JSON file in the GitHub repo. Visitors can't edit or delete their own entries; if they want a change, they have to send me a GitHub PR, which I review and merge myself. I added a honeypot field and an IP-based throttle (one tree per minute) to keep bots out.",
+          tech: ["Next.js", "TypeScript", "React", "GitHub REST API"],
+          links: [
+            { label: "→ Explore the village", href: "/en/village", primary: true },
+            { label: "GitHub", href: "https://github.com/hyunseokyu1-netizen/backtodev" },
+          ],
+          status: "live",
+          statusLabel: "Live",
+          period: "Jul 2026",
         },
         {
           name: "WiFi QR Code Generator",
