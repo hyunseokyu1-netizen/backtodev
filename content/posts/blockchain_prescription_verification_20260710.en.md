@@ -1,7 +1,12 @@
 ---
-title: 'Building a Prescription Fraud-Verification Blockchain With an AI Coding Assistant (From Smart Contract to Web UI)'
+title: >-
+  Building a Prescription Fraud-Verification Blockchain With an AI Coding
+  Assistant (From Smart Contract to Web UI)
 date: '2026-07-10'
-description: A record of recording prescription hashes on-chain with a Solidity smart contract, going from a local demo to a Sepolia testnet deployment and a web UI, all in one day
+description: >-
+  A record of recording prescription hashes on-chain with a Solidity smart
+  contract, going from a local demo to a Sepolia testnet deployment and a web
+  UI, all in one day
 tags:
   - Blockchain
   - Solidity
@@ -217,6 +222,11 @@ The pharmacy tab is the part I paid the most attention to — instead of just sh
 ```bash
 npm run web   # visit http://localhost:3900
 ```
+
+![스크린샷 2026-07-10 07.41.54](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_41_54_1783655766861.png)
+![스크린샷 2026-07-10 07.42.00](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_42_00_1783655766862.png)
+![스크린샷 2026-07-10 07.42.06](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-07-10_07_42_06_1783655766863.png)
+
 
 ## Frequently used commands
 
