@@ -36,7 +36,7 @@ interface Project {
   statusLabel: string;
   period: string;
   image?: { src: string; alt: string };
-  screenshots?: { src: string; alt: string; caption: string }[];
+  screenshots?: { src: string; alt: string; caption: string; width?: number; height?: number }[];
 }
 
 export default async function PortfolioPage() {
@@ -63,6 +63,11 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Sepolia 테스트넷 배포",
           period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/docverify-screen-hospital.png", alt: "처방전 위변조 검증 시스템 병원 발행 화면", caption: "병원 — 발행", width: 1578, height: 1492 },
+            { src: "/portfolio/docverify-screen-pharmacy.png", alt: "처방전 위변조 검증 시스템 약국 검증 화면", caption: "약국 — 검증", width: 1466, height: 1562 },
+            { src: "/portfolio/docverify-screen-lookup.png", alt: "처방전 위변조 검증 시스템 상태 조회 화면", caption: "상태 조회", width: 1502, height: 1264 },
+          ],
         },
         {
           name: "매치다",
@@ -279,6 +284,11 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Deployed to Sepolia testnet",
           period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/docverify-screen-hospital.png", alt: "Document verification blockchain hospital issue screen", caption: "Hospital — Issue", width: 1578, height: 1492 },
+            { src: "/portfolio/docverify-screen-pharmacy.png", alt: "Document verification blockchain pharmacy verify screen", caption: "Pharmacy — Verify", width: 1466, height: 1562 },
+            { src: "/portfolio/docverify-screen-lookup.png", alt: "Document verification blockchain status lookup screen", caption: "Status Lookup", width: 1502, height: 1264 },
+          ],
         },
         {
           name: "Matchda",
@@ -695,8 +705,8 @@ export default async function PortfolioPage() {
                     <Image
                       src={screenshot.src}
                       alt={screenshot.alt}
-                      width={1080}
-                      height={2340}
+                      width={screenshot.width ?? 1080}
+                      height={screenshot.height ?? 2340}
                       style={{
                         width: "100%",
                         height: "auto",
