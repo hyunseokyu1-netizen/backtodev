@@ -284,6 +284,24 @@ export default async function PortfolioPage() {
           period: "2026.04",
           image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
         },
+        {
+          name: "마작 조이",
+          tagline: "족보도 역도 없이, 짝만 맞추면 이기는 심플 마작",
+          description:
+            "사람들이 마작을 어려워하는 진짜 이유는 규칙이 아니라 복잡한 점수 체계(역·판수·부수)라고 생각했습니다. 그래서 규칙을 걷어내고 '몸통 4개 + 머리 1개' 조합 하나만 기억하면 되게 만들었고, 대신 승리 점수는 기본 100점에 더하기 보너스와 곱하기 보너스를 얹어 영수증처럼 한 줄씩 보여주는 연출을 넣었습니다. 사람은 항상 좌석 0, 나머지는 AI가 채우는 로컬 대전이 기본이고, 같은 Wi-Fi에서 방을 만들면 최대 4명이 함께 즐기는 LAN 멀티플레이도 지원합니다 — 호스트가 유일한 심판 역할을 하고 참가자는 행동만 전송하는 구조라 서버 비용이 들지 않습니다. 효과음은 외부 에셋 없이 파이썬으로 직접 합성했고, 한국어·중국어·영어 3개 언어와 점수 없이 짝 맞추기만 즐기는 초보자 모드도 넣었습니다.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "개발 중",
+          period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "마작 조이 홈 화면", caption: "홈 — AI / 친구와 하기", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "마작 조이 게임플레이 화면, 패 가져가기 타이머", caption: "게임플레이 — 15초 응답 타이머", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "마작 조이 게임 설명서 화면", caption: "설명서 — 족보 없이 조합 하나만", width: 1080, height: 2340 },
+          ],
+        },
       ]
     : [
         {
@@ -524,6 +542,24 @@ export default async function PortfolioPage() {
           statusLabel: "Live",
           period: "May 2026",
           image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
+        },
+        {
+          name: "Mahjong Joy",
+          tagline: "Mahjong is intimidating — so I stripped it down to just matching",
+          description:
+            "What actually scares people away from mahjong isn't the rules — it's the scoring system (yaku, han, fu). So I stripped the rules down to one shape to remember: 4 sets + 1 pair. Winning scores are rebuilt as a simple receipt instead: a base 100 points, plus bonuses, then multiplier bonuses, revealed line by line like a real receipt. The default mode is solo play against AI — you're always seat 0, AI fills the rest — but I also built LAN multiplayer: create a room on the same Wi-Fi and up to 4 people play together, with the host acting as the sole referee while guests just send actions, so it needs no server at all. Sound effects are synthesized in Python with no external assets, and the app supports Korean, Chinese, and English, plus a beginner mode that drops scoring entirely and keeps just the matching.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "In development",
+          period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "Mahjong Joy home screen", caption: "Home — Play with AI / Friends", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "Mahjong Joy gameplay screen with claim timer", caption: "Gameplay — 15s response timer", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "Mahjong Joy how to play screen", caption: "How to play — one shape, no hands", width: 1080, height: 2340 },
+          ],
         },
       ];
 
