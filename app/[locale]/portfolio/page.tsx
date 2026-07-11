@@ -302,6 +302,24 @@ export default async function PortfolioPage() {
             { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "마작 조이 게임 설명서 화면", caption: "설명서 — 족보 없이 조합 하나만", width: 1080, height: 2340 },
           ],
         },
+        {
+          name: "Football Dice",
+          tagline: "주사위와 카드로 승부하는 미식축구 보드게임",
+          description:
+            "미식축구를 주사위와 카드로 재현한 보드게임 앱입니다. 공격·수비 플레이북에서 카드를 고르면 주사위 매치업 차트로 결과가 갈리는 방식으로, 보드게임 특유의 긴장감을 그대로 살렸습니다. 쉬움·보통·어려움 난이도별 AI와 대전하거나, 같은 Wi-Fi에서 친구와 직접 대전할 수 있습니다. 추천 플레이 3장뿐 아니라 전체 플레이북도 열람할 수 있고, 한국어·영어를 지원하며 주사위·카드 연출과 효과음은 각각 켜고 끌 수 있습니다.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "개발 중",
+          period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice 홈 화면", caption: "홈 — 난이도 선택", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice 공격 플레이북 화면", caption: "공격 플레이북 선택", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice 주사위 판정 결과 화면", caption: "주사위 판정 결과", width: 1080, height: 2340 },
+          ],
+        },
       ]
     : [
         {
@@ -559,6 +577,24 @@ export default async function PortfolioPage() {
             { src: "/portfolio/mahjongjoy-screen-home.png", alt: "Mahjong Joy home screen", caption: "Home — Play with AI / Friends", width: 1080, height: 2340 },
             { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "Mahjong Joy gameplay screen with claim timer", caption: "Gameplay — 15s response timer", width: 1080, height: 2340 },
             { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "Mahjong Joy how to play screen", caption: "How to play — one shape, no hands", width: 1080, height: 2340 },
+          ],
+        },
+        {
+          name: "Football Dice",
+          tagline: "An American football board game resolved by dice and cards",
+          description:
+            "A board game app that recreates American football with dice and cards. Pick a play from your offense or defense playbook, and the outcome is resolved against a dice matchup chart — keeping the tension of a real tabletop board game. Play against AI across three difficulty levels, or challenge a friend directly over the same Wi-Fi network. Beyond the three suggested plays, you can browse the full playbook, and the app supports Korean and English with independent toggles for dice-and-card animations and sound effects.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "In development",
+          period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice home screen", caption: "Home — difficulty select", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice offense playbook screen", caption: "Offense playbook selection", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice dice resolution result screen", caption: "Dice resolution result", width: 1080, height: 2340 },
           ],
         },
       ];
