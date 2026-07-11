@@ -46,6 +46,34 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "블로그 자동 발행 SaaS",
+          tagline: "주제만 등록하면 AI가 초안을 쓰고, 클라우드가 알아서 발행",
+          description:
+            "날짜별로 주제를 등록해 두면 Claude가 초안을 쓰고, 예약된 시간에 티스토리와 네이버 블로그에 자동 발행해 주는 서비스입니다. 두 플랫폼 모두 글쓰기 API가 종료되어 Playwright 브라우저 자동화가 유일한 방법이었습니다 — Vercel 서버리스 함수 안에서 헤드리스 크롬을 띄워 실제 에디터에 글을 쓰고 발행 버튼을 누릅니다. 로그인은 Browserbase 원격 브라우저를 iframe으로 임베드해 사용자가 직접 하고, 서비스는 비밀번호를 전혀 다루지 않고 세션 쿠키만 저장합니다. 하루만 지나도 만료되는 카카오 세션은 매일 밤 세션을 깨워 연명시키는 cron으로 해결했고, 사용자별 Redis 네임스페이스로 멀티테넌트 구조를 갖췄습니다. 처음엔 로컬 CLI로 시작했다가 클라우드 SaaS로 전환했고, 현재 월 구독 서비스로 상업화를 준비 중입니다. 발행 자동화 로직이 곧 제품이라, 이 프로젝트는 예외적으로 소스를 공개하지 않습니다.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Playwright",
+            "@sparticuz/chromium",
+            "Upstash Redis",
+            "Auth.js",
+            "Browserbase",
+            "Vercel Cron",
+            "Claude API",
+          ],
+          links: [],
+          status: "wip",
+          statusLabel: "상업화 준비 중",
+          period: "2026.07 ~",
+          screenshots: [
+            { src: "/portfolio/blogauto-screen-dashboard.png", alt: "블로그 자동 발행 대시보드 — 주제 등록과 발행 현황", caption: "대시보드 — 주제 등록·발행 현황", width: 2412, height: 1682 },
+            { src: "/portfolio/blogauto-screen-queue.png", alt: "블로그 자동 발행 큐 — 날짜별 예약 주제 목록", caption: "발행 큐 — 한 달치 예약", width: 1956, height: 1650 },
+            { src: "/portfolio/blogauto-screen-generating.png", alt: "AI 초안 생성 중 화면", caption: "AI 초안 생성", width: 1440, height: 362 },
+            { src: "/portfolio/blogauto-screen-draft.png", alt: "생성된 초안 미리보기·수정 팝업", caption: "초안 미리보기·수정", width: 1438, height: 1024 },
+            { src: "/portfolio/blogauto-screen-settings.png", alt: "티스토리·네이버 블로그 연동 설정 화면", caption: "블로그 연동 설정", width: 2392, height: 1418 },
+          ],
+        },
+        {
           name: "문서 위변조 검증 블록체인",
           tagline: "처방전 파일의 해시만 온체인에 기록해 위변조를 검증하는 스마트 계약",
           description:
@@ -322,6 +350,34 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "Blog Auto-Publisher SaaS",
+          tagline: "Register a topic — AI drafts it, the cloud publishes it",
+          description:
+            "A service where you register topics by date, Claude writes the drafts, and posts are automatically published to Tistory and Naver Blog at the scheduled time. Both platforms shut down their writing APIs, so Playwright browser automation was the only way in — a headless Chrome runs inside a Vercel serverless function, types into the real editor, and clicks the publish button. For login, a Browserbase remote browser is embedded as an iframe so users sign in themselves; the service never touches passwords and stores only session cookies. Kakao sessions expire after just a day of inactivity, which I solved with a nightly cron that keeps sessions alive. Per-user Redis namespaces make it multi-tenant. It started as a local CLI and pivoted to a cloud SaaS — now preparing to launch as a paid subscription. Since the publishing automation is the product itself, this is the one project whose source stays private.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Playwright",
+            "@sparticuz/chromium",
+            "Upstash Redis",
+            "Auth.js",
+            "Browserbase",
+            "Vercel Cron",
+            "Claude API",
+          ],
+          links: [],
+          status: "wip",
+          statusLabel: "Preparing to launch",
+          period: "Jul 2026 ~",
+          screenshots: [
+            { src: "/portfolio/blogauto-screen-dashboard.png", alt: "Blog auto-publisher dashboard with topic registration and publish status", caption: "Dashboard — topics & publish status", width: 2412, height: 1682 },
+            { src: "/portfolio/blogauto-screen-queue.png", alt: "Publish queue with topics scheduled by date", caption: "Publish queue — a month scheduled", width: 1956, height: 1650 },
+            { src: "/portfolio/blogauto-screen-generating.png", alt: "AI draft generation in progress", caption: "AI drafting", width: 1440, height: 362 },
+            { src: "/portfolio/blogauto-screen-draft.png", alt: "Generated draft preview and edit modal", caption: "Draft preview & edit", width: 1438, height: 1024 },
+            { src: "/portfolio/blogauto-screen-settings.png", alt: "Tistory and Naver blog connection settings", caption: "Blog connection settings", width: 2392, height: 1418 },
+          ],
+        },
         {
           name: "Document Verification Blockchain",
           tagline: "Smart contract that verifies documents by matching file hashes on-chain",
