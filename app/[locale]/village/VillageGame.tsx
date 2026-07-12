@@ -460,6 +460,10 @@ export default function VillageGame({
   const modalRef = useRef<ModalState | null>(null);
   /** 심기 성공 시 마을 씬에 나무를 추가하는 엔진 훅 */
   const plantRef = useRef<((entry: GuestbookEntry) => void) | null>(null);
+  /** 터치 D-pad가 조작할 눌린 키 집합 — 키보드 핸들러와 동일한 Set을 공유 */
+  const pressedRef = useRef<Set<string>>(new Set());
+  /** 터치 상호작용 버튼이 호출할 SPACE 로직 */
+  const interactRef = useRef<() => void>(() => {});
   const isKo = locale === "ko";
 
   // 방명록 작성 폼 상태
@@ -639,8 +643,21 @@ export default function VillageGame({
     });
 
     // ---------- 키보드 입력 ----------
-    const pressed = new Set<string>();
+    const pressed = pressedRef.current;
+    pressed.clear();
     let currentZone: Interact | null = null; // 지금 프롬프트가 떠 있는 상호작용 대상
+
+    /** SPACE 상호작용 로직 — 키보드와 터치 버튼이 공용으로 호출 */
+    function handleInteract() {
+      const m = modalRef.current;
+      if (m) {
+        if (m.kind !== "plant") closeModal(); // 작성 폼은 Space로 닫히지 않음
+      } else if (currentZone && !transitioning) {
+        openModal(currentZone);
+        pressed.clear(); // 모달 열린 동안 이동키가 눌린 채 고정되는 것 방지
+      }
+    }
+    interactRef.current = handleInteract;
 
     function onKeyDown(e: KeyboardEvent) {
       const el = e.target as HTMLElement | null;
@@ -656,13 +673,7 @@ export default function VillageGame({
       if (e.code === "Space") {
         e.preventDefault(); // 스페이스로 페이지가 스크롤되는 것 방지
         if (e.repeat) return;
-        const m = modalRef.current;
-        if (m) {
-          if (m.kind !== "plant") closeModal(); // 작성 폼은 Space로 닫히지 않음
-        } else if (currentZone && !transitioning) {
-          openModal(currentZone);
-          pressed.clear(); // 모달 열린 동안 이동키가 눌린 채 고정되는 것 방지
-        }
+        handleInteract();
         return;
       }
       if (MOVE_KEYS[e.code]) {
@@ -786,6 +797,8 @@ export default function VillageGame({
       cancelAnimationFrame(rafId);
       timeouts.forEach(clearTimeout);
       plantRef.current = null;
+      interactRef.current = () => {};
+      pressed.clear();
       resizeObserver.disconnect();
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
@@ -890,7 +903,13 @@ export default function VillageGame({
   return (
     <div style={{ maxWidth: "60rem", margin: "0 auto" }}>
       {/* 모달 안 링크 hover — 인라인 스타일로는 :hover가 안 되므로 클래스 사용 */}
-      <style>{`.pv-modal-link:hover { background: rgba(232, 228, 216, 0.08); }`}</style>
+      <style>{`
+        .pv-modal-link:hover { background: rgba(232, 228, 216, 0.08); }
+        .pv-touch-controls { display: none; }
+        @media (pointer: coarse) {
+          .pv-touch-controls { display: block; }
+        }
+      `}</style>
 
       <div style={{ marginBottom: "1.25rem" }}>
         <h1
@@ -1438,6 +1457,107 @@ export default function VillageGame({
             zIndex: 3,
           }}
         />
+
+        {/* 터치 조작 — 키보드가 없는 모바일에서도 이동/상호작용 가능하게 */}
+        {!modal && (
+          <div
+            className="pv-touch-controls"
+            style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 14,
+                bottom: 14,
+                width: 132,
+                height: 132,
+                pointerEvents: "auto",
+              }}
+            >
+              {(
+                [
+                  { code: "KeyW", label: "▲", col: 2, row: 1 },
+                  { code: "KeyA", label: "◀", col: 1, row: 2 },
+                  { code: "KeyD", label: "▶", col: 3, row: 2 },
+                  { code: "KeyS", label: "▼", col: 2, row: 3 },
+                ] as const
+              ).map((btn) => (
+                <button
+                  key={btn.code}
+                  type="button"
+                  aria-label={btn.code}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    pressedRef.current.add(btn.code);
+                  }}
+                  onPointerUp={(e) => {
+                    e.preventDefault();
+                    pressedRef.current.delete(btn.code);
+                  }}
+                  onPointerLeave={() => pressedRef.current.delete(btn.code)}
+                  onPointerCancel={() => pressedRef.current.delete(btn.code)}
+                  onContextMenu={(e) => e.preventDefault()}
+                  style={{
+                    position: "absolute",
+                    left: (btn.col - 1) * 44,
+                    top: (btn.row - 1) * 44,
+                    width: 44,
+                    height: 44,
+                    padding: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "1.1rem",
+                    lineHeight: 1,
+                    color: "#e8e4d8",
+                    background: "rgba(232, 228, 216, 0.14)",
+                    border: "1px solid rgba(232, 228, 216, 0.4)",
+                    borderRadius: 8,
+                    touchAction: "none",
+                    userSelect: "none",
+                    WebkitUserSelect: "none",
+                    WebkitTapHighlightColor: "transparent",
+                  }}
+                >
+                  {btn.label}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              aria-label={isKo ? "상호작용" : "Interact"}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                interactRef.current();
+              }}
+              onContextMenu={(e) => e.preventDefault()}
+              style={{
+                position: "absolute",
+                right: 18,
+                bottom: 18,
+                width: 64,
+                height: 64,
+                padding: 0,
+                borderRadius: "50%",
+                fontSize: "0.68rem",
+                fontWeight: 700,
+                color: "#10140d",
+                background: "#e8e4d8",
+                border: "2px solid #10140d",
+                boxShadow: "3px 3px 0 rgba(0, 0, 0, 0.5)",
+                fontFamily: "var(--font-mono), monospace",
+                touchAction: "none",
+                userSelect: "none",
+                WebkitUserSelect: "none",
+                WebkitTapHighlightColor: "transparent",
+                pointerEvents: "auto",
+              }}
+            >
+              {isKo ? "실행" : "USE"}
+            </button>
+          </div>
+        )}
       </div>
 
       <p
