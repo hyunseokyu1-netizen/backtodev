@@ -46,6 +46,35 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "노가리",
+          tagline: "게시판을 운영자가 아니라 사용자들의 동의로 여는 익명 커뮤니티",
+          description:
+            "누구나 사람·사물·브랜드·사건을 두고 익명으로 수다 떠는 커뮤니티입니다. 핵심 실험은 두 가지였습니다. 첫째, 게시판(노가리방)을 운영자가 만들지 않습니다 — 누구나 주제를 제안하고 72시간 안에 30명이 동의하면 자동 개설되며, 만료·폭파(24시간 시한부 대나무숲)·무활동 아카이브는 전부 pg_cron이 처리합니다. 둘째, 회원가입이 없는데도 대화가 성립해야 했습니다. 미들웨어가 모든 방문자에게 익명 세션을 부여하고, 방 ID와 기기 해시를 시드로 한 결정론적 닉네임을 만들어 같은 방에서는 '격분한 국회의원'으로 일관되게 유지되지만 다른 방에서는 추적이 불가능합니다. 중복 방 제안은 임베딩 없이 Claude에게 기존 주제 목록을 통째로 주고 의미상 중복을 판정시키고, 댓글은 정규식 개인정보 필터 → LLM 스크리닝 2단계로 거릅니다. 트렌딩 랭킹은 Hacker News식 시간 감쇠 점수를 Postgres 뷰 하나로 계산합니다. 디자인은 검은 선 물고기 아이콘 + 오프화이트 종이 질감의 모노크롬 시스템을 HTML 핸드오프에서 코드로 재구현했습니다.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "React",
+            "Supabase",
+            "PostgreSQL",
+            "pg_cron",
+            "Tailwind CSS",
+            "Claude API",
+            "Serwist PWA",
+            "Vercel",
+          ],
+          links: [
+            { label: "→ nogari.vercel.app", href: "https://nogari.vercel.app", primary: true },
+          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2026.07",
+          image: { src: "/portfolio/nogari-feature.png", alt: "노가리 첫 화면 — 핫한 노가리방 실시간 랭킹" },
+          screenshots: [
+            { src: "/portfolio/nogari-screen-browse.png", alt: "노가리방 유형별 브라우징 — 국회의원 300명 시드 카드 그리드", caption: "유형별 브라우징 + 검색", width: 2560, height: 1720 },
+            { src: "/portfolio/nogari-screen-room.png", alt: "노가리방 상세 — 자동 생성 익명 닉네임과 댓글", caption: "익명 댓글 — 방마다 다른 닉네임", width: 2560, height: 1400 },
+          ],
+        },
+        {
           name: "블로그 자동 발행 SaaS",
           tagline: "주제만 등록하면 AI가 초안을 쓰고, 클라우드가 알아서 발행",
           description:
@@ -350,6 +379,35 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "Nogari",
+          tagline: "An anonymous community where boards are opened by user consensus, not admins",
+          description:
+            "An anonymous community for talking about people, products, brands, and events. Two experiments drive it. First, boards aren't created by an admin — anyone can propose a topic, and if 30 people agree within 72 hours, the room opens automatically; expiry, 24-hour self-destructing \"bamboo forest\" rooms, and inactivity archiving are all handled by pg_cron. Second, conversations had to work with zero signup: middleware grants every visitor an anonymous session, and a deterministic nickname derived from the room ID and a device hash keeps you consistently \"Furious Lawmaker\" within one room while making you untraceable across rooms. Duplicate room proposals are screened without embeddings — Claude receives the full list of existing topics and judges semantic duplicates directly — and comments pass through a two-stage filter: regex PII detection, then LLM screening. The trending ranking is a Hacker News-style time-decay score computed in a single Postgres view. The visual design — a line-art fish on off-white paper, all monochrome — was reimplemented in code from an HTML design handoff.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "React",
+            "Supabase",
+            "PostgreSQL",
+            "pg_cron",
+            "Tailwind CSS",
+            "Claude API",
+            "Serwist PWA",
+            "Vercel",
+          ],
+          links: [
+            { label: "→ nogari.vercel.app", href: "https://nogari.vercel.app", primary: true },
+          ],
+          status: "live",
+          statusLabel: "Live",
+          period: "Jul 2026",
+          image: { src: "/portfolio/nogari-feature.png", alt: "Nogari first screen — real-time trending rooms" },
+          screenshots: [
+            { src: "/portfolio/nogari-screen-browse.png", alt: "Browsing rooms by type — 300 seeded lawmaker cards", caption: "Browse by type + search", width: 2560, height: 1720 },
+            { src: "/portfolio/nogari-screen-room.png", alt: "Room detail — auto-generated anonymous nicknames and comments", caption: "Anonymous comments — per-room nicknames", width: 2560, height: 1400 },
+          ],
+        },
         {
           name: "Blog Auto-Publisher SaaS",
           tagline: "Register a topic — AI drafts it, the cloud publishes it",
