@@ -63,7 +63,7 @@ export default async function PortfolioPage() {
             "Vercel",
           ],
           links: [
-            { label: "→ nogari.vercel.app", href: "https://nogari.vercel.app", primary: true },
+            { label: "→ nogari.org", href: "https://nogari.org", primary: true },
           ],
           status: "live",
           statusLabel: "운영 중",
@@ -397,7 +397,7 @@ export default async function PortfolioPage() {
             "Vercel",
           ],
           links: [
-            { label: "→ nogari.vercel.app", href: "https://nogari.vercel.app", primary: true },
+            { label: "→ nogari.org", href: "https://nogari.org", primary: true },
           ],
           status: "live",
           statusLabel: "Live",
