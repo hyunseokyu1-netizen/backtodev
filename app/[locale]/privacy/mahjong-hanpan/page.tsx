@@ -104,9 +104,9 @@ export default async function MahjongHanpanPrivacyPage() {
             <section>
               <h2 style={h2Style}>7. 문의</h2>
               <p style={pStyle}>
-                개인정보 관련 문의사항이 있으시면 GitHub를 통해 연락해 주세요:{" "}
-                <a href="https://github.com/hyunseokyu1-netizen" target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  github.com/hyunseokyu1-netizen
+                개인정보 관련 문의사항이 있으시면 이메일로 연락해 주세요:{" "}
+                <a href="mailto:backdev.tip@gmail.com" style={linkStyle}>
+                  backdev.tip@gmail.com
                 </a>
               </p>
             </section>
@@ -173,9 +173,9 @@ export default async function MahjongHanpanPrivacyPage() {
             <section>
               <h2 style={h2Style}>7. Contact</h2>
               <p style={pStyle}>
-                If you have any questions about this Privacy Policy, please reach out via GitHub:{" "}
-                <a href="https://github.com/hyunseokyu1-netizen" target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  github.com/hyunseokyu1-netizen
+                If you have any questions about this Privacy Policy, please reach out via email:{" "}
+                <a href="mailto:backdev.tip@gmail.com" style={linkStyle}>
+                  backdev.tip@gmail.com
                 </a>
               </p>
             </section>
