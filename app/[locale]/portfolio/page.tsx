@@ -1,6 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import Image from "next/image";
+import LightboxImage from "@/components/LightboxImage";
 
 const BASE_URL = "https://backtodev.com";
 
@@ -936,33 +936,25 @@ export default async function PortfolioPage() {
               ))}
             </div>
 
-            {/* Preview image */}
+            {/* Preview image — 클릭하면 오버레이로 크게 보기 */}
             {project.image && (
-              <a
-                href={project.links.find((l) => l.primary)?.href}
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
                 style={{
-                  display: "block",
                   marginTop: "1.25rem",
                   borderRadius: 10,
                   overflow: "hidden",
                   border: "1px solid hsl(var(--border))",
                 }}
               >
-                <Image
+                <LightboxImage
                   src={project.image.src}
                   alt={project.image.alt}
                   width={1280}
                   height={800}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    display: "block",
-                  }}
                   priority
+                  isKo={isKo}
                 />
-              </a>
+              </div>
             )}
 
             {/* Screenshots */}
@@ -986,16 +978,13 @@ export default async function PortfolioPage() {
                       background: "hsl(var(--background))",
                     }}
                   >
-                    <Image
+                    <LightboxImage
                       src={screenshot.src}
                       alt={screenshot.alt}
                       width={screenshot.width ?? 1080}
                       height={screenshot.height ?? 2340}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        display: "block",
-                      }}
+                      caption={screenshot.caption}
+                      isKo={isKo}
                     />
                     <figcaption
                       style={{
