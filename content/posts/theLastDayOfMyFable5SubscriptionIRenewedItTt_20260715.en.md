@@ -1,5 +1,5 @@
 ---
-title: Last day of my Fable5 subscription... and they extended it... T_T
+title: Fable5, which I thought was over... got extended... T_T
 date: '2026-07-15'
 description: Entropic extended my Fable5 subscription again, and now I have zero excuse to stop building
 tags:
