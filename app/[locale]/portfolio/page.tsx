@@ -49,7 +49,7 @@ export default async function PortfolioPage() {
           name: "대화형 학습 플랫폼",
           tagline: "코드 실행부터 쿠버네티스 배포까지, 브라우저 안의 실습실",
           description:
-            "딥러닝과 쿠버네티스를 공부하려고 책 대신 학습 사이트를 직접 만들었습니다. 화면은 마크다운 지문·Monaco 에디터·Xterm.js 터미널의 3분할 구조이고, 에디터에서 실행한 파이썬 코드는 FastAPI 백엔드가 CPU·시간·출력량 제한을 건 격리 서브프로세스에서 돌린 뒤 웹소켓으로 터미널에 실시간 스트리밍합니다. 채점도 같은 샌드박스에서 이뤄집니다 — 제출 코드를 실행한 디렉터리에서 체커 스크립트가 돌아 '입력 차원이 기대와 다릅니다' 같은 한국어 피드백을 주고, 통과 산출물(토큰, 모델 가중치)은 다음 단계로 자동 전달됩니다. 쿠버네티스 실습은 시뮬레이션이 아니라 유저 전용 K3s 클러스터 컨테이너의 셸을 PTY로 웹 터미널에 연결해 실제 kubectl이 응답하고, Docker 기초 코스는 별도의 dind(Docker-in-Docker) 환경을 씁니다. 마지막 MLOps 코스는 직접 학습시킨 PyTorch 모델을 torch 없이 numpy만으로 추론하는 경량 서빙 이미지로 빌드해 K3s에 주입하고, LoadBalancer IP로 curl 검증까지 하는 전체 파이프라인입니다. PyTorch·머신러닝·LLM·데이터 분석·Docker·쿠버네티스 기초/심화·MLOps까지 8개 코스, 채점 회귀 테스트 41개로 유지합니다. 로컬 Docker·K3s 인프라 위에서 도는 개인 학습 환경이라 라이브 데모 없이 기록으로 남깁니다.",
+            "딥러닝과 쿠버네티스를 공부하려고 책 대신 학습 사이트를 직접 만들었습니다. 화면은 마크다운 지문·Monaco 에디터·Xterm.js 터미널의 3분할 구조이고, 에디터에서 실행한 파이썬 코드는 FastAPI 백엔드가 CPU·시간·출력량 제한을 건 격리 서브프로세스에서 돌린 뒤 웹소켓으로 터미널에 실시간 스트리밍합니다. 채점도 같은 샌드박스에서 이뤄집니다 — 제출 코드를 실행한 디렉터리에서 체커 스크립트가 돌아 '입력 차원이 기대와 다릅니다' 같은 한국어 피드백을 주고, 통과 산출물(토큰, 모델 가중치)은 다음 단계로 자동 전달됩니다. 쿠버네티스 실습은 시뮬레이션이 아니라 유저 전용 K3s 클러스터 컨테이너의 셸을 PTY로 웹 터미널에 연결해 실제 kubectl이 응답하고, Docker 기초 코스는 별도의 dind(Docker-in-Docker) 환경을 씁니다. 마지막 MLOps 코스는 직접 학습시킨 PyTorch 모델을 torch 없이 numpy만으로 추론하는 경량 서빙 이미지로 빌드해 K3s에 주입하고, LoadBalancer IP로 curl 검증까지 하는 전체 파이프라인입니다. PyTorch·머신러닝·LLM·데이터 분석·Docker·쿠버네티스 기초/심화·MLOps까지 8개 코스, 채점 회귀 테스트 41개로 유지합니다. 로컬 Docker·K3s 인프라 위에서 도는 개인 학습 환경이라 라이브 데모는 없고, 소스와 실행 방법은 GitHub에 공개했습니다.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -62,7 +62,9 @@ export default async function PortfolioPage() {
             "K3s",
             "pytest",
           ],
-          links: [],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/interactive-learning-platform", primary: true },
+          ],
           status: "live",
           statusLabel: "로컬 운영 중",
           period: "2026.07",
@@ -409,7 +411,7 @@ export default async function PortfolioPage() {
           name: "Interactive Learning Platform",
           tagline: "A hands-on lab in the browser — from running code to deploying on Kubernetes",
           description:
-            "I wanted to study deep learning and Kubernetes, so instead of reading books I built the learning site myself. The screen is a three-pane workspace — markdown lesson, Monaco editor, and an Xterm.js terminal. Python code from the editor runs in an isolated subprocess with CPU, wall-clock, and output limits enforced by a FastAPI backend, and the output streams back to the terminal over WebSocket in real time. Grading happens in the same sandbox: a checker script runs in the directory where your submission executed, gives feedback like \"expected input dimension (Batch, 100)\", and passing artifacts (tokens, model weights) carry over to the next stage automatically. The Kubernetes labs are not simulations — a per-user K3s cluster container is wired to the web terminal via PTY so real kubectl answers back, and the Docker course gets its own dind (Docker-in-Docker) environment. The final MLOps course closes the loop: package your own trained PyTorch model into a lightweight numpy-only serving image, inject it into K3s, and verify the API through a LoadBalancer IP with curl. Eight courses — PyTorch, ML, LLM, data analysis, Docker, Kubernetes basics/advanced, and MLOps — backed by 41 grading regression tests. It runs on local Docker and K3s infrastructure, so there's no live demo; this entry is the record.",
+            "I wanted to study deep learning and Kubernetes, so instead of reading books I built the learning site myself. The screen is a three-pane workspace — markdown lesson, Monaco editor, and an Xterm.js terminal. Python code from the editor runs in an isolated subprocess with CPU, wall-clock, and output limits enforced by a FastAPI backend, and the output streams back to the terminal over WebSocket in real time. Grading happens in the same sandbox: a checker script runs in the directory where your submission executed, gives feedback like \"expected input dimension (Batch, 100)\", and passing artifacts (tokens, model weights) carry over to the next stage automatically. The Kubernetes labs are not simulations — a per-user K3s cluster container is wired to the web terminal via PTY so real kubectl answers back, and the Docker course gets its own dind (Docker-in-Docker) environment. The final MLOps course closes the loop: package your own trained PyTorch model into a lightweight numpy-only serving image, inject it into K3s, and verify the API through a LoadBalancer IP with curl. Eight courses — PyTorch, ML, LLM, data analysis, Docker, Kubernetes basics/advanced, and MLOps — backed by 41 grading regression tests. It runs on local Docker and K3s infrastructure, so there's no live demo — but the source and setup guide are on GitHub.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -422,7 +424,9 @@ export default async function PortfolioPage() {
             "K3s",
             "pytest",
           ],
-          links: [],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/interactive-learning-platform", primary: true },
+          ],
           status: "live",
           statusLabel: "Running locally",
           period: "Jul 2026",
