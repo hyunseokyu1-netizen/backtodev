@@ -807,8 +807,8 @@ export default async function PortfolioPage() {
           >
             {/* Top row: name + status */}
             <div
-              className="flex items-start justify-between"
-              style={{ marginBottom: "0.75rem", gap: "1rem" }}
+              className="flex flex-col sm:flex-row sm:items-start sm:justify-between"
+              style={{ marginBottom: "0.75rem", gap: "0.5rem" }}
             >
               <div>
                 <h2
@@ -832,7 +832,7 @@ export default async function PortfolioPage() {
                   {project.tagline}
                 </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 flex-wrap sm:shrink-0">
                 <span
                   style={{
                     fontSize: "0.7rem",
@@ -840,6 +840,7 @@ export default async function PortfolioPage() {
                     borderRadius: 99,
                     fontWeight: 700,
                     fontFamily: "var(--font-mono), monospace",
+                    whiteSpace: "nowrap",
                     background:
                       project.status === "live"
                         ? "hsl(160 40% 12%)"
@@ -863,6 +864,7 @@ export default async function PortfolioPage() {
                     fontSize: "0.7rem",
                     color: "hsl(var(--muted-foreground))",
                     fontFamily: "var(--font-mono), monospace",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {project.period}
