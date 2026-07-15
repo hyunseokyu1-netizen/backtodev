@@ -1,5 +1,5 @@
 ---
-title: Fable5 사용 마지막날.... 연장함...ㅠㅠ
+title: 끝난 줄 알았던 Fable5, 연장되었다...ㅠㅠ
 date: '2026-07-15'
 description: Fable5 사용 날짜 연장함..
 tags:
