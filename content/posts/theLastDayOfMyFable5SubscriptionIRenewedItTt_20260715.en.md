@@ -1,5 +1,5 @@
 ---
-title: The last day of my Fable5 subscription... I renewed it... T_T
+title: The last day of my Fable5 subscription... They renewed it... T_T
 date: '2026-07-15'
 description: Fable 5 usage period extended...
 tags:
