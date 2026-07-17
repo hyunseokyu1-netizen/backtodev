@@ -65,7 +65,6 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "스토어 등록 준비 중",
           period: "2026.07",
-          image: { src: "/portfolio/reponote-feature.png", alt: "RepoNote 앱 아이콘 — 보라색 배경의 마크다운 노트" },
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote 파일 트리 화면 — 접기/펼치기 폴더와 동기화 상태", caption: "파일 트리 — 폴더 접기/펼치기", width: 1080, height: 2340 },
             { src: "/portfolio/reponote-screen-editor.png", alt: "RepoNote 마크다운 편집 화면 — 저장 상태 표시", caption: "편집 — 자동 저장·자동 커밋", width: 1080, height: 2340 },
@@ -481,7 +480,6 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "Preparing store release",
           period: "Jul 2026",
-          image: { src: "/portfolio/reponote-feature.png", alt: "RepoNote app icon — markdown note on purple background" },
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote file tree with collapsible folders and sync status", caption: "File tree — collapsible folders", width: 1080, height: 2340 },
             { src: "/portfolio/reponote-screen-editor.png", alt: "RepoNote markdown editor with save status", caption: "Editor — auto-save & auto-commit", width: 1080, height: 2340 },
