@@ -46,6 +46,32 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "YouTube 링크 영상 편집기",
+          tagline: "링크 붙여넣기 → 구간 선택 → 하나의 MP4",
+          description:
+            "유튜브 영상 몇 개에서 원하는 구간만 이어붙이고 싶을 때, 무거운 편집 프로그램을 켜는 대신 브라우저에서 끝내려고 만든 개인용 편집 도구입니다. URL을 붙여넣으면 yt-dlp로 메타데이터와 함께 유튜브의 Most Replayed(사람들이 많이 다시 본 구간) 데이터를 가져와 SVG 그래프로 그려주는데, 봉우리를 보고 클릭·드래그하면 하이라이트 구간이 바로 선택됩니다. 렌더링은 몇 분씩 걸리는 작업이라 FastAPI 백엔드를 분리해 job 모델로 설계했습니다 — 요청 즉시 jobId만 반환하고 프런트가 진행률을 폴링하며, 실행 중인 yt-dlp·FFmpeg 프로세스를 죽이고 임시 파일까지 정리하는 취소도 지원합니다. 클립은 프레임 단위 정확도를 위해 재인코딩으로 자르면서 해상도·fps·코덱을 동시에 통일해 두고, 마지막 병합은 FFmpeg concat copy로 몇 초 만에 끝냅니다. 유튜브가 데이터센터 IP의 다운로드를 차단해 클라우드 배포와는 맞지 않는 워크로드라, 대신 setup.sh 한 번으로 다른 맥에도 설치되도록 패키징했습니다. 다운로드 도구라는 특성상 소스는 공개하지 않습니다.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "zustand",
+            "dnd-kit",
+            "FastAPI",
+            "yt-dlp",
+            "FFmpeg",
+          ],
+          links: [
+            { label: "개발 이야기", href: "/ko/posts/youtube_editor_20260717" },
+          ],
+          status: "live",
+          statusLabel: "로컬 사용 중",
+          period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/ytedit-screen-main.png", alt: "YouTube 링크 영상 편집기 메인 화면 — 플레이어, 소스 영상 목록, Most Replayed heatmap 그래프", caption: "메인 화면 — Most Replayed heatmap", width: 1600, height: 922 },
+            { src: "/portfolio/ytedit-screen-render.png", alt: "편집 타임라인의 클립 4개와 렌더링 100% 완료 후 결과 영상 미리보기", caption: "클립 타임라인 — 렌더링 완료·미리보기", width: 1600, height: 944 },
+          ],
+        },
+        {
           name: "대화형 학습 플랫폼",
           tagline: "코드 실행부터 쿠버네티스 배포까지, 브라우저 안의 실습실",
           description:
@@ -407,6 +433,32 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "YouTube Link Video Editor",
+          tagline: "Paste links → pick segments → one MP4",
+          description:
+            "A personal editing tool for the moments you just want to stitch together a few segments from different YouTube videos — without launching a heavyweight editor. Paste a URL and it pulls the metadata via yt-dlp along with YouTube's Most Replayed data, rendered as an SVG graph; the peaks show you where the highlights are, and clicking or dragging on the graph selects a range instantly. Since rendering takes minutes, I split off a FastAPI backend built around a job model — the API returns a jobId immediately, the frontend polls for progress, and cancellation kills the running yt-dlp/FFmpeg processes and cleans up temp files. Clips are cut with re-encoding for frame-accurate boundaries while simultaneously normalizing resolution, fps, and codecs, so the final merge is a near-instant FFmpeg concat copy. YouTube blocks downloads from datacenter IPs, which makes this workload a poor fit for cloud hosting — so instead I packaged it to install on any Mac with a single setup.sh. Given that it's a downloading tool, the source stays private.",
+          tech: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "zustand",
+            "dnd-kit",
+            "FastAPI",
+            "yt-dlp",
+            "FFmpeg",
+          ],
+          links: [
+            { label: "Dev story", href: "/en/posts/youtube_editor_20260717" },
+          ],
+          status: "live",
+          statusLabel: "Running locally",
+          period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/ytedit-screen-main.png", alt: "YouTube Link Video Editor main screen — player, source list, and Most Replayed heatmap graph", caption: "Main screen — Most Replayed heatmap", width: 1600, height: 922 },
+            { src: "/portfolio/ytedit-screen-render.png", alt: "Edit timeline with four clips and the rendered result preview at 100%", caption: "Clip timeline — render complete", width: 1600, height: 944 },
+          ],
+        },
         {
           name: "Interactive Learning Platform",
           tagline: "A hands-on lab in the browser — from running code to deploying on Kubernetes",
