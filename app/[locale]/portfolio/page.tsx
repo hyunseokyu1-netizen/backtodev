@@ -61,6 +61,7 @@ export default async function PortfolioPage() {
           ],
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
+            { label: "개발 이야기", href: "/ko/posts/reponote_flutter_20260717" },
           ],
           status: "wip",
           statusLabel: "스토어 등록 준비 중",
@@ -476,6 +477,7 @@ export default async function PortfolioPage() {
           ],
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
+            { label: "Dev story", href: "/ko/posts/reponote_flutter_20260717" },
           ],
           status: "wip",
           statusLabel: "Preparing store release",
