@@ -46,6 +46,34 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "RepoNote",
+          tagline: "Obsidian 저장소와 자동 동기화되는 모바일 메모장",
+          description:
+            "모바일에서 Obsidian과 Git을 연결하는 게 너무 복잡하고, 충돌이 나면 폰의 작은 화면에서 병합 마커를 보며 해결해야 하는 게 고통스러워서 직접 만든 메모 앱입니다. 발상을 뒤집었습니다 — 폰에 저장소를 클론하는 대신 Git CLI 없이 GitHub Contents API만 사용해서, 열고 쓰고 닫으면 알아서 커밋됩니다. 입력은 항상 로컬 DB에 먼저 저장되고(600ms debounce) 입력이 멈추면 5초 뒤 자동으로 GitHub에 반영되므로, 오프라인이나 API 실패에도 글이 유실되지 않습니다. 충돌은 파일을 읽을 때의 SHA와 업로드 직전 서버 SHA를 비교해 감지하고, 덮어쓰는 대신 두 버전을 비교해 고르는 화면을 띄웁니다. 사실 이 앱은 같은 작업지시서로 React Native에서 먼저 만들었는데 빌드·상태 관리 에러가 너무 많아 중단하고, Flutter로 처음부터 다시 만들어 완성했습니다 — 스펙 문서를 잘 써두면 프레임워크를 갈아타도 손해가 크지 않다는 걸 배웠습니다. 한국어/영어를 지원하고 Riverpod Provider 오버라이드로 가짜 API를 주입하는 스토어 스크린샷용 데모 모드도 만들었습니다.",
+          tech: [
+            "Flutter",
+            "Dart",
+            "Riverpod",
+            "go_router",
+            "dio",
+            "drift",
+            "GitHub REST API",
+          ],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "스토어 등록 준비 중",
+          period: "2026.07",
+          image: { src: "/portfolio/reponote-feature.png", alt: "RepoNote 앱 아이콘 — 보라색 배경의 마크다운 노트" },
+          screenshots: [
+            { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote 파일 트리 화면 — 접기/펼치기 폴더와 동기화 상태", caption: "파일 트리 — 폴더 접기/펼치기", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-editor.png", alt: "RepoNote 마크다운 편집 화면 — 저장 상태 표시", caption: "편집 — 자동 저장·자동 커밋", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-preview.png", alt: "RepoNote 마크다운 미리보기 — 체크리스트 렌더링", caption: "미리보기 — 체크리스트 렌더링", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-token.png", alt: "RepoNote GitHub 연결 화면 — Fine-grained Token 안내", caption: "GitHub 연결 — 최소 권한 토큰", width: 1080, height: 2340 },
+          ],
+        },
+        {
           name: "YouTube 링크 영상 편집기",
           tagline: "링크 붙여넣기 → 구간 선택 → 하나의 MP4",
           description:
@@ -433,6 +461,34 @@ export default async function PortfolioPage() {
         },
       ]
     : [
+        {
+          name: "RepoNote",
+          tagline: "A mobile notepad that auto-syncs with your Obsidian repo",
+          description:
+            "Connecting Obsidian to Git on mobile was painfully complex, and resolving merge conflicts on a phone screen was worse — so I built my own note app. The idea is inverted: instead of cloning the repo to the phone, it uses only the GitHub Contents API with no Git CLI at all. Open, write, close — your note is committed automatically. Every keystroke is saved to a local database first (600ms debounce), and changes are pushed to GitHub five seconds after you stop typing, so nothing is lost offline or when the API fails. Conflicts are detected by comparing the SHA from when the file was read against the server's SHA right before upload; instead of overwriting, the app shows both versions and lets you choose. This app was actually built twice — first in React Native from the same spec document, but constant build and state-management errors killed it, so I rebuilt it from scratch in Flutter. Lesson learned: a well-written spec makes switching frameworks surprisingly cheap. It ships in English and Korean, with a demo mode that injects a fake GitHub API via Riverpod provider overrides for store screenshots.",
+          tech: [
+            "Flutter",
+            "Dart",
+            "Riverpod",
+            "go_router",
+            "dio",
+            "drift",
+            "GitHub REST API",
+          ],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "Preparing store release",
+          period: "Jul 2026",
+          image: { src: "/portfolio/reponote-feature.png", alt: "RepoNote app icon — markdown note on purple background" },
+          screenshots: [
+            { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote file tree with collapsible folders and sync status", caption: "File tree — collapsible folders", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-editor.png", alt: "RepoNote markdown editor with save status", caption: "Editor — auto-save & auto-commit", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-preview.png", alt: "RepoNote markdown preview rendering checklists", caption: "Preview — rendered checklists", width: 1080, height: 2340 },
+            { src: "/portfolio/reponote-screen-token.png", alt: "RepoNote GitHub connection screen with fine-grained token guide", caption: "GitHub connect — least-privilege token", width: 1080, height: 2340 },
+          ],
+        },
         {
           name: "YouTube Link Video Editor",
           tagline: "Paste links → pick segments → one MP4",
