@@ -166,10 +166,13 @@ export default function PostsClient({ posts, readLabel }: Props) {
           border: "1px solid hsl(var(--border))",
           position: "sticky",
           top: 80,
+          maxHeight: "calc(100vh - 100px)",
+          display: "flex",
+          flexDirection: "column",
         }}
         className="hidden lg:block"
       >
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-4" style={{ flexShrink: 0 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
             <line x1="7" y1="7" x2="7.01" y2="7"/>
@@ -177,7 +180,7 @@ export default function PostsClient({ posts, readLabel }: Props) {
           <span style={{ fontWeight: 700, fontSize: "1rem", color: "hsl(var(--foreground))" }}>Topics</span>
         </div>
 
-        <div className="flex flex-wrap" style={{ gap: "0.5rem" }}>
+        <div className="flex flex-wrap" style={{ gap: "0.5rem", overflowY: "auto" }}>
           {/* All Posts */}
           <button
             onClick={() => setActiveTag(null)}
