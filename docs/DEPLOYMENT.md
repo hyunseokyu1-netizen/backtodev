@@ -24,7 +24,7 @@ This project is deployed on [Vercel](https://vercel.com). Every push to `main` t
 
 Posts placed in `content/scheduled/` are automatically published via GitHub Actions.
 
-- Runs daily at 00:00 KST (UTC 15:00)
+- Runs daily at 00:05 KST (UTC 15:05)
 - Checks `publish_date` field first, falls back to `date` field
 - Moves eligible files to `content/posts/` and pushes a commit
 
