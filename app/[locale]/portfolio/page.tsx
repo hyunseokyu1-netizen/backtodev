@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import LightboxImage from "@/components/LightboxImage";
+import ExpandableProjectList from "@/components/ExpandableProjectList";
 import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -1251,11 +1252,10 @@ export default async function PortfolioPage() {
               : "More projects I have shipped, operated, or built hands-on."}
           </p>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-          {projects.filter((project) => !project.featured).map((project) => (
-            <ProjectCard key={project.name} project={project} isKo={isKo} compact />
-          ))}
-        </div>
+        <ExpandableProjectList
+          projects={projects.filter((project) => !project.featured)}
+          isKo={isKo}
+        />
       </section>
 
       {/* Footer note */}

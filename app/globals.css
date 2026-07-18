@@ -294,6 +294,21 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 3px !important;
 }
 
+.more-project-card,
+.project-detail-button {
+  transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.more-project-card:hover {
+  border-color: hsl(var(--primary) / 0.28) !important;
+  transform: translateY(-1px);
+}
+
+.project-detail-button:hover {
+  background: hsl(var(--primary) / 0.14) !important;
+  transform: translateY(-1px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -304,7 +319,9 @@ h1, h2, h3, h4, h5, h6 {
     transition-duration: 0.01ms !important;
   }
 
-  .post-card:hover {
+  .post-card:hover,
+  .more-project-card:hover,
+  .project-detail-button:hover {
     transform: none;
   }
 }
