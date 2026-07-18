@@ -52,6 +52,7 @@ export default function LightboxImage({ src, alt, width, height, caption, priori
           alt={alt}
           width={width}
           height={height}
+          sizes="(max-width: 768px) calc(100vw - 3rem), 52rem"
           style={{ width: "100%", height: "auto", display: "block" }}
           priority={priority}
         />

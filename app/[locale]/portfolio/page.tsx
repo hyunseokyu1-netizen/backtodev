@@ -35,8 +35,264 @@ interface Project {
   status: "live" | "wip";
   statusLabel: string;
   period: string;
-  image?: { src: string; alt: string };
+  featured?: boolean;
+  image?: { src: string; alt: string; width: number; height: number };
   screenshots?: { src: string; alt: string; caption: string; width?: number; height?: number }[];
+}
+
+function ProjectBody({ project, isKo }: { project: Project; isKo: boolean }) {
+  return (
+    <>
+      <p
+        style={{
+          color: "hsl(var(--muted-foreground))",
+          lineHeight: 1.85,
+          fontSize: "0.9rem",
+          marginBottom: "1.25rem",
+        }}
+      >
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap" style={{ gap: "0.4rem", marginBottom: "1.25rem" }}>
+        {project.tech.map((tech) => (
+          <span
+            key={tech}
+            style={{
+              fontSize: "0.72rem",
+              padding: "0.2rem 0.6rem",
+              borderRadius: 6,
+              background: "hsl(var(--background))",
+              color: "hsl(var(--muted-foreground))",
+              border: "1px solid hsl(var(--border))",
+              fontFamily: "var(--font-mono), monospace",
+            }}
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex items-center flex-wrap" style={{ gap: "0.75rem" }}>
+        {project.links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target={link.href.startsWith("http") ? "_blank" : undefined}
+            rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            style={{
+              fontSize: "0.82rem",
+              fontWeight: link.primary ? 700 : 500,
+              color: link.primary ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
+              textDecoration: "none",
+              fontFamily: "var(--font-mono), monospace",
+              borderBottom: `1px solid ${
+                link.primary ? "hsl(var(--primary) / 0.4)" : "hsl(var(--border))"
+              }`,
+              paddingBottom: "1px",
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      {project.image && (
+        <div
+          style={{
+            marginTop: "1.25rem",
+            borderRadius: 10,
+            overflow: "hidden",
+            border: "1px solid hsl(var(--border))",
+          }}
+        >
+          <LightboxImage
+            src={project.image.src}
+            alt={project.image.alt}
+            width={project.image.width}
+            height={project.image.height}
+            isKo={isKo}
+          />
+        </div>
+      )}
+
+      {project.screenshots && (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+            gap: "0.9rem",
+            marginTop: "1rem",
+          }}
+        >
+          {project.screenshots.map((screenshot) => (
+            <figure
+              key={screenshot.src}
+              style={{
+                margin: 0,
+                borderRadius: 10,
+                overflow: "hidden",
+                border: "1px solid hsl(var(--border))",
+                background: "hsl(var(--background))",
+              }}
+            >
+              <LightboxImage
+                src={screenshot.src}
+                alt={screenshot.alt}
+                width={screenshot.width ?? 1080}
+                height={screenshot.height ?? 2340}
+                caption={screenshot.caption}
+                isKo={isKo}
+              />
+              <figcaption
+                style={{
+                  padding: "0.55rem 0.7rem",
+                  fontSize: "0.72rem",
+                  color: "hsl(var(--muted-foreground))",
+                  fontFamily: "var(--font-mono), monospace",
+                  textAlign: "center",
+                  borderTop: "1px solid hsl(var(--border))",
+                }}
+              >
+                {screenshot.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+function ProjectCard({ project, isKo, compact = false }: { project: Project; isKo: boolean; compact?: boolean }) {
+  return (
+    <article
+      style={{
+        borderRadius: 20,
+        padding: compact ? "1.25rem 1.5rem" : "1.75rem",
+        background: "hsl(var(--card))",
+        border: `1px solid ${project.featured ? "hsl(var(--primary) / 0.28)" : "hsl(var(--border))"}`,
+        position: "relative",
+      }}
+    >
+      <div
+        className="flex flex-col sm:flex-row sm:items-start sm:justify-between"
+        style={{ marginBottom: compact ? "0.25rem" : "0.75rem", gap: "0.5rem" }}
+      >
+        <div>
+          {project.featured && (
+            <span
+              style={{
+                display: "inline-block",
+                marginBottom: "0.45rem",
+                color: "hsl(var(--primary))",
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: "0.65rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+              }}
+            >
+              FEATURED
+            </span>
+          )}
+          <h2
+            style={{
+              fontSize: compact ? "1.05rem" : "1.15rem",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              color: "hsl(var(--foreground))",
+              marginBottom: "0.2rem",
+            }}
+          >
+            {project.name}
+          </h2>
+          <p
+            style={{
+              fontSize: "0.82rem",
+              color: "hsl(var(--primary))",
+              fontFamily: "var(--font-mono), monospace",
+            }}
+          >
+            {project.tagline}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap sm:shrink-0">
+          <span
+            style={{
+              fontSize: "0.7rem",
+              padding: "0.25rem 0.6rem",
+              borderRadius: 99,
+              fontWeight: 700,
+              fontFamily: "var(--font-mono), monospace",
+              whiteSpace: "nowrap",
+              background: project.status === "live" ? "hsl(160 40% 12%)" : "hsl(40 40% 12%)",
+              color: project.status === "live" ? "hsl(160 70% 55%)" : "hsl(40 90% 60%)",
+              border: `1px solid ${
+                project.status === "live" ? "hsl(160 40% 22%)" : "hsl(40 40% 24%)"
+              }`,
+            }}
+          >
+            {project.status === "live" ? "● " : "○ "}
+            {project.statusLabel}
+          </span>
+          <span
+            style={{
+              fontSize: "0.7rem",
+              color: "hsl(var(--muted-foreground))",
+              fontFamily: "var(--font-mono), monospace",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {project.period}
+          </span>
+        </div>
+      </div>
+
+      {compact ? (
+        <div style={{ marginTop: "0.9rem" }}>
+          <div className="flex flex-wrap" style={{ gap: "0.35rem", marginBottom: "0.85rem" }}>
+            {project.tech.slice(0, 6).map((tech) => (
+              <span
+                key={tech}
+                style={{
+                  fontSize: "0.68rem",
+                  padding: "0.16rem 0.5rem",
+                  borderRadius: 6,
+                  background: "hsl(var(--background))",
+                  color: "hsl(var(--muted-foreground))",
+                  border: "1px solid hsl(var(--border))",
+                  fontFamily: "var(--font-mono), monospace",
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center flex-wrap" style={{ gap: "0.75rem" }}>
+            {project.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                style={{
+                  color: link.primary ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: "0.75rem",
+                  textDecoration: "underline",
+                  textUnderlineOffset: 3,
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <ProjectBody project={project} isKo={isKo} />
+      )}
+    </article>
+  );
 }
 
 export default async function PortfolioPage() {
@@ -47,6 +303,7 @@ export default async function PortfolioPage() {
     ? [
         {
           name: "RepoNote",
+          featured: true,
           tagline: "Obsidian 저장소와 자동 동기화되는 모바일 메모장",
           description:
             "모바일에서 Obsidian과 Git을 연결하는 게 너무 복잡하고, 충돌이 나면 폰의 작은 화면에서 병합 마커를 보며 해결해야 하는 게 고통스러워서 직접 만든 메모 앱입니다. 발상을 뒤집었습니다 — 폰에 저장소를 클론하는 대신 Git CLI 없이 GitHub Contents API만 사용해서, 열고 쓰고 닫으면 알아서 커밋됩니다. 입력은 항상 로컬 DB에 먼저 저장되고(600ms debounce) 입력이 멈추면 5초 뒤 자동으로 GitHub에 반영되므로, 오프라인이나 API 실패에도 글이 유실되지 않습니다. 충돌은 파일을 읽을 때의 SHA와 업로드 직전 서버 SHA를 비교해 감지하고, 덮어쓰는 대신 두 버전을 비교해 고르는 화면을 띄웁니다. 사실 이 앱은 같은 작업지시서로 React Native에서 먼저 만들었는데 빌드·상태 관리 에러가 너무 많아 중단하고, Flutter로 처음부터 다시 만들어 완성했습니다 — 스펙 문서를 잘 써두면 프레임워크를 갈아타도 손해가 크지 않다는 걸 배웠습니다. 한국어/영어를 지원하고 Riverpod Provider 오버라이드로 가짜 API를 주입하는 스토어 스크린샷용 데모 모드도 만들었습니다.",
@@ -151,7 +408,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.07",
-          image: { src: "/portfolio/nogari-feature.png", alt: "노가리 첫 화면 — 핫한 노가리방 실시간 랭킹" },
+          image: { src: "/portfolio/nogari-feature.png", alt: "노가리 첫 화면 — 핫한 노가리방 실시간 랭킹", width: 2560, height: 1720 },
           screenshots: [
             { src: "/portfolio/nogari-screen-browse.png", alt: "노가리방 유형별 브라우징 — 국회의원 300명 시드 카드 그리드", caption: "유형별 브라우징 + 검색", width: 2560, height: 1720 },
             { src: "/portfolio/nogari-screen-room.png", alt: "노가리방 상세 — 자동 생성 익명 닉네임과 댓글", caption: "익명 댓글 — 방마다 다른 닉네임", width: 2560, height: 1400 },
@@ -159,6 +416,7 @@ export default async function PortfolioPage() {
         },
         {
           name: "블로그 자동 발행 SaaS",
+          featured: true,
           tagline: "주제만 등록하면 AI가 초안을 쓰고, 클라우드가 알아서 발행",
           description:
             "날짜별로 주제를 등록해 두면 Claude가 초안을 쓰고, 예약된 시간에 티스토리와 네이버 블로그에 자동 발행해 주는 서비스입니다. 두 플랫폼 모두 글쓰기 API가 종료되어 Playwright 브라우저 자동화가 유일한 방법이었습니다 — Vercel 서버리스 함수 안에서 헤드리스 크롬을 띄워 실제 에디터에 글을 쓰고 발행 버튼을 누릅니다. 로그인은 Browserbase 원격 브라우저를 iframe으로 임베드해 사용자가 직접 하고, 서비스는 비밀번호를 전혀 다루지 않고 세션 쿠키만 저장합니다. 하루만 지나도 만료되는 카카오 세션은 매일 밤 세션을 깨워 연명시키는 cron으로 해결했고, 사용자별 Redis 네임스페이스로 멀티테넌트 구조를 갖췄습니다. 처음엔 로컬 CLI로 시작했다가 클라우드 SaaS로 전환했고, 현재 월 구독 서비스로 상업화를 준비 중입니다. 발행 자동화 로직이 곧 제품이라, 이 프로젝트는 예외적으로 소스를 공개하지 않습니다.",
@@ -211,6 +469,7 @@ export default async function PortfolioPage() {
         },
         {
           name: "매치다",
+          featured: true,
           tagline: "채용공고 URL 붙여넣기 → AI 매칭 → 커버레터 자동 생성",
           description:
             "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다. 처음엔 'JobRadar'라는 이름으로 시작했지만, 브랜딩 작업을 거치며 '세상의 모든 직업을 매칭해준다'는 뜻의 매치다(match + da)로 이름을 바꿨습니다.",
@@ -230,11 +489,11 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "테스트 중",
           period: "2026.04 ~",
-          image: { src: "/portfolio/matchda-feature.png", alt: "매치다 글로벌 커리어 플랫폼 홈 화면" },
+          image: { src: "/portfolio/matchda-feature.png", alt: "매치다 글로벌 커리어 플랫폼 홈 화면", width: 1440, height: 680 },
           screenshots: [
-            { src: "/portfolio/matchda-screen-matching.png", alt: "매치다 AI 공고 매칭 화면", caption: "AI 공고 매칭" },
-            { src: "/portfolio/matchda-screen-translate.png", alt: "매치다 이력서 영문 번역 화면", caption: "이력서 영문 번역" },
-            { src: "/portfolio/matchda-screen-tracking.png", alt: "매치다 지원 현황 추적 화면", caption: "지원 현황 추적" },
+            { src: "/portfolio/matchda-screen-matching.png", alt: "매치다 AI 공고 매칭 화면", caption: "AI 공고 매칭", width: 1440, height: 790 },
+            { src: "/portfolio/matchda-screen-translate.png", alt: "매치다 이력서 영문 번역 화면", caption: "이력서 영문 번역", width: 1440, height: 900 },
+            { src: "/portfolio/matchda-screen-tracking.png", alt: "매치다 지원 현황 추적 화면", caption: "지원 현황 추적", width: 1440, height: 820 },
           ],
         },
         {
@@ -259,7 +518,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "출시 완료",
           period: "2026.05",
-          image: { src: "/portfolio/tilt-feature.png", alt: "TILT 메이즈 퍼즐 게임 화면" },
+          image: { src: "/portfolio/tilt-feature.png", alt: "TILT 메이즈 퍼즐 게임 화면", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/tilt-screen-menu.png",
@@ -299,7 +558,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "출시 완료",
           period: "2026.05",
-          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
+          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/chainplay-screen-ko-main.png",
@@ -342,7 +601,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "출시 완료",
           period: "2025.05",
-          image: { src: "/portfolio/cassette-feature-ko.png", alt: "REPO TAPE — 나만의 테이프를 만들고 공유해보세요" },
+          image: { src: "/portfolio/cassette-feature-ko.png", alt: "REPO TAPE — 나만의 테이프를 만들고 공유해보세요", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-ko-splash.png",
@@ -409,9 +668,9 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.04 ~",
-          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev 블로그 홈 화면" },
+          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev 블로그 홈 화면", width: 1280, height: 800 },
           screenshots: [
-            { src: "/portfolio/backtodev-screen-posts.png", alt: "포스트 목록 화면", caption: "Posts" },
+            { src: "/portfolio/backtodev-screen-posts.png", alt: "포스트 목록 화면", caption: "Posts", width: 1280, height: 800 },
           ],
         },
         {
@@ -449,7 +708,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "운영 중",
           period: "2026.04",
-          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
+          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면", width: 2590, height: 1754 },
         },
         {
           name: "마작 조이",
@@ -491,6 +750,7 @@ export default async function PortfolioPage() {
     : [
         {
           name: "RepoNote",
+          featured: true,
           tagline: "A mobile notepad that auto-syncs with your Obsidian repo",
           description:
             "Connecting Obsidian to Git on mobile was painfully complex, and resolving merge conflicts on a phone screen was worse — so I built my own note app. The idea is inverted: instead of cloning the repo to the phone, it uses only the GitHub Contents API with no Git CLI at all. Open, write, close — your note is committed automatically. Every keystroke is saved to a local database first (600ms debounce), and changes are pushed to GitHub five seconds after you stop typing, so nothing is lost offline or when the API fails. Conflicts are detected by comparing the SHA from when the file was read against the server's SHA right before upload; instead of overwriting, the app shows both versions and lets you choose. This app was actually built twice — first in React Native from the same spec document, but constant build and state-management errors killed it, so I rebuilt it from scratch in Flutter. Lesson learned: a well-written spec makes switching frameworks surprisingly cheap. It ships in English and Korean, with a demo mode that injects a fake GitHub API via Riverpod provider overrides for store screenshots.",
@@ -595,7 +855,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "Jul 2026",
-          image: { src: "/portfolio/nogari-feature.png", alt: "Nogari first screen — real-time trending rooms" },
+          image: { src: "/portfolio/nogari-feature.png", alt: "Nogari first screen — real-time trending rooms", width: 2560, height: 1720 },
           screenshots: [
             { src: "/portfolio/nogari-screen-browse.png", alt: "Browsing rooms by type — 300 seeded lawmaker cards", caption: "Browse by type + search", width: 2560, height: 1720 },
             { src: "/portfolio/nogari-screen-room.png", alt: "Room detail — auto-generated anonymous nicknames and comments", caption: "Anonymous comments — per-room nicknames", width: 2560, height: 1400 },
@@ -603,6 +863,7 @@ export default async function PortfolioPage() {
         },
         {
           name: "Blog Auto-Publisher SaaS",
+          featured: true,
           tagline: "Register a topic — AI drafts it, the cloud publishes it",
           description:
             "A service where you register topics by date, Claude writes the drafts, and posts are automatically published to Tistory and Naver Blog at the scheduled time. Both platforms shut down their writing APIs, so Playwright browser automation was the only way in — a headless Chrome runs inside a Vercel serverless function, types into the real editor, and clicks the publish button. For login, a Browserbase remote browser is embedded as an iframe so users sign in themselves; the service never touches passwords and stores only session cookies. Kakao sessions expire after just a day of inactivity, which I solved with a nightly cron that keeps sessions alive. Per-user Redis namespaces make it multi-tenant. It started as a local CLI and pivoted to a cloud SaaS — now preparing to launch as a paid subscription. Since the publishing automation is the product itself, this is the one project whose source stays private.",
@@ -655,6 +916,7 @@ export default async function PortfolioPage() {
         },
         {
           name: "Matchda",
+          featured: true,
           tagline: "Paste a job URL → AI matching → auto-generated cover letter",
           description:
             "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — Matchda scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF. It originally launched as \"JobRadar,\" but was rebranded through a branding process to Matchda (match + da) — capturing the idea of matching every job in the world.",
@@ -674,11 +936,11 @@ export default async function PortfolioPage() {
           status: "wip",
           statusLabel: "Testing",
           period: "Apr 2026 ~",
-          image: { src: "/portfolio/matchda-feature.png", alt: "Matchda global career platform home" },
+          image: { src: "/portfolio/matchda-feature.png", alt: "Matchda global career platform home", width: 1440, height: 680 },
           screenshots: [
-            { src: "/portfolio/matchda-screen-matching.png", alt: "Matchda AI job matching", caption: "AI job matching" },
-            { src: "/portfolio/matchda-screen-translate.png", alt: "Matchda resume translation", caption: "Resume translation" },
-            { src: "/portfolio/matchda-screen-tracking.png", alt: "Matchda application tracking", caption: "Application tracking" },
+            { src: "/portfolio/matchda-screen-matching.png", alt: "Matchda AI job matching", caption: "AI job matching", width: 1440, height: 790 },
+            { src: "/portfolio/matchda-screen-translate.png", alt: "Matchda resume translation", caption: "Resume translation", width: 1440, height: 900 },
+            { src: "/portfolio/matchda-screen-tracking.png", alt: "Matchda application tracking", caption: "Application tracking", width: 1440, height: 820 },
           ],
         },
         {
@@ -703,7 +965,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Released",
           period: "May 2026",
-          image: { src: "/portfolio/tilt-feature.png", alt: "TILT maze puzzle game screen" },
+          image: { src: "/portfolio/tilt-feature.png", alt: "TILT maze puzzle game screen", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/tilt-screen-menu.png",
@@ -743,7 +1005,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Released",
           period: "May 2026",
-          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면" },
+          image: { src: "/portfolio/chainplay-feature.png", alt: "ChainPlay 메인 화면", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/chainplay-screen-en-main.png",
@@ -786,7 +1048,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Released",
           period: "May 2025",
-          image: { src: "/portfolio/cassette-feature-en.png", alt: "REPO TAPE — Make Your Own Tape and Share the Music" },
+          image: { src: "/portfolio/cassette-feature-en.png", alt: "REPO TAPE — Make Your Own Tape and Share the Music", width: 1024, height: 500 },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-en-splash.png",
@@ -853,9 +1115,9 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "Apr 2026 ~",
-          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev blog home" },
+          image: { src: "/portfolio/backtodev-feature.png", alt: "back to dev blog home", width: 1280, height: 800 },
           screenshots: [
-            { src: "/portfolio/backtodev-screen-posts.png", alt: "Posts list page", caption: "Posts" },
+            { src: "/portfolio/backtodev-screen-posts.png", alt: "Posts list page", caption: "Posts", width: 1280, height: 800 },
           ],
         },
         {
@@ -893,7 +1155,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Live",
           period: "May 2026",
-          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면" },
+          image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면", width: 2590, height: 1754 },
         },
         {
           name: "Mahjong Joy",
@@ -956,219 +1218,51 @@ export default async function PortfolioPage() {
         </p>
       </div>
 
-      {/* Project cards */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-        {projects.map((project) => (
-          <article
-            key={project.name}
+      <section aria-labelledby="featured-projects">
+        <h2
+          id="featured-projects"
+          style={{
+            fontSize: "0.78rem",
+            color: "hsl(var(--muted-foreground))",
+            fontFamily: "var(--font-mono), monospace",
+            letterSpacing: "0.1em",
+            marginBottom: "1rem",
+          }}
+        >
+          {isKo ? "대표 프로젝트" : "FEATURED PROJECTS"}
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          {projects.filter((project) => project.featured).map((project) => (
+            <ProjectCard key={project.name} project={project} isKo={isKo} />
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="more-projects" style={{ marginTop: "3.5rem" }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <h2
+            id="more-projects"
             style={{
-              borderRadius: 20,
-              padding: "1.75rem",
-              background: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              position: "relative",
+              fontSize: "1.15rem",
+              fontWeight: 700,
+              color: "hsl(var(--foreground))",
+              marginBottom: "0.35rem",
             }}
           >
-            {/* Top row: name + status */}
-            <div
-              className="flex flex-col sm:flex-row sm:items-start sm:justify-between"
-              style={{ marginBottom: "0.75rem", gap: "0.5rem" }}
-            >
-              <div>
-                <h2
-                  style={{
-                    fontSize: "1.15rem",
-                    fontWeight: 700,
-                    letterSpacing: "-0.02em",
-                    color: "hsl(var(--foreground))",
-                    marginBottom: "0.2rem",
-                  }}
-                >
-                  {project.name}
-                </h2>
-                <p
-                  style={{
-                    fontSize: "0.82rem",
-                    color: "hsl(var(--primary))",
-                    fontFamily: "var(--font-mono), monospace",
-                  }}
-                >
-                  {project.tagline}
-                </p>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap sm:shrink-0">
-                <span
-                  style={{
-                    fontSize: "0.7rem",
-                    padding: "0.25rem 0.6rem",
-                    borderRadius: 99,
-                    fontWeight: 700,
-                    fontFamily: "var(--font-mono), monospace",
-                    whiteSpace: "nowrap",
-                    background:
-                      project.status === "live"
-                        ? "hsl(160 40% 12%)"
-                        : "hsl(40 40% 12%)",
-                    color:
-                      project.status === "live"
-                        ? "hsl(160 70% 55%)"
-                        : "hsl(40 90% 60%)",
-                    border: `1px solid ${
-                      project.status === "live"
-                        ? "hsl(160 40% 22%)"
-                        : "hsl(40 40% 24%)"
-                    }`,
-                  }}
-                >
-                  {project.status === "live" ? "● " : "○ "}
-                  {project.statusLabel}
-                </span>
-                <span
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "hsl(var(--muted-foreground))",
-                    fontFamily: "var(--font-mono), monospace",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {project.period}
-                </span>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p
-              style={{
-                color: "hsl(var(--muted-foreground))",
-                lineHeight: 1.85,
-                fontSize: "0.9rem",
-                marginBottom: "1.25rem",
-              }}
-            >
-              {project.description}
-            </p>
-
-            {/* Tech tags */}
-            <div
-              className="flex flex-wrap"
-              style={{ gap: "0.4rem", marginBottom: "1.25rem" }}
-            >
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  style={{
-                    fontSize: "0.72rem",
-                    padding: "0.2rem 0.6rem",
-                    borderRadius: 6,
-                    background: "hsl(var(--background))",
-                    color: "hsl(var(--muted-foreground))",
-                    border: "1px solid hsl(var(--border))",
-                    fontFamily: "var(--font-mono), monospace",
-                  }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* Links */}
-            <div className="flex items-center flex-wrap" style={{ gap: "0.75rem" }}>
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  style={{
-                    fontSize: "0.82rem",
-                    fontWeight: link.primary ? 700 : 500,
-                    color: link.primary
-                      ? "hsl(var(--primary))"
-                      : "hsl(var(--muted-foreground))",
-                    textDecoration: "none",
-                    fontFamily: "var(--font-mono), monospace",
-                    borderBottom: `1px solid ${
-                      link.primary
-                        ? "hsl(var(--primary) / 0.4)"
-                        : "hsl(var(--border))"
-                    }`,
-                    paddingBottom: "1px",
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Preview image — 클릭하면 오버레이로 크게 보기 */}
-            {project.image && (
-              <div
-                style={{
-                  marginTop: "1.25rem",
-                  borderRadius: 10,
-                  overflow: "hidden",
-                  border: "1px solid hsl(var(--border))",
-                }}
-              >
-                <LightboxImage
-                  src={project.image.src}
-                  alt={project.image.alt}
-                  width={1280}
-                  height={800}
-                  priority
-                  isKo={isKo}
-                />
-              </div>
-            )}
-
-            {/* Screenshots */}
-            {project.screenshots && (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-                  gap: "0.9rem",
-                  marginTop: "1rem",
-                }}
-              >
-                {project.screenshots.map((screenshot) => (
-                  <figure
-                    key={screenshot.src}
-                    style={{
-                      margin: 0,
-                      borderRadius: 10,
-                      overflow: "hidden",
-                      border: "1px solid hsl(var(--border))",
-                      background: "hsl(var(--background))",
-                    }}
-                  >
-                    <LightboxImage
-                      src={screenshot.src}
-                      alt={screenshot.alt}
-                      width={screenshot.width ?? 1080}
-                      height={screenshot.height ?? 2340}
-                      caption={screenshot.caption}
-                      isKo={isKo}
-                    />
-                    <figcaption
-                      style={{
-                        padding: "0.55rem 0.7rem",
-                        fontSize: "0.72rem",
-                        color: "hsl(var(--muted-foreground))",
-                        fontFamily: "var(--font-mono), monospace",
-                        textAlign: "center",
-                        borderTop: "1px solid hsl(var(--border))",
-                      }}
-                    >
-                      {screenshot.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
+            {isKo ? "더 만든 것들" : "More projects"}
+          </h2>
+          <p style={{ color: "hsl(var(--muted-foreground))", fontSize: "0.82rem" }}>
+            {isKo
+              ? "대표 작업 외에도 직접 출시하거나 운영한 프로젝트입니다."
+              : "More projects I have shipped, operated, or built hands-on."}
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+          {projects.filter((project) => !project.featured).map((project) => (
+            <ProjectCard key={project.name} project={project} isKo={isKo} compact />
+          ))}
+        </div>
+      </section>
 
       {/* Footer note */}
       <p
