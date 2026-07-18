@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { readGuestbook } from "@/lib/guestbook";
 import VillageGame, { type VillagePost } from "./VillageGame";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -12,19 +11,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  return {
+  return localizedPageMetadata({
+    locale,
+    path: "village",
     title: isKo ? "픽셀 마을" : "Pixel Village",
     description: isKo
       ? "블로그를 90년대 RPG 마을처럼 돌아다녀 보세요"
       : "Explore this blog as a 90s-style RPG village",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/village`,
-      languages: {
-        ko: `${BASE_URL}/ko/village`,
-        en: `${BASE_URL}/en/village`,
-      },
-    },
-  };
+  });
 }
 
 export default async function VillagePage({

@@ -1,8 +1,7 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import LightboxImage from "@/components/LightboxImage";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -11,19 +10,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  return {
+  return localizedPageMetadata({
+    locale,
+    path: "portfolio",
     title: isKo ? "포트폴리오" : "Portfolio",
     description: isKo
-      ? "직접 만든 사이드 프로젝트들"
-      : "Side projects I've built",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/portfolio`,
-      languages: {
-        ko: `${BASE_URL}/ko/portfolio`,
-        en: `${BASE_URL}/en/portfolio`,
-      },
-    },
-  };
+      ? "AI와 제품 기획 경험을 바탕으로 직접 설계하고 출시한 프로젝트들"
+      : "Products and side projects I designed, built, and shipped with AI-assisted development",
+  });
 }
 
 interface Project {

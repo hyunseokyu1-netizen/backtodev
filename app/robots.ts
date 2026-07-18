@@ -5,7 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/api"],
     },
     sitemap: "https://backtodev.com/sitemap.xml",
+    host: "https://backtodev.com",
   };
 }

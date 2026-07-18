@@ -3,8 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -13,20 +12,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  return {
+  return localizedPageMetadata({
+    locale,
     title: isKo ? "backtodev — 다시 개발자로" : "backtodev — Back to Dev",
     description: isKo
       ? "40대 PM이 다시 개발자로 돌아오는 기록. 실패하고 배우며 성장하는 이야기."
       : "A 40-something PM returning to development. Notes on learning, building, and shipping.",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        ko: `${BASE_URL}/ko`,
-        en: `${BASE_URL}/en`,
-        "x-default": `${BASE_URL}/ko`,
-      },
-    },
-  };
+  });
 }
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {

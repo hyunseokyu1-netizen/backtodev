@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -9,17 +8,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: "Privacy Policy — Mahjong Round (마작한판)",
-    description: "Privacy policy for the Mahjong Round (마작한판) mobile game.",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/privacy/mahjong-hanpan`,
-      languages: {
-        ko: `${BASE_URL}/ko/privacy/mahjong-hanpan`,
-        en: `${BASE_URL}/en/privacy/mahjong-hanpan`,
-      },
-    },
-  };
+  return localizedPageMetadata({
+    locale,
+    path: "privacy/mahjong-hanpan",
+    title: locale === "ko" ? "마작한판 개인정보처리방침" : "Mahjong Round Privacy Policy",
+    description: locale === "ko"
+      ? "마작한판 모바일 게임 개인정보처리방침"
+      : "Privacy policy for the Mahjong Round mobile game",
+  });
 }
 
 export default async function MahjongHanpanPrivacyPage() {

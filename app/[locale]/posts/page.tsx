@@ -2,8 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getAllPosts } from "@/lib/posts";
 import PostsClient from "@/components/PostsClient";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -11,16 +10,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/posts`,
-      languages: {
-        ko: `${BASE_URL}/ko/posts`,
-        en: `${BASE_URL}/en/posts`,
-        "x-default": `${BASE_URL}/ko/posts`,
-      },
-    },
-  };
+  const isKo = locale === "ko";
+  return localizedPageMetadata({
+    locale,
+    path: "posts",
+    title: isKo ? "개발 기록" : "Development Notes",
+    description: isKo
+      ? "AI 코딩, 사이드 프로젝트, 앱 출시 과정에서 직접 겪고 해결한 개발 기록"
+      : "Hands-on notes about AI coding, side projects, debugging, and shipping apps",
+  });
 }
 
 export default async function PostsPage({ params }: { params: Promise<{ locale: string }> }) {

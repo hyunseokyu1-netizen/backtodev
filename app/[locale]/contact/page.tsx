@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -10,18 +9,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  return {
-    title: isKo ? "연락하기 | backtodev" : "Contact | backtodev",
+  return localizedPageMetadata({
+    locale,
+    path: "contact",
+    title: isKo ? "연락하기" : "Contact",
     description: isKo ? "backtodev에 연락하기" : "Get in touch with backtodev",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/contact`,
-      languages: {
-        ko: `${BASE_URL}/ko/contact`,
-        en: `${BASE_URL}/en/contact`,
-        "x-default": `${BASE_URL}/ko/contact`,
-      },
-    },
-  };
+  });
 }
 
 export default async function ContactPage() {

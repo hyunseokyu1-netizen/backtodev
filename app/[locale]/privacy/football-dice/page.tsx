@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -9,17 +8,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: "Privacy Policy — Football Dice",
-    description: "Privacy policy for the Football Dice mobile game.",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/privacy/football-dice`,
-      languages: {
-        ko: `${BASE_URL}/ko/privacy/football-dice`,
-        en: `${BASE_URL}/en/privacy/football-dice`,
-      },
-    },
-  };
+  return localizedPageMetadata({
+    locale,
+    path: "privacy/football-dice",
+    title: locale === "ko" ? "Football Dice 개인정보처리방침" : "Football Dice Privacy Policy",
+    description: locale === "ko"
+      ? "Football Dice 모바일 게임 개인정보처리방침"
+      : "Privacy policy for the Football Dice mobile game",
+  });
 }
 
 export default async function FootballDicePrivacyPage() {

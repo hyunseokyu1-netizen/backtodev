@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -9,17 +8,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: "Privacy Policy — RepoNote",
-    description: "Privacy policy for the RepoNote mobile app.",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/privacy/repo-note`,
-      languages: {
-        ko: `${BASE_URL}/ko/privacy/repo-note`,
-        en: `${BASE_URL}/en/privacy/repo-note`,
-      },
-    },
-  };
+  return localizedPageMetadata({
+    locale,
+    path: "privacy/repo-note",
+    title: locale === "ko" ? "RepoNote 개인정보처리방침" : "RepoNote Privacy Policy",
+    description: locale === "ko"
+      ? "RepoNote 모바일 앱 개인정보처리방침"
+      : "Privacy policy for the RepoNote mobile app",
+  });
 }
 
 export default async function RepoNotePrivacyPage() {

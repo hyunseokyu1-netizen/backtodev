@@ -1,7 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -9,16 +8,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/about`,
-      languages: {
-        ko: `${BASE_URL}/ko/about`,
-        en: `${BASE_URL}/en/about`,
-        "x-default": `${BASE_URL}/ko/about`,
-      },
-    },
-  };
+  const isKo = locale === "ko";
+  return localizedPageMetadata({
+    locale,
+    path: "about",
+    title: isKo ? "소개" : "About",
+    description: isKo
+      ? "제품 기획자에서 다시 개발자로 돌아와 AI와 함께 제품을 만드는 과정"
+      : "A product manager returning to development and building products with AI",
+  });
 }
 
 export default async function AboutPage() {

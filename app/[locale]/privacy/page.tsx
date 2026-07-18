@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://backtodev.com";
+import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -9,17 +8,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: "Privacy Policy",
-    description: "Privacy policy for backtodev.",
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/privacy`,
-      languages: {
-        ko: `${BASE_URL}/ko/privacy`,
-        en: `${BASE_URL}/en/privacy`,
-      },
-    },
-  };
+  const isKo = locale === "ko";
+  return localizedPageMetadata({
+    locale,
+    path: "privacy",
+    title: isKo ? "개인정보처리방침" : "Privacy Policy",
+    description: isKo ? "backtodev 개인정보처리방침" : "Privacy policy for backtodev",
+  });
 }
 
 export default async function PrivacyPage() {

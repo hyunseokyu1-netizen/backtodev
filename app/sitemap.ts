@@ -25,6 +25,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: post.date ? new Date(post.date) : new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
+        alternates: {
+          languages: {
+            ko: `${BASE_URL}/ko/posts/${slug}`,
+            ...(enSlugs.has(slug) && { en: `${BASE_URL}/en/posts/${slug}` }),
+            "x-default": `${BASE_URL}/ko/posts/${slug}`,
+          },
+        },
       });
     }
 
@@ -35,24 +42,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: post.date ? new Date(post.date) : new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
+        alternates: {
+          languages: {
+            ...(koSlugs.has(slug) && { ko: `${BASE_URL}/ko/posts/${slug}` }),
+            en: `${BASE_URL}/en/posts/${slug}`,
+            "x-default": koSlugs.has(slug)
+              ? `${BASE_URL}/ko/posts/${slug}`
+              : `${BASE_URL}/en/posts/${slug}`,
+          },
+        },
       });
     }
 
     return entries;
   });
 
-  const staticEntries: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/ko`,        lastModified: new Date(), changeFrequency: "daily",   priority: 1.0 },
-    { url: `${BASE_URL}/en`,        lastModified: new Date(), changeFrequency: "daily",   priority: 1.0 },
-    { url: `${BASE_URL}/ko/posts`,  lastModified: new Date(), changeFrequency: "daily",   priority: 0.9 },
-    { url: `${BASE_URL}/en/posts`,  lastModified: new Date(), changeFrequency: "daily",   priority: 0.9 },
-    { url: `${BASE_URL}/ko/about`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/en/about`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/ko/contact`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.4 },
-    { url: `${BASE_URL}/en/contact`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.4 },
-    { url: `${BASE_URL}/ko/privacy`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${BASE_URL}/en/privacy`, lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
+  const staticPages = [
+    { path: "", changeFrequency: "daily" as const, priority: 1.0 },
+    { path: "/posts", changeFrequency: "daily" as const, priority: 0.9 },
+    { path: "/portfolio", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/about", changeFrequency: "monthly" as const, priority: 0.6 },
+    { path: "/village", changeFrequency: "weekly" as const, priority: 0.6 },
+    { path: "/contact", changeFrequency: "yearly" as const, priority: 0.4 },
+    { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
+    { path: "/privacy/football-dice", changeFrequency: "yearly" as const, priority: 0.2 },
+    { path: "/privacy/mahjong-hanpan", changeFrequency: "yearly" as const, priority: 0.2 },
+    { path: "/privacy/repo-note", changeFrequency: "yearly" as const, priority: 0.2 },
   ];
+
+  const staticEntries: MetadataRoute.Sitemap = staticPages.flatMap((page) => {
+    const languages = {
+      ko: `${BASE_URL}/ko${page.path}`,
+      en: `${BASE_URL}/en${page.path}`,
+      "x-default": `${BASE_URL}/ko${page.path}`,
+    };
+    return (["ko", "en"] as const).map((locale) => ({
+      url: languages[locale],
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+      alternates: { languages },
+    }));
+  });
 
   return [...staticEntries, ...postEntries];
 }

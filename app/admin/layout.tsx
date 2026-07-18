@@ -5,7 +5,11 @@ import "../globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-export const metadata: Metadata = { title: "Admin | backtodev" };
+export const metadata: Metadata = {
+  title: "Admin | backtodev",
+  metadataBase: new URL("https://backtodev.com"),
+  robots: { index: false, follow: false, noarchive: true },
+};
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
