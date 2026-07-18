@@ -1,10 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/posts";
-import { readGuestbook } from "@/lib/guestbook";
 import PostCard from "@/components/PostCard";
-import VillageIntroOverlay from "@/components/VillageIntroOverlay";
-import type { VillagePost } from "@/app/[locale]/village/VillageGame";
 import type { Metadata } from "next";
 
 const BASE_URL = "https://backtodev.com";
@@ -39,20 +36,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const allPosts = await getAllPosts(locale);
   const posts = allPosts.slice(0, 6);
 
-  // 첫 진입 픽셀 마을 오버레이용 데이터
-  const villagePosts: VillagePost[] = allPosts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    date: p.date,
-    tags: p.tags ?? [],
-  }));
-  const { entries: guestbook } = await readGuestbook();
-
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6rem", paddingBottom: "3rem" }}>
-
-      <VillageIntroOverlay locale={locale} posts={villagePosts} guestbook={guestbook} />
-
       {/* ── Hero ── */}
       <section className="relative" style={{ paddingTop: "3rem" }}>
         {/* Dot grid */}
@@ -139,9 +124,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </p>
 
             {/* CTAs */}
-            <div className="flex items-center" style={{ gap: "1rem", marginTop: "1rem" }}>
+            <div className="flex items-center flex-wrap" style={{ gap: "1rem", marginTop: "1rem" }}>
               <Link
-                href="/posts"
+                href="/portfolio"
                 className="inline-flex items-center justify-center transition-all"
                 style={{
                   height: 48,
@@ -154,10 +139,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                   textDecoration: "none",
                 }}
               >
-                Read Posts
+                {t("viewPortfolio")}
               </Link>
               <Link
-                href="/about"
+                href="/posts"
                 className="inline-flex items-center justify-center transition-all"
                 style={{
                   height: 48,
@@ -171,7 +156,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                   textDecoration: "none",
                 }}
               >
-                About Me
+                {t("readPosts")}
+              </Link>
+              <Link
+                href="/village"
+                className="inline-flex items-center justify-center text-sm transition-colors"
+                style={{
+                  height: 48,
+                  color: "hsl(var(--muted-foreground))",
+                  fontFamily: "var(--font-mono), monospace",
+                  textDecoration: "none",
+                }}
+              >
+                {t("enterVillage")} →
               </Link>
             </div>
           </div>
