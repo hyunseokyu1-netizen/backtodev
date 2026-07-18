@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 
@@ -17,24 +17,35 @@ interface Props {
 /** 클릭하면 페이지 위 오버레이로 원본 크기에 가깝게 보여주는 썸네일 이미지 */
 export default function LightboxImage({ src, alt, width, height, caption, priority, isKo = true }: Props) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const captionId = useId();
 
   useEffect(() => {
     if (!open) return;
+    const trigger = triggerRef.current;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeRef.current?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      trigger?.focus();
     };
   }, [open]);
 
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen(true)}
         aria-label={isKo ? `${alt} 크게 보기` : `View larger: ${alt}`}
@@ -61,6 +72,10 @@ export default function LightboxImage({ src, alt, width, height, caption, priori
       {open &&
         createPortal(
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={isKo ? `${alt} 확대 이미지` : `Enlarged image: ${alt}`}
+            aria-describedby={caption ? captionId : undefined}
             onClick={() => setOpen(false)}
             style={{
               position: "fixed",
@@ -75,6 +90,7 @@ export default function LightboxImage({ src, alt, width, height, caption, priori
             }}
           >
             <button
+              ref={closeRef}
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
@@ -112,10 +128,12 @@ export default function LightboxImage({ src, alt, width, height, caption, priori
                 maxHeight: "90vh",
               }}
             >
-              {/* 원본 비율 유지가 우선이라 next/image 대신 일반 img 사용 */}
-              <img
+              <Image
                 src={src}
                 alt={alt}
+                width={width}
+                height={height}
+                sizes="94vw"
                 style={{
                   maxWidth: "94vw",
                   maxHeight: caption ? "78vh" : "90vh",
@@ -129,6 +147,7 @@ export default function LightboxImage({ src, alt, width, height, caption, priori
               />
               {caption && (
                 <span
+                  id={captionId}
                   style={{
                     color: "#e8e4d8",
                     fontFamily: "var(--font-mono), monospace",

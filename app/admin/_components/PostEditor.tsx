@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -277,9 +278,9 @@ export default function PostEditor({ slug: initSlug, date: initDate, tags: initT
         className="flex items-center gap-3 px-6 py-3 border-b shrink-0"
         style={{ background: "var(--surface)", borderColor: "var(--border)" }}
       >
-        <a href="/admin" className="text-sm font-medium mr-2" style={{ color: "var(--text-muted)" }}>
+        <Link href="/admin" className="text-sm font-medium mr-2" style={{ color: "var(--text-muted)" }}>
           ← 목록
-        </a>
+        </Link>
         <span style={{ color: "var(--border)" }}>|</span>
         <span className="font-bold text-sm" style={{ color: "var(--yellow)" }}>
           {isEdit ? "글 수정" : "새 글 작성"}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Post {
   slug: string;
@@ -39,7 +40,24 @@ export default function AdminPostList() {
     setLoading(false);
   };
 
-  useEffect(() => { fetchPosts(); }, []);
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadPosts = async () => {
+      try {
+        const res = await fetch("/api/admin/posts");
+        const data = await res.json();
+        if (!cancelled) setPosts(data);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void loadPosts();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleDelete = async (slug: string, lang: string, title: string) => {
     if (!confirm(`"${title}" (${lang.toUpperCase()}) 글을 삭제할까요?`)) return;
@@ -98,13 +116,13 @@ export default function AdminPostList() {
               {query ? `${filteredPosts.length} / ${posts.length}개` : `총 ${posts.length}개의 글`}
             </p>
           </div>
-          <a
+          <Link
             href="/admin/posts/new"
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all"
             style={{ background: "var(--yellow)", color: "hsl(210 15% 6%)" }}
           >
             + 새 글 작성
-          </a>
+          </Link>
         </div>
 
         {/* 검색 */}

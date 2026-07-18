@@ -84,6 +84,9 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
+        <a href="#main-content" className="skip-link">
+          {locale === "ko" ? "본문으로 건너뛰기" : "Skip to content"}
+        </a>
         <NextIntlClientProvider messages={messages}>
           <div className="min-h-screen flex flex-col relative" style={{ background: "hsl(var(--background))" }}>
             {/* Dot grid background */}
@@ -101,6 +104,8 @@ export default async function LocaleLayout({
             <Nav />
 
             <main
+              id="main-content"
+              tabIndex={-1}
               className="flex-1 relative"
               style={{
                 maxWidth: "72rem",

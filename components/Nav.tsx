@@ -45,7 +45,6 @@ export default function Nav() {
 
   const toggleLocale = () => {
     const next = locale === "ko" ? "en" : "ko";
-    document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000; SameSite=Lax`;
     router.replace(cleanPath, { locale: next });
   };
 
@@ -100,6 +99,7 @@ export default function Nav() {
                 <Link
                   key={href}
                   href={href}
+                  aria-current={active ? "page" : undefined}
                   className="relative px-3 py-2 text-sm font-medium transition-colors"
                   style={{ color: active ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" }}
                 >
@@ -124,6 +124,7 @@ export default function Nav() {
 
           {/* Language toggle */}
           <button
+            type="button"
             onClick={toggleLocale}
             className="text-xs font-bold px-3 py-1.5 rounded-lg transition-all"
             style={{
@@ -133,12 +134,14 @@ export default function Nav() {
               fontFamily: "var(--font-mono), monospace",
             }}
             title={locale === "ko" ? "Switch to English" : "한국어로 보기"}
+            aria-label={locale === "ko" ? "Switch to English" : "한국어로 보기"}
           >
             {locale === "ko" ? "EN" : "KO"}
           </button>
 
           {/* 모바일 햄버거 버튼 */}
           <button
+            type="button"
             className="flex md:hidden items-center justify-center rounded-lg transition-colors"
             style={{
               padding: "0.375rem",
@@ -146,7 +149,11 @@ export default function Nav() {
               background: menuOpen ? "hsl(var(--primary) / 0.1)" : "transparent",
             }}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="메뉴 열기"
+            aria-label={menuOpen
+              ? (locale === "ko" ? "메뉴 닫기" : "Close menu")
+              : (locale === "ko" ? "메뉴 열기" : "Open menu")}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
           </button>
@@ -164,13 +171,14 @@ export default function Nav() {
             WebkitBackdropFilter: "blur(20px)",
           }}
         >
-          <nav className="flex flex-col px-6 py-4" style={{ gap: "0.25rem" }}>
+          <nav id="mobile-navigation" className="flex flex-col px-6 py-4" style={{ gap: "0.25rem" }}>
             {links.map(({ href, label }) => {
               const active = href === "/" ? cleanPath === "/" : cleanPath.startsWith(href);
               return (
                 <Link
                   key={href}
                   href={href}
+                  aria-current={active ? "page" : undefined}
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center py-3 text-base font-medium transition-colors"
                   style={{
