@@ -342,7 +342,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "출시 완료",
           period: "2025.05",
-          image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
+          image: { src: "/portfolio/cassette-feature-ko.png", alt: "REPO TAPE — 나만의 테이프를 만들고 공유해보세요" },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-ko-splash.png",
@@ -779,7 +779,7 @@ export default async function PortfolioPage() {
           status: "live",
           statusLabel: "Released",
           period: "May 2025",
-          image: { src: "/portfolio/cassette-feature.png", alt: "Cassette Music Player 화면" },
+          image: { src: "/portfolio/cassette-feature-en.png", alt: "REPO TAPE — Make Your Own Tape and Share the Music" },
           screenshots: [
             {
               src: "/portfolio/cassette-screen-en-splash.png",
