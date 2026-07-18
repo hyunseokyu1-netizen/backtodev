@@ -6,6 +6,14 @@ import type { GuestbookEntry } from "@/app/[locale]/village/world";
 const FILE = "content/guestbook.json";
 const IS_PROD = !!process.env.VERCEL;
 
+function parseEntries(content: string): GuestbookEntry[] {
+  const parsed: unknown = JSON.parse(content);
+  if (!Array.isArray(parsed)) {
+    throw new Error("Guestbook data must be an array");
+  }
+  return parsed as GuestbookEntry[];
+}
+
 export async function readGuestbook(): Promise<{
   entries: GuestbookEntry[];
   sha?: string;
@@ -13,19 +21,11 @@ export async function readGuestbook(): Promise<{
   if (IS_PROD) {
     const file = await getFile(FILE);
     if (!file) return { entries: [] };
-    try {
-      return { entries: JSON.parse(file.content), sha: file.sha };
-    } catch {
-      return { entries: [], sha: file.sha };
-    }
+    return { entries: parseEntries(file.content), sha: file.sha };
   }
   const filePath = path.join(process.cwd(), FILE);
   if (!fs.existsSync(filePath)) return { entries: [] };
-  try {
-    return { entries: JSON.parse(fs.readFileSync(filePath, "utf-8")) };
-  } catch {
-    return { entries: [] };
-  }
+  return { entries: parseEntries(fs.readFileSync(filePath, "utf-8")) };
 }
 
 export async function saveGuestbook(

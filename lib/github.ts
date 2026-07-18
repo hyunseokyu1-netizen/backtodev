@@ -13,6 +13,17 @@ export interface GitHubFile {
   sha: string;
 }
 
+export class GitHubApiError extends Error {
+  constructor(
+    operation: string,
+    public readonly status: number,
+    details?: string
+  ) {
+    super(`GitHub ${operation} failed: ${status}${details ? ` ${details}` : ""}`);
+    this.name = "GitHubApiError";
+  }
+}
+
 export async function getFileSha(path: string): Promise<string | null> {
   const res = await fetch(`${BASE}/${path}`, { headers: headers(), cache: "no-store" });
   if (res.status === 404) return null;
@@ -52,7 +63,7 @@ export async function putFile(path: string, content: string, message: string, sh
   });
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`GitHub PUT failed: ${res.status} ${err}`);
+    throw new GitHubApiError("PUT", res.status, err);
   }
   const data = await res.json();
   return data.content?.sha ?? "";

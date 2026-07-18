@@ -517,6 +517,7 @@ export default function VillageGame({
         body: JSON.stringify({
           name: gbName,
           message: gbMessage,
+          locale: isKo ? "ko" : "en",
           website: honeypotRef.current?.value ?? "",
         }),
       });
