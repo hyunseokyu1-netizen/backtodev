@@ -4,13 +4,18 @@ import type { PostMeta } from "@/lib/posts";
 interface Props {
   post: PostMeta;
   readLabel?: string;
+  locale: string;
 }
 
-export default function PostCard({ post, readLabel = "Read →" }: Props) {
+export default function PostCard({ post, locale, readLabel = "Read →" }: Props) {
   const tags = post.tags ?? [];
 
   const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    ? new Date(post.date).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
     : post.date;
 
   return (

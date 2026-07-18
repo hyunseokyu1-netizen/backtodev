@@ -2,6 +2,8 @@
   "nav": {
     "home": "홈",
     "posts": "글",
+    "village": "마을",
+    "portfolio": "포트폴리오",
     "about": "소개"
   },
   "home": {
@@ -22,8 +24,13 @@
   },
   "posts": {
     "title": "글 목록",
+    "description": "다시 개발하며 직접 겪고 배운 것들을 기록합니다.",
     "count": "총 {count}개의 글",
-    "noPost": "아직 작성된 글이 없습니다."
+    "noPost": "아직 작성된 글이 없습니다.",
+    "searchPlaceholder": "글 검색...",
+    "noResults": "검색 결과가 없습니다.",
+    "topics": "주제",
+    "allPosts": "전체"
   },
   "post": {
     "backToList": "← 목록으로",

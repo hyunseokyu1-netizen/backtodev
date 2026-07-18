@@ -24,7 +24,6 @@ export async function generateMetadata({
 export default async function PostsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations("posts");
-  const tPost = await getTranslations("post");
   const posts = await getAllPosts(locale);
 
   return (
@@ -40,17 +39,14 @@ export default async function PostsPage({ params }: { params: Promise<{ locale: 
             marginBottom: "0.5rem",
           }}
         >
-          All Posts
+          {t("title")}
         </h1>
         <p style={{ color: "hsl(var(--muted-foreground))", fontSize: "1rem" }}>
-          Thoughts, learnings, and snippets from the journey back to dev.
+          {t("description")}
         </p>
       </div>
 
-      <PostsClient
-        posts={posts}
-        readLabel={tPost("read")}
-      />
+      <PostsClient posts={posts} />
     </div>
   );
 }

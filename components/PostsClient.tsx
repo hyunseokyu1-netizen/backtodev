@@ -3,13 +3,15 @@
 import { useState, useMemo } from "react";
 import { Link } from "@/i18n/navigation";
 import type { PostMeta } from "@/lib/posts";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
   posts: PostMeta[];
-  readLabel: string;
 }
 
-export default function PostsClient({ posts, readLabel }: Props) {
+export default function PostsClient({ posts }: Props) {
+  const locale = useLocale();
+  const t = useTranslations("posts");
   const [search, setSearch] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -39,7 +41,11 @@ export default function PostsClient({ posts, readLabel }: Props) {
   }, [posts, search, activeTag]);
 
   const formattedDate = (date: string) =>
-    new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    new Date(date).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
 
   return (
     <div className="flex flex-col lg:flex-row items-start" style={{ gap: "2rem" }}>
@@ -59,7 +65,8 @@ export default function PostsClient({ posts, readLabel }: Props) {
           </svg>
           <input
             type="text"
-            placeholder="Search posts ..."
+            placeholder={t("searchPlaceholder")}
+            aria-label={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{
@@ -91,7 +98,7 @@ export default function PostsClient({ posts, readLabel }: Props) {
               fontFamily: "var(--font-mono), monospace",
             }}
           >
-            No posts found.
+            {t("noResults")}
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
@@ -177,7 +184,7 @@ export default function PostsClient({ posts, readLabel }: Props) {
             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
             <line x1="7" y1="7" x2="7.01" y2="7"/>
           </svg>
-          <span style={{ fontWeight: 700, fontSize: "1rem", color: "hsl(var(--foreground))" }}>Topics</span>
+          <span style={{ fontWeight: 700, fontSize: "1rem", color: "hsl(var(--foreground))" }}>{t("topics")}</span>
         </div>
 
         <div className="flex flex-wrap" style={{ gap: "0.5rem", overflowY: "auto" }}>
@@ -196,7 +203,7 @@ export default function PostsClient({ posts, readLabel }: Props) {
               transition: "all 150ms",
             }}
           >
-            All Posts
+            {t("allPosts")}
           </button>
 
           {tagCounts.map(([tag, count]) => (

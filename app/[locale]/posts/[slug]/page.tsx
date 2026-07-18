@@ -7,6 +7,15 @@ import type { Metadata } from "next";
 
 const BASE_URL = "https://backtodev.com";
 
+function estimateReadingMinutes(content: string): number {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[#>*_`\[\]()-]/g, " ");
+  const wordCount = plainText.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+}
+
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
 }
@@ -73,8 +82,13 @@ export default async function PostPage({ params }: Props) {
   const tags = post.tags ?? [];
 
   const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+    ? new Date(post.date).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
     : post.date;
+  const readingMinutes = estimateReadingMinutes(post.content);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -176,7 +190,7 @@ export default async function PostPage({ params }: Props) {
               <circle cx="12" cy="12" r="10"/>
               <polyline points="12 6 12 12 16 14"/>
             </svg>
-            1 min read
+            {readingMinutes} {t("minRead")}
           </span>
           {post.isFallback && (
             <span

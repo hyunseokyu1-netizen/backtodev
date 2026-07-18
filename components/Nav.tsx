@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname as useRawPathname } from "next/navigation";
 import { useRouter, Link } from "@/i18n/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const TerminalIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,17 +29,18 @@ const CloseIcon = () => (
 
 export default function Nav() {
   const locale = useLocale();
+  const t = useTranslations("nav");
   const rawPathname = useRawPathname();
   const router = useRouter();
   const cleanPath = rawPathname.replace(/^\/(en|ko)(?=\/|$)/, "") || "/";
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { href: "/" as const, label: "Home" },
-    { href: "/posts" as const, label: "Posts" },
-    { href: "/village" as const, label: "Village" },
-    { href: "/portfolio" as const, label: "Portfolio" },
-    { href: "/about" as const, label: "About" },
+    { href: "/" as const, label: t("home") },
+    { href: "/posts" as const, label: t("posts") },
+    { href: "/village" as const, label: t("village") },
+    { href: "/portfolio" as const, label: t("portfolio") },
+    { href: "/about" as const, label: t("about") },
   ];
 
   const toggleLocale = () => {

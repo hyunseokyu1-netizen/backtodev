@@ -2,6 +2,8 @@
   "nav": {
     "home": "Home",
     "posts": "Posts",
+    "village": "Village",
+    "portfolio": "Portfolio",
     "about": "About"
   },
   "home": {
@@ -22,8 +24,13 @@
   },
   "posts": {
     "title": "Posts",
+    "description": "Thoughts, learnings, and snippets from the journey back to dev.",
     "count": "{count} posts",
-    "noPost": "No posts yet."
+    "noPost": "No posts yet.",
+    "searchPlaceholder": "Search posts...",
+    "noResults": "No posts found.",
+    "topics": "Topics",
+    "allPosts": "All Posts"
   },
   "post": {
     "backToList": "← Back to list",

@@ -265,7 +265,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               color: "hsl(var(--foreground))",
             }}
           >
-            Latest Notes
+            {t("latestNotes")}
           </h2>
           <Link
             href="/posts"
@@ -276,7 +276,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               textDecoration: "none",
             }}
           >
-            View all
+            {t("viewAll")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 2 }}>
               <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
             </svg>
@@ -304,7 +304,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               const isLastSingle = pair.length === 1;
               return isLastSingle ? (
                 <div key={pair[0].slug} style={{ marginTop: i > 0 ? "1.5rem" : 0 }}>
-                  <PostCard post={pair[0]} readLabel={tPost("read")} />
+                  <PostCard post={pair[0]} locale={locale} readLabel={tPost("read")} />
                 </div>
               ) : (
                 <div
@@ -313,7 +313,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                   style={{ gap: "1.5rem", marginTop: i > 0 ? "1.5rem" : 0 }}
                 >
                   {pair.map((post) => (
-                    <PostCard key={post.slug} post={post} readLabel={tPost("read")} />
+                    <PostCard key={post.slug} post={post} locale={locale} readLabel={tPost("read")} />
                   ))}
                 </div>
               );
