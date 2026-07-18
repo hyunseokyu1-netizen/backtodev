@@ -158,7 +158,7 @@ If I manually add people by email, I have to approve them and they have to wait.
 | Create posts | Group members |
 | View members | Group admin |
 
-![그룹 만들기 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_49_42_1778551636467.png)
+![그룹 만들기 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_49_42_1778555636467.png)
 
 ![그룹 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_50_31_1778555679096.png)
 ![그룹 주소 복사](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-12_______10_50_56_1778555700028.png)
