@@ -379,6 +379,13 @@ export default async function PortfolioPage() {
               width: 1079,
               height: 2100,
             },
+            {
+              src: "/portfolio/cassette-screen-ko-webshare.png",
+              alt: "공유 링크로 열리는 웹 미리보기 페이지 — 테이프 이름과 Side A/B 트랙 목록, 앱으로 열기 버튼",
+              caption: "웹 미리보기 — 앱 없이도 트랙 목록 확인",
+              width: 1146,
+              height: 1512,
+            },
           ],
         },
         {
@@ -815,6 +822,13 @@ export default async function PortfolioPage() {
               caption: "Link sharing — web preview + one-tap import",
               width: 1079,
               height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-webshare.png",
+              alt: "Web preview page opened from a share link — tape name, Side A/B tracklist, and an Open in App button",
+              caption: "Web preview — browse the tracklist with no app required",
+              width: 1134,
+              height: 1512,
             },
           ],
         },
