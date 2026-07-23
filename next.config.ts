@@ -65,6 +65,47 @@ const nextConfig: NextConfig = {
         destination: "/ko/posts",
         permanent: true,
       },
+      // 빈약 글 통합(2026-07)으로 병합된 옛 슬러그 → 새 슬러그
+      {
+        source: "/:locale(ko|en)/posts/20260616_fable5_nomoreservice",
+        destination: "/:locale/posts/fable5_rollercoaster_20260715",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/myLastDayUsingFable5_20260711",
+        destination: "/:locale/posts/fable5_rollercoaster_20260715",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/theLastDayOfMyFable5SubscriptionIRenewedItTt_20260715",
+        destination: "/:locale/posts/fable5_rollercoaster_20260715",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/cassette_20160409_01",
+        destination: "/:locale/posts/cassette_dev_log_20260410",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/cassette_20160410_01",
+        destination: "/:locale/posts/cassette_dev_log_20260410",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/20260326_01_start_essay",
+        destination: "/:locale/posts/back_to_dev_origin_20260326",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/legacy_developer_20260330",
+        destination: "/:locale/posts/back_to_dev_origin_20260326",
+        permanent: true,
+      },
+      {
+        source: "/:locale(ko|en)/posts/google_play_app_release_20260528",
+        destination: "/:locale/posts/google_play_console_production_20260527",
+        permanent: true,
+      },
     ];
   },
 };

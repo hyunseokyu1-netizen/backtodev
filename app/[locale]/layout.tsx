@@ -32,12 +32,10 @@ export async function generateMetadata({
     verification: {
       google: "Xjx7p7yNQ1OljsshafOv8YDLYrI5waUQ_DfBZhJehZQ",
     },
+    // 영어 페이지는 자동 번역(검수 없음)이라 색인 제외 — 애드센스/검색 품질 신호 정리
+    ...(!isKo && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        "ko": `${BASE_URL}/ko`,
-        "en": `${BASE_URL}/en`,
-      },
     },
     openGraph: {
       type: "website",

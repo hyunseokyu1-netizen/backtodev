@@ -5,6 +5,7 @@ description: 'ChatGPT 무료 크래딧 줌. '
 tags:
   - ChatGPT
   - Free Credit
+noindex: true
 ---
 ChatGPT 무료 크래딧 줌. 
 

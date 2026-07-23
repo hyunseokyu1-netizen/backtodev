@@ -15,19 +15,14 @@ export function localizedPageMetadata({
 }): Metadata {
   const normalizedPath = path ? `/${path.replace(/^\//, "")}` : "";
   const canonical = `${BASE_URL}/${locale}${normalizedPath}`;
-  const koUrl = `${BASE_URL}/ko${normalizedPath}`;
-  const enUrl = `${BASE_URL}/en${normalizedPath}`;
 
   return {
     title,
     description,
+    // 영어 페이지는 자동 번역(검수 없음)이라 색인 제외
+    ...(locale !== "ko" && { robots: { index: false, follow: true } }),
     alternates: {
       canonical,
-      languages: {
-        ko: koUrl,
-        en: enUrl,
-        "x-default": koUrl,
-      },
     },
     openGraph: {
       type: "website",

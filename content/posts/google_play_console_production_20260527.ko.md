@@ -123,3 +123,33 @@ tags:
 ![신청 완료](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-27_11_09_04_1779860162832.png)
 
 접수 완료. 이제 구글 심사 기다리는 일만 남았다.
+
+---
+
+## 업데이트 (5월 28일) — 하루 만에 승인 완료
+
+신청 다음 날 바로 승인이 났다. 승인 완료되면 이렇게 메일이 온다.
+
+![스크린샷 2026-05-28 11.30.39](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_11_30_39_1779935559909.png)
+
+대시보드 화면:
+
+![스크린샷 2026-05-28 10.23.28](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_10_23_28_1779935559906.png)
+![스크린샷 2026-05-28 08.47.13](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_08_47_13_1779935559904.png)
+
+승인 후 남은 할 일 목록:
+
+![스크린샷 2026-05-28 08.47.26](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_08_47_26_1779935559905.png)
+
+- 국가 및 지역 선택
+- 새 버전 만들기
+- 버전 미리보기 및 확인
+- 검토를 위해 Google에 버전 전송
+- Google Play에 앱 게시
+
+검토 내역을 구글에 전송:
+
+![스크린샷 2026-05-28 10.29.44](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_10_29_44_1779935559907.png)
+![스크린샷 2026-05-28 10.30.35](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/___________2026-05-28_10_30_35_1779935559908.png)
+
+여기까지 하면 프로덕션 등록의 전체 과정이 끝난다.
