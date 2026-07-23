@@ -297,6 +297,65 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
+          name: "KidsPlay — 꼬마 놀이터",
+          tagline: "결제 팝업도 광고도 없는, 아이 혼자 놀 수 있는 웹 놀이터",
+          description:
+            "집에 굴러다니던 오래된 맥북을 아이 전용 기기로 만들려다 시작한 프로젝트입니다. 아이들 게임 앱을 몇 개 깔아줬더니 게임이 끝날 때마다 결제 유도 팝업이 떴고, 글을 못 읽는 아이는 그저 큰 버튼을 눌렀습니다. 전면 광고의 닫기 버튼은 5초 뒤에야 화면 구석에 아주 작게 나타나서, 아이 손으로는 정확히 누르지 못하고 결국 광고 링크가 열렸습니다. 그래서 광고도 결제도 외부 링크도 없는 놀이터를 직접 만들었습니다. 2~7세를 위한 색칠 놀이, 퍼즐, 짝꿍 찾기 등 10가지 놀이가 들어 있고, 나이를 2~3세·4~5세·6~7세로 고르면 같은 게임의 문제 수가 달라집니다. 아이가 다른 걸 건드리지 못하도록 시작 버튼을 누르면 Fullscreen API로 전체 화면에 진입하고, 우클릭·더블클릭·휠·키보드 이벤트를 전부 차단했습니다. 부모가 빠져나오는 문은 고정 PIN 대신 매번 새로 생성되는 곱셈 문제로 만들었습니다 — 외울 대상이 없으니 아이가 훔쳐볼 수도, 부모가 잊어버릴 수도 없습니다. 놀이 시간 타이머는 남은 초를 빼는 대신 종료 시각을 절대 시간으로 잡아, 탭이 백그라운드로 내려가도 정확히 끝납니다. 진행 기록은 서버 없이 기기 안에만 저장되고, 서비스 워커 덕분에 한 번 접속하면 인터넷 없이도 놀 수 있습니다.",
+          tech: [
+            "Next.js 16",
+            "React 19",
+            "TypeScript",
+            "Tailwind CSS 4",
+            "Fullscreen API",
+            "Web Speech API",
+            "PWA / Service Worker",
+            "Cloudflare Pages",
+          ],
+          links: [
+            {
+              label: "→ 사이트 열기",
+              href: "https://kidsnara.pages.dev",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/kidsplay",
+            },
+          ],
+          status: "live",
+          statusLabel: "운영 중",
+          period: "2026.07",
+          image: {
+            src: "/portfolio/kidsplay-feature.png",
+            alt: "KidsPlay — 우리 아이의 작은 놀이터",
+            width: 1024,
+            height: 538,
+          },
+          screenshots: [
+            {
+              src: "/portfolio/kidsplay-screen-parent.png",
+              alt: "KidsPlay 부모 화면 — 나이, 놀이 시간, 첫 놀이를 고르고 전체 화면으로 시작",
+              caption: "부모 화면 — 나이·시간 설정 후 전체 화면 진입",
+              width: 1280,
+              height: 830,
+            },
+            {
+              src: "/portfolio/kidsplay-screen-hub.png",
+              alt: "KidsPlay 놀이터 화면 — 10가지 놀이 카드와 상단의 별, 남은 시간, 자물쇠 버튼",
+              caption: "놀이터 — 10가지 놀이, 상단에 남은 시간과 잠금",
+              width: 1280,
+              height: 830,
+            },
+            {
+              src: "/portfolio/kidsplay-screen-coloring.png",
+              alt: "KidsPlay 색칠 놀이 화면 — 그림 선택, 붓 크기, 색 팔레트와 자동 색칠 버튼",
+              caption: "색칠 놀이 — 14가지 그림, 붓 크기와 확대 조절",
+              width: 1280,
+              height: 1224,
+            },
+          ],
+        },
+        {
           name: "Cassette Music Player",
           featured: true,
           tagline: "MP3·유튜브를 카세트에 담아 링크 하나로 선물하는 뮤직 플레이어",
@@ -317,6 +376,14 @@ export default async function PortfolioPage() {
               label: "→ Play Store",
               href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
               primary: true,
+            },
+            {
+              label: "샘플 테이프 듣기 (사랑노래)",
+              href: "https://repotape.pages.dev/cassette-tape/?n=%EC%82%AC%EB%9E%91%EB%85%B8%EB%9E%98forYou&a=DokABcA8Iy8,9ipBvDc-kIs,3OUfwB6Apog,g7zBem7X8UA,SUJc0s9AsQg,GQsthRKn4_8,iZyHZmWqDyI&b=wTe1ljdLt1E,xErdj3MczEQ,bkUCWuBdL1A,vbP_2J2rz4Y,i3DEtHD-4wA,Q6ZG93q5y1Y,vAAGPmRiL-4&c=E0705F",
+            },
+            {
+              label: "샘플 테이프 듣기 (팝송)",
+              href: "https://repotape.pages.dev/cassette-tape/?n=Mixed%20Tape&a=dQw4w9WgXcQ,9bZkp7q19f0,kJQP7kiw5Fk,JGwWNGJdvx8,OPf0YbXqDm0,pc0mxOXbWIU,NaFd8ucHLuo,yebNIHKAC4A&b=fJ9rUzIMcZQ,hTWKbfoikeg,YQHsXMglC9A,CevxZvSJLk8,09R8_2nJtjg&c=FF9A44",
             },
             {
               label: "GitHub",
@@ -743,6 +810,65 @@ export default async function PortfolioPage() {
       ]
     : [
         {
+          name: "KidsPlay — A Little Playground",
+          tagline: "A web playground for kids with no ads, no purchase prompts",
+          description:
+            "This started as an attempt to turn an old MacBook lying around the house into a device just for my kids. I installed a few children's game apps, and every time a game ended a purchase prompt appeared — my child, too young to read, simply tapped the biggest button. Full-screen ads were worse: the close button showed up after five seconds, tiny and tucked into a corner, too small for small hands to hit, so the ad link opened instead. So I built a playground with no ads, no payments, and no outbound links at all. It ships ten activities for ages 2–7 including coloring, puzzles, and memory matching, and picking an age band (2–3, 4–5, 6–7) changes how many items each game presents. To keep children from wandering off into the rest of the machine, pressing start enters the Fullscreen API and the app blocks right-click, double-click, wheel, and keyboard events. The way out for parents is not a fixed PIN but a freshly generated multiplication problem — there is nothing to memorize, so a child can't learn it by watching and a parent can't forget it. The play timer stores an absolute end timestamp rather than counting seconds down, so it still ends on time even if the tab is backgrounded. Progress lives only on the device with no server involved, and a service worker means it keeps working offline after the first visit.",
+          tech: [
+            "Next.js 16",
+            "React 19",
+            "TypeScript",
+            "Tailwind CSS 4",
+            "Fullscreen API",
+            "Web Speech API",
+            "PWA / Service Worker",
+            "Cloudflare Pages",
+          ],
+          links: [
+            {
+              label: "→ Open site",
+              href: "https://kidsnara.pages.dev",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/kidsplay",
+            },
+          ],
+          status: "live",
+          statusLabel: "Live",
+          period: "Jul 2026",
+          image: {
+            src: "/portfolio/kidsplay-feature.png",
+            alt: "KidsPlay — a little playground for your child",
+            width: 1024,
+            height: 538,
+          },
+          screenshots: [
+            {
+              src: "/portfolio/kidsplay-screen-parent.png",
+              alt: "KidsPlay parent screen — choose age, play time, and a first activity before starting full screen",
+              caption: "Parent screen — set age and time, then go full screen",
+              width: 1280,
+              height: 830,
+            },
+            {
+              src: "/portfolio/kidsplay-screen-hub.png",
+              alt: "KidsPlay playground screen — ten activity cards with stars, remaining time, and lock buttons on top",
+              caption: "Playground — ten activities, time and lock up top",
+              width: 1280,
+              height: 830,
+            },
+            {
+              src: "/portfolio/kidsplay-screen-coloring.png",
+              alt: "KidsPlay coloring screen — picture picker, brush sizes, color palette, and auto-fill button",
+              caption: "Coloring — 14 pictures with brush size and zoom",
+              width: 1280,
+              height: 1224,
+            },
+          ],
+        },
+        {
           name: "Cassette Music Player",
           featured: true,
           tagline: "Mix MP3s and YouTube into a cassette, gift it with one link",
@@ -763,6 +889,14 @@ export default async function PortfolioPage() {
               label: "→ Play Store",
               href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
               primary: true,
+            },
+            {
+              label: "Sample tape (Korean ballads)",
+              href: "https://repotape.pages.dev/cassette-tape/?n=%EC%82%AC%EB%9E%91%EB%85%B8%EB%9E%98forYou&a=DokABcA8Iy8,9ipBvDc-kIs,3OUfwB6Apog,g7zBem7X8UA,SUJc0s9AsQg,GQsthRKn4_8,iZyHZmWqDyI&b=wTe1ljdLt1E,xErdj3MczEQ,bkUCWuBdL1A,vbP_2J2rz4Y,i3DEtHD-4wA,Q6ZG93q5y1Y,vAAGPmRiL-4&c=E0705F",
+            },
+            {
+              label: "Sample tape (Pop hits)",
+              href: "https://repotape.pages.dev/cassette-tape/?n=Mixed%20Tape&a=dQw4w9WgXcQ,9bZkp7q19f0,kJQP7kiw5Fk,JGwWNGJdvx8,OPf0YbXqDm0,pc0mxOXbWIU,NaFd8ucHLuo,yebNIHKAC4A&b=fJ9rUzIMcZQ,hTWKbfoikeg,YQHsXMglC9A,CevxZvSJLk8,09R8_2nJtjg&c=FF9A44",
             },
             {
               label: "GitHub",
