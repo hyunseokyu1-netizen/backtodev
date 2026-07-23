@@ -3,59 +3,19 @@ import { getAllPosts } from "@/lib/posts";
 
 const BASE_URL = "https://backtodev.com";
 
+// 영어 페이지는 자동 번역(검수 없음)이라 noindex 처리와 함께 사이트맵에서도 제외한다.
+// 사이트맵에는 색인 대상인 한국어 페이지만 노출.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [koPosts, enPosts] = await Promise.all([
-    getAllPosts("ko"),
-    getAllPosts("en"),
-  ]);
+  const koPosts = await getAllPosts("ko");
 
-  // 실제 해당 언어 콘텐츠가 있는 것만 (fallback 제외)
-  const koSlugs = new Set(koPosts.filter((p) => !p.isFallback).map((p) => p.slug));
-  const enSlugs = new Set(enPosts.filter((p) => !p.isFallback).map((p) => p.slug));
-
-  const allSlugs = new Set([...koSlugs, ...enSlugs]);
-
-  const postEntries: MetadataRoute.Sitemap = Array.from(allSlugs).flatMap((slug) => {
-    const entries: MetadataRoute.Sitemap = [];
-
-    if (koSlugs.has(slug)) {
-      const post = koPosts.find((p) => p.slug === slug)!;
-      entries.push({
-        url: `${BASE_URL}/ko/posts/${slug}`,
-        lastModified: post.date ? new Date(post.date) : new Date(),
-        changeFrequency: "monthly",
-        priority: 0.8,
-        alternates: {
-          languages: {
-            ko: `${BASE_URL}/ko/posts/${slug}`,
-            ...(enSlugs.has(slug) && { en: `${BASE_URL}/en/posts/${slug}` }),
-            "x-default": `${BASE_URL}/ko/posts/${slug}`,
-          },
-        },
-      });
-    }
-
-    if (enSlugs.has(slug)) {
-      const post = enPosts.find((p) => p.slug === slug)!;
-      entries.push({
-        url: `${BASE_URL}/en/posts/${slug}`,
-        lastModified: post.date ? new Date(post.date) : new Date(),
-        changeFrequency: "monthly",
-        priority: 0.8,
-        alternates: {
-          languages: {
-            ...(koSlugs.has(slug) && { ko: `${BASE_URL}/ko/posts/${slug}` }),
-            en: `${BASE_URL}/en/posts/${slug}`,
-            "x-default": koSlugs.has(slug)
-              ? `${BASE_URL}/ko/posts/${slug}`
-              : `${BASE_URL}/en/posts/${slug}`,
-          },
-        },
-      });
-    }
-
-    return entries;
-  });
+  const postEntries: MetadataRoute.Sitemap = koPosts
+    .filter((p) => !p.isFallback && !p.noindex)
+    .map((post) => ({
+      url: `${BASE_URL}/ko/posts/${post.slug}`,
+      lastModified: post.date ? new Date(post.date) : new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
 
   const staticPages = [
     { path: "", changeFrequency: "daily" as const, priority: 1.0 },
@@ -70,19 +30,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/privacy/repo-note", changeFrequency: "yearly" as const, priority: 0.2 },
   ];
 
-  const staticEntries: MetadataRoute.Sitemap = staticPages.flatMap((page) => {
-    const languages = {
-      ko: `${BASE_URL}/ko${page.path}`,
-      en: `${BASE_URL}/en${page.path}`,
-      "x-default": `${BASE_URL}/ko${page.path}`,
-    };
-    return (["ko", "en"] as const).map((locale) => ({
-      url: languages[locale],
-      changeFrequency: page.changeFrequency,
-      priority: page.priority,
-      alternates: { languages },
-    }));
-  });
+  const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
+    url: `${BASE_URL}/ko${page.path}`,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 
   return [...staticEntries, ...postEntries];
 }

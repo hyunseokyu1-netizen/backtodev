@@ -13,6 +13,8 @@ export interface PostMeta {
   lang?: string;
   /** 해당 locale 버전이 없어서 fallback된 경우 true */
   isFallback?: boolean;
+  /** frontmatter에 noindex: true — 사이트에는 노출하되 검색엔진 색인 제외 */
+  noindex?: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -45,6 +47,7 @@ function parseFrontmatter(slug: string, lang: string, raw: string): PostMeta {
     description: data.description ?? "",
     tags: data.tags ?? [],
     lang,
+    noindex: data.noindex === true,
   };
 }
 
@@ -114,6 +117,7 @@ export async function getPost(slug: string, locale = "ko"): Promise<Post | null>
       tags: data.tags ?? [],
       lang: candidate.lang,
       isFallback: candidate.isFallback,
+      noindex: data.noindex === true,
       content,
     };
   }

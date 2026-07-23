@@ -6,6 +6,7 @@ tags:
   - Hackathon
   - AI
   - BlockChain
+noindex: true
 ---
 
 ![해커톤 개요](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/overview_1_1_1779348720864.png)

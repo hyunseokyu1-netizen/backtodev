@@ -33,26 +33,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(slug, locale);
   if (!post) return {};
 
-  const otherLocale = locale === "ko" ? "en" : "ko";
-  const otherPost = await getPost(slug, otherLocale);
   // isFallback: 영어 번역 없이 한국어 내용을 /en/ 에서 보여주는 경우
   // 두 URL이 같은 내용 → canonical을 ko 버전으로 통일해 중복 페이지 오류 방지
   const canonicalUrl = post.isFallback
     ? `${BASE_URL}/ko/posts/${slug}`
     : `${BASE_URL}/${locale}/posts/${slug}`;
 
+  // 색인 제외 대상: fallback 중복 페이지, 자동 번역 영어판, frontmatter noindex 글
+  const noindex = post.isFallback || locale !== "ko" || post.noindex;
+
   return {
     title: post.title,
     description: post.description,
-    ...(post.isFallback && { robots: { index: false, follow: false } }),
+    ...(noindex && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        ko: `${BASE_URL}/ko/posts/${slug}`,
-        ...(otherPost && !otherPost.isFallback
-          ? { en: `${BASE_URL}/en/posts/${slug}`, "x-default": `${BASE_URL}/ko/posts/${slug}` }
-          : { "x-default": `${BASE_URL}/ko/posts/${slug}` }),
-      },
     },
     openGraph: {
       type: "article",

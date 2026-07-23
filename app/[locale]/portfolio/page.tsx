@@ -297,8 +297,83 @@ export default async function PortfolioPage() {
   const projects: Project[] = isKo
     ? [
         {
-          name: "RepoNote",
+          name: "Cassette Music Player",
           featured: true,
+          tagline: "MP3·유튜브를 카세트에 담아 링크 하나로 선물하는 뮤직 플레이어",
+          description:
+            "1980년대 카세트 테이프 경험을 안드로이드 폰에 옮긴 음악 플레이어입니다. v2.0.0에서 앱을 처음부터 다시 만들면서 프리미엄 카세트 데크 느낌의 다크 테마로 디자인을 새로 하고, 셸 색상 7가지로 테이프를 꾸밀 수 있게 했습니다. 휴대폰 속 MP3 파일뿐 아니라 YouTube 링크도 테이프에 담을 수 있고, Side A/B 각 30분이라는 진짜 카세트의 물리적 한계는 그대로 지킵니다 — 30:00에 도달하면 곡이 잘리고 반대 면으로 넘어갑니다. FF 버튼을 꾹 눌러야 다음 곡으로 넘어가는 조작감과 트랙 사이 테이프 노이즈로, 스킵 없이 앨범처럼 끝까지 듣는 경험에 집중했습니다. 가장 공들인 기능은 링크 공유입니다 — 완성한 테이프를 링크 하나로 보내면 받는 사람은 앱 설치 없이 웹에서 트랙리스트를 미리 보고, 앱이 있다면 바로 가져올 수 있습니다. 테이프마다 재생 위치를 따로 기억해 여러 테이프를 갈아 끼워도 듣던 곳부터 이어지고, 화면을 꺼도 잠금화면에서 로컬 곡을 조작할 수 있습니다. 한국어·영어를 지원합니다.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "expo-router",
+            "expo-av",
+            "react-native-reanimated",
+            "react-native-svg",
+            "AsyncStorage",
+          ],
+          links: [
+            {
+              label: "→ Play Store",
+              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
+            },
+          ],
+          status: "live",
+          statusLabel: "출시 완료",
+          period: "2025.05",
+          image: { src: "/portfolio/cassette-feature-ko.png", alt: "REPO TAPE — 나만의 테이프를 만들고 공유해보세요", width: 1024, height: 500 },
+          screenshots: [
+            {
+              src: "/portfolio/cassette-screen-ko-splash.png",
+              alt: "Cassette Music Player 인트로 화면 — 새로워진 다크 테마",
+              caption: "인트로 — 새로워진 다크 테마",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-ko-player.png",
+              alt: "Cassette Music Player Mixed Tape 재생 화면 — Side A 트랙 목록과 컨트롤",
+              caption: "플레이어 — Side A 재생",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-ko-edit.png",
+              alt: "Cassette Music Player 테이프 편집 화면 — Side A/B 30분 제한과 MP3·URL 추가",
+              caption: "테이프 편집 — Side A/B, 30분 제한",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-ko-collection.png",
+              alt: "Cassette Music Player 테이프 컬렉션 화면 — 셸 색상별 테이프 목록",
+              caption: "테이프 컬렉션 — 셸 색상 커스터마이즈",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-ko-share.png",
+              alt: "Cassette Music Player 공유 화면 — 링크 공유와 텍스트 코드 공유 옵션",
+              caption: "링크 공유 — 웹 미리보기 + 바로 가져오기",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-ko-webshare.png",
+              alt: "공유 링크로 열리는 웹 미리보기 페이지 — 테이프 이름과 Side A/B 트랙 목록, 앱으로 열기 버튼",
+              caption: "웹 미리보기 — 앱 없이도 트랙 목록 확인",
+              width: 1146,
+              height: 1512,
+            },
+          ],
+        },
+        {
+          name: "RepoNote",
           tagline: "Obsidian 저장소와 자동 동기화되는 모바일 메모장",
           description:
             "모바일에서 Obsidian과 Git을 연결하는 게 너무 복잡하고, 충돌이 나면 폰의 작은 화면에서 병합 마커를 보며 해결해야 하는 게 고통스러워서 직접 만든 메모 앱입니다. 발상을 뒤집었습니다 — 폰에 저장소를 클론하는 대신 Git CLI 없이 GitHub Contents API만 사용해서, 열고 쓰고 닫으면 알아서 커밋됩니다. 입력은 항상 로컬 DB에 먼저 저장되고(600ms debounce) 입력이 멈추면 5초 뒤 자동으로 GitHub에 반영되므로, 오프라인이나 API 실패에도 글이 유실되지 않습니다. 충돌은 파일을 읽을 때의 SHA와 업로드 직전 서버 SHA를 비교해 감지하고, 덮어쓰는 대신 두 버전을 비교해 고르는 화면을 띄웁니다. 사실 이 앱은 같은 작업지시서로 React Native에서 먼저 만들었는데 빌드·상태 관리 에러가 너무 많아 중단하고, Flutter로 처음부터 다시 만들어 완성했습니다 — 스펙 문서를 잘 써두면 프레임워크를 갈아타도 손해가 크지 않다는 걸 배웠습니다. 한국어/영어를 지원하고 Riverpod Provider 오버라이드로 가짜 API를 주입하는 스토어 스크린샷용 데모 모드도 만들었습니다.",
@@ -316,7 +391,7 @@ export default async function PortfolioPage() {
             { label: "개발 이야기", href: "/ko/posts/reponote_flutter_20260717" },
           ],
           status: "wip",
-          statusLabel: "스토어 등록 준비 중",
+          statusLabel: "비공개 테스트중",
           period: "2026.07",
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote 파일 트리 화면 — 접기/펼치기 폴더와 동기화 상태", caption: "파일 트리 — 폴더 접기/펼치기", width: 1080, height: 2340 },
@@ -411,7 +486,6 @@ export default async function PortfolioPage() {
         },
         {
           name: "블로그 자동 발행 SaaS",
-          featured: true,
           tagline: "주제만 등록하면 AI가 초안을 쓰고, 클라우드가 알아서 발행",
           description:
             "날짜별로 주제를 등록해 두면 Claude가 초안을 쓰고, 예약된 시간에 티스토리와 네이버 블로그에 자동 발행해 주는 서비스입니다. 두 플랫폼 모두 글쓰기 API가 종료되어 Playwright 브라우저 자동화가 유일한 방법이었습니다 — Vercel 서버리스 함수 안에서 헤드리스 크롬을 띄워 실제 에디터에 글을 쓰고 발행 버튼을 누릅니다. 로그인은 Browserbase 원격 브라우저를 iframe으로 임베드해 사용자가 직접 하고, 서비스는 비밀번호를 전혀 다루지 않고 세션 쿠키만 저장합니다. 하루만 지나도 만료되는 카카오 세션은 매일 밤 세션을 깨워 연명시키는 cron으로 해결했고, 사용자별 Redis 네임스페이스로 멀티테넌트 구조를 갖췄습니다. 처음엔 로컬 CLI로 시작했다가 클라우드 SaaS로 전환했고, 현재 월 구독 서비스로 상업화를 준비 중입니다. 발행 자동화 로직이 곧 제품이라, 이 프로젝트는 예외적으로 소스를 공개하지 않습니다.",
@@ -482,13 +556,49 @@ export default async function PortfolioPage() {
             { label: "개발 이야기", href: "/ko/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "테스트 중",
+          statusLabel: "상용화 준비중",
           period: "2026.04 ~",
           image: { src: "/portfolio/matchda-feature.png", alt: "매치다 글로벌 커리어 플랫폼 홈 화면", width: 1440, height: 680 },
           screenshots: [
             { src: "/portfolio/matchda-screen-matching.png", alt: "매치다 AI 공고 매칭 화면", caption: "AI 공고 매칭", width: 1440, height: 790 },
             { src: "/portfolio/matchda-screen-translate.png", alt: "매치다 이력서 영문 번역 화면", caption: "이력서 영문 번역", width: 1440, height: 900 },
             { src: "/portfolio/matchda-screen-tracking.png", alt: "매치다 지원 현황 추적 화면", caption: "지원 현황 추적", width: 1440, height: 820 },
+          ],
+        },
+        {
+          name: "마작 조이",
+          tagline: "족보도 역도 없이, 짝만 맞추면 이기는 심플 마작",
+          description:
+            "사람들이 마작을 어려워하는 진짜 이유는 규칙이 아니라 복잡한 점수 체계(역·판수·부수)라고 생각했습니다. 그래서 규칙을 걷어내고 '몸통 4개 + 머리 1개' 조합 하나만 기억하면 되게 만들었고, 대신 승리 점수는 기본 100점에 더하기 보너스와 곱하기 보너스를 얹어 영수증처럼 한 줄씩 보여주는 연출을 넣었습니다. 사람은 항상 좌석 0, 나머지는 AI가 채우는 로컬 대전이 기본이고, 같은 Wi-Fi에서 방을 만들면 최대 4명이 함께 즐기는 LAN 멀티플레이도 지원합니다 — 호스트가 유일한 심판 역할을 하고 참가자는 행동만 전송하는 구조라 서버 비용이 들지 않습니다. 효과음은 외부 에셋 없이 파이썬으로 직접 합성했고, 한국어·중국어·영어 3개 언어와 점수 없이 짝 맞추기만 즐기는 초보자 모드도 넣었습니다.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "비공개 테스트중",
+          period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "마작 조이 홈 화면", caption: "홈 — AI / 친구와 하기", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "마작 조이 게임플레이 화면, 패 가져가기 타이머", caption: "게임플레이 — 15초 응답 타이머", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "마작 조이 게임 설명서 화면", caption: "설명서 — 족보 없이 조합 하나만", width: 1080, height: 2340 },
+          ],
+        },
+        {
+          name: "Football Dice",
+          tagline: "주사위와 카드로 승부하는 미식축구 보드게임",
+          description:
+            "미식축구를 주사위와 카드로 재현한 보드게임 앱입니다. 공격·수비 플레이북에서 카드를 고르면 주사위 매치업 차트로 결과가 갈리는 방식으로, 보드게임 특유의 긴장감을 그대로 살렸습니다. 쉬움·보통·어려움 난이도별 AI와 대전하거나, 같은 Wi-Fi에서 친구와 직접 대전할 수 있습니다. 추천 플레이 3장뿐 아니라 전체 플레이북도 열람할 수 있고, 한국어·영어를 지원하며 주사위·카드 연출과 효과음은 각각 켜고 끌 수 있습니다.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "비공개 테스트중",
+          period: "2026.07",
+          screenshots: [
+            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice 홈 화면", caption: "홈 — 난이도 선택", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice 공격 플레이북 화면", caption: "공격 플레이북 선택", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice 주사위 판정 결과 화면", caption: "주사위 판정 결과", width: 1080, height: 2340 },
           ],
         },
         {
@@ -568,81 +678,6 @@ export default async function PortfolioPage() {
           ],
         },
         {
-          name: "Cassette Music Player",
-          tagline: "MP3·유튜브를 카세트에 담아 링크 하나로 선물하는 뮤직 플레이어",
-          description:
-            "1980년대 카세트 테이프 경험을 안드로이드 폰에 옮긴 음악 플레이어입니다. v2.0.0에서 앱을 처음부터 다시 만들면서 프리미엄 카세트 데크 느낌의 다크 테마로 디자인을 새로 하고, 셸 색상 7가지로 테이프를 꾸밀 수 있게 했습니다. 휴대폰 속 MP3 파일뿐 아니라 YouTube 링크도 테이프에 담을 수 있고, Side A/B 각 30분이라는 진짜 카세트의 물리적 한계는 그대로 지킵니다 — 30:00에 도달하면 곡이 잘리고 반대 면으로 넘어갑니다. FF 버튼을 꾹 눌러야 다음 곡으로 넘어가는 조작감과 트랙 사이 테이프 노이즈로, 스킵 없이 앨범처럼 끝까지 듣는 경험에 집중했습니다. 가장 공들인 기능은 링크 공유입니다 — 완성한 테이프를 링크 하나로 보내면 받는 사람은 앱 설치 없이 웹에서 트랙리스트를 미리 보고, 앱이 있다면 바로 가져올 수 있습니다. 테이프마다 재생 위치를 따로 기억해 여러 테이프를 갈아 끼워도 듣던 곳부터 이어지고, 화면을 꺼도 잠금화면에서 로컬 곡을 조작할 수 있습니다. 한국어·영어를 지원합니다.",
-          tech: [
-            "React Native",
-            "TypeScript",
-            "Expo SDK 54",
-            "expo-router",
-            "expo-av",
-            "react-native-reanimated",
-            "react-native-svg",
-            "AsyncStorage",
-          ],
-          links: [
-            {
-              label: "→ Play Store",
-              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
-              primary: true,
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
-            },
-          ],
-          status: "live",
-          statusLabel: "출시 완료",
-          period: "2025.05",
-          image: { src: "/portfolio/cassette-feature-ko.png", alt: "REPO TAPE — 나만의 테이프를 만들고 공유해보세요", width: 1024, height: 500 },
-          screenshots: [
-            {
-              src: "/portfolio/cassette-screen-ko-splash.png",
-              alt: "Cassette Music Player 인트로 화면 — 새로워진 다크 테마",
-              caption: "인트로 — 새로워진 다크 테마",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-ko-player.png",
-              alt: "Cassette Music Player Mixed Tape 재생 화면 — Side A 트랙 목록과 컨트롤",
-              caption: "플레이어 — Side A 재생",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-ko-edit.png",
-              alt: "Cassette Music Player 테이프 편집 화면 — Side A/B 30분 제한과 MP3·URL 추가",
-              caption: "테이프 편집 — Side A/B, 30분 제한",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-ko-collection.png",
-              alt: "Cassette Music Player 테이프 컬렉션 화면 — 셸 색상별 테이프 목록",
-              caption: "테이프 컬렉션 — 셸 색상 커스터마이즈",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-ko-share.png",
-              alt: "Cassette Music Player 공유 화면 — 링크 공유와 텍스트 코드 공유 옵션",
-              caption: "링크 공유 — 웹 미리보기 + 바로 가져오기",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-ko-webshare.png",
-              alt: "공유 링크로 열리는 웹 미리보기 페이지 — 테이프 이름과 Side A/B 트랙 목록, 앱으로 열기 버튼",
-              caption: "웹 미리보기 — 앱 없이도 트랙 목록 확인",
-              width: 1146,
-              height: 1512,
-            },
-          ],
-        },
-        {
           name: "back to dev",
           tagline: "40대 PM이 다시 개발자로 돌아오는 기록",
           description:
@@ -705,47 +740,86 @@ export default async function PortfolioPage() {
           period: "2026.04",
           image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면", width: 2590, height: 1754 },
         },
-        {
-          name: "마작 조이",
-          tagline: "족보도 역도 없이, 짝만 맞추면 이기는 심플 마작",
-          description:
-            "사람들이 마작을 어려워하는 진짜 이유는 규칙이 아니라 복잡한 점수 체계(역·판수·부수)라고 생각했습니다. 그래서 규칙을 걷어내고 '몸통 4개 + 머리 1개' 조합 하나만 기억하면 되게 만들었고, 대신 승리 점수는 기본 100점에 더하기 보너스와 곱하기 보너스를 얹어 영수증처럼 한 줄씩 보여주는 연출을 넣었습니다. 사람은 항상 좌석 0, 나머지는 AI가 채우는 로컬 대전이 기본이고, 같은 Wi-Fi에서 방을 만들면 최대 4명이 함께 즐기는 LAN 멀티플레이도 지원합니다 — 호스트가 유일한 심판 역할을 하고 참가자는 행동만 전송하는 구조라 서버 비용이 들지 않습니다. 효과음은 외부 에셋 없이 파이썬으로 직접 합성했고, 한국어·중국어·영어 3개 언어와 점수 없이 짝 맞추기만 즐기는 초보자 모드도 넣었습니다.",
-          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
-          links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
-          ],
-          status: "wip",
-          statusLabel: "개발 중",
-          period: "2026.07",
-          screenshots: [
-            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "마작 조이 홈 화면", caption: "홈 — AI / 친구와 하기", width: 1080, height: 2340 },
-            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "마작 조이 게임플레이 화면, 패 가져가기 타이머", caption: "게임플레이 — 15초 응답 타이머", width: 1080, height: 2340 },
-            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "마작 조이 게임 설명서 화면", caption: "설명서 — 족보 없이 조합 하나만", width: 1080, height: 2340 },
-          ],
-        },
-        {
-          name: "Football Dice",
-          tagline: "주사위와 카드로 승부하는 미식축구 보드게임",
-          description:
-            "미식축구를 주사위와 카드로 재현한 보드게임 앱입니다. 공격·수비 플레이북에서 카드를 고르면 주사위 매치업 차트로 결과가 갈리는 방식으로, 보드게임 특유의 긴장감을 그대로 살렸습니다. 쉬움·보통·어려움 난이도별 AI와 대전하거나, 같은 Wi-Fi에서 친구와 직접 대전할 수 있습니다. 추천 플레이 3장뿐 아니라 전체 플레이북도 열람할 수 있고, 한국어·영어를 지원하며 주사위·카드 연출과 효과음은 각각 켜고 끌 수 있습니다.",
-          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
-          links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
-          ],
-          status: "wip",
-          statusLabel: "개발 중",
-          period: "2026.07",
-          screenshots: [
-            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice 홈 화면", caption: "홈 — 난이도 선택", width: 1080, height: 2340 },
-            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice 공격 플레이북 화면", caption: "공격 플레이북 선택", width: 1080, height: 2340 },
-            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice 주사위 판정 결과 화면", caption: "주사위 판정 결과", width: 1080, height: 2340 },
-          ],
-        },
       ]
     : [
         {
-          name: "RepoNote",
+          name: "Cassette Music Player",
           featured: true,
+          tagline: "Mix MP3s and YouTube into a cassette, gift it with one link",
+          description:
+            "An Android music player that brings the 1980s cassette tape experience to a modern phone. For v2.0.0 I rebuilt the app from scratch with a premium cassette-deck dark theme and seven shell colors to personalize each tape. Tapes can now hold YouTube links alongside local MP3 files, while still enforcing the real physical limit of a cassette — 30 minutes per side, cutting off and flipping to the other side at 30:00. Skipping isn't instant; you have to hold FF to move to the next track, and tape hiss plays between songs, keeping the focus on listening through like an album. The feature I'm proudest of is link sharing — send a finished tape as a single link, and the recipient can preview the tracklist on the web with no app required, or import it straight into the app if they already have it installed. Each tape remembers its own playback position, so swapping tapes still picks up where you left off, and lock screen controls let you manage local tracks with the screen off. Available in Korean and English.",
+          tech: [
+            "React Native",
+            "TypeScript",
+            "Expo SDK 54",
+            "expo-router",
+            "expo-av",
+            "react-native-reanimated",
+            "react-native-svg",
+            "AsyncStorage",
+          ],
+          links: [
+            {
+              label: "→ Play Store",
+              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
+              primary: true,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
+            },
+          ],
+          status: "live",
+          statusLabel: "Released",
+          period: "May 2025",
+          image: { src: "/portfolio/cassette-feature-en.png", alt: "REPO TAPE — Make Your Own Tape and Share the Music", width: 1024, height: 500 },
+          screenshots: [
+            {
+              src: "/portfolio/cassette-screen-en-splash.png",
+              alt: "Cassette Music Player intro screen with the new dark theme",
+              caption: "Intro — new dark theme",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-player.png",
+              alt: "Cassette Music Player Mixed Tape playback screen — Side A tracklist and controls",
+              caption: "Player — Side A playback",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-edit.png",
+              alt: "Cassette Music Player tape editor screen — Side A/B 30-minute limit and Add MP3/URL",
+              caption: "Tape editor — Side A/B, 30-min limit",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-collection.png",
+              alt: "Cassette Music Player tape collection screen — tapes listed by shell color",
+              caption: "Tape collection — customizable shell colors",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-share.png",
+              alt: "Cassette Music Player share screen — share as link or text code",
+              caption: "Link sharing — web preview + one-tap import",
+              width: 1079,
+              height: 2100,
+            },
+            {
+              src: "/portfolio/cassette-screen-en-webshare.png",
+              alt: "Web preview page opened from a share link — tape name, Side A/B tracklist, and an Open in App button",
+              caption: "Web preview — browse the tracklist with no app required",
+              width: 1134,
+              height: 1512,
+            },
+          ],
+        },
+        {
+          name: "RepoNote",
           tagline: "A mobile notepad that auto-syncs with your Obsidian repo",
           description:
             "Connecting Obsidian to Git on mobile was painfully complex, and resolving merge conflicts on a phone screen was worse — so I built my own note app. The idea is inverted: instead of cloning the repo to the phone, it uses only the GitHub Contents API with no Git CLI at all. Open, write, close — your note is committed automatically. Every keystroke is saved to a local database first (600ms debounce), and changes are pushed to GitHub five seconds after you stop typing, so nothing is lost offline or when the API fails. Conflicts are detected by comparing the SHA from when the file was read against the server's SHA right before upload; instead of overwriting, the app shows both versions and lets you choose. This app was actually built twice — first in React Native from the same spec document, but constant build and state-management errors killed it, so I rebuilt it from scratch in Flutter. Lesson learned: a well-written spec makes switching frameworks surprisingly cheap. It ships in English and Korean, with a demo mode that injects a fake GitHub API via Riverpod provider overrides for store screenshots.",
@@ -763,7 +837,7 @@ export default async function PortfolioPage() {
             { label: "Dev story", href: "/ko/posts/reponote_flutter_20260717" },
           ],
           status: "wip",
-          statusLabel: "Preparing store release",
+          statusLabel: "Private testing",
           period: "Jul 2026",
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote file tree with collapsible folders and sync status", caption: "File tree — collapsible folders", width: 1080, height: 2340 },
@@ -858,7 +932,6 @@ export default async function PortfolioPage() {
         },
         {
           name: "Blog Auto-Publisher SaaS",
-          featured: true,
           tagline: "Register a topic — AI drafts it, the cloud publishes it",
           description:
             "A service where you register topics by date, Claude writes the drafts, and posts are automatically published to Tistory and Naver Blog at the scheduled time. Both platforms shut down their writing APIs, so Playwright browser automation was the only way in — a headless Chrome runs inside a Vercel serverless function, types into the real editor, and clicks the publish button. For login, a Browserbase remote browser is embedded as an iframe so users sign in themselves; the service never touches passwords and stores only session cookies. Kakao sessions expire after just a day of inactivity, which I solved with a nightly cron that keeps sessions alive. Per-user Redis namespaces make it multi-tenant. It started as a local CLI and pivoted to a cloud SaaS — now preparing to launch as a paid subscription. Since the publishing automation is the product itself, this is the one project whose source stays private.",
@@ -929,13 +1002,49 @@ export default async function PortfolioPage() {
             { label: "Dev story", href: "/en/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "Testing",
+          statusLabel: "Preparing to launch",
           period: "Apr 2026 ~",
           image: { src: "/portfolio/matchda-feature.png", alt: "Matchda global career platform home", width: 1440, height: 680 },
           screenshots: [
             { src: "/portfolio/matchda-screen-matching.png", alt: "Matchda AI job matching", caption: "AI job matching", width: 1440, height: 790 },
             { src: "/portfolio/matchda-screen-translate.png", alt: "Matchda resume translation", caption: "Resume translation", width: 1440, height: 900 },
             { src: "/portfolio/matchda-screen-tracking.png", alt: "Matchda application tracking", caption: "Application tracking", width: 1440, height: 820 },
+          ],
+        },
+        {
+          name: "Mahjong Joy",
+          tagline: "Mahjong is intimidating — so I stripped it down to just matching",
+          description:
+            "What actually scares people away from mahjong isn't the rules — it's the scoring system (yaku, han, fu). So I stripped the rules down to one shape to remember: 4 sets + 1 pair. Winning scores are rebuilt as a simple receipt instead: a base 100 points, plus bonuses, then multiplier bonuses, revealed line by line like a real receipt. The default mode is solo play against AI — you're always seat 0, AI fills the rest — but I also built LAN multiplayer: create a room on the same Wi-Fi and up to 4 people play together, with the host acting as the sole referee while guests just send actions, so it needs no server at all. Sound effects are synthesized in Python with no external assets, and the app supports Korean, Chinese, and English, plus a beginner mode that drops scoring entirely and keeps just the matching.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "Private testing",
+          period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "Mahjong Joy home screen", caption: "Home — Play with AI / Friends", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "Mahjong Joy gameplay screen with claim timer", caption: "Gameplay — 15s response timer", width: 1080, height: 2340 },
+            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "Mahjong Joy how to play screen", caption: "How to play — one shape, no hands", width: 1080, height: 2340 },
+          ],
+        },
+        {
+          name: "Football Dice",
+          tagline: "An American football board game resolved by dice and cards",
+          description:
+            "A board game app that recreates American football with dice and cards. Pick a play from your offense or defense playbook, and the outcome is resolved against a dice matchup chart — keeping the tension of a real tabletop board game. Play against AI across three difficulty levels, or challenge a friend directly over the same Wi-Fi network. Beyond the three suggested plays, you can browse the full playbook, and the app supports Korean and English with independent toggles for dice-and-card animations and sound effects.",
+          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
+          links: [
+            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
+          ],
+          status: "wip",
+          statusLabel: "Private testing",
+          period: "Jul 2026",
+          screenshots: [
+            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice home screen", caption: "Home — difficulty select", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice offense playbook screen", caption: "Offense playbook selection", width: 1080, height: 2340 },
+            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice dice resolution result screen", caption: "Dice resolution result", width: 1080, height: 2340 },
           ],
         },
         {
@@ -1015,81 +1124,6 @@ export default async function PortfolioPage() {
           ],
         },
         {
-          name: "Cassette Music Player",
-          tagline: "Mix MP3s and YouTube into a cassette, gift it with one link",
-          description:
-            "An Android music player that brings the 1980s cassette tape experience to a modern phone. For v2.0.0 I rebuilt the app from scratch with a premium cassette-deck dark theme and seven shell colors to personalize each tape. Tapes can now hold YouTube links alongside local MP3 files, while still enforcing the real physical limit of a cassette — 30 minutes per side, cutting off and flipping to the other side at 30:00. Skipping isn't instant; you have to hold FF to move to the next track, and tape hiss plays between songs, keeping the focus on listening through like an album. The feature I'm proudest of is link sharing — send a finished tape as a single link, and the recipient can preview the tracklist on the web with no app required, or import it straight into the app if they already have it installed. Each tape remembers its own playback position, so swapping tapes still picks up where you left off, and lock screen controls let you manage local tracks with the screen off. Available in Korean and English.",
-          tech: [
-            "React Native",
-            "TypeScript",
-            "Expo SDK 54",
-            "expo-router",
-            "expo-av",
-            "react-native-reanimated",
-            "react-native-svg",
-            "AsyncStorage",
-          ],
-          links: [
-            {
-              label: "→ Play Store",
-              href: "https://play.google.com/store/apps/details?id=com.hscassette.player",
-              primary: true,
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/hyunseokyu1-netizen/cassette-music-player",
-            },
-          ],
-          status: "live",
-          statusLabel: "Released",
-          period: "May 2025",
-          image: { src: "/portfolio/cassette-feature-en.png", alt: "REPO TAPE — Make Your Own Tape and Share the Music", width: 1024, height: 500 },
-          screenshots: [
-            {
-              src: "/portfolio/cassette-screen-en-splash.png",
-              alt: "Cassette Music Player intro screen with the new dark theme",
-              caption: "Intro — new dark theme",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-en-player.png",
-              alt: "Cassette Music Player Mixed Tape playback screen — Side A tracklist and controls",
-              caption: "Player — Side A playback",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-en-edit.png",
-              alt: "Cassette Music Player tape editor screen — Side A/B 30-minute limit and Add MP3/URL",
-              caption: "Tape editor — Side A/B, 30-min limit",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-en-collection.png",
-              alt: "Cassette Music Player tape collection screen — tapes listed by shell color",
-              caption: "Tape collection — customizable shell colors",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-en-share.png",
-              alt: "Cassette Music Player share screen — share as link or text code",
-              caption: "Link sharing — web preview + one-tap import",
-              width: 1079,
-              height: 2100,
-            },
-            {
-              src: "/portfolio/cassette-screen-en-webshare.png",
-              alt: "Web preview page opened from a share link — tape name, Side A/B tracklist, and an Open in App button",
-              caption: "Web preview — browse the tracklist with no app required",
-              width: 1134,
-              height: 1512,
-            },
-          ],
-        },
-        {
           name: "back to dev",
           tagline: "A developer blog — a 40-something PM returning to code",
           description:
@@ -1151,42 +1185,6 @@ export default async function PortfolioPage() {
           statusLabel: "Live",
           period: "May 2026",
           image: { src: "/portfolio/wifi-qr-preview.png", alt: "WiFi QR 코드 생성기 화면", width: 2590, height: 1754 },
-        },
-        {
-          name: "Mahjong Joy",
-          tagline: "Mahjong is intimidating — so I stripped it down to just matching",
-          description:
-            "What actually scares people away from mahjong isn't the rules — it's the scoring system (yaku, han, fu). So I stripped the rules down to one shape to remember: 4 sets + 1 pair. Winning scores are rebuilt as a simple receipt instead: a base 100 points, plus bonuses, then multiplier bonuses, revealed line by line like a real receipt. The default mode is solo play against AI — you're always seat 0, AI fills the rest — but I also built LAN multiplayer: create a room on the same Wi-Fi and up to 4 people play together, with the host acting as the sole referee while guests just send actions, so it needs no server at all. Sound effects are synthesized in Python with no external assets, and the app supports Korean, Chinese, and English, plus a beginner mode that drops scoring entirely and keeps just the matching.",
-          tech: ["Flutter", "Dart", "dart:io Sockets", "Provider", "audioplayers"],
-          links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
-          ],
-          status: "wip",
-          statusLabel: "In development",
-          period: "Jul 2026",
-          screenshots: [
-            { src: "/portfolio/mahjongjoy-screen-home.png", alt: "Mahjong Joy home screen", caption: "Home — Play with AI / Friends", width: 1080, height: 2340 },
-            { src: "/portfolio/mahjongjoy-screen-gameplay.png", alt: "Mahjong Joy gameplay screen with claim timer", caption: "Gameplay — 15s response timer", width: 1080, height: 2340 },
-            { src: "/portfolio/mahjongjoy-screen-howto.png", alt: "Mahjong Joy how to play screen", caption: "How to play — one shape, no hands", width: 1080, height: 2340 },
-          ],
-        },
-        {
-          name: "Football Dice",
-          tagline: "An American football board game resolved by dice and cards",
-          description:
-            "A board game app that recreates American football with dice and cards. Pick a play from your offense or defense playbook, and the outcome is resolved against a dice matchup chart — keeping the tension of a real tabletop board game. Play against AI across three difficulty levels, or challenge a friend directly over the same Wi-Fi network. Beyond the three suggested plays, you can browse the full playbook, and the app supports Korean and English with independent toggles for dice-and-card animations and sound effects.",
-          tech: ["Flutter", "Dart", "dart:io Sockets", "shared_preferences", "audioplayers"],
-          links: [
-            { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
-          ],
-          status: "wip",
-          statusLabel: "In development",
-          period: "Jul 2026",
-          screenshots: [
-            { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice home screen", caption: "Home — difficulty select", width: 1080, height: 2340 },
-            { src: "/portfolio/footballdice-screen-gameplay.png", alt: "Football Dice offense playbook screen", caption: "Offense playbook selection", width: 1080, height: 2340 },
-            { src: "/portfolio/footballdice-screen-result.png", alt: "Football Dice dice resolution result screen", caption: "Dice resolution result", width: 1080, height: 2340 },
-          ],
         },
       ];
 
