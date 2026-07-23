@@ -619,7 +619,7 @@ export default async function PortfolioPage() {
           featured: true,
           tagline: "채용공고 URL 붙여넣기 → AI 매칭 → 커버레터 자동 생성",
           description:
-            "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다. 처음엔 'JobRadar'라는 이름으로 시작했지만, 브랜딩 작업을 거치며 '세상의 모든 직업을 매칭해준다'는 뜻의 매치다(match + da)로 이름을 바꿨습니다.",
+            "취업 준비 중 매일 반복되는 공고 검색과 커버레터 작성을 자동화하기 위해 만든 개인 툴입니다. 채용공고 URL을 붙여넣으면 JD를 자동으로 스크래핑하고, AI가 내 프로필과 매칭 점수를 매깁니다. 관심 있는 공고는 지원 상태(관심있음 → 지원완료 → 면접 → 합격)로 관리하고, 버튼 하나로 영문·한국어 커버레터를 생성해 TXT·DOCX·PDF로 내보낼 수 있습니다. Seek, Indeed, LinkedIn, Glassdoor URL을 지원합니다. 공고별 맞춤 이력서 생성에는 임베딩·벡터DB 없이 동작하는 경량 RAG를 적용했습니다 — 과거에 비슷한 공고에 써뒀던 맞춤 이력서 중 이번 JD와 키워드가 많이 겹치는 상위 3건만 골라 '표현·강조 참고 자료'로 프롬프트에 주입하고, 사실은 반드시 원본 이력서에서만 가져오도록 역할을 분리해 세대를 거치며 과장이 누적되는 문제를 막았습니다. 처음엔 'JobRadar'라는 이름으로 시작했지만, 브랜딩 작업을 거치며 '세상의 모든 직업을 매칭해준다'는 뜻의 매치다(match + da)로 이름을 바꿨습니다.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -627,6 +627,7 @@ export default async function PortfolioPage() {
             "Vercel",
             "Cheerio",
             "Claude API",
+            "RAG",
           ],
           links: [
             { label: "→ 사이트 바로가기", href: "https://matchda.com/", primary: true },
@@ -1173,7 +1174,7 @@ export default async function PortfolioPage() {
           featured: true,
           tagline: "Paste a job URL → AI matching → auto-generated cover letter",
           description:
-            "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — Matchda scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF. It originally launched as \"JobRadar,\" but was rebranded through a branding process to Matchda (match + da) — capturing the idea of matching every job in the world.",
+            "A personal tool built to automate the daily grind of job searching. Paste a job posting URL from Seek, Indeed, LinkedIn, or Glassdoor — Matchda scrapes the JD automatically and uses AI to score the match against your profile. Track each application through status stages (interested → applied → interview → offer), and generate English or Korean cover letters with one click. Export as TXT, DOCX, or PDF. Tailored resume generation runs on a lightweight RAG built without embeddings or a vector database — it pulls up to three of your own past tailored resumes that share the most keywords with the current JD, injects them into the prompt purely as phrasing and emphasis reference, and keeps every fact sourced strictly from the original resume, preventing the kind of embellishment creep that can compound across AI-generated versions. It originally launched as \"JobRadar,\" but was rebranded through a branding process to Matchda (match + da) — capturing the idea of matching every job in the world.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -1181,6 +1182,7 @@ export default async function PortfolioPage() {
             "Vercel",
             "Cheerio",
             "Claude API",
+            "RAG",
           ],
           links: [
             { label: "→ Live site", href: "https://matchda.com/", primary: true },
