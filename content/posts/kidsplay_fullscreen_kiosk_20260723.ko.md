@@ -30,6 +30,8 @@ tags:
 
 결과물은 React + Next.js로 만든 웹 앱이다. 색칠 놀이, 퍼즐, 짝꿍 찾기 등 10가지 놀이가 들어갔다. 이 글은 그중에서도 **"아이가 못 빠져나가는 화면"을 브라우저 API만으로 어떻게 만들었는지**에 대한 기록이다.
 
+![KidsPlay 놀이 허브 화면 — 10가지 놀이 카드](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/portfolio/kidsplay-screen-ko-hub.png)
+
 ## 전체 구조 잡기: 부모 화면과 아이 화면 분리
 
 가장 먼저 정한 건 화면을 두 개의 모드로 완전히 나누는 것이었다. 설정은 부모만 만지고, 아이는 놀이만 한다.
@@ -178,6 +180,8 @@ function createMathProblem() {
 ```
 
 2부터 9까지의 곱셈이다. 구구단을 아는 사람이면 3초 안에 푼다. 아직 구구단을 모르는 미취학 아동은 못 푼다. **외울 대상이 없으니 아이가 훔쳐볼 수도 없고, 부모가 잊어버릴 것도 없다.** 저장할 비밀도 없으니 localStorage를 뒤져도 나오는 게 없다.
+
+![KidsPlay 부모님 확인 모달 — 랜덤 곱셈 문제](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/portfolio/kidsplay-screen-ko-parentcheck.png)
 
 문에 들어가는 방법도 아이가 우연히 밟지 않게 만들었다. 화면 상단 모서리의 자물쇠 버튼을 **1초간 누르고 있어야** 열린다.
 
