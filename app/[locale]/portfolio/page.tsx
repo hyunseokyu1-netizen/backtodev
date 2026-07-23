@@ -321,6 +321,10 @@ export default async function PortfolioPage() {
               label: "GitHub",
               href: "https://github.com/hyunseokyu1-netizen/kidsplay",
             },
+            {
+              label: "개발 이야기",
+              href: "/ko/posts/kidsplay_fullscreen_kiosk_20260723",
+            },
           ],
           status: "live",
           statusLabel: "운영 중",
@@ -840,6 +844,10 @@ export default async function PortfolioPage() {
             {
               label: "GitHub",
               href: "https://github.com/hyunseokyu1-netizen/kidsplay",
+            },
+            {
+              label: "Dev story",
+              href: "/ko/posts/kidsplay_fullscreen_kiosk_20260723",
             },
           ],
           status: "live",
