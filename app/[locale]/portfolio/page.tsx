@@ -353,6 +353,13 @@ export default async function PortfolioPage() {
               width: 1280,
               height: 1224,
             },
+            {
+              src: "/portfolio/kidsplay-screen-parentgate.png",
+              alt: "KidsPlay 부모님 확인 화면 — 9 곱하기 6 문제와 숫자 키패드",
+              caption: "부모님 확인 — 매번 새로 생성되는 곱셈 문제로 잠금 해제",
+              width: 1000,
+              height: 1246,
+            },
           ],
         },
         {
@@ -865,6 +872,13 @@ export default async function PortfolioPage() {
               caption: "Coloring — 14 pictures with brush size and zoom",
               width: 1280,
               height: 1224,
+            },
+            {
+              src: "/portfolio/kidsplay-screen-parentgate.png",
+              alt: "KidsPlay grown-up check screen — a 9 times 6 problem with a number keypad",
+              caption: "Grown-up check — a fresh multiplication problem every time",
+              width: 1000,
+              height: 1246,
             },
           ],
         },
