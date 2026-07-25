@@ -580,7 +580,7 @@ export default async function PortfolioPage() {
           featured: true,
           tagline: "결제 팝업도 광고도 없는, 아이가 혼자 못 빠져나가는 웹 놀이터",
           description:
-            "집에 굴러다니던 오래된 맥북을 아이 전용 기기로 만들려다가, 무료 놀이 앱마다 결제 팝업과 전면 광고가 너무 잦아서 아예 직접 만든 웹 앱입니다. 색칠 놀이·퍼즐·알파벳 등 10가지 놀이를 담았고, 광고·결제·외부 링크가 전혀 없습니다. 핵심 과제는 '아이는 혼자서 못 빠져나가지만 부모는 쉽게 나갈 수 있는' 화면을 만드는 것이었습니다. Fullscreen API로 시작과 동시에 전체화면에 진입시키고, 우클릭·더블클릭·스크롤·키보드 이벤트는 키즈 모드일 때만 막았습니다. 부모 확인은 고정 PIN 대신 매번 새로 생성되는 곱셈 문제로 풀었습니다 — 외울 게 없으니 아이가 훔쳐볼 수도, 부모가 잊어버릴 수도 없습니다. 놀이 시간 타이머는 1초씩 빼는 대신 종료 시각을 절대 시간으로 저장해, 탭이 백그라운드에 있어도 정확히 맞도록 했습니다. 서버도 로그인도 없이 localStorage와 서비스 워커만으로 진행 상황 저장과 오프라인 지원까지 구현했습니다.",
+            "집에 굴러다니던 오래된 맥북을 아이 전용 기기로 만들려다가, 무료 놀이 앱마다 결제 팝업과 전면 광고가 너무 잦아서 아예 직접 만든 웹 앱입니다. 색칠 놀이·퍼즐·알파벳 등 17가지 놀이를 담았고, 광고·결제·외부 링크가 전혀 없습니다. 핵심 과제는 '아이는 혼자서 못 빠져나가지만 부모는 쉽게 나갈 수 있는' 화면을 만드는 것이었습니다. Fullscreen API로 시작과 동시에 전체화면에 진입시키고, 우클릭·더블클릭·스크롤·키보드 이벤트는 키즈 모드일 때만 막았습니다. 부모 확인은 고정 PIN 대신 매번 새로 생성되는 곱셈 문제로 풀었습니다 — 외울 게 없으니 아이가 훔쳐볼 수도, 부모가 잊어버릴 수도 없습니다. 놀이 시간 타이머는 1초씩 빼는 대신 종료 시각을 절대 시간으로 저장해, 탭이 백그라운드에 있어도 정확히 맞도록 했습니다. 서버도 로그인도 없이 localStorage와 서비스 워커만으로 진행 상황 저장과 오프라인 지원까지 구현했습니다.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -600,9 +600,9 @@ export default async function PortfolioPage() {
           image: { src: "/portfolio/kidsplay-feature.png", alt: "KidsPlay — 우리 아이의 작은 놀이터", width: 1024, height: 538 },
           screenshots: [
             { src: "/portfolio/kidsplay-screen-ko-parent.png", alt: "KidsPlay 부모 설정 화면 — 나이·놀이 시간·첫 놀이 선택", caption: "부모 설정 — 나이·시간 선택", width: 1280, height: 830 },
-            { src: "/portfolio/kidsplay-screen-ko-hub.png", alt: "KidsPlay 놀이 허브 화면 — 10가지 놀이 카드", caption: "놀이터 — 10가지 놀이", width: 1280, height: 830 },
-            { src: "/portfolio/kidsplay-screen-ko-coloring.png", alt: "KidsPlay 색칠 놀이 화면 — 그림 선택과 색칠판", caption: "색칠 놀이", width: 1280, height: 1224 },
-            { src: "/portfolio/kidsplay-screen-ko-parentcheck.png", alt: "KidsPlay 부모님 확인 모달 — 랜덤 곱셈 문제", caption: "부모님 확인 — 랜덤 곱셈 문제", width: 1274, height: 1588 },
+            { src: "/portfolio/kidsplay-screen-ko-hub.png", alt: "KidsPlay 놀이 허브 화면 — 17가지 놀이 카드, 페이지 넘김 지원", caption: "놀이터 — 17가지 놀이", width: 1280, height: 830 },
+            { src: "/portfolio/kidsplay-screen-ko-coloring.png", alt: "KidsPlay 색칠 놀이 화면 — 그림 선택과 색칠판, 자동 색칠·지우개 버튼", caption: "색칠 놀이", width: 1280, height: 1065 },
+            { src: "/portfolio/kidsplay-screen-ko-parentcheck.png", alt: "KidsPlay 부모님 확인 모달 — 랜덤 곱셈 문제", caption: "부모님 확인 — 랜덤 곱셈 문제", width: 1280, height: 830 },
           ],
         },
         {
@@ -1066,7 +1066,7 @@ export default async function PortfolioPage() {
           featured: true,
           tagline: "No payment popups, no ads — a web playground a kid can't escape alone",
           description:
-            "An old MacBook was sitting unused at home, so I set out to turn it into a dedicated play station for my kids — but the free apps I installed were riddled with payment popups and full-screen ads a toddler could easily tap into. So I built my own web app instead: ten activities (coloring, puzzles, alphabet, and more) with zero ads, zero payments, and no outbound links at all. The real challenge was building a screen a child can't accidentally escape from, while keeping the exit easy for a parent. The Fullscreen API takes the app full-screen the moment it starts, and right-click, double-click, scroll, and keyboard events are blocked only while in kid mode. Instead of a fixed PIN, the parent-exit gate is a freshly generated multiplication problem every time — there's nothing to memorize, so a child can't peek and a parent can't forget it. The play-time timer stores an absolute end time instead of counting down second by second, so it stays accurate even if the tab sits in the background. With no server or login at all, progress saving and offline support run entirely on localStorage and a service worker.",
+            "An old MacBook was sitting unused at home, so I set out to turn it into a dedicated play station for my kids — but the free apps I installed were riddled with payment popups and full-screen ads a toddler could easily tap into. So I built my own web app instead: seventeen activities (coloring, puzzles, alphabet, and more) with zero ads, zero payments, and no outbound links at all. The real challenge was building a screen a child can't accidentally escape from, while keeping the exit easy for a parent. The Fullscreen API takes the app full-screen the moment it starts, and right-click, double-click, scroll, and keyboard events are blocked only while in kid mode. Instead of a fixed PIN, the parent-exit gate is a freshly generated multiplication problem every time — there's nothing to memorize, so a child can't peek and a parent can't forget it. The play-time timer stores an absolute end time instead of counting down second by second, so it stays accurate even if the tab sits in the background. With no server or login at all, progress saving and offline support run entirely on localStorage and a service worker.",
           tech: [
             "Next.js",
             "TypeScript",
@@ -1086,9 +1086,9 @@ export default async function PortfolioPage() {
           image: { src: "/portfolio/kidsplay-feature.png", alt: "KidsPlay — a little playground for your child", width: 1024, height: 538 },
           screenshots: [
             { src: "/portfolio/kidsplay-screen-en-parent.png", alt: "KidsPlay parent setup screen — age, play time, and first activity", caption: "Parent setup — age & time", width: 1280, height: 830 },
-            { src: "/portfolio/kidsplay-screen-en-hub.png", alt: "KidsPlay activity hub screen — ten activity cards", caption: "Playground — 10 activities", width: 1280, height: 830 },
-            { src: "/portfolio/kidsplay-screen-en-coloring.png", alt: "KidsPlay coloring screen — picture picker and paint canvas", caption: "Coloring", width: 1280, height: 830 },
-            { src: "/portfolio/kidsplay-screen-en-parentcheck.png", alt: "KidsPlay grown-up check modal — random multiplication problem", caption: "Grown-up check — random multiplication", width: 1078, height: 1434 },
+            { src: "/portfolio/kidsplay-screen-en-hub.png", alt: "KidsPlay activity hub screen — seventeen activity cards with pagination", caption: "Playground — 17 activities", width: 1280, height: 830 },
+            { src: "/portfolio/kidsplay-screen-en-coloring.png", alt: "KidsPlay coloring screen — picture picker, paint canvas, auto-fill and eraser buttons", caption: "Coloring", width: 1280, height: 1065 },
+            { src: "/portfolio/kidsplay-screen-en-parentcheck.png", alt: "KidsPlay grown-up check modal — random multiplication problem", caption: "Grown-up check — random multiplication", width: 1280, height: 830 },
           ],
         },
         {
