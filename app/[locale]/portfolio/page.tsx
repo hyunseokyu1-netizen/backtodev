@@ -2,6 +2,7 @@ import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import LightboxImage from "@/components/LightboxImage";
 import ExpandableProjectList from "@/components/ExpandableProjectList";
+import GithubContributions from "@/components/GithubContributions";
 import { localizedPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -1287,6 +1288,10 @@ export default async function PortfolioPage() {
             ? "글로만 배우지 않고, 직접 만들어보는 것들을 여기에 기록합니다."
             : "Not just learning by reading — shipping things and logging them here."}
         </p>
+      </div>
+
+      <div style={{ marginBottom: "3rem" }}>
+        <GithubContributions isKo={isKo} />
       </div>
 
       <section aria-labelledby="featured-projects">
