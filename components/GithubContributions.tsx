@@ -17,14 +17,15 @@ export default async function GithubContributions({ isKo }: { isKo: boolean }) {
   };
 
   return (
-    <div
+    <a
+      href={`https://github.com/${login}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="post-card"
       style={{
-        borderRadius: 16,
         padding: "1.25rem",
         maxWidth: "100%",
         minWidth: 0,
-        background: "hsl(var(--card))",
-        border: "1px solid rgba(255,255,255,0.05)",
       }}
     >
       <div className="flex items-center justify-between flex-wrap" style={{ gap: "0.5rem", marginBottom: "1rem" }}>
@@ -65,6 +66,6 @@ export default async function GithubContributions({ isKo }: { isKo: boolean }) {
           ))}
         </div>
       </div>
-    </div>
+    </a>
   );
 }
