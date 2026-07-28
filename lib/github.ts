@@ -164,3 +164,63 @@ export async function putFilesBatch(
   const newCommitSha = await createCommit(message, newTreeSha, commitSha);
   await updateRef(newCommitSha);
 }
+
+// ── Contribution Calendar (About 페이지 잔디) ──────────────────────────────────
+
+export interface ContributionDay {
+  date: string;
+  count: number;
+}
+
+export interface ContributionWeek {
+  days: ContributionDay[];
+}
+
+export interface ContributionCalendar {
+  total: number;
+  weeks: ContributionWeek[];
+}
+
+/** 실패해도 페이지가 죽으면 안 되므로 예외를 던지지 않고 null을 반환 */
+export async function getContributionCalendar(login: string): Promise<ContributionCalendar | null> {
+  const query = `
+    query($login: String!) {
+      user(login: $login) {
+        contributionsCollection {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                contributionCount
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const res = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify({ query, variables: { login } }),
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+
+    const json = await res.json();
+    const calendar = json?.data?.user?.contributionsCollection?.contributionCalendar;
+    if (!calendar) return null;
+
+    return {
+      total: calendar.totalContributions,
+      weeks: calendar.weeks.map((week: { contributionDays: { contributionCount: number; date: string }[] }) => ({
+        days: week.contributionDays.map((day) => ({ date: day.date, count: day.contributionCount })),
+      })),
+    };
+  } catch {
+    return null;
+  }
+}

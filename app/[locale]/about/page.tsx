@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { localizedPageMetadata } from "@/lib/metadata";
+import GithubContributions from "@/components/GithubContributions";
 
 export async function generateMetadata({
   params,
@@ -230,7 +231,7 @@ export default async function AboutPage() {
       </div>
 
       {/* ── Right column ── */}
-      <div style={{ flex: 1, paddingTop: "0.5rem" }}>
+      <div style={{ flex: 1, minWidth: 0, width: "100%", paddingTop: "0.5rem" }}>
 
         {/* Hero heading */}
         <h1
@@ -293,6 +294,11 @@ export default async function AboutPage() {
               </p>
             </>
           )}
+        </div>
+
+        {/* GitHub contribution calendar */}
+        <div style={{ marginBottom: "2.5rem" }}>
+          <GithubContributions isKo={isKo} />
         </div>
 
         {/* Dynamic sections */}
