@@ -511,8 +511,8 @@ export default async function PortfolioPage() {
             "Claude API",
           ],
           links: [],
-          status: "wip",
-          statusLabel: "상업화 준비 중",
+          status: "live",
+          statusLabel: "로컬 운영 중",
           period: "2026.07 ~",
           screenshots: [
             { src: "/portfolio/blogauto-screen-dashboard.png", alt: "블로그 자동 발행 대시보드 — 주제 등록과 발행 현황", caption: "대시보드 — 주제 등록·발행 현황", width: 2412, height: 1682 },
@@ -567,7 +567,7 @@ export default async function PortfolioPage() {
             { label: "개발 이야기", href: "/ko/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "상용화 준비중",
+          statusLabel: "마케팅 준비중",
           period: "2026.04 ~",
           image: { src: "/portfolio/matchda-feature.png", alt: "매치다 글로벌 커리어 플랫폼 홈 화면", width: 1440, height: 680 },
           screenshots: [
@@ -996,8 +996,8 @@ export default async function PortfolioPage() {
             "Claude API",
           ],
           links: [],
-          status: "wip",
-          statusLabel: "Preparing to launch",
+          status: "live",
+          statusLabel: "Running locally",
           period: "Jul 2026 ~",
           screenshots: [
             { src: "/portfolio/blogauto-screen-dashboard.png", alt: "Blog auto-publisher dashboard with topic registration and publish status", caption: "Dashboard — topics & publish status", width: 2412, height: 1682 },
@@ -1052,7 +1052,7 @@ export default async function PortfolioPage() {
             { label: "Dev story", href: "/en/posts/jobradar_01_setup_20260420" },
           ],
           status: "wip",
-          statusLabel: "Preparing to launch",
+          statusLabel: "Marketing prep",
           period: "Apr 2026 ~",
           image: { src: "/portfolio/matchda-feature.png", alt: "Matchda global career platform home", width: 1440, height: 680 },
           screenshots: [
