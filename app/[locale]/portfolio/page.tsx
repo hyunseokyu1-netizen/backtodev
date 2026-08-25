@@ -400,8 +400,8 @@ export default async function PortfolioPage() {
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
             { label: "개발 이야기", href: "/ko/posts/reponote_flutter_20260717" },
           ],
-          status: "wip",
-          statusLabel: "비공개 테스트중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.07",
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote 파일 트리 화면 — 접기/펼치기 폴더와 동기화 상태", caption: "파일 트리 — 폴더 접기/펼치기", width: 1080, height: 2340 },
@@ -614,8 +614,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
           ],
-          status: "wip",
-          statusLabel: "비공개 테스트중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.07",
           screenshots: [
             { src: "/portfolio/mahjongjoy-screen-home.png", alt: "마작 조이 홈 화면", caption: "홈 — AI / 친구와 하기", width: 1080, height: 2340 },
@@ -632,8 +632,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
           ],
-          status: "wip",
-          statusLabel: "비공개 테스트중",
+          status: "live",
+          statusLabel: "출시 완료",
           period: "2026.07",
           screenshots: [
             { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice 홈 화면", caption: "홈 — 난이도 선택", width: 1080, height: 2340 },
@@ -885,8 +885,8 @@ export default async function PortfolioPage() {
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/repo-note", primary: true },
             { label: "Dev story", href: "/ko/posts/reponote_flutter_20260717" },
           ],
-          status: "wip",
-          statusLabel: "Private testing",
+          status: "live",
+          statusLabel: "Released",
           period: "Jul 2026",
           screenshots: [
             { src: "/portfolio/reponote-screen-files.png", alt: "RepoNote file tree with collapsible folders and sync status", caption: "File tree — collapsible folders", width: 1080, height: 2340 },
@@ -1099,8 +1099,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/mahjong_joy", primary: true },
           ],
-          status: "wip",
-          statusLabel: "Private testing",
+          status: "live",
+          statusLabel: "Released",
           period: "Jul 2026",
           screenshots: [
             { src: "/portfolio/mahjongjoy-screen-home.png", alt: "Mahjong Joy home screen", caption: "Home — Play with AI / Friends", width: 1080, height: 2340 },
@@ -1117,8 +1117,8 @@ export default async function PortfolioPage() {
           links: [
             { label: "→ GitHub", href: "https://github.com/hyunseokyu1-netizen/football_dice", primary: true },
           ],
-          status: "wip",
-          statusLabel: "Private testing",
+          status: "live",
+          statusLabel: "Released",
           period: "Jul 2026",
           screenshots: [
             { src: "/portfolio/footballdice-screen-home.png", alt: "Football Dice home screen", caption: "Home — difficulty select", width: 1080, height: 2340 },
