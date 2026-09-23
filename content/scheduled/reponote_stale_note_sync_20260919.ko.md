@@ -1,8 +1,8 @@
 ---
-title: 'PC에서 옮긴 노트가 앱에 그대로 남아있다 — GitHub 기반 메모 앱의 로컬 DB 정리 버그 잡기'
+title: 'GitHub 동기화 메모 앱 버그 잡기 (1/2) — PC에서 옮긴 노트가 앱에 그대로 남아있다'
 date: '2026-09-19'
 publish_date: '2026-09-30'
-description: 옵시디언 저장소를 GitHub로 동기화하는 Flutter 앱에서 PC에서 폴더를 옮긴 노트가 앱 목록에 계속 남던 원인을 추적하고, "서버에 없는 로컬 파일"을 상태별로 구분해 정리하는 로직과 drift 인메모리 테스트로 고친 과정
+description: 옵시디언 저장소를 GitHub로 동기화하는 Flutter 앱에서 PC에서 폴더를 옮긴 노트가 앱 목록에 계속 남던 원인을 추적하고, "서버에 없는 로컬 파일"을 동기화 상태별로 구분해 정리하도록 고친 과정
 tags:
   - Flutter
   - drift
@@ -190,31 +190,27 @@ Future<void> _purgeStaleInMissingDirs(
 전부 정리 대상이다. 여기서도 `_isStaleSynced`를 거치니까 폰에서 수정 중인
 파일은 안전하다.
 
-## Step 4: 고쳤다고 말하려면 테스트가 있어야 한다
+## Step 4: 고쳤다는 걸 무엇으로 확인했나
 
-이 프로젝트엔 그동안 DB를 끼고 도는 테스트가 없었다. 유틸 함수 단위 테스트만
-있었다. 이번엔 "PC에서 옮기고 → 앱에서 새로고침" 시나리오를 그대로 재현하는
-테스트를 넣고 싶었다.
+고치고 나서 폰으로 한 번 해보면 "된다"는 건 알 수 있다. 문제는 이 로직이
+**지우면 안 되는 파일을 안 지운다**는 것까지 손으로 확인하기가 번거롭다는 점이다.
+수정 중인 초안이 있는 파일, 아직 안 올린 로컬 전용 파일, 삭제 예약한 파일…
+경우의 수가 다섯 개고, 하나라도 잘못 지우면 사용자가 쓴 글이 날아간다.
 
-필요한 건 세 가지였다.
+그래서 "PC에서 옮기고 → 앱에서 새로고침"을 코드로 재현하는 테스트를 6개 썼다.
+실제 네트워크도, 실제 SQLite 파일도 없이 돈다.
 
-| 필요한 것 | 어떻게 해결했나 |
+| 테스트 | 확인하는 것 |
 |---|---|
-| 진짜 SQLite 없이 도는 DB | drift의 `NativeDatabase.memory()` + 이미 있던 `AppDatabase.forTesting()` |
-| 네트워크 없는 GitHub API | 스크린샷용으로 만들어둔 `FakeGitHubApiClient` 재활용 (`tree` 맵을 바꾸면 서버 상태가 바뀜) |
-| 앱 지원 디렉토리 없는 파일 캐시 | `LocalFileCache`에 `baseDir` 주입 생성자 추가, 테스트에선 임시 폴더 |
+| 다른 폴더로 옮긴 노트 | 이전 위치에서 사라지는가 |
+| 폴더째 옮긴 경우 | 상위 폴더 갱신만으로 하위 파일 메타데이터가 정리되는가 |
+| 수정 초안이 있는 파일 | 서버에 없어도 **살아남는가** |
+| 로컬 전용 파일 | 서버에 없어도 살아남는가 |
+| 삭제 대기 파일 | 목록에선 숨되 DB에는 남는가 |
+| `markDelete` | 로컬 전용 파일은 초안까지 깔끔히 지워지는가 |
 
-`LocalFileCache` 변경은 이 다섯 줄이 전부다. 기본 동작은 그대로다.
-
-```dart
-/// [baseDir]를 넘기면 앱 지원 디렉토리 대신 그 경로를 사용한다 (테스트용).
-LocalFileCache({Directory? baseDir}) {
-  _baseDir = baseDir;
-}
-```
-
-핵심 테스트는 이렇게 생겼다. `api.tree`를 손대는 부분이 "PC에서 옮기고 push한
-것"에 해당한다.
+테스트 하나는 이렇게 생겼다. `api.tree`를 손대는 줄이 "PC에서 옮기고 push한 것"에
+해당한다.
 
 ```dart
 test('PC에서 다른 폴더로 옮긴 노트는 목록 갱신 시 이전 위치에서 사라진다', () async {
@@ -234,25 +230,32 @@ test('PC에서 다른 폴더로 옮긴 노트는 목록 갱신 시 이전 위치
 });
 ```
 
-같은 방식으로 다섯 개를 더 썼다.
-
-- 폴더째 옮긴 경우 루트 새로고침만으로 하위 파일 메타데이터가 정리되는지
-- 수정 초안이 있는 파일은 서버에 없어도 **살아남는지**
-- `localOnly` 파일은 서버에 없어도 살아남는지
-- `pendingDelete` 파일은 DB에 유지되는지
-- 로컬 전용 파일을 `markDelete`하면 초안까지 깔끔히 지워지는지
-
-테스트가 실제로 버그를 잡는지도 확인했다. 수정한 파일만 `git stash`로 잠깐
-되돌리고 돌리면 이동 관련 2개가 빨갛게 실패하고, `stash pop` 후엔 전부
-통과한다. 이 한 번의 확인이 "테스트가 통과한다"와 "테스트가 의미 있다"의
-차이를 만든다.
+중요한 건 이 테스트가 **정말 이 버그를 잡는지**까지 확인한 것이다. 수정한 파일
+하나만 수정 전 커밋으로 되돌리고 돌려봤다.
 
 ```bash
-git stash push lib/features/file_browser/data/notes_repository.dart
-flutter test test/features/file_browser/notes_repository_test.dart   # 2개 실패
-git stash pop
-flutter test                                                          # 35개 통과
+git checkout dcc1096^ -- lib/features/file_browser/data/notes_repository.dart
+flutter test test/features/file_browser/notes_repository_test.dart
 ```
+
+이동 관련 2개가 정확히 빨갛게 나온다.
+
+```text
+00:00 +0 -1: PC에서 다른 폴더로 옮긴 노트는 … [E]
+  Expected: not contains 'inbox/note.md'
+    Actual: MappedListIterable<BrowserEntry, String>:['inbox/note.md']
+
+00:00 +0 -2: 폴더째 옮긴 경우 상위 폴더 갱신 시 … [E]
+  Expected: not contains 'inbox/note.md'
+    Actual: Set:['inbox/note.md', 'root.md']
+```
+
+나머지 4개("살아남아야 하는" 쪽)는 수정 전에도 통과한다. 즉 이 두 개가 딱 이번
+버그를 가리킨다. 파일을 복구하면 6개 전부 통과한다. 이 한 번의 확인이 "테스트가
+통과한다"와 "테스트가 의미 있다"의 차이를 만든다.
+
+테스트를 **돌릴 수 있는 환경**을 만드는 쪽 — 인메모리 DB, 가짜 GitHub API, 파일
+캐시 경로 주입 — 은 이야기가 길어서 [2편](/posts/reponote_repository_test_harness_20260924)에서 따로 다룬다.
 
 ## 트러블슈팅: 폰에 설치했더니 서명이 안 맞는다
 
@@ -297,3 +300,7 @@ adb shell dumpsys package com.backdev.reponote | grep installer
 
 1.0.5는 Play 스토어에 올리는 중이다. 이제 옵시디언에서 폴더 정리를 해도 폰에서
 새로고침 한 번이면 끝난다.
+
+[다음 편(2/2)](/posts/reponote_repository_test_harness_20260924)에서는 이 글에서 "테스트 6개를 썼다"고 한 줄로 넘어간 부분을 다룬다.
+DB·네트워크·파일 시스템을 전부 끼고 도는 Repository를, 에뮬레이터도 네트워크도
+없이 11초 만에 검증하는 테스트 하네스를 어떻게 짰는지에 대한 이야기다.
