@@ -1,7 +1,7 @@
 ---
 title: '이미 배포한 앱의 공유 링크 도메인을 바꾸려면 — 하위 호환 파싱 설계기'
 date: '2026-07-24'
-publish_date: '2026-10-04'
+publish_date: '2026-10-09'
 description: 개인 GitHub 아이디가 노출되는 공유 링크 주소를 Cloudflare로 옮기면서, 이미 퍼진 옛날 링크를 깨뜨리지 않고 앱 3곳의 코드를 고친 과정과 실수
 tags:
   - Flutter

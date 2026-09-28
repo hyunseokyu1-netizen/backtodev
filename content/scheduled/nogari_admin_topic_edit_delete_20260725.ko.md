@@ -1,7 +1,7 @@
 ---
 title: '관리자 화면에 "카테고리 수정"과 "방 삭제"를 붙이며 배운 것들'
 date: '2026-07-25'
-publish_date: '2026-10-06'
+publish_date: '2026-10-11'
 description: 잘못 분류된 방을 바로잡고 잘못 만든 방을 지우는 관리자 기능을 만들며 겪은 cascade 삭제, FK 참조 정리, 인증/검증 가드 설계
 tags:
   - Next.js

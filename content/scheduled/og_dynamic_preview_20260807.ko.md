@@ -1,7 +1,7 @@
 ---
 title: '카톡 링크 미리보기를 링크마다 다르게 — 정적 사이트에서 OG 태그 동적으로 주입하기'
 date: '2026-08-07'
-publish_date: '2026-10-13'
+publish_date: '2026-10-18'
 description: 공유 링크 미리보기 제목이 전부 똑같이 뜨는 문제를 Cloudflare Pages Functions와 HTMLRewriter로 해결하고, 카카오톡 캐시라는 복병까지 만난 기록
 tags:
   - Cloudflare Pages

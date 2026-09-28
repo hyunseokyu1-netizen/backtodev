@@ -1,7 +1,7 @@
 ---
 title: '하모니카 앱 개발기 2편 - 숫자 악보 파서, 조옮김, 그리고 에뮬레이터에서 잡은 버그 3개'
 date: '2026-09-24'
-publish_date: '2026-10-15'
+publish_date: '2026-10-20'
 description: 악보 사진 자동 인식 대신 한국식 숫자 악보 텍스트 파서를 먼저 만들고, Key를 바꿔도 홀·계이름·악보가 함께 바뀌도록 데이터를 설계한 뒤 Riverpod autoDispose 등 버그 3개를 잡은 기록
 tags:
   - Flutter

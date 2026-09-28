@@ -1,7 +1,7 @@
 ---
 title: '앱 이름을 나라별로 다르게 보여주기 — 패키지명은 그대로 두고 표시 이름만 바꾸는 법'
 date: '2026-08-07'
-publish_date: '2026-10-10'
+publish_date: '2026-10-15'
 description: 부르기 어려운 앱 이름을 한국어 믹스테이프, 영어 Repo Tape로 바꾸면서 Android·iOS 로케일 리소스를 나누고, 패키지명을 건드리면 안 되는 이유를 확인한 기록
 tags:
   - Flutter

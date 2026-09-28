@@ -1,7 +1,7 @@
 ---
 title: '1366×768 구형 맥북에서도 돌아가는 어린이 웹게임 만들기 — KidsPlay 확장기'
 date: '2026-07-25'
-publish_date: '2026-10-05'
+publish_date: '2026-10-10'
 description: 구형 맥북과 오래된 브라우저에서 발견한 화면 잘림·음성·캔버스 문제를 고치고 KidsPlay를 17가지 단계형 게임으로 확장한 과정
 tags:
   - NextJS

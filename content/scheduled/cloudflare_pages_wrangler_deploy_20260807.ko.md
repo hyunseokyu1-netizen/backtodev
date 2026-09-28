@@ -1,7 +1,7 @@
 ---
 title: 'wrangler로 Cloudflare Pages에 배포하기 — 정적 사이트부터 엣지 함수까지, 그리고 세 가지 함정'
 date: '2026-08-07'
-publish_date: '2026-10-11'
+publish_date: '2026-10-16'
 description: 명령어 한 줄로 정적 사이트를 배포하면서 Functions가 조용히 누락되는 함정, 엣지 전파 지연, 계정 캐시가 배포 폴더에 섞이는 문제를 겪고 정리한 실전 기록
 tags:
   - Cloudflare Pages

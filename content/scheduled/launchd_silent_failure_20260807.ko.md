@@ -1,7 +1,7 @@
 ---
 title: '에러가 없는데 아무 일도 안 일어났다 — launchd 스케줄러가 사라진 걸 10일 뒤에 안 이야기'
 date: '2026-08-07'
-publish_date: '2026-10-12'
+publish_date: '2026-10-17'
 description: 블로그 자동 발행이 열흘간 멈춘 진짜 원인이 세션 만료가 아니라 launchd plist 소실이었고, macOS TCC 때문에 복구까지 한 번 더 막혔던 진단 과정
 tags:
   - launchd

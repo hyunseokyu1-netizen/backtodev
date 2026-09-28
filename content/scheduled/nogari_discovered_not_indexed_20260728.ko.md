@@ -1,7 +1,7 @@
 ---
 title: '"발견됨 - 색인 생성 안 됨" 317개의 정체 — 빈 페이지를 색인해달라고 조르고 있었다'
 date: '2026-07-28'
-publish_date: '2026-10-09'
+publish_date: '2026-10-14'
 description: 구글 서치 콘솔에 쌓인 색인 안 된 317개 페이지의 원인을 DB 집계로 추적하고 sitemap과 noindex로 얇은 콘텐츠를 걷어낸 기록
 tags:
   - SEO

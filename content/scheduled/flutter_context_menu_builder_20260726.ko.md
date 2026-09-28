@@ -1,7 +1,7 @@
 ---
 title: 'Flutter 텍스트 선택 툴바 손보기 — 전체 선택하면 사라지는 복사 버튼 고치기'
 date: '2026-07-26'
-publish_date: '2026-10-07'
+publish_date: '2026-10-12'
 description: 안드로이드에서 전체 선택 후 복사 툴바가 사라지고 키보드에 가려지는 문제를 Flutter contextMenuBuilder로 해결하고, 오버플로 위치까지 다잡은 과정
 tags:
   - Flutter
