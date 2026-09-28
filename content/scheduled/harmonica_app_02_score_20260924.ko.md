@@ -209,7 +209,8 @@ flutter test test/features/practice_completion_gate_test.dart
 
 솔직하게 적어 둡니다.
 
-- **실제 하모니카 튜닝값 조정**: 합성 신호로는 통과했지만, 진짜 악기·폰 마이크·방 소음에서는 `PitchSmoother`의 `minConfidence`, `PitchService`의 `noiseGateRms`, YIN `threshold`를 조정해야 할 수 있습니다.
+- **화면 켜짐 유지**: 실제 하모니카로 불어 보니 경음도 잡히고 지금 내는 계이름도 잘 보였는데, 연습 도중 화면이 자꾸 꺼졌습니다. 다음 작업에서 연습 화면이 켜져 있는 동안에는 화면이 꺼지지 않게 할 예정입니다.
+- **감도 미세 조정**: 방 소음이나 폰 마이크에 따라 `PitchSmoother`의 `minConfidence`, `PitchService`의 `noiseGateRms`, YIN `threshold`를 더 다듬을 수 있습니다.
 - **판정 기준**: ±10/25/50 cents는 초기값입니다. 레슨 받으면서 너무 빡빡한지 느슨한지 맞춰 볼 생각입니다.
 - **악보 자동 인식**: `ScoreParser` 구현체를 붙이는 건 다음 과제입니다.
 - **릴리즈 서명**: 지금은 debug 키 서명이라 스토어 배포 전에 설정이 필요합니다.
