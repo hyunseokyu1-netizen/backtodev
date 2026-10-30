@@ -19,10 +19,12 @@ export function localizedPageMetadata({
   return {
     title,
     description,
-    // 영어 페이지는 자동 번역(검수 없음)이라 색인 제외
-    ...(locale !== "ko" && { robots: { index: false, follow: true } }),
     alternates: {
       canonical,
+      languages: {
+        ko: `${BASE_URL}/ko${normalizedPath}`,
+        en: `${BASE_URL}/en${normalizedPath}`,
+      },
     },
     openGraph: {
       type: "website",

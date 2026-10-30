@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${BASE_URL}/ko/posts/${slug}`
     : `${BASE_URL}/${locale}/posts/${slug}`;
 
-  // 색인 제외 대상: fallback 중복 페이지, 자동 번역 영어판, frontmatter noindex 글
-  const noindex = post.isFallback || locale !== "ko" || post.noindex;
+  // 색인 제외 대상: fallback 중복 페이지(영어 번역 없어 한국어를 그대로 보여주는 경우), frontmatter noindex 글
+  const noindex = post.isFallback || post.noindex;
 
   return {
     title: post.title,
@@ -48,6 +48,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...(noindex && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        ko: `${BASE_URL}/ko/posts/${slug}`,
+        en: `${BASE_URL}/en/posts/${slug}`,
+      },
     },
     openGraph: {
       type: "article",
