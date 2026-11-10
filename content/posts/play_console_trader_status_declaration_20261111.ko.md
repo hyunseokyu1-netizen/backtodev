@@ -18,6 +18,8 @@ tags:
 
 전 세계에서 삭제라니, 그냥 넘길 수는 없었다. 찾아보고 직접 선언까지 끝낸 김에, 이게 뭔지 정리해둔다.
 
+![Play Console에 뜬 '2027년 2월까지 판매자 상태를 선언하세요' 안내와 '조치 필요' 배지](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/play_console_trader_notice_20261111.png)
+
 ## 판매자 상태 선언이 뭔가
 
 **판매자 상태 선언(Trader Status Declaration)**은 Google Play에 앱을 올린 개발자가 자신이 **"판매자(Trader)"**인지 **"비판매자(Non-trader)"**인지 밝히는 절차다. 여기서 말하는 판매자는 거래, 비즈니스, 기술 또는 직업과 관련된 목적으로 활동하는 개인 또는 조직을 뜻한다. 쉽게 말해 앱으로 돈을 벌 목적이 있는지 없는지를 구분하는 선언이다.
@@ -57,6 +59,8 @@ tags:
 3. **판매자 상태** 항목에서 "판매자 계정" 또는 "비판매자 계정" 중 하나를 선택한다
 4. 선택에 따라 추가로 입력할 정보(법적 이름, 주소 등)가 있으면 채운다 — 결제 프로필에 이미 등록된 정보가 있으면 자동으로 불러온다
 5. "공개 개발자 프로필의 일부로 이 정보를 Google Play에 표시하는 데 동의합니다"에 체크하고 제출한다
+
+![판매자 상태 선언 화면 — 판매자 계정과 비판매자 계정 중 하나를 선택하는 라디오 버튼](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/play_console_trader_select_20261111.png)
 
 전체 과정이 생각보다 짧다. 다만 체크박스에 **"Google에서 이 개발자 프로필을 확인할 수 없는 경우 개발자 프로필과 앱이 Google Play에서 삭제될 수 있음을 인지하고 있습니다"**라는 문구가 있으니, 입력한 정보가 결제 프로필 정보와 일치하는지 한 번 더 확인하고 제출하는 게 안전하다.
 

@@ -18,6 +18,8 @@ I logged into Play Console the other day and noticed a badge I hadn't seen befor
 
 "Removed worldwide" isn't something you can just skim past. I looked into it, went ahead and completed the declaration myself, and figured I'd write down what I learned.
 
+![Play Console notice reading "Declare your trader status by February 2027" with an "Action needed" badge](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/play_console_trader_notice_20261111.png)
+
 ## What a Trader Status Declaration Actually Is
 
 A **Trader Status Declaration** is the process where a developer who has published an app on Google Play states whether they're a **"Trader"** or a **"Non-trader."** A trader, in this context, is any individual or organization acting for purposes related to their trade, business, craft, or profession. In plain terms, it's a declaration of whether you have a profit motive behind your app.
@@ -57,6 +59,8 @@ Once I actually did it, it turned out to be straightforward.
 3. Under **Trader status**, select either "Trader account" or "Non-trader account"
 4. Fill in any additional information required based on your selection (legal name, address, etc.) — if that information already exists in your payments profile, it gets pulled in automatically
 5. Check the box confirming "I agree to Google displaying this information as part of my public developer profile on Google Play" and submit
+
+![Trader status declaration screen with radio buttons for Trader account and Non-trader account](https://raw.githubusercontent.com/hyunseokyu1-netizen/backtodev/main/public/images/play_console_trader_select_20261111.png)
 
 The whole process is shorter than you'd expect. One thing worth double-checking before you submit: there's a checkbox that reads **"I acknowledge that my developer profile and apps may be removed from Google Play if Google is unable to verify this developer profile."** Make sure whatever you enter matches your existing payments profile information before you hit submit.
 
